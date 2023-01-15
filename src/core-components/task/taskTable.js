@@ -18,7 +18,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
 import { getTaskListThunk } from './api/task-thunk-api';
 import AddTask from './addTask';
-import TaskIcon from '@mui/icons-material/Task';
+import TaskIcon from '@material-ui/icons/AssignmentLate';;
 
 export default function TaskTable (props)
 {

@@ -18,7 +18,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
 import { getProjectListThunk } from './api/project-thunk-api';
 import AddProject from './addProject';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import LeaderboardIcon from '@material-ui/icons/InvertColors';;
 
 export default function ProjectTable() {
   const history = useHistory();

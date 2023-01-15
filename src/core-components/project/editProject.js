@@ -14,7 +14,7 @@ import Button from 'components/CustomButtons/Button';
 import "date-fns";
 import { styled } from '@mui/material/styles';
 
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';;
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';

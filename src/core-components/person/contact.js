@@ -7,7 +7,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from '@material-ui/icons/Group';;
 import Card from 'components/Card/Card.jsx';
 import CardIcon from 'components/Card/CardIcon.jsx';
 import Button from 'components/CustomButtons/Button';

@@ -11,7 +11,6 @@ import { addPersonThunk } from './api/person-thunk-api';
 
 import Box from '@mui/material/Box';
 import Autocomplete from '@mui/material/Autocomplete';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { debounce } from '@mui/material/utils';

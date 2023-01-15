@@ -10,7 +10,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
 import CardIcon from 'components/Card/CardIcon';
-import BusinessIcon from '@mui/icons-material/Business';
+import BusinessIcon from '@material-ui/icons/Apartment';;
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';

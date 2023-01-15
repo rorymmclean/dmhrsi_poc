@@ -2,14 +2,14 @@ import Dashboard from 'views/Dashboard/Dashboard.jsx';
 import LoginPage from 'views/Pages/LoginPage.jsx';
 import UserProfile from 'views/Pages/UserProfile.jsx';
 import ConfirmationNumber from '@material-ui/icons/ConfirmationNumber';
-import TaskIcon from '@mui/icons-material/Task';
+import TaskIcon from '@material-ui/icons/AssignmentLate';;
 
 
 // @material-ui/icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import BusinessIcon from '@mui/icons-material/Business';
-import GroupIcon from '@mui/icons-material/Group';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import BusinessIcon from '@material-ui/icons/Apartment';;
+import GroupIcon from '@material-ui/icons/Group';;
+import LeaderboardIcon from '@material-ui/icons/InvertColors';;
 
 import OrganizationTable from 'core-components/organization/organizationTable';
 import EditOrganization from 'core-components/organization/editOrganization';
