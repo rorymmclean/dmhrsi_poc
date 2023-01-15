@@ -45,10 +45,10 @@ export default function Assignments() {
    const [state, setState] = React.useState({
       columns: [
        { title: 'Project', field: 'FIRST_NAME' },
-      { title: 'Task', field: 'TASK_ID' },
-        { title: 'Organization', field: 'ORGANIZATION_ID' },
-          { title: 'START_DATE', field: 'Start Date' },
-          { title: 'END_DATE', field: 'End Date' },
+      { title: 'Task', field: 'TASK_NAME' },
+        { title: 'Organization', field: 'ORGANIZATION_NAME' },
+          { title: 'Start Date ', field: 'START_DATE' },
+          { title: 'End Date', field: 'END_DATE' },
           { title: 'Location', field: 'LOCATION_ID' },
           { title: 'Primary', field: 'PRIMARY_FLAG' },
 
