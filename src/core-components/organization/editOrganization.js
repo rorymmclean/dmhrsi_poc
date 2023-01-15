@@ -31,7 +31,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { editOrganizationThunk, getOrganizationDetailsThunk, getOrganizationListThunk } from './api/organization-thunk-api';
-import { NotificationManager ,NotificationContainer} from "react-light-notifications";
+
 import { Alert, Snackbar } from '@mui/material';
 
 const Accordion = styled((props) => (

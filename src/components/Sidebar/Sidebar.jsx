@@ -107,10 +107,10 @@ class Sidebar extends React.Component {
   // this function creates the links and collapses that appear in the sidebar (left menu)
   createLinks = routes => {
     const { classes, color, rtlActive } = this.props;
-    const admin = JSON.parse(localStorage.getItem('login')).response.userType !== 'admin';
+    
 
     return routes.map((prop, key) => {
-      if (prop.redirect || admin === prop.isSuperAdmin) {
+      if (prop.redirect ) {
         return null;
       }
       if (prop.collapse) {
