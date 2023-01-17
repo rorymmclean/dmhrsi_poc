@@ -21,6 +21,7 @@ import ProjectTable from 'core-components/project/projectTable';
 import EditProject from 'core-components/project/editProject';
 import TaskTable from 'core-components/task/taskTable';
 import EditTask from 'core-components/task/editTask';
+import ContactPerson from 'core-components/person/contact';
 
 var dashRoutes = [
   {
@@ -126,6 +127,19 @@ var dashRoutes = [
     redirect: true,
     layout: '/admin'
   },
+  
+    {
+    path: '/contactPerson',
+    name: 'Contact Person',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: ConfirmationNumber,
+    component: ContactPerson,
+    redirect: true,
+    layout: '/admin'
+  },
+  
      {
     path: '/assignments',
     name: 'Assignments',

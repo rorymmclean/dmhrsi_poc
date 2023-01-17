@@ -42,7 +42,7 @@ export default function TaskTable (props)
         { title: 'FCC', field: 'FCC' },
         { title: 'SUPE', field: 'SUPE' },
         { title: 'Labor Cost', field: 'LABOR_COST_ID' },
-    {
+  !search_string?.length ? {
       field: 'view',
       editable: 'never',
       title: 'Edit',
@@ -52,8 +52,8 @@ export default function TaskTable (props)
       }}>
         <Edit onClick={() => onClickStory(rowData)} />
       </Button>
-    }
-    ],
+    }:null
+    ].filter(item=>item),
     data: []
   } );
   
