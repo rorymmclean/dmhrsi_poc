@@ -107,6 +107,53 @@ export const END_POINTS = {
       method: HTTP_METHOD_POST
     },
       },
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+      timeCard: {
+        getOrganization: {
+          url: 'time/ft?search_string={search_string}',
+          method: HTTP_METHOD_GET
+        },
+        addOrganization: {
+          url: 'time',
+          method: HTTP_METHOD_PUT
+        },
+         getOrganizationDetails: {
+          url: 'time?id={id}',
+          method: HTTP_METHOD_GET
+        },
+         editOrganization: {
+          url: 'time',
+          method: HTTP_METHOD_POST
+        },
+      },
+
+
+
+
+
+
+
+
+
+
+
+
       laborcosts: {
        url: 'laborcosts',
       method: HTTP_METHOD_GET 

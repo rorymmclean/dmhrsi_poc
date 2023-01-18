@@ -3,10 +3,9 @@ import { formatParameterizedURL } from 'utils.js';
 import { fetcher } from 'axios-helper.js';
 
 
+export const getTimeCardListAPI = async data => {
+  const endpoint = { ...END_POINTS.timeCard.getTimeCard };
 
-export const getTaskListAPI = async data => {
-  const endpoint = { ...END_POINTS.task.getTask };
-  
   endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string });
 
   const response = await fetcher(endpoint);
@@ -14,18 +13,16 @@ export const getTaskListAPI = async data => {
   return response;
 };
 
-export const addTaskAPI = async data => {
-  const endpoint = { ...END_POINTS.task.addTask };
-  endpoint.url = formatParameterizedURL(endpoint.url, data);
+export const addTimeCardAPI = async data => {
+  const endpoint = { ...END_POINTS.timeCard.addTimeCard  };
   endpoint.data = data;
   const response = await fetcher(endpoint);
-  console.log(response,'response233');
+
   return response;
 };
 
-
-export const getTaskDetailsAPI = async data => {
-  const endpoint = { ...END_POINTS.task.getTaskDetails };
+export const getTimeCardDetailsAPI = async data => {
+  const endpoint = { ...END_POINTS.timeCard.getTimeCardDetails };
 
   endpoint.url = formatParameterizedURL(endpoint.url, { id: data?.id });
 
@@ -33,10 +30,14 @@ export const getTaskDetailsAPI = async data => {
 
   return response;
 };
-export const editTaskAPI = async data => {
-  const endpoint = { ...END_POINTS.task.editTask };
+
+export const editTimeCardAPI = async data => {
+  const endpoint = { ...END_POINTS.timeCard.editTimeCard  };
   endpoint.data = data;
   const response = await fetcher(endpoint);
 
   return response;
 };
+
+
+
