@@ -84,28 +84,11 @@ export default function WorkSchedule() {
             </JPGrid>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             {days.map((day) => (
                 <JPGrid item xs={12} sm={1} key={day} marginLeft={'6.2px'}     >
                     <Typography style={{ textAlign: 'center' }}>{day}</Typography>
                 </JPGrid>
             ))}
-
-
-
-
 
 
 

@@ -107,23 +107,7 @@ export const END_POINTS = {
       method: HTTP_METHOD_POST
     },
       },
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-      
-
-
+ 
       timeCard: {
         getOrganization: {
           url: 'time/ft?search_string={search_string}',

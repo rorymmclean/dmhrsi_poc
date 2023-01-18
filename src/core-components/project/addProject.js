@@ -17,16 +17,15 @@ import { getPersonListThunk } from 'core-components/person/api/person-thunk-api'
 export default function AddProject(props) {
     const { onSave } = props;
     const location = useLocation();
-
-
     const [show, setShow] = React.useState(false);
     const [data, setData] = React.useState({});
-     const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState('');
+    const [value, setValue] = React.useState(null);
+    const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
     
+    
     const [valueManager, setValueManager] = React.useState(null);
-  const [inputValueManager, setInputValueManager] = React.useState('');
+    const [inputValueManager, setInputValueManager] = React.useState('');
     const [ optionsManager, setOptionsManager ] = React.useState( [] );
     
      const searchManagers = (value) => {
