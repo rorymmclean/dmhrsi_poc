@@ -77,7 +77,7 @@ export default function EditPerson() {
   };
   
     const [data, setData] = React.useState({});
-console.log(data);
+          console.log(data);
     useEffect(() => {
     ThunkDispatch(getPersonDetailsThunk({id:location.pathname.split('/')[3]}))
       .then(result => {

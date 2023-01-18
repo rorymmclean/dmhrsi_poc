@@ -41,6 +41,7 @@ export default function WorkSchedule() {
 
 
     React.useEffect(() => {
+
         ThunkDispatch(getTaskSearchThunk())
             .then(result => {
                 if (result?.data?.body) {
@@ -52,7 +53,7 @@ export default function WorkSchedule() {
             })
             .catch(error => console.error('getTaskSearchThunk', error))
             .finally(() => { });
-    }, []);
+    }, [inputValue]);
 
 
 
@@ -109,6 +110,7 @@ export default function WorkSchedule() {
 
 
             <JPGrid item xs={12} sm={2} marginRight={'6.2px'} marginBottom={'6.2px'} >
+
                 <Autocomplete
                     id="Task"
                     getOptionLabel={(option) => option
@@ -139,6 +141,7 @@ export default function WorkSchedule() {
 
 
             <JPGrid item xs={12} sm={2} marginRight={'6.2px'} marginBottom={'6.2px'}>
+
                 <Autocomplete
                     id="Type"
                     getOptionLabel={(option) => option
@@ -185,7 +188,8 @@ export default function WorkSchedule() {
             <JPGrid item xs={12} sm={2} marginRight={'6.2px'} marginBottom={'6.2px'} >
                 <Autocomplete
                     id="Task"
-                    getOptionLabel={(option) => `${option.TASK_NAME}`
+                    getOptionLabel={(option) => option
+
                     }
                     filterOptions={(x) => x}
                     options={optionsTask}
@@ -196,11 +200,11 @@ export default function WorkSchedule() {
                     noOptionsText="No Task"
 
                     onChange={(event, newValue) => {
-                        setOptionsTask(newValue ? [newValue, ...optionsTask] : optionsTask);
-                        setValueTask(newValue);
+                        setOptions(newValue ? [newValue, ...options] : options);
+                        setTaskOneValue(newValue);
                     }}
                     onInputChange={(event, newInputValue) => {
-                        setInputValueTask(newInputValue);
+                        setInputValue(newInputValue);
                     }}
                     renderInput={(params) => (
                         <TextField {...params} label="Task" fullWidth variant="outlined" required />

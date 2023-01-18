@@ -19,7 +19,6 @@ export const addTaskAPI = async data => {
   endpoint.url = formatParameterizedURL(endpoint.url, data);
   endpoint.data = data;
   const response = await fetcher(endpoint);
-  console.log(response,'response233');
   return response;
 };
 

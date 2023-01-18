@@ -8,9 +8,7 @@ export const getProjectListThunk = createAsyncThunk('Project/list', async (data,
 });
 
 export const addProjectThunk = createAsyncThunk('Project/add', async (data, { dispatch }) => {
-  console.log(data,'data2')
   const response = await addProjectAPI(data);
-  console.log(response,'response')
   return response;
 });
 
