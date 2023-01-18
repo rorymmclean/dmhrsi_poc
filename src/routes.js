@@ -24,6 +24,8 @@ import EditTask from 'core-components/task/editTask';
 import timeCardTable from 'core-components/timeCardSearch/timeCardTable';
 import EditTimeCard from 'core-components/timeCardSearch/editTimeCard';
 import allocationRuleSet from 'core-components/allocation/allocationRuleSet'
+import ContactPerson from 'core-components/person/contact';
+
 var dashRoutes = [
   {
     path: '/dashboard',
@@ -128,6 +130,19 @@ var dashRoutes = [
     redirect: true,
     layout: '/admin'
   },
+  
+    {
+    path: '/contactPerson',
+    name: 'Contact Person',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: ConfirmationNumber,
+    component: ContactPerson,
+    redirect: true,
+    layout: '/admin'
+  },
+  
      {
     path: '/assignments',
     name: 'Assignments',

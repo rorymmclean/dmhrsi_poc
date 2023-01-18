@@ -12,27 +12,16 @@ import Card from 'components/Card/Card.jsx';
 import CardIcon from 'components/Card/CardIcon.jsx';
 import Button from 'components/CustomButtons/Button';
 import "date-fns";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from "@material-ui/pickers";
 import { styled } from '@mui/material/styles';
 
 import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';;
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { editOrganizationThunk, getOrganizationDetailsThunk, getOrganizationListThunk } from './api/organization-thunk-api';
-
 import { Alert, Snackbar } from '@mui/material';
+import GetContactDetailsPrimary from 'core-components/contact/getContactDetailsPrimary';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -178,22 +167,8 @@ setOpen(true)
                   </JPGrid>
                 </JPGrid>
               </GridItem>
-              <GridItem xs={12} sm={6} style={{ marginBottom: '20px' }}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label="From"
-                    format="MM/dd/yyyy"
-                    value={data?.START_DATE}
-                    onChange={(e) => setData({ ...data, START_DATE: e })}
-
-                    inputVariant="outlined"
-                  />
-                </MuiPickersUtilsProvider>
-            
-              </GridItem>
-              <GridItem xs={12} sm={6} style={{ marginTop: '16px' }}>
+    
+              <GridItem xs={12} sm={6} style={{ marginTop: '16px',marginBottom: '16px' }}>
 
                 <TextField
                   variant="outlined"
@@ -208,190 +183,8 @@ setOpen(true)
                   onChange={(e) => setData({ ...data, SERVICE: e.target.value })}
                 />
               </GridItem>
-
-
-
-
-
-
-
-
-
-              
-              <GridItem xs={12} sm={12} >
-
-                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                  <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>Primary Location</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <GridContainer>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <FormControl fullWidth>
-                          <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={data.SERVICE}
-                            label="Type"
-                            onChange={(e) => setData({ ...data, SERVICE: e.target.value })}
-
-                          >
-                            <MenuItem value={10}>W2DN04</MenuItem>
-                            <MenuItem value={20}>W2DN05</MenuItem>
-                            <MenuItem value={30}>W2DN11</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={6}>
-                        <JPGrid container direction={'row'} justify={'flex-end'}>
-                          <JPGrid item marginRight={3} marginLeft={3}>
-                            <Button
-                              onClick={() => {
-                                history.push({
-                                  pathname: `/admin/contact/${data.ORGANIZATION_ID}`,
-                                  
-                                });
-                              }}
-                              variant={'outlined'}
-                              color={'info'}
-                            >
-                              Contacts
-                            </Button>
-                          </JPGrid>
-                        </JPGrid>
-
-                        
-                      </GridItem>
-                      <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
-
-                        <TextField
-                          variant="outlined"
-                          style={{ fontSize: "25px" }}
-                          fullWidth
-                          id="ADDRESS_1"
-                          label="Address 1"
-                          name="ADDRESS_1"
-                          autoComplete="ADDRESS_1"
-                          value={data?.ADDRESS_1}
-                          onChange={(e) => setData({ ...data, ADDRESS_1: e.target.value })}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
-
-                        <TextField
-                          variant="outlined"
-                          style={{ fontSize: "25px" }}
-                          fullWidth
-                          id="ADDRESS_2"
-                          label="Address 2"
-                          name="ADDRESS_2"
-                          autoComplete="ADDRESS_2"
-                          value={data?.ADDRESS_2}
-                          onChange={(e) => setData({ ...data, ADDRESS_2: e.target.value })}
-                        />
-                      </GridItem>
-
-                      <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
-
-                        <TextField
-                          variant="outlined"
-                          style={{ fontSize: "25px" }}
-                          fullWidth
-                          id="ADDRESS_3"
-                          label="Address 3"
-                          name="ADDRESS_3"
-                          autoComplete="ADDRESS_3"
-                          value={data?.ADDRESS_3}
-                          onChange={(e) => setData({ ...data, ADDRESS_3: e.target.value })}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={6} style={{ marginTop: '16px' }}>
-
-                        <TextField
-                          variant="outlined"
-                          style={{ fontSize: "25px" }}
-                          fullWidth
-                          id="COUNTRY"
-                          label="Country"
-                          name="COUNTRY"
-                          autoComplete="COUNTRY"
-                          value={data?.COUNTRY}
-                          onChange={(e) => setData({ ...data, COUNTRY: e.target.value })}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
-
-                        <TextField
-                          variant="outlined"
-                          style={{ fontSize: "25px" }}
-                          fullWidth
-                          id="CITY"
-                          label="City"
-                          name="CITY"
-                          autoComplete="CITY"
-                          value={data?.CITY}
-                          onChange={(e) => setData({ ...data, CITY: e.target.value })}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
-
-                        <TextField
-                          variant="outlined"
-                          style={{ fontSize: "25px" }}
-                          fullWidth
-                          id="POSTAL_CODE"
-                          label="Postal Code"
-                          name="POSTAL_CODE"
-                          autoComplete="POSTAL_CODE"
-                          value={data?.POSTAL_CODE}
-                          onChange={(e) => setData({ ...data, POSTAL_CODE: e.target.value })}
-                        />
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={10} style={{ marginTop: '16px' }}>
-                        <JPGrid container direction={'row'} justify={'flex-end'}>
-                          <JPGrid item >
-                            <TextField
-                              variant="outlined"
-                              style={{ fontSize: "25px" }}
-                              fullWidth
-                              id="STATE"
-                              label="State"
-                              name="STATE"
-                              autoComplete="STATE"
-                              value={data?.STATE}
-                              onChange={(e) => setData({ ...data, STATE: e.target.value })}
-                            />
-                          </JPGrid>
-                        </JPGrid>
-
-                        
-                      </GridItem>
-                    </GridContainer>
-
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                  <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography>LCA Codes</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-         
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-                  <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography>Self-Service Preferences</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-         
-                  </AccordionDetails>
-                </Accordion>
-              </GridItem>
-              
-
-
-
+              <GetContactDetailsPrimary  ENTITITY_TYPE= {"ORG"}/>
+          
                
             </GridContainer>
 
