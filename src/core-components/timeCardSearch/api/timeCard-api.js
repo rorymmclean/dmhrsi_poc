@@ -4,7 +4,7 @@ import { fetcher } from 'axios-helper.js';
 
 
 export const getTimeCardListAPI = async data => {
-  const endpoint = { ...END_POINTS.timeCard.getTimeCard };
+  const endpoint = { ...END_POINTS.task.getTasksearch };
 
   endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string });
 
@@ -38,6 +38,5 @@ export const editTimeCardAPI = async data => {
 
   return response;
 };
-
 
 

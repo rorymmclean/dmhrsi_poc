@@ -22,7 +22,6 @@ import EditProject from 'core-components/project/editProject';
 import TaskTable from 'core-components/task/taskTable';
 import EditTask from 'core-components/task/editTask';
 import timeCardTable from 'core-components/timeCardSearch/timeCardTable';
-import EditTimeCard from 'core-components/timeCardSearch/editTimeCard';
 import allocationRuleSet from 'core-components/allocation/allocationRuleSet'
 import ContactPerson from 'core-components/person/contact';
 
@@ -162,17 +161,6 @@ var dashRoutes = [
     rtlMini: '',
     icon: BusinessIcon,
     component: timeCardTable,
-    layout: '/admin'
-  },
-  {
-    path: '/editTimeCard',
-    name: 'edit',
-    rtlName: '',
-    mini: 'S',
-    rtlMini: '',
-    icon: ConfirmationNumber,
-    component: EditTimeCard,
-    redirect: true,
     layout: '/admin'
   },
   {

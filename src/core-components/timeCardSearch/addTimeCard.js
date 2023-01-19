@@ -5,11 +5,10 @@ import { useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import JPModal from 'components/jp-modal/jp-modal';
 import { useMemo } from 'react';
-import { TextField, Typography } from '@material-ui/core';
-import { addTimeCardThunk } from './api/timeCard-thunk-api';
+import { TextField } from '@material-ui/core';
 import WorkSchedule from 'components/Schedule/workSchedule';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import { getPersonListThunk } from 'core-components/person/api/person-thunk-api';
 
 
 
@@ -20,24 +19,51 @@ export default function AddTimeCard(props) {
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
     const status = ['Open', 'Close']
-
     const [show, setShow] = React.useState(false);
     const [data, setData] = React.useState({});
+    const [valueEmployee, setValueEmployee] = React.useState(null);
+    const [inputValueEmployee, setInputValueEmployee] = React.useState('');
+    const [optionsEmployee, setOptionsEmployee] = React.useState([]);
+
+
+    const searchEmployees = (value) => {
+        ThunkDispatch(getPersonListThunk({ search_string: value }))
+            .then(result => {
+                if (result?.data?.body) {
+                    setOptionsEmployee(JSON.parse(result.data.body));
+                } else {
+                    setOptionsEmployee([]);
+
+                }
+            })
+            .catch(error => console.error('getPersonListThunk', error))
+            .finally(() => { });
+    };
+    React.useEffect(() => {
+        let active = true;
+        if (inputValueEmployee === '') {
+            setOptionsEmployee([]);
+            return undefined;
+        }
+        searchEmployees(inputValueEmployee)
+
+
+        return () => {
+            active = false;
+        };
+    }, [inputValueEmployee]);
+
+
 
     const customersOptions = useMemo(
         () => (
             <>
-
-
                 <JPModal
-
                     defaultTitle="TimeCard"
                     title={`Add TimeCard`}
-
                     onClose={_ => {
                         setShow(false)
                         setData({})
-
                     }}
                     closeButton={true}
                     fullWidth
@@ -47,16 +73,13 @@ export default function AddTimeCard(props) {
                         name: 'Save', onClick: _ => {
 
                             const userObject = {
-                                EMPLOYEE: data?.EMPLOYEE,
                                 START_DATE: data?.START_DATE,
                                 STATUS: data?.STATUS,
                                 HOURS: data?.HOURS,
                                 END_DATE: data?.END_DATE,
+                                Employee_ID: valueEmployee.PERSON_ID,
 
                             };
-
-
-
                             ThunkDispatch(addTimeCardThunk({ ...userObject }))
                                 .then(result => {
 
@@ -76,22 +99,32 @@ export default function AddTimeCard(props) {
                         color: !data?.SERVICE?.length || !data?.EMPLOYEE?.length ? null : 'info'
                     }]}
 
-
                 >
                     <JPGrid minHeight={200} >
                         <JPGrid container direction="row" alignItems="center" spacing={1} padding={8} >
                             <JPGrid item xs={12} sm={6}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    style={{ fontSize: "25px" }}
-                                    fullWidth
-                                    id="Employee"
-                                    label="Employee"
-                                    name="Employee"
-                                    autoComplete="Employee"
-                                    value={data?.EMPLOYEE}
-                                    onChange={(e) => setData({ ...data, Employee: e.target.value })}
+                                <Autocomplete
+                                    id="Employees"
+                                    getOptionLabel={(option) => `${option.FIRST_NAME} ${option.MIDDLE_NAME} ${option.LAST_NAME}`
+                                    }
+                                    filterOptions={(x) => x}
+                                    options={optionsEmployee}
+                                    autoComplete
+                                    includeInputInList
+                                    filterSelectedOptions
+                                    value={valueEmployee}
+                                    noOptionsText="No Employees"
+                                    onChange={(event, newValue) => {
+                                        setOptionsEmployee(newValue ? [newValue, ...optionsEmployee] : optionsEmployee);
+                                        setValueEmployee(newValue);
+                                    }}
+                                    onInputChange={(event, newInputValue) => {
+                                        setInputValueEmployee(newInputValue);
+                                    }}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Employee Name" fullWidth variant="outlined" required />
+                                    )}
+
                                 />
                             </JPGrid>
 
@@ -118,7 +151,6 @@ export default function AddTimeCard(props) {
                                     renderInput={(params) => (
                                         <TextField {...params} label="Status" fullWidth variant="outlined" required />
                                     )}
-
                                 />
                             </JPGrid>
                             <JPGrid item xs={12} sm={6}>
@@ -149,16 +181,14 @@ export default function AddTimeCard(props) {
                                     onChange={(e) => setData({ ...data, END_DATE: e.target.value })}
                                 />
                             </JPGrid>
-
                             <WorkSchedule />
-
                         </JPGrid>
                     </JPGrid>
                 </JPModal>
 
             </>
         ),
-        [show, data]
+        [show, data, options, optionsEmployee]
     );
     return (
         <>
@@ -166,13 +196,10 @@ export default function AddTimeCard(props) {
             <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
                 <JPGrid>
                     <Button color={'info'} onClick={() => setShow(true)} >
-                        Add TimeCard
+                        Add Time Card
                     </Button>
                 </JPGrid>
             </JPGrid>
-
         </>
-
-
     );
 }

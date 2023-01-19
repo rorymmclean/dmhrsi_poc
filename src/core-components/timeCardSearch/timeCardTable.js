@@ -31,22 +31,22 @@ export default function TimeCardTable() {
     });
   }
   const [state, setState] = React.useState({
-      columns: [
-          { title: 'Date', field: 'START_DATE',field: 'END_DATE' },
-          { title: 'Hours', field: 'STATOUDS' },
-          { title: 'Statous', field: 'TIMECARD_ID' },
-          { title: 'Approver', field: '' },
-    {
-      field: 'view',
-      editable: 'never',
-      title: 'Edit',
-      render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
-        padding: "8px 4px 6px 8px",
-        borderRadius: "20px"
-      }}>
-        <Edit onClick={() => onClickStory(rowData)} />
-      </Button>
-    }
+    columns: [
+      { title: 'Date', field: 'START_DATE', field: 'END_DATE' },
+      { title: 'Hours', field: 'STATOUDS' },
+      { title: 'Statous', field: 'TIMECARD_ID' },
+      { title: 'Approver', field: '' },
+      {
+        field: 'view',
+        editable: 'never',
+        title: 'Edit',
+        render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
+          padding: "8px 4px 6px 8px",
+          borderRadius: "20px"
+        }}>
+          <Edit onClick={() => onClickStory(rowData)} />
+        </Button>
+      }
     ],
     data: []
   });
@@ -61,52 +61,50 @@ export default function TimeCardTable() {
     });
 
   useEffect(() => {
-    ThunkDispatch(getTimeCardListThunk({search_string:""}))
+    ThunkDispatch(getTimeCardListThunk({ search_string: "" }))
       .then(result => {
         if (result?.data?.body) {
-            
-      
-        setState(prevState => {
-          const data = [...prevState.data];
-          for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-            data.push(JSON.parse(result.data.body)[index]);
-          }
-          return { ...prevState, data };
-        });
-      }
+          setState(prevState => {
+            const data = [...prevState.data];
+            for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
+              data.push(JSON.parse(result.data.body)[index]);
+            }
+            return { ...prevState, data };
+          });
+        }
       })
       .catch(error => console.error('getTimeCardListThunk', error))
       .finally(() => { setIsLoading(false) });
   }, []);
 
-    const searchTimeCards = (value) => {
-       ThunkDispatch(getTimeCardListThunk({search_string:value}))
+  const searchTimeCards = (value) => {
+    ThunkDispatch(getTimeCardListThunk({ search_string: value }))
       .then(result => {
         if (result?.data?.body) {
-            
-        
-        setState(prevState => {
-          const data = [...prevState.data];
-          for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-            data.push(JSON.parse(result.data.body)[index]);
-          }
-          return { ...prevState, data };
-        });
+
+
+          setState(prevState => {
+            const data = [...prevState.data];
+            for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
+              data.push(JSON.parse(result.data.body)[index]);
+            }
+            return { ...prevState, data };
+          });
         } else {
-           setState(prevState => {
-             let data = [];
-          return { ...prevState, data };
-        });
-      }
+          setState(prevState => {
+            let data = [];
+            return { ...prevState, data };
+          });
+        }
       })
       .catch(error => console.error('getTimeCardListThunk', error))
       .finally(() => { setIsLoading(false) });
   };
 
- const inputDebounce = React.useRef(_.debounce(searchTimeCards, 500)).current;
+  const inputDebounce = React.useRef(_.debounce(searchTimeCards, 500)).current;
 
-  
-  
+
+
   const handleInputChange = ({ target }) => {
     const { value } = target;
     inputDebounce(value);
@@ -122,7 +120,7 @@ export default function TimeCardTable() {
         });
 
       }} />
-          
+
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
@@ -130,53 +128,49 @@ export default function TimeCardTable() {
               <CardIcon color="primary">
                 <BusinessIcon />
               </CardIcon>
-              <h4 style={{color:"#000"}}>TimeCards</h4>
+              <h4 style={{ color: "#000" }}>TimeCards</h4>
             </CardHeader>
             <CardBody>
-               <GridContainer>
+              <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
- <TextField
-        type="search"
-        variant="outlined"
+                  <TextField
+                    type="search"
+                    variant="outlined"
                     margin="normal"
                     fullWidth
-                      placeholder="Search"
-      onChange={handleInputChange}
+                    placeholder="Search"
+                    onChange={handleInputChange}
 
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          )
-        }}
-      />
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      )
+                    }}
+                  />
                 </GridItem>
-                      </GridContainer>
-
-
-      <MaterialTable
-        isLoading={isLoading}
+              </GridContainer>
+              <MaterialTable
+                isLoading={isLoading}
                 columns={state.columns}
-                 components={{
-              Container: props => (
-                <JPGrid container>
-                  <JPGrid item xs={12}>
-                    <Paper {...props} sx elevation={0} />
-                  </JPGrid>
-                </JPGrid>
-              )
-            }}
-        data={renderList(state.data)}
-         options={{
-           search: false,
-                         showTitle: false,
-              toolbar: false,
-
-           
-      }}
+                components={{
+                  Container: props => (
+                    <JPGrid container>
+                      <JPGrid item xs={12}>
+                        <Paper {...props} sx elevation={0} />
+                      </JPGrid>
+                    </JPGrid>
+                  )
+                }}
+                data={renderList(state.data)}
+                options={{
+                  search: false,
+                  showTitle: false,
+                  toolbar: false,
+                }}
               />
-              
+
             </CardBody>
           </Card>
         </GridItem>

@@ -108,24 +108,15 @@ export const END_POINTS = {
     },
       },
  
+      
       timeCard: {
-        getOrganization: {
-          url: 'time/ft?search_string={search_string}',
+        getTimeCard: {
+          url: 'timecard/search?search_string={search_string}',
           method: HTTP_METHOD_GET
         },
-        addOrganization: {
-          url: 'time',
-          method: HTTP_METHOD_PUT
-        },
-         getOrganizationDetails: {
-          url: 'time?id={id}',
-          method: HTTP_METHOD_GET
-        },
-         editOrganization: {
-          url: 'time',
-          method: HTTP_METHOD_POST
-        },
+        
       },
+
 
 
 
