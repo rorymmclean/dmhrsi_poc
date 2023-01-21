@@ -21,6 +21,8 @@ import ProjectTable from 'core-components/project/projectTable';
 import EditProject from 'core-components/project/editProject';
 import TaskTable from 'core-components/task/taskTable';
 import EditTask from 'core-components/task/editTask';
+import timeCardTable from 'core-components/timeCardSearch/timeCardTable';
+import allocationRuleSet from 'core-components/allocation/allocationRuleSet'
 import ContactPerson from 'core-components/person/contact';
 
 var dashRoutes = [
@@ -149,6 +151,26 @@ var dashRoutes = [
     icon: ConfirmationNumber,
     component: Assignments,
     redirect: true,
+    layout: '/admin'
+  },
+  {
+    path: '/timeCard',
+    name: 'TimeCard',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: BusinessIcon,
+    component: timeCardTable,
+    layout: '/admin'
+  },
+  {
+    path: '/allocation',
+    name: 'Allocation',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: BusinessIcon,
+    component: allocationRuleSet,
     layout: '/admin'
   },
   {

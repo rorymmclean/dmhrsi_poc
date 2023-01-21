@@ -107,6 +107,28 @@ export const END_POINTS = {
       method: HTTP_METHOD_POST
     },
       },
+ 
+      
+      timeCard: {
+        getTimeCard: {
+          url: 'timecard/search?search_string={search_string}',
+          method: HTTP_METHOD_GET
+        },
+        
+      },
+
+
+
+
+
+
+
+
+
+
+
+
+
       laborcosts: {
        url: 'laborcosts',
       method: HTTP_METHOD_GET 
