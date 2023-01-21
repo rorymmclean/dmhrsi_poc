@@ -114,9 +114,23 @@ export const END_POINTS = {
           url: 'timecard/search?search_string={search_string}',
           method: HTTP_METHOD_GET
         },
-        
+          addTimeCard: {
+      url: 'timecard',
+      method: HTTP_METHOD_PUT
+        },
+          getTimeCardDetails:{
+       url: 'timecard?id={id}',
+      method: HTTP_METHOD_GET
+    },
       },
 
+    
+      timeEntry: {
+        getTimeEntry: {
+          url: 'timeentry/search?search_string={search_string}',
+          method: HTTP_METHOD_GET
+        },
+      },
 
 
 
