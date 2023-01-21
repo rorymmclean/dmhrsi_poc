@@ -84,7 +84,7 @@ class LoginPage extends React.Component {
 
           let store = JSON.parse(localStorage.getItem('login'));
           if (store.login) {
-            this.props.history.push('/admin/dashboard');
+            this.props.history.push('/admin/timeCard');
 
             this.setState({
               isLoad: false

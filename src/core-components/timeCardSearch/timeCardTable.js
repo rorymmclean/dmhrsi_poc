@@ -13,16 +13,17 @@ import BusinessIcon from '@material-ui/icons/Apartment';;
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
 import AddTimeCard from './addTimeCard';
+import EditTimeCard from './editTimeCard';
 
 export default function TimeCardTable() {
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onClickStory = (item) => {
     history.push({
@@ -32,20 +33,32 @@ export default function TimeCardTable() {
   }
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Date', field: 'START_DATE', field: 'END_DATE' },
-      { title: 'Hours', field: 'STATOUDS' },
-      { title: 'Statous', field: 'TIMECARD_ID' },
-      { title: 'Approver', field: '' },
+      { title: 'Date', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.START_DATE} - ${rowData?.END_DATE}`}</Typography> },
+      { title: 'Approver', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.FIRST_NAME} ${rowData?.MIDDLE_NAME} ${rowData?.LAST_NAME}`}</Typography> },
+      {
+        title: 'Status', field: 'FIRST_NAME', render: rowData =>
+        {let s=""
+          if ( rowData?.STATUS == "C" )
+          {
+          s="Close"
+          }
+          if ( rowData?.STATUS == "A" )
+          {
+          s="Approved"
+          }
+           if ( rowData?.STATUS == "O" )
+          {
+          s="Open"
+        }
+          return <Typography type={ 'h3' }>{ `${s }` }</Typography>
+        }
+      },
+      { title: 'Hours', field: 'Hours' },
       {
         field: 'view',
         editable: 'never',
         title: 'Edit',
-        render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
-          padding: "8px 4px 6px 8px",
-          borderRadius: "20px"
-        }}>
-          <Edit onClick={() => onClickStory(rowData)} />
-        </Button>
+        render: rowData => <EditTimeCard rowData={ rowData } />
       }
     ],
     data: []
@@ -60,28 +73,18 @@ export default function TimeCardTable() {
       };
     });
 
-  useEffect(() => {
-    ThunkDispatch(getTimeCardListThunk({ search_string: "" }))
-      .then(result => {
-        if (result?.data?.body) {
-          setState(prevState => {
-            const data = [...prevState.data];
-            for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-              data.push(JSON.parse(result.data.body)[index]);
-            }
-            return { ...prevState, data };
-          });
-        }
-      })
-      .catch(error => console.error('getTimeCardListThunk', error))
-      .finally(() => { setIsLoading(false) });
-  }, []);
 
-  const searchTimeCards = (value) => {
+
+  const searchTimeCards = ( value ) =>
+  {
+    
     ThunkDispatch(getTimeCardListThunk({ search_string: value }))
       .then(result => {
         if (result?.data?.body) {
-
+setState(prevState => {
+            let data = [];
+            return { ...prevState, data };
+          });
 
           setState(prevState => {
             const data = [...prevState.data];
@@ -128,7 +131,7 @@ export default function TimeCardTable() {
               <CardIcon color="primary">
                 <BusinessIcon />
               </CardIcon>
-              <h4 style={{ color: "#000" }}>TimeCards</h4>
+              <h4 style={{ color: "#000" }}>Time Cards</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>
@@ -178,3 +181,4 @@ export default function TimeCardTable() {
     </div>
   );
 }
+/*Bud Jerrold Whitfield */

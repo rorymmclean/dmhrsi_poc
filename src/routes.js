@@ -27,11 +27,13 @@ import ContactPerson from 'core-components/person/contact';
 
 var dashRoutes = [
   {
-    path: '/dashboard',
-    name: 'Dashboard',
+    path: '/timeCard',
+    name: 'Time Cards',
     rtlName: '',
+    mini: 'S',
+    rtlMini: '',
     icon: DashboardIcon,
-    component: Dashboard,
+    component: timeCardTable,
     layout: '/admin'
   },
   {
@@ -151,16 +153,6 @@ var dashRoutes = [
     icon: ConfirmationNumber,
     component: Assignments,
     redirect: true,
-    layout: '/admin'
-  },
-  {
-    path: '/timeCard',
-    name: 'TimeCard',
-    rtlName: '',
-    mini: 'S',
-    rtlMini: '',
-    icon: BusinessIcon,
-    component: timeCardTable,
     layout: '/admin'
   },
   {

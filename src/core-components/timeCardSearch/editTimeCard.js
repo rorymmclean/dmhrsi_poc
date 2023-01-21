@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
 import { useLocation } from 'react-router-dom';
@@ -19,11 +19,12 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import moment from 'moment';
-import { addTimeCardThunk } from './api/timeCard-thunk-api';
+import { addTimeCardThunk, getTimeCardDetailsThunk } from './api/timeCard-thunk-api';
 import WorkSchedule from 'core-components/timeEntry/workSchedule';
+import Edit from "@material-ui/icons/Edit";
 
-export default function AddTimeCard(props) {
-    const { onSave } = props;
+export default function EditTimeCard(props) {
+    const { onSave,rowData } = props;
     const location = useLocation();
     const [value, setValue] = React.useState('Open');
     const [inputValue, setInputValue] = React.useState('');
@@ -37,6 +38,20 @@ export default function AddTimeCard(props) {
     const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
 console.log(data);
 
+    
+  useEffect(() => {
+    ThunkDispatch(getTimeCardDetailsThunk({id:rowData.TIMECARD_ID}))
+      .then(result => {
+          if ( result?.data?.body )
+          {
+            console.log(JSON.parse(result.data.body));
+         // setData({ ...JSON.parse(result.data.body)[0],START_DATE:new Date(),id:location.pathname.split('/')[3] })
+      
+      }
+      })
+      .catch(error => console.error('getTimeCardDetailsThunk', error))
+      .finally(() => { });
+  }, [rowData.TIMECARD_ID]);
     const searchEmployees = (value) => {
         ThunkDispatch(getPersonListThunk({ search_string: value }))
             .then(result => {
@@ -94,9 +109,9 @@ console.log(data);
                             ThunkDispatch(addTimeCardThunk({ ...userObject }))
                                 .then(result => {
 
-                                    onSave({ ...userObject, FIRST_NAME: valueEmployee.FIRST_NAME,
+                                    /*onSave({ ...userObject, FIRST_NAME: valueEmployee.FIRST_NAME,
                                 MIDDLE_NAME: valueEmployee.MIDDLE_NAME,
-                                LAST_NAME: valueEmployee.LAST_NAME, TIMECARD_ID: result.data.ID })
+                                LAST_NAME: valueEmployee.LAST_NAME, TIMECARD_ID: result.data.ID })*/
 
 
                                     setShow(false)
@@ -192,7 +207,7 @@ console.log(data);
             
                                 
                             </JPGrid>
-                          <WorkSchedule />
+                            <WorkSchedule TIMECARD_ID={ rowData.TIMECARD_ID } />
                         </JPGrid>
                     </JPGrid>
                 </JPModal>
@@ -204,13 +219,12 @@ console.log(data);
     return (
         <>
             {customersOptions}
-            <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
-                <JPGrid>
-                    <Button color={'info'} onClick={() => setShow(true)} >
-                        Add Time Card
-                    </Button>
-                </JPGrid>
-            </JPGrid>
+            <Button color={'info'} onClick={() => setShow(true)} style={{
+          padding: "8px 4px 6px 8px",
+          borderRadius: "20px"
+        }}>
+          <Edit onClick={() => setShow(true)} />
+        </Button>
         </>
     );
 }
