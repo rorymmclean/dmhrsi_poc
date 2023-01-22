@@ -20,15 +20,11 @@ import {
 } from "@material-ui/pickers";
 import moment from 'moment';
 import { addTimeCardThunk, getTimeCardDetailsThunk } from './api/timeCard-thunk-api';
-import WorkSchedule from 'core-components/timeEntry/workSchedule';
 import Edit from "@material-ui/icons/Edit";
+import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 
 export default function EditTimeCard(props) {
     const { onSave,rowData } = props;
-    const location = useLocation();
-    const [value, setValue] = React.useState('Open');
-    const [inputValue, setInputValue] = React.useState('');
-    const [options, setOptions] = React.useState([]);
     const [show, setShow] = React.useState(false);
     const [data, setData] = React.useState({});
     const [valueEmployee, setValueEmployee] = React.useState(null);
@@ -36,22 +32,23 @@ export default function EditTimeCard(props) {
     const [optionsEmployee, setOptionsEmployee] = React.useState([]);
     const STATUS_NAME = { 'Open': 'O','Approved':"A" ,'Close':'C'}
     const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
-console.log(data);
 
     
-  useEffect(() => {
+    useEffect( () =>
+    {
+      if(show)
     ThunkDispatch(getTimeCardDetailsThunk({id:rowData.TIMECARD_ID}))
       .then(result => {
           if ( result?.data?.body )
-          {
-            console.log(JSON.parse(result.data.body));
-         // setData({ ...JSON.parse(result.data.body)[0],START_DATE:new Date(),id:location.pathname.split('/')[3] })
+          {              
+         setData({ ...JSON.parse(result.data.body)[0] })
       
       }
       })
       .catch(error => console.error('getTimeCardDetailsThunk', error))
       .finally(() => { });
-  }, [rowData.TIMECARD_ID]);
+  }, [ rowData.TIMECARD_ID,show ] );
+    
     const searchEmployees = (value) => {
         ThunkDispatch(getPersonListThunk({ search_string: value }))
             .then(result => {
@@ -86,14 +83,14 @@ console.log(data);
             <>
                 <JPModal
                     defaultTitle="Time Card"
-                    title={`Add Time Card`}
+                    title={`Time Card`}
                     onClose={_ => {
                         setShow(false)
                         setData({})
                     }}
                     closeButton={true}
                     fullWidth
-                    maxWidth="md"
+                    maxWidth="lg"
                     open={show}
                     dialogActions={[{
                         name: 'Save', onClick: _ => {
@@ -207,7 +204,9 @@ console.log(data);
             
                                 
                             </JPGrid>
-                            <WorkSchedule TIMECARD_ID={ rowData.TIMECARD_ID } />
+                            { show ? <WorkScheduleTest TIMECARD_ID={ rowData.TIMECARD_ID } /> : null }
+
+                            
                         </JPGrid>
                     </JPGrid>
                 </JPModal>

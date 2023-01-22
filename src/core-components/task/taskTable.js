@@ -78,7 +78,6 @@ export default function TaskTable (props)
       .then(result => {
         if (result?.data?.body) {
             
-        console.log(JSON.parse(result.data.body));
         setState(prevState => {
           const data = [...prevState.data];
           for (let index = 0; index < JSON.parse(result.data.body).length; index++) {

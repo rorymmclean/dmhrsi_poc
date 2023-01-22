@@ -20,7 +20,6 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import { Alert, Autocomplete, Snackbar } from '@mui/material';
-import WorkSchedule from 'core-components/timeEntry/workSchedule';
 import { Padding } from '@mui/icons-material';
 
 
@@ -197,7 +196,6 @@ export default function allocationRuleSet() {
              
               </GridItem>
 
-        <WorkSchedule />
 
 
 

@@ -20,7 +20,7 @@ import {
 } from "@material-ui/pickers";
 import moment from 'moment';
 import { addTimeCardThunk } from './api/timeCard-thunk-api';
-import WorkSchedule from 'core-components/timeEntry/workSchedule';
+import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 
 export default function AddTimeCard(props) {
     const { onSave } = props;
@@ -35,7 +35,6 @@ export default function AddTimeCard(props) {
     const [optionsEmployee, setOptionsEmployee] = React.useState([]);
     const STATUS_NAME = { 'Open': 'O','Approved':"A" ,'Close':'C'}
     const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
-console.log(data);
 
     const searchEmployees = (value) => {
         ThunkDispatch(getPersonListThunk({ search_string: value }))
@@ -192,7 +191,7 @@ console.log(data);
             
                                 
                             </JPGrid>
-                          <WorkSchedule />
+                          <WorkScheduleTest />
                         </JPGrid>
                     </JPGrid>
                 </JPModal>

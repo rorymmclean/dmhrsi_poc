@@ -23,14 +23,8 @@ import EditTimeCard from './editTimeCard';
 
 export default function TimeCardTable() {
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onClickStory = (item) => {
-    history.push({
-      pathname: `/admin/edit/${item?.TIMECRD_ID}`,
-      state: { id: item?.TIMECRD_ID }
-    });
-  }
+  const [ isLoading, setIsLoading ] = useState( false );
+  
   const [state, setState] = React.useState({
     columns: [
       { title: 'Date', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.START_DATE} - ${rowData?.END_DATE}`}</Typography> },
