@@ -53,7 +53,7 @@ export default function TimeCardTable() {
           return <Chip label={ `${s }` } color={color} variant="outlined" />
         }
       },
-      { title: 'Hours', field: 'Hours' },
+      { title: 'Hours', field: 'HOURS', render: rowData => <Typography type={'h3'}>{`${rowData?.HOURS||0} Hrs `}</Typography>  },
       {
         field: 'view',
         editable: 'never',

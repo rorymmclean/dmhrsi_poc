@@ -7,9 +7,10 @@ import TaskIcon from '@material-ui/icons/AssignmentLate';;
 
 // @material-ui/icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import BusinessIcon from '@material-ui/icons/Apartment';;
-import GroupIcon from '@material-ui/icons/Group';;
-import LeaderboardIcon from '@material-ui/icons/InvertColors';;
+import BusinessIcon from '@material-ui/icons/Apartment';
+import GroupIcon from '@material-ui/icons/Group';
+import LeaderboardIcon from '@material-ui/icons/InvertColors';
+
 
 import OrganizationTable from 'core-components/organization/organizationTable';
 import EditOrganization from 'core-components/organization/editOrganization';
