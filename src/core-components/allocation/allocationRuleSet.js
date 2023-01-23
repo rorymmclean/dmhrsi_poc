@@ -1,237 +1,132 @@
-import React, { useEffect } from 'react';
-
-import { useHistory, useLocation } from 'react-router-dom';
-import JPGrid from 'components/jp-grid/jp-grid';
-import { Grid, TextField, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import Button from 'components/CustomButtons/Button.jsx';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-
-import Button from 'components/CustomButtons/Button';
-import "date-fns";
-import DateFnsUtils from "@date-io/date-fns";
+import Card from 'components/Card/Card';
+import CardIcon from 'components/Card/CardIcon';
+import CardHeader from 'components/Card/CardHeader';
+import CardBody from 'components/Card/CardBody';
+import JPGrid from 'components/jp-grid/jp-grid';
+import {  Grid,  Typography } from '@material-ui/core';
+import Select from '@mui/material/Select';
+import TextField from "@material-ui/core/TextField";
+import _ from 'lodash';
+import TaskIcon from '@material-ui/icons/AssignmentLate';;
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import { styled } from '@mui/material/styles';
+import DateFnsUtils from "@date-io/date-fns";
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import "date-fns";
+import moment from 'moment';
 
-import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';;
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import { Alert, Autocomplete, Snackbar } from '@mui/material';
-import { Padding } from '@mui/icons-material';
+export default function Allocations() {
+  const [data, setData] = useState({});
 
+  const handleSave = () => {
+    const userObject =     {
+      START_DATE:moment(data?.START_DATE).format('MM/DD/YYYY'),
+      END_DATE: moment(data?.END_DATE).format('MM/DD/YYYY') ,
+      NAME: data?.NAME,
+      BASIS:data?.BASIS
+    };
 
-
-
-export default function allocationRuleSet() {
-  const history = useHistory();
-  const location = useLocation();
-  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S' , 'Total'];
-  const [expanded, setExpanded] = React.useState('panel1');
-  const [data, setData] = React.useState({});
-  const [open, setOpen] = React.useState(false);
-
-
-  const Basis = ['Weekly', 'By-Weekly']
-  const [inputValue, setInputValue] = React.useState('');
-  const [options, setOptions] = React.useState([]);
-  const [BasisiValue, setBasisValue] = React.useState('');
- 
-
-
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
+  console.log(userObject);
   };
-  
-
   return (
-    <>
-   
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  style={{ fontSize: "25px" }}
-                  fullWidth
-                  id="Name"
-                  label="Name"
-                  name="Name"
-                  autoComplete="Name"
-                  //value={data?.ORGANIZATION_NAME}
-                 // onChange={(e) => setData({ ...data, ORGANIZATION_NAME: e.target.value })}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
+    <div className="m-sm-30">
+      <JPGrid container direction={'row'} justify={'flex-end'} >
+        <JPGrid item marginRight={3} marginLeft={3}>
+          <Button
+            variant={'outlined'}
+            color={'info'} 
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+        </JPGrid>
+      </JPGrid>
 
-                <JPGrid container direction={'row'} justify={'flex-end'}>
-                  <JPGrid item marginRight={3} marginLeft={3}>
-                    <Button
-                      onClick={() => {
-                        history.push({
-                          pathname: `/admin/allocation`
-                   
-                        })
-                      }}
-                      variant={'outlined'}
-                    >
-                      Cancel
-                    </Button>
-                  </JPGrid>
-                  <JPGrid item marginRight={3} marginLeft={3}>
-                    <Button
-                   
-
-
-                      variant={'outlined'}
-                      color={'info'}
-                    >
-                      Save
-                    </Button>
-
-
-                  </JPGrid>
-
-                </JPGrid>
-
-              </GridItem>
-              
-              <GridItem xs={12} sm={6} container direction={'row'} justify={'flex-start'}
-              style={{flexBasis:'25%'}}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label="Start"
-                    format="MM/dd/yyyy"
-                    value={data?.START_DATE}
-                    onChange={(e) => setData({ ...data, START_DATE: e })}
-
-                    inputVariant="outlined"
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+              <CardIcon color="primary">
+                <TaskIcon />
+              </CardIcon>
+              <h4 style={{ color: "#000" }}>Allocations</h4>
+            </CardHeader>
+            <CardBody>
+              <Grid container>
+                <JPGrid xs={12} sm={12} >
+                  <TextField
+                    variant="outlined"
+                    required
+                    style={{ fontSize: "25px" }}
+                    fullWidth
+                    id="Name"
+                    label="Name"
+                    name="Name"
+                    autoComplete="Name"
+                    value={data?.NAME}
+                    onChange={(e) => setData({ ...data, NAME: e.target.value })}
                   />
-                </MuiPickersUtilsProvider>
-            
-              </GridItem>
+                </JPGrid>
+                <JPGrid xs={12} sm={4}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="start-date-picker"
+                      label="Start Date"
+                      format="MM/dd/yyyy"
+                      value={data?.START_DATE}
+                      onChange={(date) => setData({ ...data, START_DATE: date })}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
+                  </MuiPickersUtilsProvider>
+                </JPGrid>
+                <JPGrid xs={12} sm={4}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      id="end-date-picker"
+                      label="End Date"
+                      format="MM/dd/yyyy"
+                      value={data?.END_DATE}
+                      onChange={(date) => setData({ ...data, END_DATE: date })}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
+                  </MuiPickersUtilsProvider>
 
-
-
-
-
-             
-              <GridItem xs={12} sm={3}  style={{marginTop:'17px'}}>
-                
-
-              <Autocomplete
-                    id="Basis"
-                    getOptionLabel={(option) => option
-                    }
-                    filterOptions={(x) => x}
-                    options={Basis}
-                    autoComplete
-                    includeInputInList
-                    filterSelectedOptions
-                    value={BasisiValue}
-                    noOptionsText="No Basis"
-
-                    onChange={(event, newValue) => {
-                        setOptions(newValue ? [newValue, ...options] : options);
-                        setBasisValue(newValue);
-                    }}
-                    onInputChange={(event, newInputValue) => {
-                        setInputValue(newInputValue);
-                    }}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Basis" fullWidth variant="outlined" required 
-                    
-                        />
-
-                    )}
-
-
-                />
-
-              </GridItem>
-              
-              
-              <GridItem xs={12} sm={8}>
-
-
-            
-          
-<GridItem container={false}  style={ {display: 'flex' , flexDirection:'row' ,alignItems:'baseline',
-
- margin:'50px 0'
-}}  >
-
-<Typography style={{ textAlign: 'start', whiteSpace:'nowrap' ,alignSelf:'center' }}>WorkSchedule :</Typography>
-    {days.map((day) => (
-                           
-
-        <GridItem item xs={12} sm={2}   >
-             <Typography style={{ textAlign: 'center' }}>{day}</Typography>
-            <TextField 
-                variant="outlined"
-                style={{ fontSize: "25px" , display:'flex'}}
-                fullWidth
-                id={day}
-                name={day}
-                onChange={(e) => setData({ ...data, [day]: e.target.value })}
-            />
+                  </JPGrid>
+                <JPGrid xs={12} sm={4} marginTop={16}>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="basis-select-label">Basis</InputLabel>
+                    <Select
+                      labelId="basis-select-label"
+                      id="basis-select"
+                      value={data?.BASIS}
+                      onChange={(e) => setData({ ...data, BASIS: e.target.value })}
+                      label="Basis"
+                    >
+                      <MenuItem value={'daily'}>Daily</MenuItem>
+                      <MenuItem value={'weekly'}>Weekly</MenuItem>
+                      <MenuItem value={'monthly'}>Monthly</MenuItem>
+                    </Select>
+                  </FormControl>
+                </JPGrid>
+              </Grid>
+            </CardBody>
+          </Card>
         </GridItem>
-    ))}
-</GridItem>
-
-
-
-
-
-
-
-              
-
-
-
-             
-              </GridItem>
-
-
-
-
-              
-
-
-
-
-
-
-         
-
-
-
-
-
-
-
-
-
-
-
-
-              
-              
-                
-                
-              
-              
-
-
-
-               
-            </GridContainer>
-
-          </>
- 
+      </GridContainer>
+    </div>
   );
 }
