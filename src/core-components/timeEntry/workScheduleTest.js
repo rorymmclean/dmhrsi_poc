@@ -4,7 +4,7 @@ import { CircularProgress, Grid, TextField, Typography } from '@material-ui/core
 import { Autocomplete } from '@material-ui/lab';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { getTaskListThunk } from 'core-components/task/api/task-thunk-api';
-import { getTimeEntryListThunk } from './api/timeEntry-thunk-api';
+import { addTimeEntryThunk, editTimeEntryThunk, getTimeEntryListThunk } from './api/timeEntry-thunk-api';
 import moment from 'moment';
 
 function getMinAndMax(dates) {
@@ -36,8 +36,8 @@ function isSameWeek(dates) {
 
 export default function WorkScheduleTest( props )
 {
-    const {TIMECARD_ID } = props;
-    const daysHeader = [ 'SUN', 'MON', "THU", "WED", "TUE", "FRI", "SAT"];
+    const {TIMECARD_ID ,disabled,START_DATE} = props;
+    const daysHeader = [ 'SUN', 'MON', "TUE", "WED","THU", "FRI", "SAT"];
     const [data, setData] = React.useState({});
     const [valueTaskOne, setValueTaskOne] = React.useState(null);
     const [inputValueTaskOne, setInputValueTaskOne] = React.useState('');
@@ -45,8 +45,6 @@ export default function WorkScheduleTest( props )
     const [ getTimeEntryList, setGetTimeEntryList ] = React.useState( [] );
     const [ isLoading, setIsLoading ] = React.useState( true );
 
-
-    
   useEffect(() => {
     ThunkDispatch(getTimeEntryListThunk({search_string:TIMECARD_ID||""}))
         .then( result =>
@@ -116,7 +114,10 @@ export default function WorkScheduleTest( props )
       .finally(() => {           setIsLoading(false) });
   }, [TIMECARD_ID] );
     
-    const searchTaskOne = (value) => {
+    
+    const searchTaskOne = ( value ) =>
+    {
+        if(value?.length)
         ThunkDispatch(getTaskListThunk({ search_string: value }))
             .then(result => {
                 if (result?.data?.body) {
@@ -141,9 +142,63 @@ export default function WorkScheduleTest( props )
         return () => {
             active = false;
         };
-    }, [inputValueTaskOne]);
+    }, [ inputValueTaskOne ] );
+    
+    const createInput = ( value,index,obj,currentDayIndex,ttimeEntryList ) =>
+    {
+       let currentDate = new Date( START_DATE )
+       
+        currentDate.setDate( currentDate.getDate() + currentDayIndex+index*7  );
+        
+        console.log("userObject", index,currentDayIndex ,ttimeEntryList,ttimeEntryList[index]?.task?.TASK_ID);
+        
+      
 
- 
+        const userObject = {
+                          TIMECARD_ID: TIMECARD_ID,
+                          POST_DATE: moment(currentDate).format('YYYY/MM/DD'),
+                          HOURS: value,
+                         TASK_ID:ttimeEntryList[index]?.task?.TASK_ID,
+             
+
+        };
+                            console.log("userObject",userObject);
+if(ttimeEntryList[index]?.task?.TASK_ID)
+       ThunkDispatch(addTimeEntryThunk(userObject))
+      .then(result => {
+        
+      })
+      .catch(error => console.error('addTimeEntryThunk', error))
+      .finally(() => {  });
+    };
+
+    
+    const editInput = ( val,value ) =>
+    {
+         const userObject = {
+                          TIMECARD_ID: TIMECARD_ID,
+                          POST_DATE: value.POST_DATE,
+                          HOURS: val,
+                          TASK_ID: value.TASK_ID,
+                           TIMECARD_ENTRY_ID: value.TIMECARD_ENTRY_ID,
+             
+
+         };
+
+        console.log("userObject",userObject);
+       ThunkDispatch(editTimeEntryThunk(userObject))
+      .then(result => {
+        
+      })
+      .catch(error => console.error('editTimeEntryThunk', error))
+      .finally(() => {  });
+    };
+
+    const createInputDebounce = React.useRef( _.debounce( createInput, 500 ) ).current;
+    const editInputDebounce = React.useRef(_.debounce(editInput, 500)).current;
+
+
+    
     return (
 
         <JPGrid container direction="row" alignContent={'center'} alignItems={'center'} justify={'center'}  >
@@ -168,13 +223,14 @@ export default function WorkScheduleTest( props )
                     <JPGrid item xs={ 12 } sm={ 2 } marginRight={ '6.2px' } marginBottom={ '6.2px' } >
                         <Autocomplete
                             id="Tasks"
-                            getOptionLabel={ ( option ) => `${ option.TASK_NAME }  `
+                            getOptionLabel={ ( option ) => `${ option.TASK_NAME }`
                             }
                             filterOptions={ ( x ) => x }
                             options={ optionsTaskOne }
                             autoComplete
                             includeInputInList
                             filterSelectedOptions
+                            disabled={disabled}
                             value={ valueTaskOne?.length?valueTaskOne:day.task }
                             defaultValue={ day.task }
                             noOptionsText="No Tasks"
@@ -197,30 +253,36 @@ export default function WorkScheduleTest( props )
                         <TextField
                             variant="outlined"
                             fullWidth
+                            
                             disabled
                             defaultValue={day?.task?.SERVICE_TYPE}
                         />
                 
             </JPGrid>
-                    { daysHeader.map( d =>
+                    { daysHeader.map( (d,currentDayIndex) =>
                     {
-                        let ccc = day.W.find( iDay =>iDay.DOW == d) || {};
+                        let ccc = day.W.find( iDay => iDay.DOW == d ) || {};
+                        
 
                         
+
                         return <JPGrid item xs={ 12 } sm={ 1 } key={ day } marginLeft={ '6.2px' } marginBottom={ '6.2px' }  >
                         {Object.keys( ccc ).length   ? <TextField
                             variant="outlined"
                             style={ { fontSize: "25px" } }
                             fullWidth
                             defaultValue={ ccc?.HOURS  }
-                            id={ day }
-                            onChange={ ( e ) => setData( { ...data, [ day ]: e.target.value } ) }
+                               
+                                disabled={disabled}
+                                 onChange={ ( e ) =>editInputDebounce(e.target.value,ccc)  }
+
                         /> : <TextField
                             variant="outlined"
                             style={ { fontSize: "25px" } }
-                            fullWidth
-                            id={ day }
-                            onChange={ ( e ) => setData( { ...data, [ day ]: e.target.value } ) }
+                                    fullWidth
+                                    disabled={disabled}
+                           
+                            onChange={ ( e ) =>createInputDebounce(e.target.value,index,day.W,currentDayIndex,getTimeEntryList)  }
                         /> }
                     </JPGrid>
                    })}

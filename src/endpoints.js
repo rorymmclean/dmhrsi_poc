@@ -121,7 +121,11 @@ export const END_POINTS = {
           getTimeCardDetails:{
        url: 'timecard?id={id}',
       method: HTTP_METHOD_GET
-    },
+        },
+        editTimeCard: {
+             url: 'timecard',
+      method: HTTP_METHOD_POST
+          }
       },
 
     
@@ -130,6 +134,14 @@ export const END_POINTS = {
           url: 'timeentry/search?search_string={search_string}',
           method: HTTP_METHOD_GET
         },
+         addTimeEntry: {
+      url: 'timeentry',
+      method: HTTP_METHOD_PUT
+    },
+    editTimeEntry: {
+      url: 'timeentry',
+      method: HTTP_METHOD_POST
+     },
       },
 
 

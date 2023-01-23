@@ -59,24 +59,11 @@ export default function OrganizationTable() {
       };
     });
 
-  useEffect(() => {
-    ThunkDispatch(getOrganizationListThunk({search_string:""}))
-      .then(result => {
-        if (result?.data?.body) {
-            
-      
-        setState(prevState => {
-          const data = [...prevState.data];
-          for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-            data.push(JSON.parse(result.data.body)[index]);
-          }
-          return { ...prevState, data };
-        });
-      }
-      })
-      .catch(error => console.error('getOrganizationListThunk', error))
-      .finally(() => { setIsLoading(false) });
-  }, []);
+   useEffect( () =>
+  {
+    setIsLoading(true)
+   searchOrganizations("TNMOFY")
+  }, [] );
 
     const searchOrganizations = (value) => {
        ThunkDispatch(getOrganizationListThunk({search_string:value}))
@@ -138,6 +125,7 @@ export default function OrganizationTable() {
         variant="outlined"
                     margin="normal"
                     fullWidth
+                    defaultValue={"TNMOFY"}
                       placeholder="Search"
       onChange={handleInputChange}
 

@@ -60,7 +60,13 @@ export default function TaskTable (props)
   useEffect( () =>
   {
     if(search_string?.length)
-   searchTasks(search_string)
+      searchTasks( search_string )
+    else
+    {
+     
+            searchTasks( "01175" )
+
+    }
   }, [search_string]);
 
   const renderList = (tableDataArr = []) =>
@@ -134,7 +140,7 @@ export default function TaskTable (props)
                     fullWidth
                       placeholder="Search"
       onChange={handleInputChange}
-
+defaultValue={search_string?.length?search_string:"01175" }
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

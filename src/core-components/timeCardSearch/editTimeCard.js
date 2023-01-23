@@ -19,12 +19,14 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import moment from 'moment';
-import { addTimeCardThunk, getTimeCardDetailsThunk } from './api/timeCard-thunk-api';
+import { addTimeCardThunk, editTimeCardThunk, getTimeCardDetailsThunk } from './api/timeCard-thunk-api';
 import Edit from "@material-ui/icons/Edit";
 import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
+import { Search } from '@material-ui/icons';
+import { Alert, Snackbar } from '@mui/material';
 
 export default function EditTimeCard(props) {
-    const { onSave,rowData } = props;
+    const { onSave,rowData,disabled } = props;
     const [show, setShow] = React.useState(false);
     const [data, setData] = React.useState({});
     const [valueEmployee, setValueEmployee] = React.useState(null);
@@ -32,6 +34,7 @@ export default function EditTimeCard(props) {
     const [optionsEmployee, setOptionsEmployee] = React.useState([]);
     const STATUS_NAME = { 'Open': 'O','Approved':"A" ,'Close':'C'}
     const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
+  const [open, setOpen] = React.useState(false);
 
     
     useEffect( () =>
@@ -49,7 +52,9 @@ export default function EditTimeCard(props) {
       .finally(() => { });
   }, [ rowData.TIMECARD_ID,show ] );
     
-    const searchEmployees = (value) => {
+    const searchEmployees = ( value ) =>
+    {
+        if(value?.length)
         ThunkDispatch(getPersonListThunk({ search_string: value }))
             .then(result => {
                 if (result?.data?.body) {
@@ -92,27 +97,27 @@ export default function EditTimeCard(props) {
                     fullWidth
                     maxWidth="lg"
                     open={show}
-                    dialogActions={[{
+                    dialogActions={disabled?[]:[{
                         name: 'Save', onClick: _ => {
 
                             const userObject = {
+                                TIMECARD_ID:rowData.TIMECARD_ID,
                                 START_DATE: data?.START_DATE,
                                 END_DATE: data?.END_DATE,
                                 STATUS: data?.STATUS,
-                                PERSON_ID: valueEmployee?.PERSON_ID,
+                                PERSON_ID: valueEmployee?.PERSON_ID||data.PERSON_ID,
                                 
 
                             };
-                            ThunkDispatch(addTimeCardThunk({ ...userObject }))
+                            ThunkDispatch(editTimeCardThunk({ ...userObject }))
                                 .then(result => {
+onSave({ ...rowData,...userObject})
 
-                                    /*onSave({ ...userObject, FIRST_NAME: valueEmployee.FIRST_NAME,
-                                MIDDLE_NAME: valueEmployee.MIDDLE_NAME,
-                                LAST_NAME: valueEmployee.LAST_NAME, TIMECARD_ID: result.data.ID })*/
-
-
+setOpen(true)
                                     setShow(false)
                                     setData({})
+                                
+
 
                                 })
                                 .catch(error => console.error('ddTimeCardThunk', error))
@@ -120,8 +125,8 @@ export default function EditTimeCard(props) {
 
                         },
                         isLoading: false,
-                        disabled: !data?.START_DATE?.length || !data?.END_DATE?.length|| !valueEmployee?.PERSON_ID?.length|| !data?.STATUS?.length,
-                        color:  !data?.START_DATE?.length || !data?.END_DATE?.length|| !valueEmployee?.PERSON_ID?.length|| !data?.STATUS?.length ? null : 'info'
+                        disabled: !data?.START_DATE?.length || !data?.END_DATE?.length|| !(valueEmployee?.PERSON_ID?.length||data.PERSON_ID)|| !data?.STATUS?.length,
+                        color:  !data?.START_DATE?.length || !data?.END_DATE?.length|| !(valueEmployee?.PERSON_ID?.length||data.PERSON_ID)|| !data?.STATUS?.length ? null : 'info'
                     }]}
 
                 >
@@ -137,7 +142,8 @@ export default function EditTimeCard(props) {
                                     autoComplete
                                     includeInputInList
                                     filterSelectedOptions
-                                    value={valueEmployee}
+                                    value={ valueEmployee?.length ? valueEmployee : data }
+                                    disabled={data.STATUS=="C"||disabled}
                                     noOptionsText="No Employees"
                                     onChange={(event, newValue) => {
                                         setOptionsEmployee(newValue ? [newValue, ...optionsEmployee] : optionsEmployee);
@@ -159,7 +165,8 @@ export default function EditTimeCard(props) {
   <Select
     labelId="demo-simple-select-label"
       id="demo-simple-select"
-      value={STATUS_ID[data.STATUS]}
+                                        value={ STATUS_ID[ data.STATUS ] }
+                                        disabled={disabled}
     label="Status"
       onChange={(e) => setData({ ...data, STATUS: STATUS_NAME[e.target.value] })}
 
@@ -179,7 +186,8 @@ export default function EditTimeCard(props) {
                     id="date-picker-dialog"
                     label="Start Date"
                     format="yyy/MM/dd"
-                    value={data?.START_DATE}
+                                        value={ data?.START_DATE }
+                                        disabled={disabled}
                     onChange={(e) => setData({ ...data, START_DATE:moment(e).format('YYYY/MM/DD') })}
 
                     inputVariant="outlined"
@@ -194,7 +202,8 @@ export default function EditTimeCard(props) {
                     margin="normal"
                     id="date-picker-dialog"
                     label="End Date"
-                    format="yyy/MM/dd"
+                                        format="yyy/MM/dd"
+                                        disabled={disabled}
                     value={data?.END_DATE}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}
 
@@ -204,7 +213,7 @@ export default function EditTimeCard(props) {
             
                                 
                             </JPGrid>
-                            { show ? <WorkScheduleTest TIMECARD_ID={ rowData.TIMECARD_ID } /> : null }
+                            { show ? <WorkScheduleTest TIMECARD_ID={ rowData.TIMECARD_ID } disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
 
                             
                         </JPGrid>
@@ -217,12 +226,31 @@ export default function EditTimeCard(props) {
     );
     return (
         <>
+            <Snackbar
+                anchorOrigin={ { vertical: "top", horizontal: "right" } }
+ open={open} autoHideDuration={1000} onClose={(event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  }}>
+        <Alert onClose={(event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  }} severity="success" variant="filled" sx={{ width: '100%' }}>
+          Time Card Update is Successful!
+        </Alert>
+      </Snackbar>
             {customersOptions}
             <Button color={'info'} onClick={() => setShow(true)} style={{
           padding: "8px 4px 6px 8px",
           borderRadius: "20px"
         }}>
-          <Edit onClick={() => setShow(true)} />
+                { disabled ?<Search onClick={ () => setShow( true ) } />: <Edit onClick={ () => setShow( true ) } /> }
         </Button>
         </>
     );

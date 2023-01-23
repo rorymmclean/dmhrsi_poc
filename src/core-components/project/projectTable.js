@@ -61,9 +61,16 @@ export default function ProjectTable() {
         id: data.id
       };
     });
+  useEffect( () =>
+  {
+    setIsLoading(true)
+   searchProjects("Project - 00499")
+  }, [] );
+  
 
-
-    const searchProjects = (value) => {
+  const searchProjects = ( value ) =>
+  {
+       
        ThunkDispatch(getProjectListThunk({search_string:value}))
       .then(result => {
         if (result?.data?.body) {
@@ -124,7 +131,7 @@ export default function ProjectTable() {
                     fullWidth
                       placeholder="Search"
       onChange={handleInputChange}
-
+defaultValue={"Project - 00499"}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

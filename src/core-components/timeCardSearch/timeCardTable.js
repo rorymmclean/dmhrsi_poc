@@ -20,6 +20,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
 import AddTimeCard from './addTimeCard';
 import EditTimeCard from './editTimeCard';
+import { Chip } from '@mui/material';
 
 export default function TimeCardTable() {
   const history = useHistory();
@@ -31,20 +32,25 @@ export default function TimeCardTable() {
       { title: 'Approver', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.FIRST_NAME} ${rowData?.MIDDLE_NAME} ${rowData?.LAST_NAME}`}</Typography> },
       {
         title: 'Status', field: 'FIRST_NAME', render: rowData =>
-        {let s=""
+        {
+          let s = ""
+          let color=""
           if ( rowData?.STATUS == "C" )
           {
-          s="Close"
+            s = "Close"
+            color="error"
           }
           if ( rowData?.STATUS == "A" )
           {
-          s="Approved"
+            s = "Approved"
+              color="success"
           }
            if ( rowData?.STATUS == "O" )
           {
-          s="Open"
+             s = "Open"
+               color="primary"
         }
-          return <Typography type={ 'h3' }>{ `${s }` }</Typography>
+          return <Chip label={ `${s }` } color={color} variant="outlined" />
         }
       },
       { title: 'Hours', field: 'Hours' },
@@ -52,12 +58,34 @@ export default function TimeCardTable() {
         field: 'view',
         editable: 'never',
         title: 'Edit',
-        render: rowData => <EditTimeCard rowData={ rowData } />
+        render: rowData => <EditTimeCard rowData={ rowData } onSave={(result) => {
+        setState(prevState => {
+          const data = [ ...prevState.data ];
+          return { ...prevState, data : data.map((item) => {
+        return item.TIMECARD_ID === result.TIMECARD_ID?result:item;
+         } )};
+        });
+
+      }}/>
+      },
+       {
+        field: 'view',
+        editable: 'never',
+        title: 'View',
+        render: rowData => <EditTimeCard rowData={ rowData } disabled={true} />
       }
     ],
     data: []
   });
 
+
+  
+  useEffect( () =>
+  {
+    setIsLoading(true)
+   searchTimeCards("Bud Jerrold Whitfield")
+  }, [] );
+  
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
       return {
@@ -135,6 +163,7 @@ setState(prevState => {
                     variant="outlined"
                     margin="normal"
                     fullWidth
+                    defaultValue={"Bud Jerrold Whitfield"}
                     placeholder="Search"
                     onChange={handleInputChange}
 

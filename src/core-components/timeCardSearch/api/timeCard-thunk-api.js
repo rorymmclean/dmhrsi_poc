@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getTimeCardListAPI ,addTimeCardAPI, getTimeCardDetailsAPI} from './timeCard-api';
+import { getTimeCardListAPI ,addTimeCardAPI, getTimeCardDetailsAPI, editTimeCardAPI} from './timeCard-api';
 
 
 export const getTimeCardListThunk = createAsyncThunk('TimeCard/list', async (data, { dispatch }) => {
@@ -18,4 +18,10 @@ export const getTimeCardDetailsThunk = createAsyncThunk('TimeCard/Details', asyn
   const response = await getTimeCardDetailsAPI(data);
 
   return response
-})
+} )
+
+export const editTimeCardThunk = createAsyncThunk('TimeCard/edit', async (data, { dispatch }) => {
+  const response = await editTimeCardAPI(data);
+
+  return response;
+});

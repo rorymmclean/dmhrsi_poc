@@ -12,3 +12,23 @@ export const getTimeEntryListAPI = async data => {
 
   return response;
 };
+
+
+export const addTimeEntryAPI = async data => {
+  const endpoint = { ...END_POINTS.timeEntry.addTimeEntry  };
+  endpoint.data = data;
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
+
+export const editTimeEntryAPI = async data => {
+  const endpoint = { ...END_POINTS.timeEntry.editTimeEntry  };
+  endpoint.data = data;
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
+

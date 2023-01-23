@@ -29,7 +29,7 @@ export default function AddTimeCard(props) {
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
     const [show, setShow] = React.useState(false);
-    const [data, setData] = React.useState({});
+    const [data, setData] = React.useState({STATUS:'O',START_DATE:moment(new Date()).format('YYYY/MM/DD') });
     const [valueEmployee, setValueEmployee] = React.useState(null);
     const [inputValueEmployee, setInputValueEmployee] = React.useState('');
     const [optionsEmployee, setOptionsEmployee] = React.useState([]);
@@ -146,7 +146,8 @@ export default function AddTimeCard(props) {
   <Select
     labelId="demo-simple-select-label"
       id="demo-simple-select"
-      value={STATUS_ID[data.STATUS]}
+                                        value={ STATUS_ID[ data.STATUS ] }
+                                        defaultValue={STATUS_ID['O']}
     label="Status"
       onChange={(e) => setData({ ...data, STATUS: STATUS_NAME[e.target.value] })}
 
@@ -191,7 +192,6 @@ export default function AddTimeCard(props) {
             
                                 
                             </JPGrid>
-                          <WorkScheduleTest />
                         </JPGrid>
                     </JPGrid>
                 </JPModal>

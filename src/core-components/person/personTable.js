@@ -61,25 +61,14 @@ export default function PersonTable() {
       };
     });
 
-  useEffect(() => {
-    ThunkDispatch(getPersonListThunk({search_string:""}))
-      .then(result => {
-        if (result?.data?.body) {
-            
-      
-        setState(prevState => {
-          const data = [...prevState.data];
-          for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-            data.push(JSON.parse(result.data.body)[index]);
-          }
-          return { ...prevState, data };
-        });
-      }
-      })
-      .catch(error => console.error('getPersonListThunk', error))
-      .finally(() => { setIsLoading(false) });
-  }, []);
-
+  
+  
+   useEffect( () =>
+  {
+    setIsLoading(true)
+   searchPersons("Deedra Courtney Robertson")
+   }, [] );
+  
     const searchPersons = (value) => {
        ThunkDispatch(getPersonListThunk({search_string:value}))
       .then(result => {
@@ -142,7 +131,7 @@ export default function PersonTable() {
                     fullWidth
                       placeholder="Search"
       onChange={handleInputChange}
-
+defaultValue={"Deedra Courtney Robertson"}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
