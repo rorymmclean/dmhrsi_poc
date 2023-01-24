@@ -4,7 +4,7 @@ import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
 import Edit from "@material-ui/icons/Edit";
 import { useHistory } from 'react-router-dom';
-import { getTimeCardListThunk } from './api/timeCard-thunk-api';
+import { getAlLocationRuleSetListThunk } from './api/AlLocationRuleSet-thunk-api';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
@@ -18,51 +18,28 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
-import AddTimeCard from './addTimeCard';
-import EditTimeCard from './editTimeCard';
+import AddAlLocationRuleSet from './addalLocationRuleSet';
+import EditAlLocationRuleSet from './editalLocationRuleSet';
 import { Chip } from '@mui/material';
 
-export default function TimeCardTable() {
+export default function AlLocationRuleSetTable() {
   const history = useHistory();
   const [ isLoading, setIsLoading ] = useState( false );
   
   const [state, setState] = React.useState({
     columns: [
       { title: 'Date', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.START_DATE} - ${rowData?.END_DATE}`}</Typography> },
-      { title: 'Approver', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.FIRST_NAME} ${rowData?.MIDDLE_NAME} ${rowData?.LAST_NAME}`}</Typography> },
-      {
-        title: 'Status', field: 'FIRST_NAME', render: rowData =>
-        {
-          let s = ""
-          let color=""
-          if ( rowData?.STATUS == "C" )
-          {
-            s = "Close"
-            color="error"
-          }
-          if ( rowData?.STATUS == "A" )
-          {
-            s = "Approved"
-              color="success"
-          }
-           if ( rowData?.STATUS == "O" )
-          {
-             s = "Open"
-               color="primary"
-        }
-          return <Chip label={ `${s }` } color={color} variant="outlined" />
-        }
-      },
-      { title: 'Hours', field: 'HOURS', render: rowData => <Typography type={'h3'}>{`${rowData?.HOURS||0} Hrs `}</Typography>  },
+      { title: 'Name', field: 'NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.NAME}`}</Typography> },
+      { title: 'Reacord Type', field: 'RECORD_TYPE', render: rowData => <Typography type={'h3'}>{`${rowData?.RECORD_TYPE}`}</Typography>  },
       {
         field: 'view',
         editable: 'never',
         title: 'Edit',
-        render: rowData => <EditTimeCard rowData={ rowData } onSave={(result) => {
+        render: rowData => <EditAlLocationRuleSet rowData={ rowData } onSave={(result) => {
         setState(prevState => {
           const data = [ ...prevState.data ];
           return { ...prevState, data : data.map((item) => {
-        return item.TIMECARD_ID === result.TIMECARD_ID?result:item;
+        return item.RULE_ID === result.RULE_ID?result:item;
          } )};
         });
 
@@ -72,7 +49,7 @@ export default function TimeCardTable() {
         field: 'view',
         editable: 'never',
         title: 'View',
-        render: rowData => <EditTimeCard rowData={ rowData } disabled={true} />
+        render: rowData => <EditAlLocationRuleSet rowData={ rowData } disabled={true} />
       }
     ],
     data: []
@@ -83,7 +60,7 @@ export default function TimeCardTable() {
   useEffect( () =>
   {
     setIsLoading(true)
-   searchTimeCards("Lavern Vincenzo Franks")
+   searchAlLocationRuleSets("Bud Jerrold Whitfield")
   }, [] );
   
   const renderList = (tableDataArr = []) =>
@@ -97,10 +74,10 @@ export default function TimeCardTable() {
 
 
 
-  const searchTimeCards = ( value ) =>
+  const searchAlLocationRuleSets = ( value ) =>
   {
     
-    ThunkDispatch(getTimeCardListThunk({ search_string: value }))
+    ThunkDispatch(getAlLocationRuleSetListThunk({ search_string: value }))
       .then(result => {
         if (result?.data?.body) {
 setState(prevState => {
@@ -122,11 +99,11 @@ setState(prevState => {
           });
         }
       })
-      .catch(error => console.error('getTimeCardListThunk', error))
+      .catch(error => console.error('getAlLocationRuleSetListThunk', error))
       .finally(() => { setIsLoading(false) });
   };
 
-  const inputDebounce = React.useRef(_.debounce(searchTimeCards, 500)).current;
+  const inputDebounce = React.useRef(_.debounce(searchAlLocationRuleSets, 500)).current;
 
 
 
@@ -136,22 +113,7 @@ setState(prevState => {
   };
   return (
     <div className="m-sm-30">
-     
-
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary" icon>
-               <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
-                <JPGrid item xs={6}  >
-                   <CardIcon color="primary">
-                <BusinessIcon />
-              </CardIcon>
-                  <h4 style={ { color: "#000" } }>Time Cards</h4>
-                  
-                 </JPGrid>
-                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
-                    <AddTimeCard onSave={(result) => {
+      <AddAlLocationRuleSet onSave={(result) => {
         setState(prevState => {
           const data = [...prevState.data];
           data.unshift(result);
@@ -160,10 +122,15 @@ setState(prevState => {
         });
 
       }} />
-                </JPGrid>
-              </JPGrid>
-              
-              
+
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+              <CardIcon color="primary">
+                <BusinessIcon />
+              </CardIcon>
+              <h4 style={{ color: "#000" }}>Al-Location Rule Set</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>
@@ -173,7 +140,7 @@ setState(prevState => {
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    defaultValue={"Lavern Vincenzo Franks"}
+                    defaultValue={"Bud Jerrold Whitfield"}
                     placeholder="Search"
                     onChange={handleInputChange}
 

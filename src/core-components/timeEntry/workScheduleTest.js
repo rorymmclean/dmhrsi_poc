@@ -1,55 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { CircularProgress, Grid, TextField, Typography } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
 import { ThunkDispatch } from 'thunk-dispatch';
-import { getTaskListThunk } from 'core-components/task/api/task-thunk-api';
 import { addTimeEntryThunk, editTimeEntryThunk, getTimeEntryListThunk } from './api/timeEntry-thunk-api';
 import moment from 'moment';
+import CustamAutocomplete from './CustamAutocomplete';
+import Button from 'components/CustomButtons/Button';
 
-function getMinAndMax(dates) {
-    var result = {};
-    for (var index in dates) {
-        var thisDate = dates[index]
-        ,   dateParts = thisDate.split(/\//)
-        ,   fullDate = new Date(dateParts[2], dateParts[0] - 1, dateParts[1]);
-        if(!result['max'] || fullDate > result['max']) {
-            result['max'] = fullDate;
-        }
-        if(!result['min'] || fullDate < result['min']) {
-            result['min'] = fullDate
-        }
-    }
-    return result;
-}
 
-function isSameWeek(dates) {
-    var minAndMax = getMinAndMax(dates)
-    ,   dayOfWeek = {}
-    dayOfWeek['min'] = minAndMax['min'].getDay();
-    dayOfWeek['max'] = minAndMax['max'].getDay();
-    if(minAndMax['max'] - minAndMax['min'] > 518400000 || dayOfWeek['min'] > dayOfWeek['max']) {
-        return false;
-    }
-    return true;
+function groupBy(objectArray, property) {
+   return objectArray.reduce((acc, obj) => {
+      const key = obj[property];
+      if (!acc[key]) {
+         acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+   }, {});
 }
 
 export default function WorkScheduleTest( props )
 {
     const {TIMECARD_ID ,disabled,START_DATE} = props;
     const daysHeader = [ 'SUN', 'MON', "TUE", "WED","THU", "FRI", "SAT"];
-    const [data, setData] = React.useState({});
-    const [valueTaskOne, setValueTaskOne] = React.useState(null);
-    const [inputValueTaskOne, setInputValueTaskOne] = React.useState('');
-    const [optionsTaskOne, setOptionsTaskOne] = React.useState([]);
     const [ getTimeEntryList, setGetTimeEntryList ] = React.useState( [] );
     const [ isLoading, setIsLoading ] = React.useState( true );
+    let ref = useRef( {} );
 
-  useEffect(() => {
+    useEffect( () =>
+    {
     ThunkDispatch(getTimeEntryListThunk({search_string:TIMECARD_ID||""}))
         .then( result =>
         {
-                    let endList = [];
+            let endList = [];
 
         if (result?.data?.body) {
           let startList = JSON.parse( result.data.body ).sort( ( a, b ) =>
@@ -57,45 +40,17 @@ export default function WorkScheduleTest( props )
             return new Date( a.POST_DATE ).getTime() - new Date( b.POST_DATE ).getTime();
           } ) || [];
 
-
-           let x = [];
-          startList.forEach( (item,index) =>
-          {
-          if(index < startList?.length)
-            if (isSameWeek([moment(startList[ index ]?.POST_DATE).format('MM/DD/YYYY'),moment(startList[ index+1 ]?.POST_DATE).format('MM/DD/YYYY') ]))
-            {
-               x.push(item)
-            } else
-            {
-               x.push(item)
-
-              endList.push({ W: x,task:{SERVICE_TYPE:startList[ index ].SERVICE_TYPE,TASK_ID:startList[ index ].TASK_ID,TASK_NAME:startList[ index ].TASK_NAME} }) 
-            x=[]
-            }
-
-           
-          } )
-          
-           
+            const groupedPeople = groupBy( startList, 'TASK_ID' );
             
-            if ( endList?.length === 1 )
-            {
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
+            Object.keys( groupedPeople ).forEach( ( item, index ) =>
+            { 
+            const task = groupedPeople[ item ].find( i => i.TASK_ID == item );
+                
+             endList.push( { W: groupedPeople[item], task: { SERVICE_TYPE: task?.SERVICE_TYPE, TASK_ID: task?.TASK_ID, TASK_NAME: task?.TASK_NAME } } )
+ 
+            })
 
-            }
-             if ( endList?.length === 2 )
-            {
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-
-             }
-            if ( endList?.length === 3 )
-            {
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-
-            }
+           
           setGetTimeEntryList(endList)
           setIsLoading(false)
     
@@ -103,9 +58,7 @@ export default function WorkScheduleTest( props )
         } else
         {
              endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-            endList.push({ W: [],task:{SERVICE_TYPE:"",TASK_ID:"",TASK_NAME:""} }) 
-            endList.push( { W: [], task: { SERVICE_TYPE: "", TASK_ID: "", TASK_NAME: "" } } ) 
+        
             setGetTimeEntryList(endList)
 
       }
@@ -115,55 +68,24 @@ export default function WorkScheduleTest( props )
   }, [TIMECARD_ID] );
     
     
-    const searchTaskOne = ( value ) =>
-    {
-        if(value?.length)
-        ThunkDispatch(getTaskListThunk({ search_string: value }))
-            .then(result => {
-                if (result?.data?.body) {
-                    setOptionsTaskOne(JSON.parse(result.data.body));
-                } else {
-                    setOptionsTaskOne([]);
 
-                }
-            })
-            .catch(error => console.error('getTaskListThunkOne', error))
-            .finally(() => { });
-    };
-    React.useEffect(() => {
-        let active = true;
-        if (inputValueTaskOne === '') {
-            setOptionsTaskOne([]);
-            return undefined;
-        }
-        searchTaskOne(inputValueTaskOne)
-
-
-        return () => {
-            active = false;
-        };
-    }, [ inputValueTaskOne ] );
-    
     const createInput = ( value,index,obj,currentDayIndex,ttimeEntryList ) =>
     {
        let currentDate = new Date( START_DATE )
        
         currentDate.setDate( currentDate.getDate() + currentDayIndex+index*7  );
         
-        console.log("userObject", index,currentDayIndex ,ttimeEntryList,ttimeEntryList[index]?.task?.TASK_ID);
-        
-      
 
         const userObject = {
                           TIMECARD_ID: TIMECARD_ID,
                           POST_DATE: moment(currentDate).format('YYYY/MM/DD'),
                           HOURS: value,
-                         TASK_ID:ttimeEntryList[index]?.task?.TASK_ID,
+                         TASK_ID:ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID,
              
 
         };
-                            console.log("userObject",userObject);
-if(ttimeEntryList[index]?.task?.TASK_ID)
+        console.log("userObject",userObject);
+if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
        ThunkDispatch(addTimeEntryThunk(userObject))
       .then(result => {
         
@@ -185,7 +107,6 @@ if(ttimeEntryList[index]?.task?.TASK_ID)
 
          };
 
-        console.log("userObject",userObject);
        ThunkDispatch(editTimeEntryThunk(userObject))
       .then(result => {
         
@@ -202,12 +123,12 @@ if(ttimeEntryList[index]?.task?.TASK_ID)
     return (
 
         <JPGrid container direction="row" alignContent={'center'} alignItems={'center'} justify={'center'}  >
-            <JPGrid item xs={12} sm={2}>
+            <JPGrid item xs={12} sm={3}>
 
                 <Typography style={{ textAlign: 'center' }}>Task</Typography>
             </JPGrid>
 
-            <JPGrid item xs={12} sm={2}>
+            <JPGrid item xs={12} sm={1}>
                 <Typography style={{ textAlign: 'center' }}>Type</Typography>
             </JPGrid>
 
@@ -220,45 +141,12 @@ if(ttimeEntryList[index]?.task?.TASK_ID)
             {
                 
                 return  <>
-                    <JPGrid item xs={ 12 } sm={ 2 } marginRight={ '6.2px' } marginBottom={ '6.2px' } >
-                        <Autocomplete
-                            id="Tasks"
-                            getOptionLabel={ ( option ) => `${ option.TASK_NAME }`
-                            }
-                            filterOptions={ ( x ) => x }
-                            options={ optionsTaskOne }
-                            autoComplete
-                            includeInputInList
-                            filterSelectedOptions
-                            disabled={disabled}
-                            value={ valueTaskOne?.length?valueTaskOne:day.task }
-                            defaultValue={ day.task }
-                            noOptionsText="No Tasks"
-                            onChange={ ( event, newValue ) =>
-                            {
-                                setOptionsTaskOne( newValue ? [ newValue, ...optionsTaskOne ] : optionsTaskOne );
-                                setValueTaskOne( newValue );
-                            } }
-                            onInputChange={ ( event, newInputValue ) =>
-                            {
-                                setInputValueTaskOne( newInputValue );
-                            } }
-                            renderInput={ ( params ) => (
-                                <TextField { ...params }  fullWidth variant="outlined" required />
-                            ) }
+            
 
-                        />
-                    </JPGrid>  
-                    <JPGrid item xs={ 12 } sm={ 2 } marginRight={ '6.2px' } marginBottom={ '6.2px' }>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            
-                            disabled
-                            defaultValue={day?.task?.SERVICE_TYPE}
-                        />
-                
-            </JPGrid>
+                    <CustamAutocomplete disabled={ disabled } task={ day.task } TIMECARD_ID={ TIMECARD_ID } onAddTask={ ( val ) => { ref.current = val } } />
+
+    
+                   
                     { daysHeader.map( (d,currentDayIndex) =>
                     {
                         let ccc = day.W.find( iDay => iDay.DOW == d ) || {};
@@ -285,7 +173,8 @@ if(ttimeEntryList[index]?.task?.TASK_ID)
                             onChange={ ( e ) =>createInputDebounce(e.target.value,index,day.W,currentDayIndex,getTimeEntryList)  }
                         /> }
                     </JPGrid>
-                   })}
+                    } ) }
+                 
                    </>
                 
                 
@@ -300,7 +189,18 @@ if(ttimeEntryList[index]?.task?.TASK_ID)
 
            
          
-           
+            { !isLoading  ? <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
+                <JPGrid>
+                    { !disabled ? <Button color={ !ref.current?.TASK_ID?.length || false ? 'info' : null } disabled={ ref.current?.TASK_ID?.length || false } onClick={ () => setGetTimeEntryList( prevState =>
+                    {
+          
+                        return [ ...prevState, { W: [], task: { SERVICE_TYPE: "", TASK_ID: "", TASK_NAME: "" } } ];
+                    } )
+                    } >
+                        Add Rule
+                    </Button> : null }
+                </JPGrid>
+            </JPGrid> : null }
           
 
           

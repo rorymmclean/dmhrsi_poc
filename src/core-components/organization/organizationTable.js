@@ -99,7 +99,23 @@ export default function OrganizationTable() {
   };
   return (
     <div className="m-sm-30">
-          <AddOrganization onSave={(result) => {
+          
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+             
+
+              <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
+                <JPGrid item xs={6}  >
+                   <CardIcon color="primary">
+                    <BusinessIcon />
+
+              </CardIcon>
+              <h4 style={{color:"#000"}}>Organizations</h4>
+                 </JPGrid>
+                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                   <AddOrganization onSave={(result) => {
         setState(prevState => {
           const data = [...prevState.data];
           data.unshift(result);
@@ -108,14 +124,9 @@ export default function OrganizationTable() {
         });
 
       }} />
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary" icon>
-              <CardIcon color="primary">
-                <BusinessIcon />
-              </CardIcon>
-              <h4 style={{color:"#000"}}>Organizations</h4>
+                </JPGrid>
+            </JPGrid>
+              
             </CardHeader>
             <CardBody>
                <GridContainer>

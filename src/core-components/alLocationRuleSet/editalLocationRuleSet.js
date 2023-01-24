@@ -19,13 +19,14 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import moment from 'moment';
-import { addTimeCardThunk, editTimeCardThunk, getTimeCardDetailsThunk } from './api/timeCard-thunk-api';
+import {  editAlLocationRuleSetThunk, getAlLocationRuleSetDetailsThunk } from './api/AlLocationRuleSet-thunk-api';
 import Edit from "@material-ui/icons/Edit";
 import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 import { Search } from '@material-ui/icons';
 import { Alert, Snackbar } from '@mui/material';
+import AlLocationRuleSetWorkSchedule from './alLocationRuleSetWorkSchedule';
 
-export default function EditTimeCard(props) {
+export default function EditAlLocationRuleSet(props) {
     const { onSave,rowData,disabled } = props;
     const [show, setShow] = React.useState(false);
     const [data, setData] = React.useState({});
@@ -40,7 +41,7 @@ export default function EditTimeCard(props) {
     useEffect( () =>
     {
       if(show)
-    ThunkDispatch(getTimeCardDetailsThunk({id:rowData.TIMECARD_ID}))
+    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:rowData.RULE_ID}))
       .then(result => {
           if ( result?.data?.body )
           {              
@@ -48,9 +49,9 @@ export default function EditTimeCard(props) {
       
       }
       })
-      .catch(error => console.error('getTimeCardDetailsThunk', error))
+      .catch(error => console.error('getAlLocationRuleSetDetailsThunk', error))
       .finally(() => { });
-  }, [ rowData.TIMECARD_ID,show ] );
+  }, [ rowData.RULE_ID,show ] );
     
     const searchEmployees = ( value ) =>
     {
@@ -87,8 +88,8 @@ export default function EditTimeCard(props) {
         () => (
             <>
                 <JPModal
-                    defaultTitle="Time Card"
-                    title={`Time Card`}
+                    defaultTitle="Al-Location Rule Set"
+                    title={`Al-Location Rule Set`}
                     onClose={_ => {
                         setShow(false)
                         setData({})
@@ -101,7 +102,7 @@ export default function EditTimeCard(props) {
                         name: 'Save', onClick: _ => {
 
                             const userObject = {
-                                TIMECARD_ID:rowData.TIMECARD_ID,
+                                RULE_ID:rowData.RULE_ID,
                                 START_DATE: data?.START_DATE,
                                 END_DATE: data?.END_DATE,
                                 STATUS: data?.STATUS,
@@ -109,7 +110,7 @@ export default function EditTimeCard(props) {
                                 
 
                             };
-                            ThunkDispatch(editTimeCardThunk({ ...userObject }))
+                            ThunkDispatch(editAlLocationRuleSetThunk({ ...userObject }))
                                 .then(result => {
 onSave({ ...rowData,...userObject})
 
@@ -120,7 +121,7 @@ setOpen(true)
 
 
                                 })
-                                .catch(error => console.error('ddTimeCardThunk', error))
+                                .catch(error => console.error('editAlLocationRuleSetThunk', error))
                                 .finally(() => { });
 
                         },
@@ -132,52 +133,19 @@ setOpen(true)
                 >
                     <JPGrid minHeight={200} >
                         <JPGrid container direction="row" alignItems="center" spacing={1} padding={8} >
-                            <JPGrid item xs={12} sm={6}>
-                                <Autocomplete
-                                    id="Employees"
-                                    getOptionLabel={(option) => `${option.FIRST_NAME} ${option.MIDDLE_NAME} ${option.LAST_NAME}`
-                                    }
-                                    filterOptions={(x) => x}
-                                    options={optionsEmployee}
-                                    autoComplete
-                                    includeInputInList
-                                    filterSelectedOptions
-                                    value={ valueEmployee?.length ? valueEmployee : data }
-                                    disabled={data.STATUS=="C"||disabled}
-                                    noOptionsText="No Employees"
-                                    onChange={(event, newValue) => {
-                                        setOptionsEmployee(newValue ? [newValue, ...optionsEmployee] : optionsEmployee);
-                                        setValueEmployee(newValue);
-                                    }}
-                                    onInputChange={(event, newInputValue) => {
-                                        setInputValueEmployee(newInputValue);
-                                    }}
-                                    renderInput={(params) => (
-                                        <TextField {...params} label="Employee Name" fullWidth variant="outlined" required />
-                                    )}
-
-                                />
-                            </JPGrid>
-
-                            <JPGrid item xs={ 12 } sm={ 6 }>
-                                <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Status</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-      id="demo-simple-select"
-                                        value={ STATUS_ID[ data.STATUS ] }
-                                        disabled={disabled}
-    label="Status"
-      onChange={(e) => setData({ ...data, STATUS: STATUS_NAME[e.target.value] })}
-
-  >
-    <MenuItem value={"Open"}>Open</MenuItem>
-    <MenuItem value={ "Approved" }>Approved</MenuItem>
-    <MenuItem value={"Close"}>Close</MenuItem>
-
-  </Select>
-</FormControl>
-                                
+                            <JPGrid item xs={12} sm={12}>
+                                <TextField
+                    variant="outlined"
+                    required
+                    style={{ fontSize: "25px" }}
+                    fullWidth
+                    id="Name"
+                    label="Name"
+                    name="Name"
+                    autoComplete="Name"
+                    value={data?.NAME}
+                    onChange={(e) => setData({ ...data, NAME: e.target.value })}
+                  />
                             </JPGrid>
                             <JPGrid item xs={ 12 } sm={ 6 }>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -213,7 +181,7 @@ setOpen(true)
             
                                 
                             </JPGrid>
-                            { show ? <WorkScheduleTest TIMECARD_ID={ rowData.TIMECARD_ID } disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
+                            { show ? <AlLocationRuleSetWorkSchedule RULE_ID={ rowData.RULE_ID } PERSON_ID={rowData.PERSON_ID} disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
 
                             
                         </JPGrid>
@@ -242,14 +210,11 @@ setOpen(true)
 
     setOpen(false);
   }} severity="success" variant="filled" sx={{ width: '100%' }}>
-          Time Card Update is Successful!
+          rule Update is Successful!
         </Alert>
       </Snackbar>
             {customersOptions}
-        <Button
-          color={ rowData?.STATUS == "O" || disabled ? 'info' : null }
-          disabled= {disabled?false: rowData?.STATUS !== "O"}
-          onClick={ () => setShow( true ) } style={ {
+            <Button color={'info'} onClick={() => setShow(true)} style={{
           padding: "8px 4px 6px 8px",
           borderRadius: "20px"
         }}>

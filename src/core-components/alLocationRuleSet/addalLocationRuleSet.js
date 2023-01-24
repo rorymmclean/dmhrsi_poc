@@ -19,10 +19,10 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import moment from 'moment';
-import { addTimeCardThunk } from './api/timeCard-thunk-api';
+import { addAlLocationRuleSetThunk } from './api/AlLocationRuleSet-thunk-api';
 import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 
-export default function AddTimeCard(props) {
+export default function AddAlLocationRuleSet(props) {
     const { onSave } = props;
     const location = useLocation();
     const [value, setValue] = React.useState('Open');
@@ -35,7 +35,7 @@ export default function AddTimeCard(props) {
     const [optionsEmployee, setOptionsEmployee] = React.useState([]);
     const STATUS_NAME = { 'Open': 'O','Approved':"A" ,'Close':'C'}
     const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
-    
+
     const searchEmployees = (value) => {
         ThunkDispatch(getPersonListThunk({ search_string: value }))
             .then(result => {
@@ -69,8 +69,8 @@ export default function AddTimeCard(props) {
         () => (
             <>
                 <JPModal
-                    defaultTitle="Time Card"
-                    title={`Add Time Card`}
+                    defaultTitle="Al-Location Rule Set"
+                    title={`Add Al-Location Rule Set`}
                     onClose={_ => {
                         setShow(false)
                         setData({})
@@ -90,7 +90,7 @@ export default function AddTimeCard(props) {
                                 
 
                             };
-                            ThunkDispatch(addTimeCardThunk({ ...userObject }))
+                            ThunkDispatch(addAlLocationRuleSetThunk({ ...userObject }))
                                 .then(result => {
 
                                     onSave({ ...userObject, FIRST_NAME: valueEmployee.FIRST_NAME,
@@ -102,7 +102,7 @@ export default function AddTimeCard(props) {
                                     setData({})
 
                                 })
-                                .catch(error => console.error('ddTimeCardThunk', error))
+                                .catch(error => console.error('addAlLocationRuleSetThunk', error))
                                 .finally(() => { });
 
                         },
@@ -114,52 +114,21 @@ export default function AddTimeCard(props) {
                 >
                     <JPGrid minHeight={200} >
                         <JPGrid container direction="row" alignItems="center" spacing={1} padding={8} >
-                            <JPGrid item xs={12} sm={6}>
-                                <Autocomplete
-                                    id="Employees"
-                                    getOptionLabel={(option) => `${option.FIRST_NAME} ${option.MIDDLE_NAME} ${option.LAST_NAME}`
-                                    }
-                                    filterOptions={(x) => x}
-                                    options={optionsEmployee}
-                                    autoComplete
-                                    includeInputInList
-                                    filterSelectedOptions
-                                    value={valueEmployee}
-                                    noOptionsText="No Employees"
-                                    onChange={(event, newValue) => {
-                                        setOptionsEmployee(newValue ? [newValue, ...optionsEmployee] : optionsEmployee);
-                                        setValueEmployee(newValue);
-                                    }}
-                                    onInputChange={(event, newInputValue) => {
-                                        setInputValueEmployee(newInputValue);
-                                    }}
-                                    renderInput={(params) => (
-                                        <TextField {...params} label="Employee Name" fullWidth variant="outlined" required />
-                                    )}
-
-                                />
+                            <JPGrid item xs={12} sm={12}>
+                                <TextField
+                    variant="outlined"
+                    required
+                    style={{ fontSize: "25px" }}
+                    fullWidth
+                    id="Name"
+                    label="Name"
+                    name="Name"
+                    autoComplete="Name"
+                    value={data?.NAME}
+                    onChange={(e) => setData({ ...data, NAME: e.target.value })}
+                  />
                             </JPGrid>
 
-                            <JPGrid item xs={ 12 } sm={ 6 }>
-                                <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Status</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-      id="demo-simple-select"
-                                        value={ STATUS_ID[ data.STATUS ] }
-                                        defaultValue={STATUS_ID['O']}
-    label="Status"
-      onChange={(e) => setData({ ...data, STATUS: STATUS_NAME[e.target.value] })}
-
-  >
-    <MenuItem value={"Open"}>Open</MenuItem>
-    <MenuItem value={ "Approved" }>Approved</MenuItem>
-    <MenuItem value={"Close"}>Close</MenuItem>
-
-  </Select>
-</FormControl>
-                                
-                            </JPGrid>
                             <JPGrid item xs={ 12 } sm={ 6 }>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
@@ -206,7 +175,7 @@ export default function AddTimeCard(props) {
             <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
                 <JPGrid>
                     <Button color={'info'} onClick={() => setShow(true)} >
-                        Add Time Card
+                        Add Al-Location Rule Set
                     </Button>
                 </JPGrid>
             </JPGrid>

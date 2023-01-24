@@ -143,7 +143,24 @@ export const END_POINTS = {
       method: HTTP_METHOD_POST
      },
       },
-
+ alLocationRuleSet: {
+        getAlLocationRuleSet: {
+          url: 'allrule/search?search_string={search_string}',
+          method: HTTP_METHOD_GET
+        },
+          addAlLocationRuleSet: {
+      url: 'allrule',
+      method: HTTP_METHOD_PUT
+        },
+          getAlLocationRuleSetDetails:{
+       url: 'allrule?id={id}',
+      method: HTTP_METHOD_GET
+        },
+        editAlLocationRuleSet: {
+             url: 'allrule',
+      method: HTTP_METHOD_POST
+          }
+      },
 
 
 

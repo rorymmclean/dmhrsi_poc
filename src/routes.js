@@ -25,7 +25,7 @@ import EditTask from 'core-components/task/editTask';
 import timeCardTable from 'core-components/timeCardSearch/timeCardTable';
 import allocationRuleSet from 'core-components/allocation/allocationRuleSet'
 import ContactPerson from 'core-components/person/contact';
-
+import AlLocationRuleSetTable from 'core-components/alLocationRuleSet/alLocationRuleSetTable';
 var dashRoutes = [
   {
     path: '/timeCard',
@@ -163,7 +163,7 @@ var dashRoutes = [
     mini: 'S',
     rtlMini: '',
     icon: BusinessIcon,
-    component: allocationRuleSet,
+    component: AlLocationRuleSetTable,
     layout: '/admin'
   },
   {

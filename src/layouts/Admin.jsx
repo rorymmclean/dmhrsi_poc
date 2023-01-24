@@ -24,7 +24,7 @@ var ps;
 class Dashboard extends React.Component {
   state = {
     mobileOpen: false,
-    miniActive: false,
+    miniActive: true,
     image: require('assets/img/sidebar-2.jpg'),
     color: 'blue',
     bgColor: 'black',
