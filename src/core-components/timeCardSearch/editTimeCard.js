@@ -187,7 +187,8 @@ setOpen(true)
                     label="Start Date"
                     format="yyy/MM/dd"
                                         value={ data?.START_DATE }
-                                        disabled={disabled}
+                      disabled={ disabled }
+                        style={{width:'100% !important'}}
                     onChange={(e) => setData({ ...data, START_DATE:moment(e).format('YYYY/MM/DD') })}
 
                     inputVariant="outlined"
@@ -204,7 +205,8 @@ setOpen(true)
                     label="End Date"
                                         format="yyy/MM/dd"
                                         disabled={disabled}
-                    value={data?.END_DATE}
+                      value={ data?.END_DATE }
+                        style={{width:'100% !important'}}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}
 
                     inputVariant="outlined"

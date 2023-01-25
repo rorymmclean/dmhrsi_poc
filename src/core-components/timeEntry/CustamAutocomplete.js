@@ -4,12 +4,13 @@ import { CircularProgress, Grid, TextField, Typography } from '@material-ui/core
 import { Autocomplete } from '@material-ui/lab';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { getTaskListThunk } from 'core-components/task/api/task-thunk-api';
-import { editTimeEntryThunk } from './api/timeEntry-thunk-api';
+import { editTimeEntryTaskThunk, editTimeEntryThunk } from './api/timeEntry-thunk-api';
+import { editTaskThunk } from 'core-components/alLocationRuleSet/api/AlLocationRuleSet-thunk-api';
 
 
 
 export default function CustamAutocomplete( props ){
-    const {disabled,task,TIMECARD_ID,onAddTask} = props;
+    const {disabled,task,onAddTask,TIMECARD_ENTRY_ID,RULE_ID} = props;
     const [valueTaskOne, setValueTaskOne] = React.useState(null);
     const [inputValueTaskOne, setInputValueTaskOne] = React.useState('');
     const [ optionsTaskOne, setOptionsTaskOne ] = React.useState( [] );
@@ -55,24 +56,38 @@ setValueTaskOne(task)
  
     
    const editInput = ( val ) =>
-    {onAddTask(val)
-         /*const userObject = {
-                          TIMECARD_ID: TIMECARD_ID,
-                          POST_DATE: value.POST_DATE,
-                          HOURS: val,
-                          TASK_ID: value.TASK_ID,
-                           TIMECARD_ENTRY_ID: value.TIMECARD_ENTRY_ID,
-             
+    {
+        if(TIMECARD_ENTRY_ID&& TIMECARD_ENTRY_ID[0]){
+const userObject = {
+                          TASK_ID: val.TASK_ID,
+                           TIMECARD_ENTRY_ID: TIMECARD_ENTRY_ID[0],
+         }
 
-         };*/
-
-       // console.log("userObject",userObject);
-       /*ThunkDispatch(editTimeEntryThunk(userObject))
+            console.log( "userObject", userObject );
+             ThunkDispatch(editTimeEntryTaskThunk(userObject))
       .then(result => {
         
       })
-      .catch(error => console.error('editTimeEntryThunk', error))
-      .finally(() => {  });*/
+      .catch(error => console.error('editTimeEntryTaskThunk', error))
+      .finally(() => {  });
+       }
+       if ( RULE_ID && RULE_ID[0] )
+       {
+        const userObject = {
+                          TASK_ID: val.TASK_ID,
+                           RULE_ID: RULE_ID[0],
+         }
+
+            console.log( "userObject", userObject );
+             ThunkDispatch(editTaskThunk(userObject))
+      .then(result => {
+        
+      })
+      .catch(error => console.error('editTaskThunk', error))
+      .finally(() => {  });   
+       }
+         
+      
     };
 
     const editInputDebounce = React.useRef(_.debounce(editInput, 1000)).current;
@@ -104,7 +119,7 @@ setValueTaskOne(task)
                                     return;
 
                                 }
-                                //editInputDebounce( newValue )
+                                editInputDebounce( newValue )
                                 onAddTask(newValue)
                                 setOptionsTaskOne( newValue ? [ newValue, ...optionsTaskOne ] : optionsTaskOne );
                                 setValueTaskOne( newValue );
@@ -123,7 +138,7 @@ setValueTaskOne(task)
 
     
                     </JPGrid>  
-                    <JPGrid item xs={ 12 } sm={ 1 } marginRight={ '6.2px' } marginBottom={ '6.2px' }>
+                    <JPGrid item xs={ 12 } sm={ 1 } minWidth={140} marginRight={ '6.2px' } marginBottom={ '6.2px' }>
              <TextField
                 variant="outlined"
                 fullWidth

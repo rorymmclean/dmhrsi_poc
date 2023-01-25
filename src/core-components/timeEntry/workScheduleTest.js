@@ -122,18 +122,18 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
     
     return (
 
-        <JPGrid container direction="row" alignContent={'center'} alignItems={'center'} justify={'center'}  >
-            <JPGrid item xs={12} sm={3}>
+        <JPGrid container direction="row" alignContent={'flex-start'} alignItems={'flex-start'} justify={'flex-start'}  >
+            <JPGrid item xs={12} sm={3} marginRight={ '6.2px' } marginBottom={ '6.2px' }>
 
                 <Typography style={{ textAlign: 'center' }}>Task</Typography>
             </JPGrid>
 
-            <JPGrid item xs={12} sm={1}>
+            <JPGrid item xs={12} sm={1} marginRight={ '6.2px' } marginBottom={ '6.2px' }>
                 <Typography style={{ textAlign: 'center' }}>Type</Typography>
             </JPGrid>
 
-            {daysHeader.map((day) => (
-                <JPGrid item xs={12} sm={1} key={day} marginLeft={'6.2px'}     >
+            {daysHeader.map((day,index) => (
+                <JPGrid  item xs={12} sm={1} key={index} marginLeft={ '6.2px' } marginBottom={ '6.2px' }      >
                     <Typography style={{ textAlign: 'center' }}>{day}</Typography>
                 </JPGrid>
             ))}
@@ -143,7 +143,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
                 return  <>
             
 
-                    <CustamAutocomplete disabled={ disabled } task={ day.task } TIMECARD_ID={ TIMECARD_ID } onAddTask={ ( val ) => { ref.current = val } } />
+                    <CustamAutocomplete disabled={ disabled } task={ day.task } TIMECARD_ENTRY_ID={day?.W?.map(i=>i.TIMECARD_ENTRY_ID)||0} TIMECARD_ID={ TIMECARD_ID } onAddTask={ ( val ) => { ref.current = val } } />
 
     
                    
@@ -154,7 +154,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
 
                         
 
-                        return <JPGrid item xs={ 12 } sm={ 1 } key={ day } marginLeft={ '6.2px' } marginBottom={ '6.2px' }  >
+                        return <JPGrid item xs={ 12 } sm={ 1 } key={ currentDayIndex } marginLeft={ '6.2px' } marginBottom={ '6.2px' }  >
                         {Object.keys( ccc ).length   ? <TextField
                             variant="outlined"
                             style={ { fontSize: "25px" } }
@@ -197,7 +197,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
                         return [ ...prevState, { W: [], task: { SERVICE_TYPE: "", TASK_ID: "", TASK_NAME: "" } } ];
                     } )
                     } >
-                        Add Rule
+                        Add Task
                     </Button> : null }
                 </JPGrid>
             </JPGrid> : null }

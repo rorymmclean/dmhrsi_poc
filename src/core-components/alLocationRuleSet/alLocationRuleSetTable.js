@@ -4,7 +4,7 @@ import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
 import Edit from "@material-ui/icons/Edit";
 import { useHistory } from 'react-router-dom';
-import { getAlLocationRuleSetListThunk } from './api/AlLocationRuleSet-thunk-api';
+import { getAlLocationRuleSetListThunk, getArsetListThunk } from './api/AlLocationRuleSet-thunk-api';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
@@ -20,7 +20,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
 import AddAlLocationRuleSet from './addalLocationRuleSet';
 import EditAlLocationRuleSet from './editalLocationRuleSet';
-import { Chip } from '@mui/material';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 
 export default function AlLocationRuleSetTable() {
   const history = useHistory();
@@ -30,7 +30,7 @@ export default function AlLocationRuleSetTable() {
     columns: [
       { title: 'Date', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.START_DATE} - ${rowData?.END_DATE}`}</Typography> },
       { title: 'Name', field: 'NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.NAME}`}</Typography> },
-      { title: 'Reacord Type', field: 'RECORD_TYPE', render: rowData => <Typography type={'h3'}>{`${rowData?.RECORD_TYPE}`}</Typography>  },
+      { title: 'Person Name', field: 'FULLNAME', render: rowData => <Typography type={'h3'}>{`${rowData?.FULLNAME}`}</Typography>  },
       {
         field: 'view',
         editable: 'never',
@@ -77,7 +77,7 @@ export default function AlLocationRuleSetTable() {
   const searchAlLocationRuleSets = ( value ) =>
   {
     
-    ThunkDispatch(getAlLocationRuleSetListThunk({ search_string: value }))
+    ThunkDispatch(getArsetListThunk({ search_string: value }))
       .then(result => {
         if (result?.data?.body) {
 setState(prevState => {
@@ -99,7 +99,7 @@ setState(prevState => {
           });
         }
       })
-      .catch(error => console.error('getAlLocationRuleSetListThunk', error))
+      .catch(error => console.error('getArsetListThunk', error))
       .finally(() => { setIsLoading(false) });
   };
 
@@ -113,7 +113,23 @@ setState(prevState => {
   };
   return (
     <div className="m-sm-30">
-      <AddAlLocationRuleSet onSave={(result) => {
+     
+
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+              
+               <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
+                <JPGrid item xs={6}  >
+                   <CardIcon color="primary">
+                    <Diversity1Icon />
+
+              </CardIcon>
+              <h4 style={{color:"#000"}}>Al-Location Rule Set</h4>
+                 </JPGrid>
+                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                   <AddAlLocationRuleSet onSave={(result) => {
         setState(prevState => {
           const data = [...prevState.data];
           data.unshift(result);
@@ -122,15 +138,10 @@ setState(prevState => {
         });
 
       }} />
+                </JPGrid>
+            </JPGrid>
+              
 
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary" icon>
-              <CardIcon color="primary">
-                <BusinessIcon />
-              </CardIcon>
-              <h4 style={{ color: "#000" }}>Al-Location Rule Set</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>

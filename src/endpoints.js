@@ -141,25 +141,44 @@ export const END_POINTS = {
     editTimeEntry: {
       url: 'timeentry',
       method: HTTP_METHOD_POST
-     },
+        },
+        editTimeEntryTask: {
+      url: 'timeentry/change-task',
+      method: HTTP_METHOD_POST
+    }
       },
- alLocationRuleSet: {
+  alLocationRuleSet: {
+    getArsetList: {
+       url: 'arset/search?search_string={search_string}',
+          method: HTTP_METHOD_GET
+   },
         getAlLocationRuleSet: {
           url: 'allrule/search?search_string={search_string}',
           method: HTTP_METHOD_GET
         },
           addAlLocationRuleSet: {
-      url: 'allrule',
+      url: 'arset',
       method: HTTP_METHOD_PUT
         },
           getAlLocationRuleSetDetails:{
-       url: 'allrule?id={id}',
+       url: 'arset?id={id}',
       method: HTTP_METHOD_GET
         },
         editAlLocationRuleSet: {
+             url: 'arset',
+      method: HTTP_METHOD_POST
+    },
+        editRuleSet: {
              url: 'allrule',
       method: HTTP_METHOD_POST
-          }
+          },addRuleSet: {
+      url: 'allrule',
+      method: HTTP_METHOD_PUT
+    },
+         editTask: {
+      url: 'allrule/change-task',
+      method: HTTP_METHOD_POST
+    }
       },
 
 

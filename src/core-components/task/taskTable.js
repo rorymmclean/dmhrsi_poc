@@ -11,7 +11,7 @@ import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper, Typography } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -22,7 +22,7 @@ import TaskIcon from '@material-ui/icons/AssignmentLate';;
 
 export default function TaskTable (props)
 {
-  const { search_string } = props;
+  const { search_string,PROJECT_NAME } = props;
 
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -110,9 +110,34 @@ export default function TaskTable (props)
     const { value } = target;
     inputDebounce(value);
   };
+
+  const style = {
+    overrides: {
+      MuiTableCell: {
+        root: {
+          padding: '6px',
+        }
+      }
+    }
+  };
+  const theme = createMuiTheme(style);
+
   return (
     <div className="m-sm-30">
-          <AddTask search_string={search_string} onSave={(result) => {
+          
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+               <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
+                <JPGrid item xs={6}  >
+                  <CardIcon color="primary">
+                <TaskIcon />
+              </CardIcon>
+              <h4 style={{color:"#000"}}>Tasks</h4>
+                 </JPGrid>
+                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                   <AddTask search_string={search_string} onSave={(result) => {
         setState(prevState => {
           const data = [...prevState.data];
           data.unshift(result);
@@ -121,14 +146,10 @@ export default function TaskTable (props)
         });
 
       }} />
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary" icon>
-              <CardIcon color="primary">
-                <TaskIcon />
-              </CardIcon>
-              <h4 style={{color:"#000"}}>Tasks</h4>
+                </JPGrid>
+              </JPGrid>
+
+              
             </CardHeader>
             <CardBody>
                <GridContainer>
@@ -140,7 +161,7 @@ export default function TaskTable (props)
                     fullWidth
                       placeholder="Search"
       onChange={handleInputChange}
-defaultValue={search_string?.length?search_string:"01175" }
+defaultValue={PROJECT_NAME?.length?PROJECT_NAME:"01175" }
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -152,7 +173,7 @@ defaultValue={search_string?.length?search_string:"01175" }
                 </GridItem>
                       </GridContainer>
 
-
+<MuiThemeProvider theme={theme}>
       <MaterialTable
         isLoading={isLoading}
                 columns={state.columns}
@@ -164,17 +185,22 @@ defaultValue={search_string?.length?search_string:"01175" }
                   </JPGrid>
                 </JPGrid>
               )
-            }}
+                } }
         data={renderList(state.data)}
-         options={{
+                options={ {
+             rowStyle: {
+                height: 4,
+                width: 5
+              },
            search: false,
                          showTitle: false,
-              toolbar: false,
+           toolbar: false,
+             
 
            
       }}
               />
-              
+             </MuiThemeProvider> 
             </CardBody>
           </Card>
         </GridItem>

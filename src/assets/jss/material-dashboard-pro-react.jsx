@@ -342,7 +342,7 @@ const title = {
   color: grayColor[2],
   textDecoration: "none",
   fontWeight: "300",
-  marginTop: "30px",
+  marginTop: "12px",
   marginBottom: "25px",
   minHeight: "32px",
   fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",

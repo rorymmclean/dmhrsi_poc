@@ -32,3 +32,12 @@ export const editTimeEntryAPI = async data => {
 };
 
 
+export const editTimeEntryTaskAPI = async data => {
+  const endpoint = { ...END_POINTS.timeEntry.editTimeEntryTask  };
+  endpoint.data = data;
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
+

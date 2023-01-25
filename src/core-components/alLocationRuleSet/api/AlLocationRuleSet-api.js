@@ -40,3 +40,38 @@ export const editAlLocationRuleSetAPI = async data => {
 };
 
 
+export const getArsetListAPI = async data => {
+  const endpoint = { ...END_POINTS.alLocationRuleSet.getArsetList};
+
+  endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string });
+
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
+
+
+export const editRuleSetAPI = async data => {
+  const endpoint = { ...END_POINTS.alLocationRuleSet.editRuleSet };
+  endpoint.data = data;
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
+export const addRuleSetAPI = async data => {
+  const endpoint = { ...END_POINTS.alLocationRuleSet.addRuleSet  };
+  endpoint.data = data;
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
+export const editTaskAPI = async data => {
+  const endpoint = { ...END_POINTS.alLocationRuleSet.editTask  };
+  endpoint.data = data;
+  const response = await fetcher(endpoint);
+
+  return response;
+};

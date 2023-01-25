@@ -122,8 +122,8 @@ searchProjects(inputValue)
 
                         },
                         isLoading: false,
-                        disabled: !value?.PROJECT_ID?.length|| !data?.TASK_NAME?.length|| !data?.SERVICE_TYPE?.length|| !data?.TASK_NBR?.length  ||!valueLaborcosts?.LABOR_COST_ID?.length ,
-                        color: !value?.PROJECT_ID?.length|| !data?.TASK_NAME?.length|| !data?.SERVICE_TYPE?.length|| !data?.TASK_NBR?.length  ||!valueLaborcosts?.LABOR_COST_ID?.length? null : 'info'
+                        disabled: !(value?.PROJECT_ID?.length||search_string?.length)|| !data?.TASK_NAME?.length|| !data?.SERVICE_TYPE?.length|| !data?.TASK_NBR?.length  ||!valueLaborcosts?.LABOR_COST_ID?.length ,
+                        color: !(value?.PROJECT_ID?.length||search_string?.length)|| !data?.TASK_NAME?.length|| !data?.SERVICE_TYPE?.length|| !data?.TASK_NBR?.length  ||!valueLaborcosts?.LABOR_COST_ID?.length? null : 'info'
                     }]}
 
 

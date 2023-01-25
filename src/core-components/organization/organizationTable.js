@@ -10,11 +10,11 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
 import CardIcon from 'components/Card/CardIcon';
-import BusinessIcon from '@material-ui/icons/Apartment';;
+import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -97,6 +97,19 @@ export default function OrganizationTable() {
     const { value } = target;
     inputDebounce(value);
   };
+
+     const style = {
+    overrides: {
+      MuiTableCell: {
+        root: {
+          padding: '6px',
+        }
+      }
+    }
+  };
+  const theme = createMuiTheme( style );
+
+
   return (
     <div className="m-sm-30">
           
@@ -109,7 +122,7 @@ export default function OrganizationTable() {
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
                 <JPGrid item xs={6}  >
                    <CardIcon color="primary">
-                    <BusinessIcon />
+                    <SensorOccupiedIcon />
 
               </CardIcon>
               <h4 style={{color:"#000"}}>Organizations</h4>
@@ -151,7 +164,7 @@ export default function OrganizationTable() {
                 </GridItem>
                       </GridContainer>
 
-
+<MuiThemeProvider theme={theme}>
       <MaterialTable
         isLoading={isLoading}
                 columns={state.columns}
@@ -173,7 +186,8 @@ export default function OrganizationTable() {
            
       }}
               />
-              
+                </MuiThemeProvider>
+ 
             </CardBody>
           </Card>
         </GridItem>

@@ -12,13 +12,14 @@ import BusinessIcon from '@material-ui/icons/Apartment';;
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper, Typography } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
 import { getPersonListThunk } from './api/person-thunk-api';
 import AddPerson from './addPerson';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function PersonTable() {
   const history = useHistory();
@@ -101,9 +102,35 @@ export default function PersonTable() {
     const { value } = target;
     inputDebounce(value);
   };
+
+    const style = {
+    overrides: {
+      MuiTableCell: {
+        root: {
+          padding: '6px',
+        }
+      }
+    }
+  };
+  const theme = createMuiTheme( style );
+
   return (
     <div className="m-sm-30">
-          <AddPerson onSave={(result) => {
+         
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+              
+              <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
+                <JPGrid item xs={6}  >
+                   <CardIcon color="primary">
+                <PersonIcon />
+              </CardIcon>
+              <h4 style={{color:"#000"}}>Persons</h4>
+                 </JPGrid>
+                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                    <AddPerson onSave={(result) => {
         setState(prevState => {
           const data = [...prevState.data];
           data.unshift(result);
@@ -112,14 +139,10 @@ export default function PersonTable() {
         });
 
       }} />
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary" icon>
-              <CardIcon color="primary">
-                <BusinessIcon />
-              </CardIcon>
-              <h4 style={{color:"#000"}}>Persons</h4>
+                </JPGrid>
+              </JPGrid>
+              
+              
             </CardHeader>
             <CardBody>
                <GridContainer>
@@ -143,7 +166,7 @@ defaultValue={"Deedra Courtney Robertson"}
                 </GridItem>
                       </GridContainer>
 
-
+<MuiThemeProvider theme={theme}>
       <MaterialTable
         isLoading={isLoading}
                 columns={state.columns}
@@ -165,7 +188,7 @@ defaultValue={"Deedra Courtney Robertson"}
            
       }}
               />
-              
+              </MuiThemeProvider>
             </CardBody>
           </Card>
         </GridItem>

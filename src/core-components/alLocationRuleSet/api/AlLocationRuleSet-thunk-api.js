@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAlLocationRuleSetListAPI ,addAlLocationRuleSetAPI, getAlLocationRuleSetDetailsAPI, editAlLocationRuleSetAPI} from './AlLocationRuleSet-api';
+import { getAlLocationRuleSetListAPI ,addAlLocationRuleSetAPI, getAlLocationRuleSetDetailsAPI, editAlLocationRuleSetAPI, getArsetListAPI, editRuleSetAPI, addRuleSetAPI, editTaskAPI} from './AlLocationRuleSet-api';
 
 
 export const getAlLocationRuleSetListThunk = createAsyncThunk('AlLocationRuleSet/list', async (data, { dispatch }) => {
@@ -24,4 +24,30 @@ export const editAlLocationRuleSetThunk = createAsyncThunk('AlLocationRuleSet/ed
   const response = await editAlLocationRuleSetAPI(data);
 
   return response;
+} );
+
+
+export const getArsetListThunk = createAsyncThunk('getArsetList/list', async (data, { dispatch }) => {
+  const response = await getArsetListAPI(data);
+
+  return response
+})
+
+export const editRuleSetThunk = createAsyncThunk('editRuleSet/edit', async (data, { dispatch }) => {
+  const response = await editRuleSetAPI(data);
+
+  return response;
+} );
+
+export const addRuleSetThunk = createAsyncThunk('addRuleSetAPI/add', async (data, { dispatch }) => {
+  const response = await addRuleSetAPI(data);
+
+  return response;
 });
+
+
+export const editTaskThunk = createAsyncThunk('editTask/edit', async (data, { dispatch }) => {
+  const response = await editTaskAPI(data);
+
+  return response;
+} );

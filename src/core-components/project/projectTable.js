@@ -11,16 +11,19 @@ import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper, Typography } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
 import { getProjectListThunk } from './api/project-thunk-api';
 import AddProject from './addProject';
-import LeaderboardIcon from '@material-ui/icons/InvertColors';;
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
-export default function ProjectTable() {
+export default function ProjectTable ( props )
+{
+  const { ID, NAME } = props;
+
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,7 +41,7 @@ export default function ProjectTable() {
       { title: 'Organization Name', field: 'ORGANIZATION_NAME' },
                   { title: 'Manager Name', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.FIRST_NAME} ${rowData?.MIDDLE_NAME} ${rowData?.LAST_NAME}`}</Typography> },
 
-    {
+    !ID?.length?{
       field: 'view',
       editable: 'never',
       title: 'Edit',
@@ -48,8 +51,8 @@ export default function ProjectTable() {
       }}>
         <Edit onClick={() => onClickStory(rowData)} />
       </Button>
-    }
-    ],
+    }:null
+    ].filter(item=>item),
     data: []
   });
 
@@ -61,12 +64,18 @@ export default function ProjectTable() {
         id: data.id
       };
     });
-  useEffect( () =>
+
+
+   useEffect( () =>
   {
-    setIsLoading(true)
-   searchProjects("Project - 00499")
-  }, [] );
-  
+    if(ID?.length)
+      searchProjects( ID )
+    else
+    {
+ searchProjects( "Project - 00499" )
+    }
+  }, [ID]); 
+
 
   const searchProjects = ( value ) =>
   {
@@ -101,9 +110,35 @@ export default function ProjectTable() {
     const { value } = target;
     inputDebounce(value);
   };
+
+   const style = {
+    overrides: {
+      MuiTableCell: {
+        root: {
+          padding: '6px',
+        }
+      }
+    }
+  };
+  const theme = createMuiTheme( style );
+  
   return (
     <div className="m-sm-30">
-          <AddProject onSave={(result) => {
+         
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+              
+               <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
+                <JPGrid item xs={6}  >
+                   <CardIcon color="primary">
+                <AssignmentIcon />
+              </CardIcon>
+              <h4 style={{color:"#000"}}>Projects</h4>
+                 </JPGrid>
+                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                    <AddProject onSave={(result) => {
         setState(prevState => {
           const data = [...prevState.data];
           data.unshift(result);
@@ -112,14 +147,9 @@ export default function ProjectTable() {
         });
 
       }} />
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary" icon>
-              <CardIcon color="primary">
-                <LeaderboardIcon />
-              </CardIcon>
-              <h4 style={{color:"#000"}}>Projects</h4>
+                </JPGrid>
+              </JPGrid>
+              
             </CardHeader>
             <CardBody>
                <GridContainer>
@@ -131,7 +161,7 @@ export default function ProjectTable() {
                     fullWidth
                       placeholder="Search"
       onChange={handleInputChange}
-defaultValue={"Project - 00499"}
+defaultValue={NAME?.length?NAME:"Project - 00499"}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -143,7 +173,7 @@ defaultValue={"Project - 00499"}
                 </GridItem>
                       </GridContainer>
 
-
+<MuiThemeProvider theme={theme}>
       <MaterialTable
         isLoading={isLoading}
                 columns={state.columns}
@@ -165,7 +195,7 @@ defaultValue={"Project - 00499"}
            
       }}
               />
-              
+              </MuiThemeProvider>
             </CardBody>
           </Card>
         </GridItem>

@@ -22,6 +22,7 @@ import { ThunkDispatch } from 'thunk-dispatch';
 import { editOrganizationThunk, getOrganizationDetailsThunk, getOrganizationListThunk } from './api/organization-thunk-api';
 import { Alert, Snackbar } from '@mui/material';
 import GetContactDetailsPrimary from 'core-components/contact/getContactDetailsPrimary';
+import ProjectTable from 'core-components/project/projectTable';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -183,9 +184,12 @@ setOpen(true)
                   onChange={(e) => setData({ ...data, SERVICE: e.target.value })}
                 />
               </GridItem>
-              <GetContactDetailsPrimary  ENTITITY_TYPE= {"ORG"}/>
-          
-               
+              <GetContactDetailsPrimary ENTITITY_TYPE={ "ORG" } />
+                            <GridItem xs={12} sm={12} style={{ marginTop: '16px',marginBottom: '16px' }}>
+
+              <ProjectTable  ID={ location.pathname.split( '/' )[ 3 ] } NAME={data?.ORGANIZATION_NAME} />
+                             </GridItem>
+
             </GridContainer>
 
           </CardBody> : <Grid

@@ -4,13 +4,11 @@ import UserProfile from 'views/Pages/UserProfile.jsx';
 import ConfirmationNumber from '@material-ui/icons/ConfirmationNumber';
 import TaskIcon from '@material-ui/icons/AssignmentLate';;
 
-
-// @material-ui/icons
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import BusinessIcon from '@material-ui/icons/Apartment';
-import GroupIcon from '@material-ui/icons/Group';
-import LeaderboardIcon from '@material-ui/icons/InvertColors';
-
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PersonIcon from '@mui/icons-material/Person';
+import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 
 import OrganizationTable from 'core-components/organization/organizationTable';
 import EditOrganization from 'core-components/organization/editOrganization';
@@ -26,6 +24,8 @@ import timeCardTable from 'core-components/timeCardSearch/timeCardTable';
 import allocationRuleSet from 'core-components/allocation/allocationRuleSet'
 import ContactPerson from 'core-components/person/contact';
 import AlLocationRuleSetTable from 'core-components/alLocationRuleSet/alLocationRuleSetTable';
+
+
 var dashRoutes = [
   {
     path: '/timeCard',
@@ -33,27 +33,27 @@ var dashRoutes = [
     rtlName: '',
     mini: 'S',
     rtlMini: '',
-    icon: DashboardIcon,
+    icon: ScheduleIcon,
     component: timeCardTable,
     layout: '/admin'
   },
   {
     path: '/organization',
-    name: 'organizations',
+    name: 'Organizations',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
-    icon: BusinessIcon,
+    icon: SensorOccupiedIcon,
     component: OrganizationTable,
     layout: '/admin'
   },
   {
     path: '/person',
-    name: 'persons',
+    name: 'Persons',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
-    icon: GroupIcon,
+    icon: PersonIcon,
     component: PersonTable,
     layout: '/admin'
   },
@@ -63,7 +63,7 @@ var dashRoutes = [
     rtlName: '',
     mini: 'S',
     rtlMini: '',
-    icon: LeaderboardIcon,
+    icon: AssignmentIcon,
     component: ProjectTable,
     layout: '/admin'
   },   {
@@ -78,7 +78,7 @@ var dashRoutes = [
   },
   {
     path: '/edit',
-    name: 'edit',
+    name: 'Edit Organization',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
@@ -89,7 +89,7 @@ var dashRoutes = [
   },
     {
     path: '/editPerson',
-    name: 'edit',
+    name: 'Edit Person',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
@@ -100,7 +100,7 @@ var dashRoutes = [
   },
   {
     path: '/editProject',
-    name: 'edit',
+    name: 'Edit Project',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
@@ -110,7 +110,7 @@ var dashRoutes = [
     layout: '/admin'
   },  {
     path: '/editTask',
-    name: 'edit',
+    name: 'Edit Task',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
@@ -123,7 +123,7 @@ var dashRoutes = [
   
     {
     path: '/contact',
-    name: 'contact',
+    name: 'Contact',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
@@ -158,11 +158,11 @@ var dashRoutes = [
   },
   {
     path: '/allocation',
-    name: 'Allocation',
+    name: 'Al-Location',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
-    icon: BusinessIcon,
+    icon: Diversity1Icon,
     component: AlLocationRuleSetTable,
     layout: '/admin'
   },
@@ -188,3 +188,5 @@ var dashRoutes = [
   }
 ];
 export default dashRoutes;
+
+

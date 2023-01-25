@@ -1,17 +1,12 @@
 import React from 'react';
 import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
-import { useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import JPModal from 'components/jp-modal/jp-modal';
 import { useMemo } from 'react';
 import { TextField } from '@material-ui/core';
 import Autocomplete from '@mui/material/Autocomplete';
 import { getPersonListThunk } from 'core-components/person/api/person-thunk-api';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -20,21 +15,15 @@ import {
 } from "@material-ui/pickers";
 import moment from 'moment';
 import { addAlLocationRuleSetThunk } from './api/AlLocationRuleSet-thunk-api';
-import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 
 export default function AddAlLocationRuleSet(props) {
     const { onSave } = props;
-    const location = useLocation();
-    const [value, setValue] = React.useState('Open');
-    const [inputValue, setInputValue] = React.useState('');
-    const [options, setOptions] = React.useState([]);
     const [show, setShow] = React.useState(false);
     const [data, setData] = React.useState({STATUS:'O',START_DATE:moment(new Date()).format('YYYY/MM/DD') });
     const [valueEmployee, setValueEmployee] = React.useState(null);
     const [inputValueEmployee, setInputValueEmployee] = React.useState('');
     const [optionsEmployee, setOptionsEmployee] = React.useState([]);
-    const STATUS_NAME = { 'Open': 'O','Approved':"A" ,'Close':'C'}
-    const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
+
 
     const searchEmployees = (value) => {
         ThunkDispatch(getPersonListThunk({ search_string: value }))
@@ -64,7 +53,6 @@ export default function AddAlLocationRuleSet(props) {
     }, [inputValueEmployee]);
 
 
-
     const customersOptions = useMemo(
         () => (
             <>
@@ -77,7 +65,7 @@ export default function AddAlLocationRuleSet(props) {
                     }}
                     closeButton={true}
                     fullWidth
-                    maxWidth="md"
+                    maxWidth="sm"
                     open={show}
                     dialogActions={[{
                         name: 'Save', onClick: _ => {
@@ -85,17 +73,17 @@ export default function AddAlLocationRuleSet(props) {
                             const userObject = {
                                 START_DATE: data?.START_DATE,
                                 END_DATE: data?.END_DATE,
-                                STATUS: data?.STATUS,
+                                NAME: data?.NAME,
                                 PERSON_ID: valueEmployee?.PERSON_ID,
                                 
 
                             };
+
                             ThunkDispatch(addAlLocationRuleSetThunk({ ...userObject }))
                                 .then(result => {
 
-                                    onSave({ ...userObject, FIRST_NAME: valueEmployee.FIRST_NAME,
-                                MIDDLE_NAME: valueEmployee.MIDDLE_NAME,
-                                LAST_NAME: valueEmployee.LAST_NAME, TIMECARD_ID: result.data.ID })
+                                    onSave({ ...userObject, FULLNAME: `${valueEmployee.FIRST_NAME} ${valueEmployee.MIDDLE_NAME} ${valueEmployee.LAST_NAME}`,
+                              RULE_SET_ID: result.data.ID ,RECORD_TYPE:"PERCENT"})
 
 
                                     setShow(false)
@@ -107,13 +95,39 @@ export default function AddAlLocationRuleSet(props) {
 
                         },
                         isLoading: false,
-                        disabled: !data?.START_DATE?.length || !data?.END_DATE?.length|| !valueEmployee?.PERSON_ID?.length|| !data?.STATUS?.length,
-                        color:  !data?.START_DATE?.length || !data?.END_DATE?.length|| !valueEmployee?.PERSON_ID?.length|| !data?.STATUS?.length ? null : 'info'
+                        disabled: !data?.START_DATE?.length || !data?.END_DATE?.length|| !valueEmployee?.PERSON_ID?.length|| !data?.NAME?.length,
+                        color:  !data?.START_DATE?.length || !data?.END_DATE?.length|| !valueEmployee?.PERSON_ID?.length|| !data?.NAME?.length ? null : 'info'
                     }]}
 
                 >
                     <JPGrid minHeight={200} >
-                        <JPGrid container direction="row" alignItems="center" spacing={1} padding={8} >
+                        <JPGrid container direction="row" alignItems="center" spacing={ 1 } padding={ 8 } >
+                            <JPGrid item xs={12} sm={12}>
+
+                                  <Autocomplete
+                                    id="Persons"
+                                    getOptionLabel={(option) => `${option.FIRST_NAME} ${option.MIDDLE_NAME} ${option.LAST_NAME}`
+                                    }
+                                    filterOptions={(x) => x}
+                                    options={optionsEmployee}
+                                    autoComplete
+                                    includeInputInList
+                                    filterSelectedOptions
+                                    value={valueEmployee}
+                                    noOptionsText="No Persons"
+                                    onChange={(event, newValue) => {
+                                        setOptionsEmployee(newValue ? [newValue, ...optionsEmployee] : optionsEmployee);
+                                        setValueEmployee(newValue);
+                                    }}
+                                    onInputChange={(event, newInputValue) => {
+                                        setInputValueEmployee(newInputValue);
+                                    }}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Person Name" fullWidth variant="outlined" required />
+                                    )}
+
+                                />  </JPGrid>
+
                             <JPGrid item xs={12} sm={12}>
                                 <TextField
                     variant="outlined"
@@ -129,7 +143,7 @@ export default function AddAlLocationRuleSet(props) {
                   />
                             </JPGrid>
 
-                            <JPGrid item xs={ 12 } sm={ 6 }>
+                            <JPGrid item xs={ 12 } sm={12 }>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -145,7 +159,7 @@ export default function AddAlLocationRuleSet(props) {
             
                                 
                             </JPGrid>
-                            <JPGrid item xs={ 12 } sm={ 6 }>
+                            <JPGrid item xs={ 12 } sm={ 12 }>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"

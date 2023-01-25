@@ -22,6 +22,7 @@ import { editPersonThunk, getPersonDetailsThunk } from './api/person-thunk-api';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { Alert, Snackbar } from '@mui/material';
 import GetContactDetailsPrimary from 'core-components/contact/getContactDetailsPrimary';
+import ProjectTable from 'core-components/project/projectTable';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -285,7 +286,10 @@ setOpen(true)
               <GetContactDetailsPrimary  ENTITITY_TYPE={"PERSON"} />
 
 
+ <GridItem xs={12} sm={12} style={{ marginTop: '16px',marginBottom: '16px' }}>
 
+              <ProjectTable  ID={ location.pathname.split( '/' )[ 3 ] } NAME={`${data?.FIRST_NAME} ${data?.MIDDLE_NAME} ${data?.LAST_NAME}`} />
+                             </GridItem>
                
             </GridContainer>
 

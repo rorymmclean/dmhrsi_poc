@@ -327,56 +327,8 @@ class Sidebar extends React.Component {
         [classes.photoRTL]: rtlActive
       });
     var user = (
-      <div className={userWrapperClass}>
-        <div className={photo}>
-          <img src={avatar} className={classes.avatarImg} alt="..." />
-        </div>
-        <List className={classes.list}>
-          <ListItem className={classes.item + ' ' + classes.userItem}>
-            <NavLink
-              to={'#'}
-              className={classes.itemLink + ' ' + classes.userCollapseButton}
-              onClick={() => this.openCollapse('openAvatar')}
-            >
-              <ListItemText
-                primary={JSON.parse(localStorage.getItem('login'))?.response?.email || ' '}
-                secondary={
-                  <b
-                    className={
-                      caret +
-                      ' ' +
-                      classes.userCaret +
-                      ' ' +
-                      (this.state.openAvatar ? classes.caretActive : '')
-                    }
-                  />
-                }
-                disableTypography={true}
-                className={itemText + ' ' + classes.userItemText}
-              />
-            </NavLink>
-            <Collapse in={this.state.openAvatar} unmountOnExit>
-              <List className={classes.list + ' ' + classes.collapseList}>
-                <ListItem className={classes.collapseItem}>
-                  <NavLink
-                    to="/admin/profile"
-                    className={classes.itemLink + ' ' + classes.userCollapseLinks}
-                  >
-                    <span className={collapseItemMini}>
-                      <UserIcon />{' '}
-                    </span>
-
-                    <ListItemText
-                      primary={'Profile'}
-                      disableTypography={true}
-                      className={collapseItemText}
-                    />
-                  </NavLink>
-                </ListItem>
-              </List>
-            </Collapse>
-          </ListItem>
-        </List>
+      <div >
+        
       </div>
     );
     var links = <List className={classes.list}>{this.createLinks(routes)}</List>;

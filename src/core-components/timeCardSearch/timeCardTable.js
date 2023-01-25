@@ -9,11 +9,11 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
 import CardIcon from 'components/Card/CardIcon';
-import BusinessIcon from '@material-ui/icons/Apartment';;
+import ScheduleIcon from '@mui/icons-material/Schedule';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper, Typography } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -134,6 +134,18 @@ setState(prevState => {
     const { value } = target;
     inputDebounce(value);
   };
+
+    const style = {
+    overrides: {
+      MuiTableCell: {
+        root: {
+          padding: '6px',
+        }
+      }
+    }
+  };
+  const theme = createMuiTheme( style );
+  
   return (
     <div className="m-sm-30">
      
@@ -145,7 +157,7 @@ setState(prevState => {
                <JPGrid container direction="row" alignItems="flex-end" justify="space-between" >
                 <JPGrid item xs={6}  >
                    <CardIcon color="primary">
-                <BusinessIcon />
+                <ScheduleIcon />
               </CardIcon>
                   <h4 style={ { color: "#000" } }>Time Cards</h4>
                   
@@ -187,6 +199,7 @@ setState(prevState => {
                   />
                 </GridItem>
               </GridContainer>
+              <MuiThemeProvider theme={theme}>
               <MaterialTable
                 isLoading={isLoading}
                 columns={state.columns}
@@ -206,7 +219,7 @@ setState(prevState => {
                   toolbar: false,
                 }}
               />
-
+</MuiThemeProvider>
             </CardBody>
           </Card>
         </GridItem>

@@ -119,7 +119,7 @@ searchOrganizations(inputValue)
                             ThunkDispatch(addProjectThunk({ ...userObject }))
                                 .then(result => {
 
-                                    onSave({ ...userObject ,PROJECT_ID:result.data.ID})
+                                    onSave({...valueManager, ...userObject ,PROJECT_ID:result.data.ID})
 
 
                                     setShow(false)

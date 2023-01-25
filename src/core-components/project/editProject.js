@@ -298,7 +298,7 @@ searchOrganizations(inputValue)
              
               <GridItem xs={12} sm={12} >
 
-               <TaskTable search_string={location.pathname.split('/')[3]} />
+                <TaskTable search_string={ location.pathname.split( '/' )[ 3 ] } PROJECT_NAME={data?.PROJECT_NAME } />
                 
               </GridItem>
               

@@ -41,7 +41,7 @@ export default function EditAlLocationRuleSet(props) {
     useEffect( () =>
     {
       if(show)
-    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:rowData.RULE_ID}))
+    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:rowData.RULE_SET_ID}))
       .then(result => {
           if ( result?.data?.body )
           {              
@@ -51,7 +51,7 @@ export default function EditAlLocationRuleSet(props) {
       })
       .catch(error => console.error('getAlLocationRuleSetDetailsThunk', error))
       .finally(() => { });
-  }, [ rowData.RULE_ID,show ] );
+  }, [ rowData.RULE_SET_ID,show ] );
     
     const searchEmployees = ( value ) =>
     {
@@ -102,10 +102,10 @@ export default function EditAlLocationRuleSet(props) {
                         name: 'Save', onClick: _ => {
 
                             const userObject = {
-                                RULE_ID:rowData.RULE_ID,
+                                RULE_SET_ID:rowData.RULE_SET_ID,
                                 START_DATE: data?.START_DATE,
                                 END_DATE: data?.END_DATE,
-                                STATUS: data?.STATUS,
+                                NAME: data?.NAME,
                                 PERSON_ID: valueEmployee?.PERSON_ID||data.PERSON_ID,
                                 
 
@@ -126,8 +126,8 @@ setOpen(true)
 
                         },
                         isLoading: false,
-                        disabled: !data?.START_DATE?.length || !data?.END_DATE?.length|| !(valueEmployee?.PERSON_ID?.length||data.PERSON_ID)|| !data?.STATUS?.length,
-                        color:  !data?.START_DATE?.length || !data?.END_DATE?.length|| !(valueEmployee?.PERSON_ID?.length||data.PERSON_ID)|| !data?.STATUS?.length ? null : 'info'
+                        disabled: !data?.START_DATE?.length || !data?.END_DATE?.length|| !(valueEmployee?.PERSON_ID?.length||data.PERSON_ID)|| !data?.NAME?.length,
+                        color:  !data?.START_DATE?.length || !data?.END_DATE?.length|| !(valueEmployee?.PERSON_ID?.length||data.PERSON_ID)|| !data?.NAME?.length ? null : 'info'
                     }]}
 
                 >
@@ -143,6 +143,7 @@ setOpen(true)
                     label="Name"
                     name="Name"
                     autoComplete="Name"
+                    disabled={disabled}
                     value={data?.NAME}
                     onChange={(e) => setData({ ...data, NAME: e.target.value })}
                   />
@@ -181,7 +182,7 @@ setOpen(true)
             
                                 
                             </JPGrid>
-                            { show ? <AlLocationRuleSetWorkSchedule RULE_ID={ rowData.RULE_ID } PERSON_ID={rowData.PERSON_ID} disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
+                            { show ? <AlLocationRuleSetWorkSchedule RULE_SET_ID={ rowData.RULE_SET_ID } PERSON_ID={rowData.PERSON_ID} disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
 
                             
                         </JPGrid>

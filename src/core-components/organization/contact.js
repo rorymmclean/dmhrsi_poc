@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper, Typography } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import CardHeader from 'components/Card/CardHeader';
@@ -119,7 +119,19 @@ export default function Contact() {
         name: data.name,
         id: data.id
       };
-    });
+    } );
+  
+   const style = {
+    overrides: {
+      MuiTableCell: {
+        root: {
+          padding: '6px',
+        }
+      }
+    }
+  };
+  const theme = createMuiTheme( style );
+
   return (
     <div className="m-sm-30">
       <JPGrid container direction={'row'} justify={'flex-end'}>
@@ -163,7 +175,7 @@ export default function Contact() {
               <h4 style={{color:"#000"}}>Contact</h4>
             </CardHeader>
             <CardBody>
-
+<MuiThemeProvider theme={theme}>
               <MaterialTable
         isLoading={isLoading}
                 columns={state.columns}
@@ -186,7 +198,7 @@ export default function Contact() {
       }}
               />
               
-               
+           </MuiThemeProvider>    
             </CardBody>
           </Card>
         </GridItem>

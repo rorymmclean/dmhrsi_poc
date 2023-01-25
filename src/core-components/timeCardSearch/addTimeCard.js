@@ -20,14 +20,10 @@ import {
 } from "@material-ui/pickers";
 import moment from 'moment';
 import { addTimeCardThunk } from './api/timeCard-thunk-api';
-import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 
 export default function AddTimeCard(props) {
     const { onSave } = props;
-    const location = useLocation();
-    const [value, setValue] = React.useState('Open');
-    const [inputValue, setInputValue] = React.useState('');
-    const [options, setOptions] = React.useState([]);
+    
     const [show, setShow] = React.useState(false);
     const [data, setData] = React.useState({STATUS:'O',START_DATE:moment(new Date()).format('YYYY/MM/DD') });
     const [valueEmployee, setValueEmployee] = React.useState(null);
@@ -77,7 +73,7 @@ export default function AddTimeCard(props) {
                     }}
                     closeButton={true}
                     fullWidth
-                    maxWidth="md"
+                    maxWidth="sm"
                     open={show}
                     dialogActions={[{
                         name: 'Save', onClick: _ => {
@@ -114,7 +110,7 @@ export default function AddTimeCard(props) {
                 >
                     <JPGrid minHeight={200} >
                         <JPGrid container direction="row" alignItems="center" spacing={1} padding={8} >
-                            <JPGrid item xs={12} sm={6}>
+                            <JPGrid item xs={12} sm={12}>
                                 <Autocomplete
                                     id="Employees"
                                     getOptionLabel={(option) => `${option.FIRST_NAME} ${option.MIDDLE_NAME} ${option.LAST_NAME}`
@@ -140,7 +136,7 @@ export default function AddTimeCard(props) {
                                 />
                             </JPGrid>
 
-                            <JPGrid item xs={ 12 } sm={ 6 }>
+                            <JPGrid item xs={ 12 } sm={ 12 }>
                                 <FormControl fullWidth>
   <InputLabel id="demo-simple-select-label">Status</InputLabel>
   <Select
@@ -160,14 +156,15 @@ export default function AddTimeCard(props) {
 </FormControl>
                                 
                             </JPGrid>
-                            <JPGrid item xs={ 12 } sm={ 6 }>
+                            <JPGrid item xs={ 12 } sm={ 12 }>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
                     format="yyy/MM/dd"
-                    value={data?.START_DATE}
+                    value={ data?.START_DATE }
+                    style={{width:'100% !important'}}
                     onChange={(e) => setData({ ...data, START_DATE:moment(e).format('YYYY/MM/DD') })}
 
                     inputVariant="outlined"
@@ -176,13 +173,14 @@ export default function AddTimeCard(props) {
             
                                 
                             </JPGrid>
-                            <JPGrid item xs={ 12 } sm={ 6 }>
+                            <JPGrid item xs={ 12 } sm={ 12 }>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
                     id="date-picker-dialog"
                     label="End Date"
                     format="yyy/MM/dd"
+                    style={{width:'100% !important'}}
                     value={data?.END_DATE}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}
 
