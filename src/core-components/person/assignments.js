@@ -40,7 +40,6 @@ export default function Assignments() {
     const [isLoading, setIsLoading] = React.useState(true);
 
     const [data, setData] = React.useState({});
-  console.log( data );
 
    const [state, setState] = React.useState({
       columns: [

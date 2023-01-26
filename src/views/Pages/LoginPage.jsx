@@ -72,7 +72,6 @@ class LoginPage extends React.Component {
       })
       .then(
         response => {
-          console.log(response);
           localStorage.setItem(
             'login',
             JSON.stringify({

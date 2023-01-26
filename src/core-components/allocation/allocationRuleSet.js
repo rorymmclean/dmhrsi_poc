@@ -34,7 +34,6 @@ export default function Allocations() {
       BASIS:data?.BASIS
     };
 
-  console.log(userObject);
   };
   return (
     <div className="m-sm-30">
@@ -82,6 +81,10 @@ export default function Allocations() {
                       id="start-date-picker"
                       label="Start Date"
                       format="MM/dd/yyyy"
+                       shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 0;
+    }}
                       value={data?.START_DATE}
                       onChange={(date) => setData({ ...data, START_DATE: date })}
                       KeyboardButtonProps={{
@@ -96,6 +99,10 @@ export default function Allocations() {
                       margin="normal"
                       id="end-date-picker"
                       label="End Date"
+                          shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 6;
+    }}
                       format="MM/dd/yyyy"
                       value={data?.END_DATE}
                       onChange={(date) => setData({ ...data, END_DATE: date })}

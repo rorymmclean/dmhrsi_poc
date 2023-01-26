@@ -65,8 +65,8 @@ export default function AddTimeCard(props) {
         () => (
             <>
                 <JPModal
-                    defaultTitle="Time Card"
-                    title={`Add Time Card`}
+                    defaultTitle="Timecard"
+                    title={`Add Timecard`}
                     onClose={_ => {
                         setShow(false)
                         setData({})
@@ -163,7 +163,12 @@ export default function AddTimeCard(props) {
                     id="date-picker-dialog"
                     label="Start Date"
                     format="yyy/MM/dd"
-                    value={ data?.START_DATE }
+                                        value={ data?.START_DATE }
+                                        shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 0;
+    }}
+
                     style={{width:'100% !important'}}
                     onChange={(e) => setData({ ...data, START_DATE:moment(e).format('YYYY/MM/DD') })}
 
@@ -179,7 +184,11 @@ export default function AddTimeCard(props) {
                     margin="normal"
                     id="date-picker-dialog"
                     label="End Date"
-                    format="yyy/MM/dd"
+                                        format="yyy/MM/dd"
+                                            shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 6;
+    }}
                     style={{width:'100% !important'}}
                     value={data?.END_DATE}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}
@@ -204,7 +213,7 @@ export default function AddTimeCard(props) {
             <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
                 <JPGrid>
                     <Button color={'info'} onClick={() => setShow(true)} >
-                        Add Time Card
+                        Add Timecard
                     </Button>
                 </JPGrid>
             </JPGrid>

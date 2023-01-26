@@ -29,7 +29,7 @@ import AlLocationRuleSetTable from 'core-components/alLocationRuleSet/alLocation
 var dashRoutes = [
   {
     path: '/timeCard',
-    name: 'Time Cards',
+    name: 'Timecards',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
@@ -158,7 +158,7 @@ var dashRoutes = [
   },
   {
     path: '/allocation',
-    name: 'Al-Location',
+    name: 'Allocation',
     rtlName: '',
     mini: 'S',
     rtlMini: '',

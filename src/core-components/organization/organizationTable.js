@@ -72,7 +72,7 @@ export default function OrganizationTable() {
             
         
         setState(prevState => {
-          const data = [...prevState.data];
+            const data = [];
           for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
             data.push(JSON.parse(result.data.body)[index]);
           }
@@ -89,7 +89,7 @@ export default function OrganizationTable() {
       .finally(() => { setIsLoading(false) });
   };
 
- const inputDebounce = React.useRef(_.debounce(searchOrganizations, 500)).current;
+ const inputDebounce = React.useRef(_.debounce(searchOrganizations, 100)).current;
 
   
   
@@ -151,7 +151,7 @@ export default function OrganizationTable() {
                     fullWidth
                     defaultValue={"TNMOFY"}
                       placeholder="Search"
-      onChange={handleInputChange}
+      onBlur={handleInputChange}
 
         InputProps={{
           startAdornment: (

@@ -19,12 +19,56 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import moment from 'moment';
-import {  editAlLocationRuleSetThunk, getAlLocationRuleSetDetailsThunk } from './api/AlLocationRuleSet-thunk-api';
+import {  allocengineThunk, editAlLocationRuleSetThunk, getAlLocationRuleSetDetailsThunk } from './api/AlLocationRuleSet-thunk-api';
 import Edit from "@material-ui/icons/Edit";
 import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 import { Search } from '@material-ui/icons';
 import { Alert, Snackbar } from '@mui/material';
 import AlLocationRuleSetWorkSchedule from './alLocationRuleSetWorkSchedule';
+import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';;
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+
+
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+  width:'100%'
+}));
+
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+} ) );
 
 export default function EditAlLocationRuleSet(props) {
     const { onSave,rowData,disabled } = props;
@@ -36,12 +80,13 @@ export default function EditAlLocationRuleSet(props) {
     const STATUS_NAME = { 'Open': 'O','Approved':"A" ,'Close':'C'}
     const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
   const [open, setOpen] = React.useState(false);
+  const [openTT, setOpenTT] = React.useState(false);
+  const [expanded, setExpanded] = React.useState('panel1');
 
-    
     useEffect( () =>
     {
       if(show)
-    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:rowData.RULE_SET_ID}))
+    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:rowData.RULE_SET_ID,RECORD_TYPE:""}))
       .then(result => {
           if ( result?.data?.body )
           {              
@@ -82,14 +127,16 @@ export default function EditAlLocationRuleSet(props) {
         };
     }, [inputValueEmployee]);
 
-
+ const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
     const customersOptions = useMemo(
         () => (
             <>
                 <JPModal
-                    defaultTitle="Al-Location Rule Set"
-                    title={`Al-Location Rule Set`}
+                    defaultTitle="Allocation Rule Set"
+                    title={`Allocation Rule Set`}
                     onClose={_ => {
                         setShow(false)
                         setData({})
@@ -131,7 +178,9 @@ setOpen(true)
                     }]}
 
                 >
-                    <JPGrid minHeight={200} >
+            <JPGrid minHeight={ 200 } >
+          
+              
                         <JPGrid container direction="row" alignItems="center" spacing={1} padding={8} >
                             <JPGrid item xs={12} sm={12}>
                                 <TextField
@@ -148,13 +197,17 @@ setOpen(true)
                     onChange={(e) => setData({ ...data, NAME: e.target.value })}
                   />
                             </JPGrid>
-                            <JPGrid item xs={ 12 } sm={ 6 }>
+                            <JPGrid item xs={ 12 } sm={ 4}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
-                    format="yyy/MM/dd"
+                      format="yyy/MM/dd"
+                       shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 0;
+    }}
                                         value={ data?.START_DATE }
                                         disabled={disabled}
                     onChange={(e) => setData({ ...data, START_DATE:moment(e).format('YYYY/MM/DD') })}
@@ -165,7 +218,7 @@ setOpen(true)
             
                                 
                             </JPGrid>
-                            <JPGrid item xs={ 12 } sm={ 6 }>
+                            <JPGrid item xs={ 12 } sm={ 4}>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -175,14 +228,49 @@ setOpen(true)
                                         disabled={disabled}
                     value={data?.END_DATE}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}
-
+    shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 6;
+    }}
                     inputVariant="outlined"
                   />
                 </MuiPickersUtilsProvider>
             
                                 
-                            </JPGrid>
-                            { show ? <AlLocationRuleSetWorkSchedule RULE_SET_ID={ rowData.RULE_SET_ID } PERSON_ID={rowData.PERSON_ID} disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
+                </JPGrid>
+                <JPGrid item xs={ 12 } sm={ 4 }>
+                <Button color={!disabled? 'info':null }  disabled={disabled} onClick={ () => 
+                    {
+           ThunkDispatch(allocengineThunk({ id: data.PERSON_ID,date:"2023-01-26"}))
+            .then(result => {
+               setOpenTT(true)
+            })
+            .catch(error => console.error('allocengineThunk', error))
+            .finally(() => { });
+                    }
+                    } >
+                        Run Engine
+                </Button>
+                </JPGrid>
+                <Accordion expanded={true} onChange={handleChange('panel1')}>
+                  <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                    <Typography>Hours</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                   { show ? <AlLocationRuleSetWorkSchedule types={"HOURS"} RULE_SET_ID={ rowData.RULE_SET_ID } PERSON_ID={rowData.PERSON_ID} disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
+
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion expanded={true} onChange={handleChange('panel2')}>
+                  <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                    <Typography>Allocations</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                   { show ? <AlLocationRuleSetWorkSchedule types={"PERCENT"} RULE_SET_ID={ rowData.RULE_SET_ID } PERSON_ID={rowData.PERSON_ID} disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
+
+                  </AccordionDetails>
+                </Accordion>
+
 
                             
                         </JPGrid>
@@ -191,10 +279,29 @@ setOpen(true)
 
             </>
         ),
-        [show, data, optionsEmployee]
+        [show, data, optionsEmployee,expanded]
     );
     return (
-        <>
+      <>
+            <Snackbar         anchorOrigin={{ vertical:"top", horizontal:"right" }}
+ open={openTT} autoHideDuration={1000} onClose={(event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenTT(false);
+  }}>
+        <Alert onClose={(event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenTT(false);
+  }} severity="success" variant="filled" sx={{ width: '100%' }}>
+         Successful!
+        </Alert>
+        </Snackbar>
+        
             <Snackbar
                 anchorOrigin={ { vertical: "top", horizontal: "right" } }
  open={open} autoHideDuration={1000} onClose={(event, reason) => {

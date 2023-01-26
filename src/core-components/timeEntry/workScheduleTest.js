@@ -19,9 +19,10 @@ function groupBy(objectArray, property) {
    }, {});
 }
 
+
 export default function WorkScheduleTest( props )
 {
-    const {TIMECARD_ID ,disabled,START_DATE} = props;
+    const {TIMECARD_ID ,disabled,START_DATE,week,END_DATE} = props;
     const daysHeader = [ 'SUN', 'MON', "TUE", "WED","THU", "FRI", "SAT"];
     const [ getTimeEntryList, setGetTimeEntryList ] = React.useState( [] );
     const [ isLoading, setIsLoading ] = React.useState( true );
@@ -29,7 +30,30 @@ export default function WorkScheduleTest( props )
 
     useEffect( () =>
     {
-    ThunkDispatch(getTimeEntryListThunk({search_string:TIMECARD_ID||""}))
+        let start = "";
+        let end = "";
+
+        
+        let currentDate = new Date( START_DATE )
+       
+        currentDate.setDate( currentDate.getDate() +  week );
+        if ( week == 0 )
+        { let currentDate = new Date( START_DATE )
+       
+        currentDate.setDate( currentDate.getDate() +  7 );
+            start = START_DATE;
+            end = moment( currentDate ).format( 'YYYY-MM-DD' );
+        } else
+        {
+            let currentDate = new Date( START_DATE )
+       
+        currentDate.setDate( currentDate.getDate() +  week );
+            start =  moment( currentDate ).format( 'YYYY-MM-DD' );
+            end = END_DATE;
+        }
+
+
+    ThunkDispatch(getTimeEntryListThunk({search_string:TIMECARD_ID||"",startdate:start,enddate:end}))
         .then( result =>
         {
             let endList = [];
@@ -73,8 +97,7 @@ export default function WorkScheduleTest( props )
     {
        let currentDate = new Date( START_DATE )
        
-        currentDate.setDate( currentDate.getDate() + currentDayIndex+index*7  );
-        
+        currentDate.setDate( currentDate.getDate() + currentDayIndex +week );
 
         const userObject = {
                           TIMECARD_ID: TIMECARD_ID,
@@ -84,7 +107,6 @@ export default function WorkScheduleTest( props )
              
 
         };
-        console.log("userObject",userObject);
 if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
        ThunkDispatch(addTimeEntryThunk(userObject))
       .then(result => {

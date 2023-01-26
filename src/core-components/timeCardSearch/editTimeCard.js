@@ -25,6 +25,51 @@ import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 import { Search } from '@material-ui/icons';
 import { Alert, Snackbar } from '@mui/material';
 
+import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';;
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+
+
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+  width:'100%'
+}));
+
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+} ) );
+
 export default function EditTimeCard(props) {
     const { onSave,rowData,disabled } = props;
     const [show, setShow] = React.useState(false);
@@ -35,6 +80,7 @@ export default function EditTimeCard(props) {
     const STATUS_NAME = { 'Open': 'O','Approved':"A" ,'Close':'C'}
     const STATUS_ID = {  'O':'Open',"A":'Approved' ,'C':'Close'}
   const [open, setOpen] = React.useState(false);
+  const [expanded, setExpanded] = React.useState('panel1');
 
     
     useEffect( () =>
@@ -81,14 +127,17 @@ export default function EditTimeCard(props) {
         };
     }, [inputValueEmployee]);
 
+ const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
 
     const customersOptions = useMemo(
         () => (
             <>
                 <JPModal
-                    defaultTitle="Time Card"
-                    title={`Time Card`}
+                    defaultTitle="Timecard"
+                    title={`Timecard`}
                     onClose={_ => {
                         setShow(false)
                         setData({})
@@ -185,7 +234,11 @@ setOpen(true)
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
-                    format="yyy/MM/dd"
+                      format="yyy/MM/dd"
+                       shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 0;
+    }}
                                         value={ data?.START_DATE }
                       disabled={ disabled }
                         style={{width:'100% !important'}}
@@ -206,6 +259,10 @@ setOpen(true)
                                         format="yyy/MM/dd"
                                         disabled={disabled}
                       value={ data?.END_DATE }
+                       shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 6;
+    }}
                         style={{width:'100% !important'}}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}
 
@@ -214,8 +271,26 @@ setOpen(true)
                 </MuiPickersUtilsProvider>
             
                                 
-                            </JPGrid>
-                            { show ? <WorkScheduleTest TIMECARD_ID={ rowData.TIMECARD_ID } disabled={ disabled } START_DATE={ data?.START_DATE } /> : null }
+                </JPGrid>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                  <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                    <Typography>First Week</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                            { show ? <WorkScheduleTest TIMECARD_ID={ rowData.TIMECARD_ID } disabled={ disabled } START_DATE={ data?.START_DATE } END_DATE={ data?.END_DATE} week={0} /> : null }
+
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                  <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                    <Typography>Second Week</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                            { show ? <WorkScheduleTest TIMECARD_ID={ rowData.TIMECARD_ID } disabled={ disabled } START_DATE={ data?.START_DATE }  END_DATE={ data?.END_DATE} week={7} /> : null }
+
+                  </AccordionDetails>
+                </Accordion>
+
 
                             
                         </JPGrid>
@@ -224,7 +299,7 @@ setOpen(true)
 
             </>
         ),
-        [show, data, optionsEmployee]
+        [show, data, optionsEmployee,expanded]
     );
     return (
         <>
@@ -244,7 +319,7 @@ setOpen(true)
 
     setOpen(false);
   }} severity="success" variant="filled" sx={{ width: '100%' }}>
-          Time Card Update is Successful!
+          Timecard Update is Successful!
         </Alert>
       </Snackbar>
             {customersOptions}

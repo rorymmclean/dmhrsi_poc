@@ -15,7 +15,6 @@ export default function CustamAutocomplete( props ){
     const [inputValueTaskOne, setInputValueTaskOne] = React.useState('');
     const [ optionsTaskOne, setOptionsTaskOne ] = React.useState( [] );
     
-console.log("valueTaskOne",valueTaskOne);
 
     const searchTaskOne = ( value ) =>
     {
@@ -39,7 +38,6 @@ setValueTaskOne(task)
 
     React.useEffect(() => {
         let active = true;
-        console.log("inputValueTaskOne",inputValueTaskOne);
         if ( inputValueTaskOne === '' )
         {
             setOptionsTaskOne( [] );
@@ -63,7 +61,6 @@ const userObject = {
                            TIMECARD_ENTRY_ID: TIMECARD_ENTRY_ID[0],
          }
 
-            console.log( "userObject", userObject );
              ThunkDispatch(editTimeEntryTaskThunk(userObject))
       .then(result => {
         
@@ -78,7 +75,6 @@ const userObject = {
                            RULE_ID: RULE_ID[0],
          }
 
-            console.log( "userObject", userObject );
              ThunkDispatch(editTaskThunk(userObject))
       .then(result => {
         
@@ -110,7 +106,6 @@ const userObject = {
                             noOptionsText="No Tasks"
                             onChange={ ( event, newValue,re ) =>
                             {
-                               console.log("valueTaskOne",re,newValue);
                                 if ( re == "clear" )
                                 {
                                     setOptionsTaskOne( [] )

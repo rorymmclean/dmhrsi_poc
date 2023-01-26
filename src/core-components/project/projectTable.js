@@ -85,7 +85,7 @@ export default function ProjectTable ( props )
         if (result?.data?.body) {
             
         setState(prevState => {
-          const data = [...prevState.data];
+            const data = [];
           for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
             data.push(JSON.parse(result.data.body)[index]);
           }
@@ -102,7 +102,7 @@ export default function ProjectTable ( props )
       .finally(() => { setIsLoading(false) });
   };
 
- const inputDebounce = React.useRef(_.debounce(searchProjects, 1000)).current;
+ const inputDebounce = React.useRef(_.debounce(searchProjects, 100)).current;
 
   
   
@@ -160,7 +160,7 @@ export default function ProjectTable ( props )
                     margin="normal"
                     fullWidth
                       placeholder="Search"
-      onChange={handleInputChange}
+      onBlur={handleInputChange}
 defaultValue={NAME?.length?NAME:"Project - 00499"}
         InputProps={{
           startAdornment: (

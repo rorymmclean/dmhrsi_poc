@@ -6,7 +6,7 @@ import { fetcher } from 'axios-helper.js';
 export const getTimeEntryListAPI = async data => {
   const endpoint = { ...END_POINTS.timeEntry.getTimeEntry };
 
-  endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string });
+  endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string,startdate:data?.startdate,enddate:data?.enddate });
 
   const response = await fetcher(endpoint);
 

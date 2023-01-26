@@ -24,7 +24,7 @@ export const addAlLocationRuleSetAPI = async data => {
 export const getAlLocationRuleSetDetailsAPI = async data => {
   const endpoint = { ...END_POINTS.alLocationRuleSet.getAlLocationRuleSetDetails };
 
-  endpoint.url = formatParameterizedURL(endpoint.url, { id: data?.id });
+  endpoint.url = formatParameterizedURL(endpoint.url, { id: data?.id,RECORD_TYPE:data?.RECORD_TYPE });
 
   const response = await fetcher(endpoint);
 
@@ -70,6 +70,16 @@ export const addRuleSetAPI = async data => {
 
 export const editTaskAPI = async data => {
   const endpoint = { ...END_POINTS.alLocationRuleSet.editTask  };
+  endpoint.data = data;
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
+export const allocengineAPI = async data => {
+  const endpoint = { ...END_POINTS.alLocationRuleSet.allocengine };
+    endpoint.url = formatParameterizedURL(endpoint.url, { id: data?.id,date: data?.date});
+
   endpoint.data = data;
   const response = await fetcher(endpoint);
 

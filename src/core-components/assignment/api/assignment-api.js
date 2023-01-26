@@ -15,7 +15,6 @@ export const addAssignmentAPI = async data => {
 
 export const getAssignmentDetailsAPI = async data =>
 {
-  console.log(data);
   const endpoint = { ...END_POINTS.assignment.getAssignmentDetails };
 
   endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string });

@@ -57,8 +57,8 @@ export default function AddAlLocationRuleSet(props) {
         () => (
             <>
                 <JPModal
-                    defaultTitle="Al-Location Rule Set"
-                    title={`Add Al-Location Rule Set`}
+                    defaultTitle="Allocation Rule Set"
+                    title={`Add Allocation Rule Set`}
                     onClose={_ => {
                         setShow(false)
                         setData({})
@@ -149,7 +149,11 @@ export default function AddAlLocationRuleSet(props) {
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
-                    format="yyy/MM/dd"
+                                        format="yyy/MM/dd"
+                                         shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 0;
+    }}
                     value={data?.START_DATE}
                     onChange={(e) => setData({ ...data, START_DATE:moment(e).format('YYYY/MM/DD') })}
 
@@ -162,9 +166,14 @@ export default function AddAlLocationRuleSet(props) {
                             <JPGrid item xs={ 12 } sm={ 12 }>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
-                    margin="normal"
+                                        margin="normal"
+                                        
                     id="date-picker-dialog"
-                    label="End Date"
+                                        label="End Date"
+                                            shouldDisableDate={date => {
+        const day = moment(date).day();
+        return day !== 6;
+    }}
                     format="yyy/MM/dd"
                     value={data?.END_DATE}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}
@@ -189,7 +198,7 @@ export default function AddAlLocationRuleSet(props) {
             <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
                 <JPGrid>
                     <Button color={'info'} onClick={() => setShow(true)} >
-                        Add Al-Location Rule Set
+                        Add Allocation Rule Set
                     </Button>
                 </JPGrid>
             </JPGrid>

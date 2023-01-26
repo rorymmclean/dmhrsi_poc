@@ -103,13 +103,10 @@ export default function TimeCardTable() {
     ThunkDispatch(getTimeCardListThunk({ search_string: value }))
       .then(result => {
         if (result?.data?.body) {
-setState(prevState => {
-            let data = [];
-            return { ...prevState, data };
-          });
+
 
           setState(prevState => {
-            const data = [...prevState.data];
+            const data = [];
             for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
               data.push(JSON.parse(result.data.body)[index]);
             }
@@ -126,7 +123,7 @@ setState(prevState => {
       .finally(() => { setIsLoading(false) });
   };
 
-  const inputDebounce = React.useRef(_.debounce(searchTimeCards, 500)).current;
+  const inputDebounce = React.useRef(_.debounce(searchTimeCards, 100)).current;
 
 
 
@@ -159,7 +156,7 @@ setState(prevState => {
                    <CardIcon color="primary">
                 <ScheduleIcon />
               </CardIcon>
-                  <h4 style={ { color: "#000" } }>Time Cards</h4>
+                  <h4 style={ { color: "#000" } }>Timecards</h4>
                   
                  </JPGrid>
                 <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
@@ -187,7 +184,7 @@ setState(prevState => {
                     fullWidth
                     defaultValue={"Lavern Vincenzo Franks"}
                     placeholder="Search"
-                    onChange={handleInputChange}
+                    onBlur={handleInputChange}
 
                     InputProps={{
                       startAdornment: (

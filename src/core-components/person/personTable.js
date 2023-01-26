@@ -77,7 +77,7 @@ export default function PersonTable() {
             
         
         setState(prevState => {
-          const data = [...prevState.data];
+            const data = [];
           for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
             data.push(JSON.parse(result.data.body)[index]);
           }
@@ -94,7 +94,7 @@ export default function PersonTable() {
       .finally(() => { setIsLoading(false) });
   };
 
- const inputDebounce = React.useRef(_.debounce(searchPersons, 500)).current;
+ const inputDebounce = React.useRef(_.debounce(searchPersons, 100)).current;
 
   
   
@@ -153,7 +153,7 @@ export default function PersonTable() {
                     margin="normal"
                     fullWidth
                       placeholder="Search"
-      onChange={handleInputChange}
+      onBlur={handleInputChange}
 defaultValue={"Deedra Courtney Robertson"}
         InputProps={{
           startAdornment: (

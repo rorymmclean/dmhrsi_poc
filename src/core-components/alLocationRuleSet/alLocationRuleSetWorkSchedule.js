@@ -21,15 +21,16 @@ function groupBy(objectArray, property) {
 
 export default function AlLocationRuleSetWorkSchedule( props )
 {
-    const {RULE_SET_ID ,disabled,START_DATE} = props;
+    const {RULE_SET_ID ,disabled,types} = props;
     const daysHeader = [ 'SUN', 'MON', "TUE", "WED","THU", "FRI", "SAT"];
     const [ getTimeEntryList, setGetTimeEntryList ] = React.useState( [] );
     const [ isLoading, setIsLoading ] = React.useState( true );
     let ref = useRef( {} );
-
+    let total = useRef( 0 );
     useEffect( () =>
     {
-    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:RULE_SET_ID||""}))
+        if(types?.length &&RULE_SET_ID?.length)
+    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:RULE_SET_ID||"",RECORD_TYPE:types}))
         .then( result =>
         {
             let endList = [];
@@ -65,7 +66,7 @@ export default function AlLocationRuleSetWorkSchedule( props )
       })
       .catch(error => console.error('getAlLocationRuleSetDetailsThunk', error))
       .finally(() => {           setIsLoading(false) });
-  }, [RULE_SET_ID] );
+  }, [RULE_SET_ID,types] );
     
     
 
@@ -73,17 +74,27 @@ export default function AlLocationRuleSetWorkSchedule( props )
     {
        
 
-        const userObject = {
+        let userObject = {
                     
                           RULE_SET_ID: RULE_SET_ID,
-                          RECORD_TYPE: "PERCENT",
-                          TASK_ID: ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID,
+                          RECORD_TYPE:types ,
+                          TASK_ID: ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID||"",
                           DOW: d,
                           UNITS: value,
 
         };
-        console.log("userObject",userObject);
-if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
+        if ( types == "HOURS" )
+        {
+            userObject={
+                    
+                          RULE_SET_ID: RULE_SET_ID,
+                          RECORD_TYPE:types ,
+                          DOW: d,
+                          UNITS: value,
+
+        };
+        }
+if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
        ThunkDispatch(addRuleSetThunk(userObject))
       .then(result => {
         
@@ -95,15 +106,25 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID)
     
     const editInput = ( val,value ) =>
     {
-         const userObject = {
+         let userObject = {
                           RULE_SET_ID: RULE_SET_ID,
-                          RECORD_TYPE: "PERCENT",
-                          TASK_ID: value.TASK_ID,
+                          RECORD_TYPE: types,
+                          TASK_ID: value?.TASK_ID||"",
                           DOW: value.DOW,
                           UNITS: val,
                           RULE_ID:value.RULE_ID
          };
-console.log("userObject",userObject);
+        if ( types == "HOURS" )
+        {
+            userObject={
+                          RULE_SET_ID: RULE_SET_ID,
+                          RECORD_TYPE: types,
+                          DOW: value.DOW,
+                          UNITS: val,
+                          RULE_ID:value.RULE_ID
+         };
+        }
+
        ThunkDispatch(editRuleSetThunk(userObject))
       .then(result => {
         
@@ -117,18 +138,24 @@ console.log("userObject",userObject);
 
 
     
-    return (
+    return (!isLoading?
 
-        <JPGrid container direction="row" alignContent={'flex-start'} alignItems={'flex-start'} justify={'flex-start'}  >
-            <JPGrid item xs={12} sm={3} marginRight={ '6.2px' } marginBottom={ '6.2px' }>
+        <JPGrid container direction="row" alignContent={ 'flex-start' } alignItems={ 'flex-start' } justify={ 'flex-start' }  >
+           
+            { types != "HOURS" ? <>
+          
+                <JPGrid item xs={ 12 } sm={ 3 } marginRight={ '6.2px' } marginBottom={ '6.2px' }>
 
-                <Typography style={{ textAlign: 'center' }}>Task</Typography>
-            </JPGrid>
+                    <Typography style={ { textAlign: 'center' } }>Task</Typography>
+                </JPGrid>
 
-            <JPGrid item xs={12} sm={1} marginRight={ '6.2px' } marginBottom={ '6.2px' }>
-                <Typography style={{ textAlign: 'center' }}>Type</Typography>
-            </JPGrid>
+                <JPGrid item xs={ 12 } sm={ 1 } minWidth={140} marginRight={ '6.2px' } marginBottom={ '6.2px' }>
+                    <Typography style={ { textAlign: 'center' } }>Type</Typography>
+                </JPGrid>
+            </> : <JPGrid item xs={ 12 } sm={3 } marginRight={ '6.2px' } marginBottom={ '6.2px' }>
 
+                    <Typography style={ { textAlign: 'center' } }></Typography>
+                </JPGrid> }
             {daysHeader.map((day,index) => (
                 <JPGrid  item xs={12} sm={1} key={index} marginLeft={ '6.2px' } marginBottom={ '6.2px' }      >
                     <Typography style={{ textAlign: 'center' }}>{day}</Typography>
@@ -140,7 +167,8 @@ console.log("userObject",userObject);
                 return  <>
             
 
-                    <CustamAutocomplete disabled={ disabled } task={ day.task } RULE_ID={day?.W?.map(i=>i.RULE_ID)||0}  onAddTask={ ( val ) => { ref.current = val } } />
+                    {!isLoading? types != "HOURS" ? <CustamAutocomplete disabled={ disabled } task={ day.task } RULE_ID={ day?.W?.map( i => i.RULE_ID ) || 0 } onAddTask={ ( val ) => { ref.current = val } } /> : <JPGrid item xs={ 12 } sm={ 3 } marginRight={ '6.2px' } marginBottom={ '6.2px' } > <Typography style={ { textAlign: 'center' } }>Work Schedule:</Typography>
+                </JPGrid>:null  }
 
     
                    
@@ -148,7 +176,6 @@ console.log("userObject",userObject);
                     {
                         let ccc = day.W.find( iDay => iDay.DOW == d ) || {};
                         
-
                         
 
                         return <JPGrid item xs={ 12 } sm={ 1 } key={ currentDayIndex } marginLeft={ '6.2px' } marginBottom={ '6.2px' }  >
@@ -158,7 +185,7 @@ console.log("userObject",userObject);
                             fullWidth
                             defaultValue={ ccc?.UNITS  }
                                 InputProps={{
-            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                                    endAdornment: <InputAdornment position="end"> { types != "HOURS" ?'%': null }</InputAdornment>,
           }}
                                 disabled={disabled}
                                  onChange={ ( e ) =>editInputDebounce(e.target.value,ccc)  }
@@ -169,14 +196,14 @@ console.log("userObject",userObject);
                                     fullWidth
                                     disabled={ disabled }
                                      InputProps={{
-            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                                    endAdornment: <InputAdornment position="end"> { types != "HOURS" ?'%': null }</InputAdornment>,
           }}
                            
                             onChange={ ( e ) =>createInputDebounce(e.target.value,index,day.W,currentDayIndex,getTimeEntryList,d)  }
                         /> }
                     </JPGrid>
                     } ) }
-                 
+                    
                    </>
                 
                 
@@ -191,7 +218,7 @@ console.log("userObject",userObject);
 
            
          
-            { !isLoading  ? <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
+            { !isLoading &&types != "HOURS"   ? <JPGrid container direction="row" alignItems="center" justify="flex-end"  >
                 <JPGrid>
                     { !disabled ? <Button color={ !ref.current?.TASK_ID?.length || false ? 'info' : null } disabled={ ref.current?.TASK_ID?.length || false } onClick={ () => setGetTimeEntryList( prevState =>
                     {
@@ -208,6 +235,15 @@ console.log("userObject",userObject);
           
            
 
-        </JPGrid>
+        </JPGrid>:<Grid
+            container
+            xs={12}
+            justify="center"
+              alignItems="center"
+              style={{  minHeight: 200}}
+          ><JPGrid>
+                <CircularProgress size={ 35 }></CircularProgress>
+                </JPGrid>
+          </Grid>
     )
 }

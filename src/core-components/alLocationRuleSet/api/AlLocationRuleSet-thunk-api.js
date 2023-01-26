@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAlLocationRuleSetListAPI ,addAlLocationRuleSetAPI, getAlLocationRuleSetDetailsAPI, editAlLocationRuleSetAPI, getArsetListAPI, editRuleSetAPI, addRuleSetAPI, editTaskAPI} from './AlLocationRuleSet-api';
+import { getAlLocationRuleSetListAPI ,addAlLocationRuleSetAPI, getAlLocationRuleSetDetailsAPI, editAlLocationRuleSetAPI, getArsetListAPI, editRuleSetAPI, addRuleSetAPI, editTaskAPI, allocengineAPI} from './AlLocationRuleSet-api';
 
 
 export const getAlLocationRuleSetListThunk = createAsyncThunk('AlLocationRuleSet/list', async (data, { dispatch }) => {
@@ -51,3 +51,10 @@ export const editTaskThunk = createAsyncThunk('editTask/edit', async (data, { di
 
   return response;
 } );
+
+export const allocengineThunk = createAsyncThunk('allocengine/get', async (data, { dispatch }) => {
+  const response = await allocengineAPI(data);
+
+  return response;
+});
+

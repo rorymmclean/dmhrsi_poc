@@ -86,7 +86,7 @@ setState(prevState => {
           });
 
           setState(prevState => {
-            const data = [...prevState.data];
+            const data = [];
             for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
               data.push(JSON.parse(result.data.body)[index]);
             }
@@ -103,7 +103,7 @@ setState(prevState => {
       .finally(() => { setIsLoading(false) });
   };
 
-  const inputDebounce = React.useRef(_.debounce(searchAlLocationRuleSets, 500)).current;
+  const inputDebounce = React.useRef(_.debounce(searchAlLocationRuleSets, 100)).current;
 
 
 
@@ -126,7 +126,7 @@ setState(prevState => {
                     <Diversity1Icon />
 
               </CardIcon>
-              <h4 style={{color:"#000"}}>Al-Location Rule Set</h4>
+              <h4 style={{color:"#000"}}>Allocation Rule Set</h4>
                  </JPGrid>
                 <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
                    <AddAlLocationRuleSet onSave={(result) => {
@@ -153,7 +153,7 @@ setState(prevState => {
                     fullWidth
                     defaultValue={"Bud Jerrold Whitfield"}
                     placeholder="Search"
-                    onChange={handleInputChange}
+                    onBlur={handleInputChange}
 
                     InputProps={{
                       startAdornment: (

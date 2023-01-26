@@ -85,7 +85,7 @@ export default function TaskTable (props)
         if (result?.data?.body) {
             
         setState(prevState => {
-          const data = [...prevState.data];
+            const data = [];
           for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
             data.push(JSON.parse(result.data.body)[index]);
           }
@@ -102,7 +102,7 @@ export default function TaskTable (props)
       .finally(() => { setIsLoading(false) });
   };
 
- const inputDebounce = React.useRef(_.debounce(searchTasks, 1000)).current;
+ const inputDebounce = React.useRef(_.debounce(searchTasks, 100)).current;
 
   
   
@@ -160,7 +160,7 @@ export default function TaskTable (props)
                     margin="normal"
                     fullWidth
                       placeholder="Search"
-      onChange={handleInputChange}
+      onBlur={handleInputChange}
 defaultValue={PROJECT_NAME?.length?PROJECT_NAME:"01175" }
         InputProps={{
           startAdornment: (

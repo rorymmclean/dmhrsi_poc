@@ -131,7 +131,7 @@ export const END_POINTS = {
     
       timeEntry: {
         getTimeEntry: {
-          url: 'timeentry/search?search_string={search_string}',
+          url: 'timeentry/search?search_string={search_string}&startdate={startdate}&enddate={enddate}',
           method: HTTP_METHOD_GET
         },
          addTimeEntry: {
@@ -148,6 +148,10 @@ export const END_POINTS = {
     }
       },
   alLocationRuleSet: {
+    allocengine: {
+          url: 'allocengine?id={id}&date={date}',
+          method: HTTP_METHOD_GET
+    },
     getArsetList: {
        url: 'arset/search?search_string={search_string}',
           method: HTTP_METHOD_GET
@@ -161,7 +165,7 @@ export const END_POINTS = {
       method: HTTP_METHOD_PUT
         },
           getAlLocationRuleSetDetails:{
-       url: 'arset?id={id}',
+       url: 'arset?id={id}&RECORD_TYPE={RECORD_TYPE}',
       method: HTTP_METHOD_GET
         },
         editAlLocationRuleSet: {
