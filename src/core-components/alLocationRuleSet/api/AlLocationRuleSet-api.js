@@ -78,7 +78,7 @@ export const editTaskAPI = async data => {
 
 export const allocengineAPI = async data => {
   const endpoint = { ...END_POINTS.alLocationRuleSet.allocengine };
-    endpoint.url = formatParameterizedURL(endpoint.url, { id: data?.id,date: data?.date});
+    endpoint.url = formatParameterizedURL(endpoint.url, { id: data?.id});
 
   endpoint.data = data;
   const response = await fetcher(endpoint);

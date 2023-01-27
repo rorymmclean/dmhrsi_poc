@@ -149,7 +149,7 @@ export const END_POINTS = {
       },
   alLocationRuleSet: {
     allocengine: {
-          url: 'allocengine?id={id}&date={date}',
+          url: 'allocengine?id={id}',
           method: HTTP_METHOD_GET
     },
     getArsetList: {

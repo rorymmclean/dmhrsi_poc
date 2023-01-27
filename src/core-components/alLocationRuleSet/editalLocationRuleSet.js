@@ -241,7 +241,7 @@ setOpen(true)
                 <JPGrid item xs={ 12 } sm={ 4 }>
                 <Button color={!disabled? 'info':null }  disabled={disabled} onClick={ () => 
                     {
-           ThunkDispatch(allocengineThunk({ id: data.PERSON_ID,date:"" }))
+           ThunkDispatch(allocengineThunk({ id: data.PERSON_ID,/*date:moment(new Date).format('YYYY-MM-DD')*/ }))
             .then(result => {
                setOpenTT(true)
             })
