@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import MaterialTable from 'material-table';
 import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
@@ -108,7 +108,36 @@ export default function OrganizationTable() {
     }
   };
   const theme = createMuiTheme( style );
-
+   const customersOptions = useMemo(
+        () => (
+            <>
+               
+<MuiThemeProvider theme={theme}>
+              <MaterialTable
+                isLoading={isLoading}
+                columns={state.columns}
+                components={{
+                  Container: props => (
+                    <JPGrid container>
+                      <JPGrid item xs={12}>
+                        <Paper {...props} sx elevation={0} />
+                      </JPGrid>
+                    </JPGrid>
+                  )
+                }}
+                data={renderList(state.data)}
+                options={{
+                  search: false,
+                  showTitle: false,
+                  toolbar: false,
+                }}
+              />
+           </MuiThemeProvider>
+           
+            </>
+        ),
+        [state.data, state.columns, isLoading]
+     );
 
   return (
     <div className="m-sm-30">
@@ -164,29 +193,7 @@ export default function OrganizationTable() {
                 </GridItem>
                       </GridContainer>
 
-<MuiThemeProvider theme={theme}>
-      <MaterialTable
-        isLoading={isLoading}
-                columns={state.columns}
-                 components={{
-              Container: props => (
-                <JPGrid container>
-                  <JPGrid item xs={12}>
-                    <Paper {...props} sx elevation={0} />
-                  </JPGrid>
-                </JPGrid>
-              )
-            }}
-        data={renderList(state.data)}
-         options={{
-           search: false,
-                         showTitle: false,
-              toolbar: false,
-
-           
-      }}
-              />
-                </MuiThemeProvider>
+{customersOptions}
  
             </CardBody>
           </Card>

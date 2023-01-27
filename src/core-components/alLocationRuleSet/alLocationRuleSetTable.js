@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import MaterialTable from 'material-table';
 import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
@@ -13,7 +13,7 @@ import BusinessIcon from '@material-ui/icons/Apartment';;
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Paper, Typography } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -21,11 +21,14 @@ import _ from 'lodash';
 import AddAlLocationRuleSet from './addalLocationRuleSet';
 import EditAlLocationRuleSet from './editalLocationRuleSet';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
+import { getPersonListThunk } from 'core-components/person/api/person-thunk-api';
+import Autocomplete from '@mui/material/Autocomplete';
 
 export default function AlLocationRuleSetTable() {
-  const history = useHistory();
   const [ isLoading, setIsLoading ] = useState( false );
-  
+    const [valueEmployee, setValueEmployee] = React.useState(null);
+    const [inputValueEmployee, setInputValueEmployee] = React.useState('');
+  const [ optionsEmployee, setOptionsEmployee ] = React.useState( [] );
   const [state, setState] = React.useState({
     columns: [
       { title: 'Date', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData?.START_DATE} - ${rowData?.END_DATE}`}</Typography> },
@@ -57,11 +60,33 @@ export default function AlLocationRuleSetTable() {
 
 
   
-  useEffect( () =>
-  {
-    setIsLoading(true)
-   searchAlLocationRuleSets("Bud Jerrold Whitfield")
-  }, [] );
+    const searchEmployees = (value) => {
+        ThunkDispatch(getPersonListThunk({ search_string: value }))
+            .then(result => {
+                if (result?.data?.body) {
+                    setOptionsEmployee(JSON.parse(result.data.body));
+                } else {
+                    setOptionsEmployee([]);
+
+                }
+            })
+            .catch(error => console.error('getPersonListThunk', error))
+            .finally(() => { });
+    };
+    React.useEffect(() => {
+        let active = true;
+        if (inputValueEmployee === '') {
+            setOptionsEmployee([]);
+            return undefined;
+        }
+        searchEmployees(inputValueEmployee)
+
+
+        return () => {
+            active = false;
+        };
+    }, [ inputValueEmployee ] );
+  
   
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
@@ -73,45 +98,83 @@ export default function AlLocationRuleSetTable() {
     });
 
 
-
   const searchAlLocationRuleSets = ( value ) =>
   {
+    if ( value?.length )
+    {
+      ThunkDispatch( getArsetListThunk( { search_string: value } ) )
+        .then( result =>
+        {
+          if ( result?.data?.body )
+          {
+
+            setState( prevState =>
+            {
     
-    ThunkDispatch(getArsetListThunk({ search_string: value }))
-      .then(result => {
-        if (result?.data?.body) {
-setState(prevState => {
-            let data = [];
-            return { ...prevState, data };
-          });
+              return { ...prevState, data: JSON.parse( result.data.body ) };
+            } );
+          } else
+          {
+            setState( prevState =>
+            {
+              return { ...prevState, data:[] };
+            } );
+          }
+        } )
+        .catch( error => console.error( 'getTimeCardListThunk', error ) )
+        .finally( () => { setIsLoading( false ) } );
+    } else
+    {
+        setState( prevState =>
+            {
+              return { ...prevState, data:[] };
+            } );
+    }
+  };
 
-          setState(prevState => {
-            const data = [];
-            for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-              data.push(JSON.parse(result.data.body)[index]);
-            }
-            return { ...prevState, data };
-          });
-        } else {
-          setState(prevState => {
-            let data = [];
-            return { ...prevState, data };
-          });
+
+    const style = {
+    overrides: {
+      MuiTableCell: {
+        root: {
+          padding: '6px',
         }
-      })
-      .catch(error => console.error('getArsetListThunk', error))
-      .finally(() => { setIsLoading(false) });
+      }
+    }
   };
+  const theme = createMuiTheme( style );
 
-  const inputDebounce = React.useRef(_.debounce(searchAlLocationRuleSets, 100)).current;
-
-
-
-  const handleInputChange = ({ target }) => {
-    const { value } = target;
-    inputDebounce(value);
-  };
-  return (
+   const customersOptions = useMemo(
+        () => (
+            <>
+               
+<MuiThemeProvider theme={theme}>
+              <MaterialTable
+                isLoading={isLoading}
+                columns={state.columns}
+                components={{
+                  Container: props => (
+                    <JPGrid container>
+                      <JPGrid item xs={12}>
+                        <Paper {...props} sx elevation={0} />
+                      </JPGrid>
+                    </JPGrid>
+                  )
+                }}
+                data={renderList(state.data)}
+                options={{
+                  search: false,
+                  showTitle: false,
+                  toolbar: false,
+                }}
+              />
+           </MuiThemeProvider>
+           
+            </>
+        ),
+        [state.data, state.columns, isLoading]
+     );
+    return (
     <div className="m-sm-30">
      
 
@@ -146,44 +209,36 @@ setState(prevState => {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <TextField
-                    type="search"
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    defaultValue={"Bud Jerrold Whitfield"}
-                    placeholder="Search"
-                    onBlur={handleInputChange}
+                 <Autocomplete
+                                    id="Persons"
+                                    getOptionLabel={(option) => `${option.FIRST_NAME} ${option.MIDDLE_NAME} ${option.LAST_NAME}`
+                                    }
+                                    filterOptions={(x) => x}
+                                    options={optionsEmployee}
+                                    autoComplete
+                                    includeInputInList
+                                    filterSelectedOptions
+                                    value={valueEmployee}
+                                    noOptionsText="No Persons"
+                                    onChange={(event, newValue) => {
+                                      setOptionsEmployee( newValue ? [ newValue, ...optionsEmployee ] : optionsEmployee );
+                                      searchAlLocationRuleSets(newValue?`${newValue.FIRST_NAME} ${newValue.MIDDLE_NAME} ${newValue.LAST_NAME}`:null)
+                                      setValueEmployee(newValue);
+                                    }}
+                                    onInputChange={(event, newInputValue) => {
+                                        setInputValueEmployee(newInputValue);
+                                    }}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Person Name" fullWidth variant="outlined" required />
+                                    )}
 
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      )
-                    }}
-                  />
+                                />
+                  
+                
                 </GridItem>
-              </GridContainer>
-              <MaterialTable
-                isLoading={isLoading}
-                columns={state.columns}
-                components={{
-                  Container: props => (
-                    <JPGrid container>
-                      <JPGrid item xs={12}>
-                        <Paper {...props} sx elevation={0} />
-                      </JPGrid>
-                    </JPGrid>
-                  )
-                }}
-                data={renderList(state.data)}
-                options={{
-                  search: false,
-                  showTitle: false,
-                  toolbar: false,
-                }}
-              />
+                </GridContainer>
+                {customersOptions}
+              
 
             </CardBody>
           </Card>
