@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import MaterialTable from 'material-table';
-import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
 import Edit from "@material-ui/icons/Edit";
 import { useHistory } from 'react-router-dom';
@@ -11,21 +10,22 @@ import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
-import { getTaskListThunk } from './api/task-thunk-api';
 import AddTask from './addTask';
-import TaskIcon from '@material-ui/icons/AssignmentLate';;
+import TaskIcon from '@material-ui/icons/AssignmentLate';
+import { getTaskListAPI } from './api/task-api';
+;
 
 export default function TaskTable (props)
 {
   const { search_string,PROJECT_NAME } = props;
 
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const onClickStory = (item) => {
     history.push({
@@ -34,28 +34,7 @@ export default function TaskTable (props)
     });
   }
 
-  const [state, setState] = React.useState({
-      columns: [
-      { title: 'Task Name', field: 'TASK_NAME' },
-        { title: 'Task #', field: 'TASK_NBR' },
-        { title: 'Service Type', field: 'SERVICE_TYPE' },
-        { title: 'FCC', field: 'FCC' },
-        { title: 'SUPE', field: 'SUPE' },
-        { title: 'Labor Cost', field: 'LABOR_COST_ID' },
-  !search_string?.length ? {
-      field: 'view',
-      editable: 'never',
-      title: 'Edit',
-      render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
-        padding: "8px 4px 6px 8px",
-        borderRadius: "20px"
-      }}>
-        <Edit onClick={() => onClickStory(rowData)} />
-      </Button>
-    }:null
-    ].filter(item=>item),
-    data: []
-  } );
+  const [data, setData] = React.useState([]);
   
   useEffect( () =>
   {
@@ -78,37 +57,25 @@ export default function TaskTable (props)
       };
     });
 
+  
+   const searchTasks = async( value ) =>
+  {
+    const response = await getTaskListAPI( {search_string:value} );
+    
 
-    const searchTasks = (value) => {
-       ThunkDispatch(getTaskListThunk({search_string:value}))
-      .then(result => {
-        if (result?.data?.body) {
-            
-        setState(prevState => {
-            const data = [];
-          for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-            data.push(JSON.parse(result.data.body)[index]);
-          }
-          return { ...prevState, data };
-        });
+    if (response?.data?.body) {
+      setIsLoading( false )
+      setData(JSON.parse(response.data.body))
+  
         } else {
-           setState(prevState => {
-             let data = [];
-          return { ...prevState, data };
-        });
-      }
-      })
-      .catch(error => console.error('getTaskListThunk', error))
-      .finally(() => { setIsLoading(false) });
+         setData([])
+
+    }
   };
 
- const inputDebounce = React.useRef(_.debounce(searchTasks, 100)).current;
-
-  
-  
   const handleInputChange = ({ target }) => {
     const { value } = target;
-    inputDebounce(value);
+    searchTasks(value);
   };
 
   const style = {
@@ -137,12 +104,13 @@ export default function TaskTable (props)
               <h4 style={{color:"#000"}}>Tasks</h4>
                  </JPGrid>
                 <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
-                   <AddTask search_string={search_string} onSave={(result) => {
-        setState(prevState => {
-          const data = [...prevState.data];
+                  <AddTask search_string={ search_string } onSave={ ( result ) =>
+                  {
+        setData(prevState => {
+          const data = [...prevState];
           data.unshift(result);
 
-          return { ...prevState, data };
+          return data;
         });
 
       }} />
@@ -160,7 +128,7 @@ export default function TaskTable (props)
                     margin="normal"
                     fullWidth
                       placeholder="Search"
-      onBlur={handleInputChange}
+      onChange={handleInputChange}
 defaultValue={PROJECT_NAME?.length?PROJECT_NAME:"01175" }
         InputProps={{
           startAdornment: (
@@ -176,7 +144,25 @@ defaultValue={PROJECT_NAME?.length?PROJECT_NAME:"01175" }
 <MuiThemeProvider theme={theme}>
       <MaterialTable
         isLoading={isLoading}
-                columns={state.columns}
+                columns={[
+      { title: 'Task Name', field: 'TASK_NAME' },
+        { title: 'Task #', field: 'TASK_NBR' },
+        { title: 'Service Type', field: 'SERVICE_TYPE' },
+        { title: 'FCC', field: 'FCC' },
+        { title: 'SUPE', field: 'SUPE' },
+        { title: 'Labor Cost', field: 'LABOR_COST_ID' },
+  !search_string?.length ? {
+      field: 'view',
+      editable: 'never',
+      title: 'Edit',
+      render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
+        padding: "8px 4px 6px 8px",
+        borderRadius: "20px"
+      }}>
+        <Edit onClick={() => onClickStory(rowData)} />
+      </Button>
+    }:null
+    ].filter(item=>item)}
                  components={{
               Container: props => (
                 <JPGrid container>
@@ -186,14 +172,14 @@ defaultValue={PROJECT_NAME?.length?PROJECT_NAME:"01175" }
                 </JPGrid>
               )
                 } }
-        data={renderList(state.data)}
+        data={renderList(data)}
                 options={ {
              rowStyle: {
                 height: 4,
                 width: 5
               },
            search: false,
-                         showTitle: false,
+           showTitle: false,
            toolbar: false,
              
 

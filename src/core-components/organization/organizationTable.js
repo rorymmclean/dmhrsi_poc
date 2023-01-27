@@ -56,14 +56,10 @@ export default function OrganizationTable() {
       setData(JSON.parse(response.data.body))
   
         } else {
-                setData([])
+         etData([])
 
     }
-    
-
   };
-
-
 
   const handleInputChange = ({ target }) => {
     const { value } = target;
@@ -104,7 +100,7 @@ export default function OrganizationTable() {
           const data = [...prevState];
           data.unshift(result);
 
-          return { ...data };
+          return data;
         });
 
       }} />

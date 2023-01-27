@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import MaterialTable from 'material-table';
-import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
 import Edit from "@material-ui/icons/Edit";
 import { useHistory } from 'react-router-dom';
@@ -8,7 +7,6 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
 import CardIcon from 'components/Card/CardIcon';
-import BusinessIcon from '@material-ui/icons/Apartment';;
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
@@ -17,9 +15,9 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
-import { getPersonListThunk } from './api/person-thunk-api';
 import AddPerson from './addPerson';
 import PersonIcon from '@mui/icons-material/Person';
+import { getPersonListAPI } from './api/person-api';
 
 export default function PersonTable() {
   const history = useHistory();
@@ -31,27 +29,7 @@ export default function PersonTable() {
       state: { id: item?.PERSON_ID }
     });
   }
-  const [state, setState] = React.useState({
-      columns: [
-          { title: 'Person Name', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} ${rowData.LAST_NAME}`}</Typography> },
-      { title: 'Type', field: 'SERVICE' },
-        { title: 'Rank', field: 'GRADE' },
-
-          { title: 'Location', field: 'LOCATION' },
-    {
-      field: 'view',
-      editable: 'never',
-      title: 'Edit',
-      render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
-        padding: "8px 4px 6px 8px",
-        borderRadius: "20px"
-      }}>
-        <Edit onClick={() => onClickStory(rowData)} />
-      </Button>
-    }
-    ],
-    data: []
-  });
+  const [data, setData] = React.useState([]);
 
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
@@ -66,42 +44,31 @@ export default function PersonTable() {
   
    useEffect( () =>
   {
-    setIsLoading(true)
    searchPersons("Deedra Courtney Robertson")
    }, [] );
   
-    const searchPersons = (value) => {
-       ThunkDispatch(getPersonListThunk({search_string:value}))
-      .then(result => {
-        if (result?.data?.body) {
-            
-        
-        setState(prevState => {
-            const data = [];
-          for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-            data.push(JSON.parse(result.data.body)[index]);
-          }
-          return { ...prevState, data };
-        });
+    const searchPersons = async( value ) =>
+  {
+    const response = await getPersonListAPI( {search_string:value} );
+    
+
+    if (response?.data?.body) {
+      setIsLoading( false )
+      setData(JSON.parse(response.data.body))
+  
         } else {
-           setState(prevState => {
-             let data = [];
-          return { ...prevState, data };
-        });
-      }
-      })
-      .catch(error => console.error('getPersonListThunk', error))
-      .finally(() => { setIsLoading(false) });
+         setData([])
+
+    }
   };
 
- const inputDebounce = React.useRef(_.debounce(searchPersons, 100)).current;
-
-  
-  
   const handleInputChange = ({ target }) => {
     const { value } = target;
-    inputDebounce(value);
+    searchPersons(value);
   };
+
+
+
 
     const style = {
     overrides: {
@@ -131,11 +98,11 @@ export default function PersonTable() {
                  </JPGrid>
                 <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
                     <AddPerson onSave={(result) => {
-        setState(prevState => {
-          const data = [...prevState.data];
+        setData(prevState => {
+          const data = [...prevState];
           data.unshift(result);
 
-          return { ...prevState, data };
+          return data;
         });
 
       }} />
@@ -153,7 +120,7 @@ export default function PersonTable() {
                     margin="normal"
                     fullWidth
                       placeholder="Search"
-      onBlur={handleInputChange}
+      onChange={handleInputChange}
 defaultValue={"Deedra Courtney Robertson"}
         InputProps={{
           startAdornment: (
@@ -169,7 +136,24 @@ defaultValue={"Deedra Courtney Robertson"}
 <MuiThemeProvider theme={theme}>
       <MaterialTable
         isLoading={isLoading}
-                columns={state.columns}
+                columns={[
+          { title: 'Person Name', field: 'FIRST_NAME', render: rowData =>   <Typography type={'h3'}>{`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} ${rowData.LAST_NAME}`}</Typography> },
+      { title: 'Type', field: 'SERVICE' },
+        { title: 'Rank', field: 'GRADE' },
+
+          { title: 'Location', field: 'LOCATION' },
+    {
+      field: 'view',
+      editable: 'never',
+      title: 'Edit',
+      render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
+        padding: "8px 4px 6px 8px",
+        borderRadius: "20px"
+      }}>
+        <Edit onClick={() => onClickStory(rowData)} />
+      </Button>
+    }
+    ]}
                  components={{
               Container: props => (
                 <JPGrid container>
@@ -179,7 +163,7 @@ defaultValue={"Deedra Courtney Robertson"}
                 </JPGrid>
               )
             }}
-        data={renderList(state.data)}
+        data={renderList(data)}
          options={{
            search: false,
                          showTitle: false,
