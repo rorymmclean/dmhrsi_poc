@@ -133,11 +133,6 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
       .finally(() => {  });
     };
 
-    const createInputDebounce = React.useRef( _.debounce( createInput, 500 ) ).current;
-    const editInputDebounce = React.useRef(_.debounce(editInput, 500)).current;
-
-
-    
     return (!isLoading?
 
         <JPGrid container direction="row" alignContent={ 'flex-start' } alignItems={ 'flex-start' } justify={ 'flex-start' }  >
@@ -188,7 +183,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
                                     endAdornment: <InputAdornment position="end"> { types != "HOURS" ?'%': null }</InputAdornment>,
           }}
                                 disabled={disabled}
-                                 onChange={ ( e ) =>editInputDebounce(e.target.value,ccc)  }
+                                 onChange={ ( e ) =>editInput(e.target.value,ccc)  }
 
                         /> : <TextField
                             variant="outlined"
@@ -199,7 +194,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
                                     endAdornment: <InputAdornment position="end"> { types != "HOURS" ?'%': null }</InputAdornment>,
           }}
                            
-                            onChange={ ( e ) =>createInputDebounce(e.target.value,index,day.W,currentDayIndex,getTimeEntryList,d)  }
+                            onChange={ ( e ) =>createInput(e.target.value,index,day.W,currentDayIndex,getTimeEntryList,d)  }
                         /> }
                     </JPGrid>
                     } ) }
