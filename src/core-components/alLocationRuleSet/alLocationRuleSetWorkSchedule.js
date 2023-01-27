@@ -149,7 +149,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
                     <Typography style={ { textAlign: 'center' } }>Task</Typography>
                 </JPGrid>
 
-                <JPGrid item xs={ 12 } sm={ 1 } minWidth={140} marginRight={ '6.2px' } marginBottom={ '6.2px' }>
+                <JPGrid item xs={ 12 } sm={ 1 }  marginRight={ '6.2px' } marginBottom={ '6.2px' }>
                     <Typography style={ { textAlign: 'center' } }>Type</Typography>
                 </JPGrid>
             </> : <JPGrid item xs={ 12 } sm={3 } marginRight={ '6.2px' } marginBottom={ '6.2px' }>
