@@ -90,7 +90,7 @@ const userObject = {
 
     
     return <>
-        <JPGrid item xs={ 12 } sm={ 3 } marginRight={ '6.2px' } marginBottom={ '6.2px' } >
+        <JPGrid item xs={ 12 } sm={ 2 } marginRight={ '6.2px' } marginBottom={ '6.2px' } >
         
                <Autocomplete
                             
