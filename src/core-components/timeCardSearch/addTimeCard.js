@@ -166,7 +166,7 @@ export default function AddTimeCard(props) {
                                         value={ data?.START_DATE }
                                         shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 0;
+        return day !== 1;
     }}
 
                     style={{width:'100% !important'}}
@@ -187,7 +187,7 @@ export default function AddTimeCard(props) {
                                         format="yyy/MM/dd"
                                             shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 6;
+        return day !== 5;
     }}
                     style={{width:'100% !important'}}
                     value={data?.END_DATE}

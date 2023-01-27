@@ -22,7 +22,7 @@ function groupBy(objectArray, property) {
 export default function AlLocationRuleSetWorkSchedule( props )
 {
     const {RULE_SET_ID ,disabled,types} = props;
-    const daysHeader = [ 'SUN', 'MON', "TUE", "WED","THU", "FRI", "SAT"];
+    const daysHeader = ['MON', "TUE", "WED","THU", "FRI", "SAT", 'SUN'];
     const [ getTimeEntryList, setGetTimeEntryList ] = React.useState( [] );
     const [ isLoading, setIsLoading ] = React.useState( true );
     let ref = useRef( {} );

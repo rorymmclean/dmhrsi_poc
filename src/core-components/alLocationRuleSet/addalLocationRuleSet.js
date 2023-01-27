@@ -152,7 +152,7 @@ export default function AddAlLocationRuleSet(props) {
                                         format="yyy/MM/dd"
                                          shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 0;
+        return day !== 1;
     }}
                     value={data?.START_DATE}
                     onChange={(e) => setData({ ...data, START_DATE:moment(e).format('YYYY/MM/DD') })}
@@ -172,7 +172,7 @@ export default function AddAlLocationRuleSet(props) {
                                         label="End Date"
                                             shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 6;
+        return day !== 5;
     }}
                     format="yyy/MM/dd"
                     value={data?.END_DATE}

@@ -23,7 +23,7 @@ function groupBy(objectArray, property) {
 export default function WorkScheduleTest( props )
 {
     const {TIMECARD_ID ,disabled,START_DATE,week,END_DATE} = props;
-    const daysHeader = [ 'SUN', 'MON', "TUE", "WED","THU", "FRI", "SAT"];
+    const daysHeader = [ 'MON', "TUE", "WED","THU", "FRI", "SAT",'SUN'];
     const [ getTimeEntryList, setGetTimeEntryList ] = React.useState( [] );
     const [ isLoading, setIsLoading ] = React.useState( true );
     let ref = useRef( {} );

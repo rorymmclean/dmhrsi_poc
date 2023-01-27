@@ -237,7 +237,7 @@ setOpen(true)
                       format="yyy/MM/dd"
                        shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 0;
+        return day !== 1;
     }}
                                         value={ data?.START_DATE }
                       disabled={ disabled }
@@ -261,7 +261,7 @@ setOpen(true)
                       value={ data?.END_DATE }
                        shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 6;
+        return day !== 5;
     }}
                         style={{width:'100% !important'}}
                     onChange={(e) => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD')})}

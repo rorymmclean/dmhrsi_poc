@@ -83,7 +83,7 @@ export default function Allocations() {
                       format="MM/dd/yyyy"
                        shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 0;
+        return day !== 1;
     }}
                       value={data?.START_DATE}
                       onChange={(date) => setData({ ...data, START_DATE: date })}
@@ -101,7 +101,7 @@ export default function Allocations() {
                       label="End Date"
                           shouldDisableDate={date => {
         const day = moment(date).day();
-        return day !== 6;
+        return day !== 5;
     }}
                       format="MM/dd/yyyy"
                       value={data?.END_DATE}
