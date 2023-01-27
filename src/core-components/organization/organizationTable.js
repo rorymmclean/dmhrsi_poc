@@ -122,7 +122,7 @@ export default function OrganizationTable() {
                     fullWidth
                     defaultValue={"TNMOFY"}
                       placeholder="Search"
-      onBlur={handleInputChange}
+      onChange={handleInputChange}
 
         InputProps={{
           startAdornment: (
