@@ -42,7 +42,7 @@ export default function AlLocationRuleSetTable() {
         setState(prevState => {
           const data = [ ...prevState.data ];
           return { ...prevState, data : data.map((item) => {
-        return item.RULE_ID === result.RULE_ID?result:item;
+        return item.RULE_SET_ID === result.RULE_SET_ID?result:item;
          } )};
         });
 
