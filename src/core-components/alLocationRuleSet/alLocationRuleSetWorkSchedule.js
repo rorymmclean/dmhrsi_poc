@@ -80,7 +80,7 @@ export default function AlLocationRuleSetWorkSchedule( props )
                           RECORD_TYPE:types ,
                           TASK_ID: ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID||"",
                           DOW: d,
-                          UNITS: value||"NULL",
+                          UNITS: value||"NAN",
 
         };
         if ( types == "HOURS" )
@@ -90,7 +90,7 @@ export default function AlLocationRuleSetWorkSchedule( props )
                           RULE_SET_ID: RULE_SET_ID,
                           RECORD_TYPE:types ,
                           DOW: d,
-                          UNITS: value ||"NULL",
+                          UNITS: value ||"NAN",
 
         };
         }
@@ -111,7 +111,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
                           RECORD_TYPE: types,
                           TASK_ID: value?.TASK_ID||"",
                           DOW: value.DOW,
-                          UNITS: val||"NULL",
+                          UNITS: val||"NAN",
                           RULE_ID:value.RULE_ID
          };
         if ( types == "HOURS" )
@@ -120,7 +120,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
                           RULE_SET_ID: RULE_SET_ID,
                           RECORD_TYPE: types,
                           DOW: value.DOW,
-                          UNITS: val||"NULL",
+                          UNITS: val||"NAN",
                           RULE_ID:value.RULE_ID
          };
         }
