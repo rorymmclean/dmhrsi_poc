@@ -23,7 +23,6 @@ import { getOrganizationListAPI } from './api/organization-api';
 export default function OrganizationTable() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useDispatch()
   
   const onClickStory = (item) => {
     history.push({
@@ -31,25 +30,7 @@ export default function OrganizationTable() {
       state: { id: item?.ORGANIZATION_ID }
     });
   }
-  const [state, setState] = React.useState({
-      columns: [
-          { title: 'Organization Name', field: 'ORGANIZATION_NAME' },
-          { title: 'Type', field: 'SERVICE' },
-          { title: 'Location', field: 'contacts' },
-    {
-      field: 'view',
-      editable: 'never',
-      title: 'Edit',
-      render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
-        padding: "8px 4px 6px 8px",
-        borderRadius: "20px"
-      }}>
-        <Edit onClick={() => onClickStory(rowData)} />
-      </Button>
-    }
-    ],
-    data: []
-  });
+  const [data, setData] = React.useState([]);
 
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
@@ -71,15 +52,12 @@ export default function OrganizationTable() {
     
 
     if (response?.data?.body) {
-          setIsLoading(false)
-        setState(prevState => {        
-          return { ...prevState, data:JSON.parse(response.data.body) };
-        });
+      setIsLoading( false )
+      setData(JSON.parse(response.data.body))
+  
         } else {
-           setState(prevState => {
-             let data = [];
-          return { ...prevState, data };
-           } );
+                setData([])
+
     }
     
 
@@ -122,11 +100,11 @@ export default function OrganizationTable() {
                  </JPGrid>
                 <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
                    <AddOrganization onSave={(result) => {
-        setState(prevState => {
-          const data = [...prevState.data];
+        setData(prevState => {
+          const data = [...prevState];
           data.unshift(result);
 
-          return { ...prevState, data };
+          return { ...data };
         });
 
       }} />
@@ -160,7 +138,22 @@ export default function OrganizationTable() {
 <MuiThemeProvider theme={theme}>
               <MaterialTable
                 isLoading={isLoading}
-                columns={state.columns}
+                columns={[
+          { title: 'Organization Name', field: 'ORGANIZATION_NAME' },
+          { title: 'Type', field: 'SERVICE' },
+          { title: 'Location', field: 'contacts' },
+    {
+      field: 'view',
+      editable: 'never',
+      title: 'Edit',
+      render: rowData => <Button color={'info'} onClick={() => onClickStory(rowData)} style={{
+        padding: "8px 4px 6px 8px",
+        borderRadius: "20px"
+      }}>
+        <Edit onClick={() => onClickStory(rowData)} />
+      </Button>
+    }
+    ]}
                 components={{
                   Container: props => (
                     <JPGrid container>
@@ -170,7 +163,7 @@ export default function OrganizationTable() {
                     </JPGrid>
                   )
                 }}
-                data={renderList(state.data)}
+                data={renderList(data)}
                 options={{
                   search: false,
                   showTitle: false,
