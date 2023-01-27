@@ -163,6 +163,10 @@ export const END_POINTS = {
           addAlLocationRuleSet: {
       url: 'arset',
       method: HTTP_METHOD_PUT
+    },
+           getRuleDetails:{
+       url: 'arset/arsetbyid?id={id}',
+      method: HTTP_METHOD_GET
         },
           getAlLocationRuleSetDetails:{
        url: 'arset?id={id}&RECORD_TYPE={RECORD_TYPE}',

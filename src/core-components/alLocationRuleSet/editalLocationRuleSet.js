@@ -19,7 +19,7 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import moment from 'moment';
-import {  allocengineThunk, editAlLocationRuleSetThunk, getAlLocationRuleSetDetailsThunk } from './api/AlLocationRuleSet-thunk-api';
+import {  allocengineThunk, editAlLocationRuleSetThunk, getAlLocationRuleSetDetailsThunk, getRuleDetailsThunk } from './api/AlLocationRuleSet-thunk-api';
 import Edit from "@material-ui/icons/Edit";
 import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 import { Search } from '@material-ui/icons';
@@ -86,7 +86,7 @@ export default function EditAlLocationRuleSet(props) {
     useEffect( () =>
     {
       if(show)
-    ThunkDispatch(getAlLocationRuleSetDetailsThunk({id:rowData.RULE_SET_ID,RECORD_TYPE:""}))
+    ThunkDispatch(getRuleDetailsThunk({id:rowData.RULE_SET_ID}))
       .then(result => {
           if ( result?.data?.body )
           {              
@@ -94,7 +94,7 @@ export default function EditAlLocationRuleSet(props) {
       
       }
       })
-      .catch(error => console.error('getAlLocationRuleSetDetailsThunk', error))
+      .catch(error => console.error('getRuleDetailsThunk', error))
       .finally(() => { });
   }, [ rowData.RULE_SET_ID,show ] );
     

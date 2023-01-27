@@ -85,3 +85,14 @@ export const allocengineAPI = async data => {
 
   return response;
 };
+
+export const getRuleDetailsAPI = async data => {
+  const endpoint = { ...END_POINTS.alLocationRuleSet.getRuleDetails};
+
+  endpoint.url = formatParameterizedURL(endpoint.url, { id: data?.id });
+
+  const response = await fetcher(endpoint);
+
+  return response;
+};
+
