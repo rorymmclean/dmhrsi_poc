@@ -183,7 +183,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
                                     endAdornment: <InputAdornment position="end"> { types != "HOURS" ?'%': null }</InputAdornment>,
           }}
                                 disabled={disabled}
-                                 onChange={ ( e ) =>editInput(e.target.value,ccc)  }
+                                 onBlur={ ( e ) =>editInput(e.target.value,ccc)  }
 
                         /> : <TextField
                             variant="outlined"
@@ -194,7 +194,7 @@ if(ttimeEntryList[index]?.task?.TASK_ID|| ref.current?.TASK_ID|| types=="HOURS")
                                     endAdornment: <InputAdornment position="end"> { types != "HOURS" ?'%': null }</InputAdornment>,
           }}
                            
-                            onChange={ ( e ) =>createInput(e.target.value,index,day.W,currentDayIndex,getTimeEntryList,d)  }
+                            onBlur={ ( e ) =>createInput(e.target.value,index,day.W,currentDayIndex,getTimeEntryList,d)  }
                         /> }
                     </JPGrid>
                     } ) }
