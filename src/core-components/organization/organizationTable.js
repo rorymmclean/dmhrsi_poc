@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import MaterialTable from 'material-table';
-import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
 import Edit from "@material-ui/icons/Edit";
 import { useHistory } from 'react-router-dom';
-import { getOrganizationListThunk } from './api/organization-thunk-api';
 import AddOrganization from './addOrganization';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
@@ -19,11 +17,14 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import _ from 'lodash';
+import { useDispatch } from 'react-redux';
+import { getOrganizationListAPI } from './api/organization-api';
 
 export default function OrganizationTable() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-
+  const dispatch = useDispatch()
+  
   const onClickStory = (item) => {
     history.push({
       pathname: `/admin/edit/${item?.ORGANIZATION_ID}`,
@@ -61,41 +62,34 @@ export default function OrganizationTable() {
 
    useEffect( () =>
   {
-    setIsLoading(true)
    searchOrganizations("TNMOFY")
   }, [] );
 
-    const searchOrganizations = (value) => {
-       ThunkDispatch(getOrganizationListThunk({search_string:value}))
-      .then(result => {
-        if (result?.data?.body) {
-            
-        
-        setState(prevState => {
-            const data = [];
-          for (let index = 0; index < JSON.parse(result.data.body).length; index++) {
-            data.push(JSON.parse(result.data.body)[index]);
-          }
-          return { ...prevState, data };
+  const searchOrganizations = async( value ) =>
+  {
+    const response = await getOrganizationListAPI( {search_string:value} );
+    
+
+    if (response?.data?.body) {
+          setIsLoading(false)
+        setState(prevState => {        
+          return { ...prevState, data:JSON.parse(response.data.body) };
         });
         } else {
            setState(prevState => {
              let data = [];
           return { ...prevState, data };
-        });
-      }
-      })
-      .catch(error => console.error('getOrganizationListThunk', error))
-      .finally(() => { setIsLoading(false) });
+           } );
+    }
+    
+
   };
 
- const inputDebounce = React.useRef(_.debounce(searchOrganizations, 100)).current;
 
-  
-  
+
   const handleInputChange = ({ target }) => {
     const { value } = target;
-    inputDebounce(value);
+    searchOrganizations(value);
   };
 
      const style = {
@@ -108,36 +102,6 @@ export default function OrganizationTable() {
     }
   };
   const theme = createMuiTheme( style );
-   const customersOptions = useMemo(
-        () => (
-            <>
-               
-<MuiThemeProvider theme={theme}>
-              <MaterialTable
-                isLoading={isLoading}
-                columns={state.columns}
-                components={{
-                  Container: props => (
-                    <JPGrid container>
-                      <JPGrid item xs={12}>
-                        <Paper {...props} sx elevation={0} />
-                      </JPGrid>
-                    </JPGrid>
-                  )
-                }}
-                data={renderList(state.data)}
-                options={{
-                  search: false,
-                  showTitle: false,
-                  toolbar: false,
-                }}
-              />
-           </MuiThemeProvider>
-           
-            </>
-        ),
-        [state.data, state.columns, isLoading]
-     );
 
   return (
     <div className="m-sm-30">
@@ -193,7 +157,27 @@ export default function OrganizationTable() {
                 </GridItem>
                       </GridContainer>
 
-{customersOptions}
+<MuiThemeProvider theme={theme}>
+              <MaterialTable
+                isLoading={isLoading}
+                columns={state.columns}
+                components={{
+                  Container: props => (
+                    <JPGrid container>
+                      <JPGrid item xs={12}>
+                        <Paper {...props} sx elevation={0} />
+                      </JPGrid>
+                    </JPGrid>
+                  )
+                }}
+                data={renderList(state.data)}
+                options={{
+                  search: false,
+                  showTitle: false,
+                  toolbar: false,
+                }}
+              />
+           </MuiThemeProvider>
  
             </CardBody>
           </Card>
