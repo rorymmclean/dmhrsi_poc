@@ -2,11 +2,9 @@ import { END_POINTS } from 'endpoints.js';
 import { formatParameterizedURL } from 'utils.js';
 import { fetcher } from 'axios-helper.js';
 
-
-
 export const getTaskListAPI = async data => {
   const endpoint = { ...END_POINTS.task.getTask };
-  
+
   endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string });
 
   const response = await fetcher(endpoint);
@@ -21,7 +19,6 @@ export const addTaskAPI = async data => {
   const response = await fetcher(endpoint);
   return response;
 };
-
 
 export const getTaskDetailsAPI = async data => {
   const endpoint = { ...END_POINTS.task.getTaskDetails };

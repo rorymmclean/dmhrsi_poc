@@ -2,7 +2,6 @@ import { END_POINTS } from 'endpoints.js';
 import { formatParameterizedURL } from 'utils.js';
 import { fetcher } from 'axios-helper.js';
 
-
 export const addContactAPI = async data => {
   const endpoint = { ...END_POINTS.contact.addContact };
   endpoint.url = formatParameterizedURL(endpoint.url, data);
@@ -11,7 +10,6 @@ export const addContactAPI = async data => {
 
   return response;
 };
-
 
 export const getContactDetailsAPI = async data => {
   const endpoint = { ...END_POINTS.contact.getContactDetails };

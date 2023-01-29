@@ -1,11 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addPersonAPI, getPersonListAPI,getPersonDetailsAPI,editPersonAPI } from './person-api';
-
+import { addPersonAPI, getPersonListAPI, getPersonDetailsAPI, editPersonAPI } from './person-api';
 
 export const getPersonListThunk = createAsyncThunk('Person/list', async (data, { dispatch }) => {
   const response = await getPersonListAPI(data);
 
-  return response
+  return response;
 });
 
 export const addPersonThunk = createAsyncThunk('Person/add', async (data, { dispatch }) => {
@@ -14,12 +13,14 @@ export const addPersonThunk = createAsyncThunk('Person/add', async (data, { disp
   return response;
 });
 
+export const getPersonDetailsThunk = createAsyncThunk(
+  'Person/Details',
+  async (data, { dispatch }) => {
+    const response = await getPersonDetailsAPI(data);
 
-export const getPersonDetailsThunk = createAsyncThunk('Person/Details', async (data, { dispatch }) => {
-  const response = await getPersonDetailsAPI(data);
-
-  return response
-})
+    return response;
+  }
+);
 
 export const editPersonThunk = createAsyncThunk('Person/edit', async (data, { dispatch }) => {
   const response = await editPersonAPI(data);

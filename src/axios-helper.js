@@ -76,7 +76,7 @@ fetcher.interceptors.request.use(
       config.headers['Content-Type'] = 'binary/octet-stream';
       config.method = 'PUT';
     } else {
-     // headers.Authorization = accessToken?.length ? 'Bearer ' + accessToken : '';
+      // headers.Authorization = accessToken?.length ? 'Bearer ' + accessToken : '';
     }
 
     // Do something before request is sent

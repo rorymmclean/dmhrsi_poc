@@ -1,12 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getTimeEntryListAPI,editTimeEntryAPI,addTimeEntryAPI, editTimeEntryTaskAPI} from './timeEntry-api';
+import {
+  getTimeEntryListAPI,
+  editTimeEntryAPI,
+  addTimeEntryAPI,
+  editTimeEntryTaskAPI
+} from './timeEntry-api';
 
+export const getTimeEntryListThunk = createAsyncThunk(
+  'timeEntry/list',
+  async (data, { dispatch }) => {
+    const response = await getTimeEntryListAPI(data);
 
-export const getTimeEntryListThunk = createAsyncThunk('timeEntry/list', async (data, { dispatch }) => {
-  const response = await getTimeEntryListAPI(data);
-
-  return response
-})
+    return response;
+  }
+);
 
 export const addTimeEntryThunk = createAsyncThunk('Entry/add', async (data, { dispatch }) => {
   const response = await addTimeEntryAPI(data);
@@ -18,10 +25,13 @@ export const editTimeEntryThunk = createAsyncThunk('Entry/edit', async (data, { 
   const response = await editTimeEntryAPI(data);
 
   return response;
-} );
-
-export const editTimeEntryTaskThunk = createAsyncThunk('Entry/editTask', async (data, { dispatch }) => {
-  const response = await editTimeEntryTaskAPI(data);
-
-  return response;
 });
+
+export const editTimeEntryTaskThunk = createAsyncThunk(
+  'Entry/editTask',
+  async (data, { dispatch }) => {
+    const response = await editTimeEntryTaskAPI(data);
+
+    return response;
+  }
+);

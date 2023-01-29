@@ -1,8 +1,7 @@
-import Dashboard from 'views/Dashboard/Dashboard.jsx';
 import LoginPage from 'views/Pages/LoginPage.jsx';
 import UserProfile from 'views/Pages/UserProfile.jsx';
 import ConfirmationNumber from '@material-ui/icons/ConfirmationNumber';
-import TaskIcon from '@material-ui/icons/AssignmentLate';;
+import TaskIcon from '@material-ui/icons/AssignmentLate';
 
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import PersonIcon from '@mui/icons-material/Person';
@@ -21,10 +20,8 @@ import EditProject from 'core-components/project/editProject';
 import TaskTable from 'core-components/task/taskTable';
 import EditTask from 'core-components/task/editTask';
 import timeCardTable from 'core-components/timeCardSearch/timeCardTable';
-import allocationRuleSet from 'core-components/allocation/allocationRuleSet'
 import ContactPerson from 'core-components/person/contact';
 import AlLocationRuleSetTable from 'core-components/alLocationRuleSet/alLocationRuleSetTable';
-
 
 var dashRoutes = [
   {
@@ -57,7 +54,7 @@ var dashRoutes = [
     component: PersonTable,
     layout: '/admin'
   },
-    {
+  {
     path: '/project',
     name: 'Projects',
     rtlName: '',
@@ -66,7 +63,8 @@ var dashRoutes = [
     icon: AssignmentIcon,
     component: ProjectTable,
     layout: '/admin'
-  },   {
+  },
+  {
     path: '/task',
     name: 'Tasks',
     rtlName: '',
@@ -87,7 +85,7 @@ var dashRoutes = [
     redirect: true,
     layout: '/admin'
   },
-    {
+  {
     path: '/editPerson',
     name: 'Edit Person',
     rtlName: '',
@@ -108,7 +106,8 @@ var dashRoutes = [
     component: EditProject,
     redirect: true,
     layout: '/admin'
-  },  {
+  },
+  {
     path: '/editTask',
     name: 'Edit Task',
     rtlName: '',
@@ -120,8 +119,7 @@ var dashRoutes = [
     layout: '/admin'
   },
 
-  
-    {
+  {
     path: '/contact',
     name: 'Contact',
     rtlName: '',
@@ -132,8 +130,8 @@ var dashRoutes = [
     redirect: true,
     layout: '/admin'
   },
-  
-    {
+
+  {
     path: '/contactPerson',
     name: 'Contact Person',
     rtlName: '',
@@ -144,8 +142,8 @@ var dashRoutes = [
     redirect: true,
     layout: '/admin'
   },
-  
-     {
+
+  {
     path: '/assignments',
     name: 'Assignments',
     rtlName: '',
@@ -188,5 +186,3 @@ var dashRoutes = [
   }
 ];
 export default dashRoutes;
-
-

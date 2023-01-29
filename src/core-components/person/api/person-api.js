@@ -2,10 +2,9 @@ import { END_POINTS } from 'endpoints.js';
 import { formatParameterizedURL } from 'utils.js';
 import { fetcher } from 'axios-helper.js';
 
-
 export const getPersonListAPI = async data => {
   const endpoint = { ...END_POINTS.person.getPerson };
-  
+
   endpoint.url = formatParameterizedURL(endpoint.url, { search_string: data?.search_string });
 
   const response = await fetcher(endpoint);
@@ -21,7 +20,6 @@ export const addPersonAPI = async data => {
 
   return response;
 };
-
 
 export const getPersonDetailsAPI = async data => {
   const endpoint = { ...END_POINTS.person.getPersonDetails };

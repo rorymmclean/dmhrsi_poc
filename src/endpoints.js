@@ -14,17 +14,17 @@ export const END_POINTS = {
       url: 'org',
       method: HTTP_METHOD_PUT
     },
-     getOrganizationDetails: {
+    getOrganizationDetails: {
       url: 'org?id={id}',
       method: HTTP_METHOD_GET
     },
-     editOrganization: {
+    editOrganization: {
       url: 'org',
       method: HTTP_METHOD_POST
-    },
+    }
   },
   person: {
-     getPerson: {
+    getPerson: {
       url: '/people/ft?search_string={search_string}',
       method: HTTP_METHOD_GET
     },
@@ -33,16 +33,16 @@ export const END_POINTS = {
       method: HTTP_METHOD_PUT
     },
     getPersonDetails: {
-       url: 'people?id={id}',
+      url: 'people?id={id}',
       method: HTTP_METHOD_GET
     },
     editPerson: {
       url: 'people',
       method: HTTP_METHOD_POST
-    },
+    }
   },
   project: {
-     getProject: {
+    getProject: {
       url: '/project/search?search_string={search_string}',
       method: HTTP_METHOD_GET
     },
@@ -51,31 +51,30 @@ export const END_POINTS = {
       method: HTTP_METHOD_PUT
     },
     getProjectDetails: {
-       url: 'project?id={id}',
+      url: 'project?id={id}',
       method: HTTP_METHOD_GET
     },
     editProject: {
       url: 'project',
       method: HTTP_METHOD_POST
-    },
+    }
   },
   contact: {
-
     addContact: {
       url: 'contacts',
       method: HTTP_METHOD_PUT
     },
     getContactDetails: {
-       url: 'contacts/search?search_string={id}',
+      url: 'contacts/search?search_string={id}',
       method: HTTP_METHOD_GET
     },
     editContact: {
       url: 'contacts',
       method: HTTP_METHOD_POST
-    },
+    }
   },
-   task: {
-     getTask: {
+  task: {
+    getTask: {
       url: '/task/search?search_string={search_string}',
       method: HTTP_METHOD_GET
     },
@@ -84,123 +83,111 @@ export const END_POINTS = {
       method: HTTP_METHOD_PUT
     },
     getTaskDetails: {
-       url: 'task?id={id}',
+      url: 'task?id={id}',
       method: HTTP_METHOD_GET
     },
     editTask: {
       url: 'task',
       method: HTTP_METHOD_POST
-     },
-  
+    }
   },
-      assignment: {
-       addAssignment: {
+  assignment: {
+    addAssignment: {
       url: 'assignment',
       method: HTTP_METHOD_PUT
     },
     getAssignmentDetails: {
-       url: 'assignment/search?search_string={search_string}',
+      url: 'assignment/search?search_string={search_string}',
       method: HTTP_METHOD_GET
     },
     editAssignment: {
       url: 'assignment',
       method: HTTP_METHOD_POST
+    }
+  },
+
+  timeCard: {
+    getTimeCard: {
+      url: 'timecard/search?search_string={search_string}',
+      method: HTTP_METHOD_GET
     },
-      },
- 
-      
-      timeCard: {
-        getTimeCard: {
-          url: 'timecard/search?search_string={search_string}',
-          method: HTTP_METHOD_GET
-        },
-          addTimeCard: {
+    addTimeCard: {
       url: 'timecard',
       method: HTTP_METHOD_PUT
-        },
-          getTimeCardDetails:{
-       url: 'timecard?id={id}',
+    },
+    getTimeCardDetails: {
+      url: 'timecard?id={id}',
       method: HTTP_METHOD_GET
-        },
-        editTimeCard: {
-             url: 'timecard',
+    },
+    editTimeCard: {
+      url: 'timecard',
       method: HTTP_METHOD_POST
-          }
-      },
+    }
+  },
 
-    
-      timeEntry: {
-        getTimeEntry: {
-          url: 'timeentry/search?search_string={search_string}&startdate={startdate}&enddate={enddate}',
-          method: HTTP_METHOD_GET
-        },
-         addTimeEntry: {
+  timeEntry: {
+    getTimeEntry: {
+      url: 'timeentry/search?search_string={search_string}&startdate={startdate}&enddate={enddate}',
+      method: HTTP_METHOD_GET
+    },
+    addTimeEntry: {
       url: 'timeentry',
       method: HTTP_METHOD_PUT
     },
     editTimeEntry: {
       url: 'timeentry',
       method: HTTP_METHOD_POST
-        },
-        editTimeEntryTask: {
+    },
+    editTimeEntryTask: {
       url: 'timeentry/change-task',
       method: HTTP_METHOD_POST
     }
-      },
+  },
   alLocationRuleSet: {
     allocengine: {
-          url: 'allocengine?id={id}',
-          method: HTTP_METHOD_GET
+      url: 'allocengine?id={id}',
+      method: HTTP_METHOD_GET
     },
     getArsetList: {
-       url: 'arset/search?search_string={search_string}',
-          method: HTTP_METHOD_GET
-   },
-        getAlLocationRuleSet: {
-          url: 'allrule/search?search_string={search_string}',
-          method: HTTP_METHOD_GET
-        },
-          addAlLocationRuleSet: {
+      url: 'arset/search?search_string={search_string}',
+      method: HTTP_METHOD_GET
+    },
+    getAlLocationRuleSet: {
+      url: 'allrule/search?search_string={search_string}',
+      method: HTTP_METHOD_GET
+    },
+    addAlLocationRuleSet: {
       url: 'arset',
       method: HTTP_METHOD_PUT
     },
-           getRuleDetails:{
-       url: 'arset/arsetbyid?id={id}',
+    getRuleDetails: {
+      url: 'arset/arsetbyid?id={id}',
       method: HTTP_METHOD_GET
-        },
-          getAlLocationRuleSetDetails:{
-       url: 'arset?id={id}&RECORD_TYPE={RECORD_TYPE}',
+    },
+    getAlLocationRuleSetDetails: {
+      url: 'arset?id={id}&RECORD_TYPE={RECORD_TYPE}',
       method: HTTP_METHOD_GET
-        },
-        editAlLocationRuleSet: {
-             url: 'arset',
+    },
+    editAlLocationRuleSet: {
+      url: 'arset',
       method: HTTP_METHOD_POST
     },
-        editRuleSet: {
-             url: 'allrule',
+    editRuleSet: {
+      url: 'allrule',
       method: HTTP_METHOD_POST
-          },addRuleSet: {
+    },
+    addRuleSet: {
       url: 'allrule',
       method: HTTP_METHOD_PUT
     },
-         editTask: {
+    editTask: {
       url: 'allrule/change-task',
       method: HTTP_METHOD_POST
     }
-      },
+  },
 
-
-
-
-
-
-
-
-
-
-
-      laborcosts: {
-       url: 'laborcosts',
-      method: HTTP_METHOD_GET 
-      }
+  laborcosts: {
+    url: 'laborcosts',
+    method: HTTP_METHOD_GET
+  }
 };

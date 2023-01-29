@@ -4,7 +4,7 @@ import { addTaskAPI, editTaskAPI, getTaskDetailsAPI, getTaskListAPI } from './ta
 export const getTaskListThunk = createAsyncThunk('Task/list', async (data, { dispatch }) => {
   const response = await getTaskListAPI(data);
 
-  return response
+  return response;
 });
 
 export const addTaskThunk = createAsyncThunk('Task/add', async (data, { dispatch }) => {
@@ -13,12 +13,11 @@ export const addTaskThunk = createAsyncThunk('Task/add', async (data, { dispatch
   return response;
 });
 
-
 export const getTaskDetailsThunk = createAsyncThunk('Task/Details', async (data, { dispatch }) => {
   const response = await getTaskDetailsAPI(data);
 
-  return response
-})
+  return response;
+});
 
 export const editTaskThunk = createAsyncThunk('Task/edit', async (data, { dispatch }) => {
   const response = await editTaskAPI(data);
