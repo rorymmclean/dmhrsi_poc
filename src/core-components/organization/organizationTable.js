@@ -56,7 +56,7 @@ export default function OrganizationTable() {
       setData(JSON.parse(response.data.body))
   
         } else {
-         etData([])
+         setData([])
 
     }
   };
