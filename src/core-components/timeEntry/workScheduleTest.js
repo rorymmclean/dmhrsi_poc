@@ -124,9 +124,6 @@ export default function WorkScheduleTest(props) {
       .finally(() => {});
   };
 
-  const createInputDebounce = React.useRef(_.debounce(createInput, 500)).current;
-  const editInputDebounce = React.useRef(_.debounce(editInput, 500)).current;
-
   return (
     <JPGrid
       container
@@ -181,7 +178,7 @@ export default function WorkScheduleTest(props) {
                         fullWidth
                         defaultValue={ccc?.HOURS}
                         disabled={disabled}
-                        onChange={e => editInputDebounce(e.target.value, ccc)}
+                        onBlur={e => editInput(e.target.value, ccc)}
                       />
                     ) : (
                       <TextField
@@ -189,8 +186,8 @@ export default function WorkScheduleTest(props) {
                         style={{ fontSize: '25px' }}
                         fullWidth
                         disabled={disabled}
-                        onChange={e =>
-                          createInputDebounce(
+                        onBlur={e =>
+                          createInput(
                             e.target.value,
                             index,
                             day.W,
