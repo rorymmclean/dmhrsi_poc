@@ -41,7 +41,7 @@ export default function AddTimeCard(props) {
         }
       })
       .catch(error => console.error('getPersonListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -94,7 +94,7 @@ export default function AddTimeCard(props) {
                     setData({});
                   })
                   .catch(error => console.error('ddTimeCardThunk', error))
-                  .finally(() => {});
+                  .finally(() => { });
               },
               isLoading: false,
               disabled:
@@ -104,9 +104,9 @@ export default function AddTimeCard(props) {
                 !data?.STATUS?.length,
               color:
                 !data?.START_DATE?.length ||
-                !data?.END_DATE?.length ||
-                !valueEmployee?.PERSON_ID?.length ||
-                !data?.STATUS?.length
+                  !data?.END_DATE?.length ||
+                  !valueEmployee?.PERSON_ID?.length ||
+                  !data?.STATUS?.length
                   ? null
                   : 'info'
             }
@@ -141,6 +141,10 @@ export default function AddTimeCard(props) {
                       fullWidth
                       variant="outlined"
                       required
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                      }}
+                      style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
                     />
                   )}
                 />
@@ -148,10 +152,13 @@ export default function AddTimeCard(props) {
 
               <JPGrid item xs={12} sm={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Status</InputLabel>
-                  <Select
+                  <InputLabel id="demo-simple-select-label"
+                    style={{ fontFamily: 'Trattatello' }}
+                  >Status</InputLabel>
+                  <Select    style={{ fontFamily: 'Trattatello' }}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
+
                     value={STATUS_ID[data.STATUS]}
                     defaultValue={STATUS_ID['O']}
                     label="Status"
@@ -175,7 +182,10 @@ export default function AddTimeCard(props) {
                       const day = moment(date).day();
                       return day !== 1;
                     }}
-                    style={{ width: '100% !important' }}
+                    style={{ width: '100% !important', fontSize: '25px', fontFamily: 'Trattatello' }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                    }}
                     onChange={e => setData({ ...data, START_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
                   />
@@ -192,7 +202,10 @@ export default function AddTimeCard(props) {
                       const day = moment(date).day();
                       return day !== 5;
                     }}
-                    style={{ width: '100% !important' }}
+                    style={{ width: '100% !important', fontSize: '25px', fontFamily: 'Trattatello' }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                    }}
                     value={data?.END_DATE}
                     onChange={e => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"

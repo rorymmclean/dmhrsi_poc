@@ -90,7 +90,13 @@ export default function EditPerson() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                    style={{ fontSize: '25px',fontFamily: 'Trattatello'}}
+                    InputProps={{
+                      style: { color: '#000',
+                      fontFamily: 'Trattatello',
+                      
+                      }
+                    }}
                     fullWidth
                     id="FirstName"
                     label="First Name"
@@ -104,8 +110,13 @@ export default function EditPerson() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
-                    fullWidth
+                    InputLabelProps={{
+                      style: { 
+                      fontFamily: 'Trattatello',
+                      
+                      }
+                    }}
+                    style={{fontFamily: 'Trattatello'}}                    fullWidth
                     id="MiddleName"
                     label="Middle Name"
                     name="MiddleName"
@@ -118,7 +129,13 @@ export default function EditPerson() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="LastName"
                     label="Last Name"
@@ -169,11 +186,17 @@ export default function EditPerson() {
                   </JPGrid>
                 </GridItem>
 
-                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
+                <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="Service"
                     label="Service"
@@ -183,10 +206,16 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, SERVICE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
+                <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="Grade"
                     label="Grade"
@@ -196,10 +225,16 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, GRADE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
+                <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="EDIPN"
                     label="EDIPN"
@@ -209,10 +244,16 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, EDIPN: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
+                <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="PersonType"
                     label="Person Type"
@@ -222,10 +263,16 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, PERSON_TYPE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
+                <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="NationalId"
                     label="National ID"
@@ -235,10 +282,16 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, NATIONAL_ID: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
+                <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="CIVILLIAN_TITLE"
                     label="Civillian Title"
@@ -248,10 +301,16 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, CIVILLIAN_TITLE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem item xs={12} sm={4} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                <GridItem item xs={12} sm={3} style={{ marginTop: '8px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
+                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="PERSONNEL_CAT"
                     label="Personnel Category"

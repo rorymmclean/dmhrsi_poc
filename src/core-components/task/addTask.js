@@ -125,7 +125,10 @@ export default function AddTask(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="TASK_NAME"
                   label="Task Name"
@@ -161,6 +164,10 @@ export default function AddTask(props) {
                         fullWidth
                         variant="outlined"
                         required
+                        InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                       />
                     )}
                   />
@@ -193,6 +200,10 @@ export default function AddTask(props) {
                       fullWidth
                       variant="outlined"
                       required
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     />
                   )}
                 />
@@ -202,7 +213,10 @@ export default function AddTask(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="SERVICE_TYPE"
                   label="Service"
@@ -216,7 +230,10 @@ export default function AddTask(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="TASK_NBR"
                   label="TASK #"
@@ -229,7 +246,10 @@ export default function AddTask(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="FCC"
                   label="FCC"
@@ -242,7 +262,10 @@ export default function AddTask(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="SUPE"
                   label="SUPE"

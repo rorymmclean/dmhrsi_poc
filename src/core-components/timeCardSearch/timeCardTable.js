@@ -166,7 +166,17 @@ export default function TimeCardTable() {
       }
     }
   };
-  const theme = createMuiTheme(style);
+  const theme = createMuiTheme({
+    typography: {
+      fontFamily: 'Trattatello',
+      fontWeight: 'bold',
+      fontSize: '28px',
+      color: '#000',
+    },
+  });
+
+
+
   const customersOptions = useMemo(
     () => (
       <>
@@ -299,6 +309,14 @@ export default function TimeCardTable() {
                         fullWidth
                         variant="outlined"
                         required
+                        InputProps={{
+                          style: {  fontFamily: 'Trattatello' }
+                        }}
+                        InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                        }}
+
+
                       />
                     )}
                   />

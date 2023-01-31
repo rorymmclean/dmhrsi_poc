@@ -137,11 +137,21 @@ export default function EditAlLocationRuleSet(props) {
         >
           <JPGrid minHeight={200}>
             <JPGrid container direction="row" alignItems="center" spacing={1} padding={8}>
-              <JPGrid item xs={12} sm={3}>
+              <JPGrid item xs={12} sm={3} marginTop="0.8vh">
                 <TextField
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: 'Trattatello'
+                    }
+                  }}
+                  InputProps={{
+                    style: {
+                      fontFamily: 'Trattatello'
+                    }
+                  }}
+                  style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="Name"
                   label="Name"
@@ -155,9 +165,15 @@ export default function EditAlLocationRuleSet(props) {
               <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
+                    style={{ fontFamily: 'Trattatello' }}
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
+                    InputLabelProps={{
+                      style: {
+                        fontFamily: 'Trattatello'
+                      }
+                    }}
                     format="yyy/MM/dd"
                     shouldDisableDate={date => {
                       const day = moment(date).day();
@@ -173,10 +189,16 @@ export default function EditAlLocationRuleSet(props) {
               <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
+                    style={{ fontFamily: 'Trattatello' }}
                     margin="normal"
                     id="date-picker-dialog"
                     label="End Date"
                     format="yyy/MM/dd"
+                    InputLabelProps={{
+                      style: {
+                        fontFamily: 'Trattatello'
+                      }
+                    }}
                     disabled={disabled}
                     value={data?.END_DATE}
                     onChange={e => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD') })}
@@ -199,7 +221,7 @@ export default function EditAlLocationRuleSet(props) {
                   onClick={() => {
                     ThunkDispatch(
                       allocengineThunk({
-                        id: data.PERSON_ID /*date:moment(new Date).format('YYYY-MM-DD')*/
+                        id: data.PERSON_ID
                       })
                     )
                       .then(result => {
@@ -213,7 +235,14 @@ export default function EditAlLocationRuleSet(props) {
                 </Button>
               </JPGrid>
 
-              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+              <Typography
+                style={{
+                  color: '#000',
+                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  fontFamily: 'Trattatello'
+                }}
+              >
                 Hours:
               </Typography>
 
@@ -227,7 +256,14 @@ export default function EditAlLocationRuleSet(props) {
                 />
               ) : null}
 
-              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+              <Typography
+                style={{
+                  color: '#000',
+                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  fontFamily: 'Trattatello'
+                }}
+              >
                 Allocations:
               </Typography>
 

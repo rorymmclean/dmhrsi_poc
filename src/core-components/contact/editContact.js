@@ -75,7 +75,7 @@ export default function EditContact(props) {
                     setData({});
                   })
                   .catch(error => console.error('editContactThunk', error))
-                  .finally(() => {});
+                  .finally(() => { });
               },
               isLoading: false,
               disabled:
@@ -87,11 +87,11 @@ export default function EditContact(props) {
                 ),
               color:
                 !data?.CONTACT_TYPE?.length ||
-                !(
-                  data?.ADDRESS_TYPE?.length ||
-                  data?.EMAIL_TYPE?.length ||
-                  data?.PHONE_TYPE?.length
-                )
+                  !(
+                    data?.ADDRESS_TYPE?.length ||
+                    data?.EMAIL_TYPE?.length ||
+                    data?.PHONE_TYPE?.length
+                  )
                   ? null
                   : 'info'
             }
@@ -102,7 +102,14 @@ export default function EditContact(props) {
               <GridItem xs={12} sm={12} md={12} style={{ marginBottom: '16px' }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Contact Type</InputLabel>
-                  <Select
+                  <Select style={{ fontFamily: 'Trattatello' }}
+                    InputProps={{
+                      style: {
+                        color: '#000',
+                        fontFamily: 'Trattatello',
+
+                      }
+                    }}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     disabled
@@ -116,9 +123,10 @@ export default function EditContact(props) {
                       })
                     }
                   >
-                    <MenuItem value={1}>Mailing Address</MenuItem>
-                    <MenuItem value={2}>Email address</MenuItem>
-                    <MenuItem value={3}>Phone Number</MenuItem>
+
+                    <MenuItem value={1} style={{ fontFamily: 'Trattatello' }}>Mailing Address</MenuItem>
+                    <MenuItem value={2} style={{ fontFamily: 'Trattatello' }}>Email address</MenuItem>
+                    <MenuItem value={3} style={{ fontFamily: 'Trattatello' }}>Phone Number</MenuItem>
                   </Select>
                 </FormControl>
               </GridItem>
@@ -128,8 +136,8 @@ export default function EditContact(props) {
                   {' '}
                   <GridItem xs={12} sm={12} md={6}>
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                      <Select
+                      <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'Trattatello' }}>Type</InputLabel>
+                      <Select style={{ fontFamily: 'Trattatello' }}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={
@@ -140,8 +148,8 @@ export default function EditContact(props) {
                         label="Type"
                         onChange={e => setData({ ...data, ADDRESS_TYPE: TYPE[e.target.value] })}
                       >
-                        <MenuItem value={1}>Work</MenuItem>
-                        <MenuItem value={2}>Home</MenuItem>
+                        <MenuItem value={1} style={{ fontFamily: 'Trattatello' }}>Work</MenuItem>
+                        <MenuItem value={2} style={{ fontFamily: 'Trattatello' }}>Home</MenuItem>
                       </Select>
                     </FormControl>
                   </GridItem>
@@ -166,23 +174,52 @@ export default function EditContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          color: '#000',
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       fullWidth
                       id="ADDRESS_1"
                       label="Address 1"
+                      InputLabelProps={{
+                        style: {
+                          color: '#000',
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       name="ADDRESS_1"
                       autoComplete="ADDRESS_1"
                       value={data?.ADDRESS_1}
                       onChange={e => setData({ ...data, ADDRESS_1: e.target.value })}
+
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       fullWidth
                       id="ADDRESS_2"
                       label="Address 2"
+                      InputLabelProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       name="ADDRESS_2"
                       autoComplete="ADDRESS_2"
                       value={data?.ADDRESS_2}
@@ -192,23 +229,51 @@ export default function EditContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          color: '#000',
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       fullWidth
                       id="ADDRESS_3"
                       label="Address 3"
+                      InputLabelProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       name="ADDRESS_3"
                       autoComplete="ADDRESS_3"
                       value={data?.ADDRESS_3}
                       onChange={e => setData({ ...data, ADDRESS_3: e.target.value })}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={6} style={{ marginTop: '16px' }}>
+                  <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          color: '#000',
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       fullWidth
                       id="COUNTRY"
                       label="Country"
+                      InputLabelProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       name="COUNTRY"
                       autoComplete="COUNTRY"
                       value={data?.COUNTRY}
@@ -218,10 +283,24 @@ export default function EditContact(props) {
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          color: '#000',
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       fullWidth
                       id="CITY"
                       label="City"
+                      InputLabelProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       name="CITY"
                       autoComplete="CITY"
                       value={data?.CITY}
@@ -231,25 +310,53 @@ export default function EditContact(props) {
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          color: '#000',
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       fullWidth
                       id="POSTAL_CODE"
                       label="Postal Code"
+                      InputLabelProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       name="POSTAL_CODE"
                       autoComplete="POSTAL_CODE"
                       value={data?.POSTAL_CODE}
                       onChange={e => setData({ ...data, POSTAL_CODE: e.target.value })}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={10} style={{ marginTop: '16px' }}>
+                  <GridItem xs={12} sm={12} md={3} style={{ marginTop: '16px' }}>
                     <JPGrid container direction={'row'} justify={'flex-end'}>
                       <JPGrid item>
                         <TextField
                           variant="outlined"
-                          style={{ fontSize: '25px' }}
+
+                          style={{ fontFamily: 'Trattatello' }}
+                          InputProps={{
+                            style: {
+                              color: '#000',
+                              fontFamily: 'Trattatello',
+
+                            }
+                          }}
                           fullWidth
                           id="STATE"
                           label="State"
+                          InputLabelProps={{
+                            style: {
+                              fontFamily: 'Trattatello',
+
+                            }
+                          }}
                           name="STATE"
                           autoComplete="STATE"
                           value={data?.STATE}
@@ -265,8 +372,9 @@ export default function EditContact(props) {
                   {' '}
                   <GridItem xs={12} sm={12} md={6}>
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                      <Select
+                      <InputLabel id="demo-simple-select-label" style={{fontFamily: 'Trattatello'}}>Type</InputLabel>
+                      <Select 
+                      style={{fontFamily: 'Trattatello'}}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={
@@ -303,7 +411,20 @@ export default function EditContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
+                      InputLabelProps={{
+                        style: { 
+                        fontFamily: 'Trattatello',
+                        
+                        }
+                      }}
                       fullWidth
                       id="EMAIL_ADDRESS"
                       label="Email"
@@ -320,8 +441,8 @@ export default function EditContact(props) {
                   {' '}
                   <GridItem xs={12} sm={12} md={6}>
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                      <Select
+                      <InputLabel id="demo-simple-select-label" style={{fontFamily: 'Trattatello'}}>Type</InputLabel>
+                      <Select style={{fontFamily: 'Trattatello'}}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={
@@ -332,8 +453,8 @@ export default function EditContact(props) {
                         label="Type"
                         onChange={e => setData({ ...data, PHONE_TYPE: TYPE[e.target.value] })}
                       >
-                        <MenuItem value={1}>Work</MenuItem>
-                        <MenuItem value={2}>Home</MenuItem>
+                        <MenuItem value={1} style={{fontFamily: 'Trattatello'}}>Work</MenuItem>
+                        <MenuItem value={2} style={{fontFamily: 'Trattatello'}}>Home</MenuItem>
                       </Select>
                     </FormControl>
                   </GridItem>
@@ -358,7 +479,14 @@ export default function EditContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                       variant="outlined"
-                      style={{ fontSize: '25px' }}
+
+                      style={{ fontFamily: 'Trattatello' }}
+                      InputProps={{
+                        style: {
+                          fontFamily: 'Trattatello',
+
+                        }
+                      }}
                       fullWidth
                       id="PHONE_NBR"
                       label="Phone"

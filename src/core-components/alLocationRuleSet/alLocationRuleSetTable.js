@@ -141,7 +141,17 @@ export default function AlLocationRuleSetTable() {
       }
     }
   };
-  const theme = createMuiTheme(style);
+  const theme = createMuiTheme({
+    typography: {
+      fontFamily: 'Trattatello',
+      fontWeight: 'bold',
+      fontSize: '28px',
+      color: '#000',
+    },
+  });
+
+
+
 
   const customersOptions = useMemo(
     () => (
@@ -187,7 +197,7 @@ export default function AlLocationRuleSetTable() {
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '28px'
+                      fontSize: '27px'
                     }}
                   >
                     Allocation Rule Set
@@ -229,6 +239,11 @@ export default function AlLocationRuleSetTable() {
                         fullWidth
                         variant="outlined"
                         required
+                        InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                        style={{ color: '#000',
+                        fontFamily: 'Trattatello' }}
                       />
                     )}
                   />

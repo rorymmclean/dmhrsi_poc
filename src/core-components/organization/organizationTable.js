@@ -69,7 +69,15 @@ export default function OrganizationTable() {
       }
     }
   };
-  const theme = createMuiTheme(style);
+  const theme = createMuiTheme({
+    typography: {
+      fontFamily: 'Trattatello',
+      fontWeight: 'bold',
+      fontSize: '28px',
+      color: '#000',
+    },
+  });
+
 
   return (
     <div className="m-sm-30">
@@ -78,7 +86,7 @@ export default function OrganizationTable() {
           <Card>
             <CardHeader color="primary" icon>
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
-                <JPGrid item xs={2}>
+                <JPGrid item xs={3}>
                   <CardIcon color="primary">
                     <SensorOccupiedIcon />
                   </CardIcon>
@@ -87,15 +95,16 @@ export default function OrganizationTable() {
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '28px'
+                      fontSize: '27px'
                     }}
                   >
                     Organizations
                   </h4>
                 </JPGrid>
-                <JPGrid item xs={8}>
+                <JPGrid item xs={6}  >
                   {' '}
                   <TextField
+              
                     type="search"
                     variant="outlined"
                     style={{ paddingTop: 4 }}
@@ -104,12 +113,23 @@ export default function OrganizationTable() {
                     placeholder="Search"
                     onChange={handleInputChange}
                     InputProps={{
+                      style: {  fontFamily: 'Trattatello' },
                       startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
+                      <InputAdornment position="start" >
+                      <SearchIcon />
+                      </InputAdornment>
                       )
+                      }}
+                    
+                    InputLabelProps={{
+                      style: { 
+                      fontFamily: 'Trattatello',
+                  
+                      }
                     }}
+
+
+
                   />
                 </JPGrid>
                 <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">

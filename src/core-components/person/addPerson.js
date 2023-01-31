@@ -130,6 +130,10 @@ export default function AddPerson(props) {
                       fullWidth
                       variant="outlined"
                       required
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     />
                   )}
                 />
@@ -139,7 +143,10 @@ export default function AddPerson(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="FirstName"
                   label="First Name"
@@ -153,7 +160,10 @@ export default function AddPerson(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="MiddleName"
                   label="Middle Name"
@@ -167,7 +177,10 @@ export default function AddPerson(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="LastName"
                   label="Last Name"
@@ -181,7 +194,10 @@ export default function AddPerson(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="Service"
                   label="Service"
@@ -194,7 +210,10 @@ export default function AddPerson(props) {
               <JPGrid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="Grade"
                   label="Grade"
@@ -207,7 +226,10 @@ export default function AddPerson(props) {
               <JPGrid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="EDIPN"
                   label="EDIPN"
@@ -220,7 +242,10 @@ export default function AddPerson(props) {
               <JPGrid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="PersonType"
                   label="Person Type"
@@ -233,7 +258,10 @@ export default function AddPerson(props) {
               <JPGrid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="NationalId"
                   label="National ID"
@@ -246,7 +274,10 @@ export default function AddPerson(props) {
               <JPGrid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="CIVILLIAN_TITLE"
                   label="Title"
@@ -259,7 +290,10 @@ export default function AddPerson(props) {
               <JPGrid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="PERSONNEL_CAT"
                   label="Category"

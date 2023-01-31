@@ -82,7 +82,17 @@ export default function TaskTable(props) {
       }
     }
   };
-  const theme = createMuiTheme(style);
+  const theme = createMuiTheme({
+    typography: {
+      fontFamily: 'Trattatello',
+      fontWeight: 'bold',
+      fontSize: '28px',
+      color: '#000',
+    },
+  });
+
+
+
 
   return (
     <div className="m-sm-30">
@@ -118,6 +128,7 @@ export default function TaskTable(props) {
                       onChange={handleInputChange}
                       defaultValue={PROJECT_NAME?.length ? PROJECT_NAME : '01175'}
                       InputProps={{
+                        style: { fontFamily: 'Trattatello' },
                         startAdornment: (
                           <InputAdornment position="start">
                             <SearchIcon />

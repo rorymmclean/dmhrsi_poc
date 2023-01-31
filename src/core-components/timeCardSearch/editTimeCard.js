@@ -193,6 +193,7 @@ export default function EditTimeCard(props) {
               <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
+                  style={{fontFamily: 'Trattatello',width: '100% !important'}}
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
@@ -203,7 +204,7 @@ export default function EditTimeCard(props) {
                     }}
                     value={data?.START_DATE}
                     disabled={disabled}
-                    style={{ width: '100% !important' }}
+                 
                     onChange={e => setData({ ...data, START_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
                   />
@@ -222,7 +223,7 @@ export default function EditTimeCard(props) {
                       const day = moment(date).day();
                       return day !== 5;
                     }}
-                    style={{ width: '100% !important' }}
+                    style={{ width: '100% !important' ,fontFamily: 'Trattatello'}}
                     onChange={e => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
                   />

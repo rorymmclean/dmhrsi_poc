@@ -84,7 +84,15 @@ export default function ProjectTable(props) {
       }
     }
   };
-  const theme = createMuiTheme(style);
+  const theme = createMuiTheme({
+    typography: {
+      fontFamily: 'Trattatello',
+      fontWeight: 'bold',
+      fontSize: '28px',
+      color: '#000',
+    },
+  });
+
 
   return (
     <div className="m-sm-30">
@@ -120,7 +128,9 @@ export default function ProjectTable(props) {
                       onChange={handleInputChange}
                       defaultValue={NAME?.length ? NAME : 'Project - 00499'}
                       InputProps={{
+                        style: { fontFamily: 'Trattatello'},
                         startAdornment: (
+                          
                           <InputAdornment position="start">
                             <SearchIcon />
                           </InputAdornment>

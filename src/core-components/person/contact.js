@@ -178,7 +178,7 @@ export default function ContactPerson() {
               </h4>
             </CardHeader>
             <CardBody>
-              <MaterialTable
+              <MaterialTable  style={{fontFamily: 'Trattatello'}}
                 isLoading={isLoading}
                 columns={state.columns}
                 components={{

@@ -64,7 +64,10 @@ export default function AddOrganization(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="Name"
                   label="Organization Name"
@@ -78,7 +81,10 @@ export default function AddOrganization(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="Type"
                   label="Type"
@@ -91,7 +97,10 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="UIC"
                   label="UIC"
@@ -104,7 +113,10 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="DMIS"
                   label="DMIS"
@@ -117,7 +129,10 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="PARENT_DMIS"
                   label="PARENT DMIS"
@@ -130,7 +145,10 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="FCC"
                   label="FCC"
@@ -143,7 +161,10 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  style={{ fontSize: '25px' }}
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="PEC"
                   label="PEC"

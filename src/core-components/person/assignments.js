@@ -72,6 +72,7 @@ export default function Assignments() {
         id: data.id
       };
     });
+    
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -94,7 +95,7 @@ export default function Assignments() {
           {Object.keys(data).length ? (
             <CardBody>
               <GridContainer>
-                <MaterialTable
+                <MaterialTable style={{fontFamily: 'Trattatello'}}
                   isLoading={isLoading}
                   columns={state.columns}
                   components={{

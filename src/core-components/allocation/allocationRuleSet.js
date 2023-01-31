@@ -86,6 +86,7 @@ export default function Allocations() {
                 <JPGrid xs={12} sm={4}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
+                     style={{fontFamily: 'Trattatello'}}
                       margin="normal"
                       id="start-date-picker"
                       label="Start Date"
@@ -105,6 +106,7 @@ export default function Allocations() {
                 <JPGrid xs={12} sm={4}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
+                    style={{fontFamily: 'Trattatello'}}
                       margin="normal"
                       id="end-date-picker"
                       label="End Date"

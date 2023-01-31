@@ -134,6 +134,11 @@ export default function AddAlLocationRuleSet(props) {
                       fullWidth
                       variant="outlined"
                       required
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                      style={{ color: '#000',
+                      fontFamily: 'Trattatello' }}
                     />
                   )}
                 />{' '}
@@ -143,7 +148,8 @@ export default function AddAlLocationRuleSet(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  style={{ fontSize: '25px',color: '#000',
+                  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="Name"
                   label="Name"
@@ -151,12 +157,17 @@ export default function AddAlLocationRuleSet(props) {
                   autoComplete="Name"
                   value={data?.NAME}
                   onChange={e => setData({ ...data, NAME: e.target.value })}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+              
                 />
               </JPGrid>
 
               <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
+                  style={{fontFamily: 'Trattatello'}}
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
@@ -174,6 +185,7 @@ export default function AddAlLocationRuleSet(props) {
               <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
+                  style={{fontFamily: 'Trattatello'}}
                     margin="normal"
                     id="date-picker-dialog"
                     label="End Date"

@@ -78,6 +78,7 @@ export default function AddProject(props) {
     () => (
       <>
         <JPModal
+        
           defaultTitle="Project"
           title={`Add Project`}
           onClose={_ => {
@@ -152,6 +153,10 @@ export default function AddProject(props) {
                       fullWidth
                       variant="outlined"
                       required
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     />
                   )}
                 />
@@ -183,6 +188,10 @@ export default function AddProject(props) {
                       fullWidth
                       variant="outlined"
                       required
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     />
                   )}
                 />
@@ -192,7 +201,10 @@ export default function AddProject(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="ProjectName"
                   label="Project Name"
@@ -206,7 +218,10 @@ export default function AddProject(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px' }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                   fullWidth
                   id="PROJECT_NBR"
                   label="Service"
