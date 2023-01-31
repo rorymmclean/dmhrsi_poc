@@ -163,7 +163,7 @@ export default function AddTimeCard(props) {
                   </Select>
                 </FormControl>
               </JPGrid>
-              <JPGrid item xs={12} sm={12}>
+              <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -181,7 +181,7 @@ export default function AddTimeCard(props) {
                   />
                 </MuiPickersUtilsProvider>
               </JPGrid>
-              <JPGrid item xs={12} sm={12}>
+              <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -211,7 +211,11 @@ export default function AddTimeCard(props) {
       {customersOptions}
       <JPGrid container direction="row" alignItems="center" justify="flex-end">
         <JPGrid>
-          <Button color={'info'} onClick={() => setShow(true)}>
+          <Button
+            color={'info'}
+            onClick={() => setShow(true)}
+            style={{ fontFamily: 'Trattatello', fontWeight: 'bold' }}
+          >
             Add Timecard
           </Button>
         </JPGrid>

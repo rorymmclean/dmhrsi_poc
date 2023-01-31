@@ -154,7 +154,7 @@ export default function AddAlLocationRuleSet(props) {
                 />
               </JPGrid>
 
-              <JPGrid item xs={12} sm={12}>
+              <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -171,7 +171,7 @@ export default function AddAlLocationRuleSet(props) {
                   />
                 </MuiPickersUtilsProvider>
               </JPGrid>
-              <JPGrid item xs={12} sm={12}>
+              <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -200,7 +200,14 @@ export default function AddAlLocationRuleSet(props) {
       {customersOptions}
       <JPGrid container direction="row" alignItems="center" justify="flex-end">
         <JPGrid>
-          <Button color={'info'} onClick={() => setShow(true)}>
+          <Button
+            color={'info'}
+            onClick={() => setShow(true)}
+            style={{
+              fontFamily: 'Trattatello',
+              fontWeight: 'bold'
+            }}
+          >
             Add Allocation Rule Set
           </Button>
         </JPGrid>

@@ -16,6 +16,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import _ from 'lodash';
 import AddTask from './addTask';
+import { Search } from '@material-ui/icons';
+
 import TaskIcon from '@material-ui/icons/AssignmentLate';
 import { getTaskListAPI } from './api/task-api';
 export default function TaskTable(props) {
@@ -27,6 +29,12 @@ export default function TaskTable(props) {
   const onClickStory = item => {
     history.push({
       pathname: `/admin/editTask/${item?.TASK_ID}`,
+      state: { id: item?.TASK_ID }
+    });
+  };
+  const onClickStoryview = item => {
+    history.push({
+      pathname: `/admin/viewTask/${item?.TASK_ID}`,
       state: { id: item?.TASK_ID }
     });
   };
@@ -83,13 +91,43 @@ export default function TaskTable(props) {
           <Card>
             <CardHeader color="primary" icon>
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
-                <JPGrid item xs={6}>
+                <JPGrid item xs={2}>
                   <CardIcon color="primary">
                     <TaskIcon />
                   </CardIcon>
-                  <h4 style={{ color: '#000' }}>Tasks</h4>
+                  <h4
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                      fontSize: '28px'
+                    }}
+                  >
+                    Tasks
+                  </h4>
                 </JPGrid>
-                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                <JPGrid item xs={8}>
+                  {' '}
+                  {!search_string?.length ? (
+                    <TextField
+                      type="search"
+                      variant="outlined"
+                      style={{ paddingTop: 4 }}
+                      fullWidth
+                      placeholder="Search"
+                      onChange={handleInputChange}
+                      defaultValue={PROJECT_NAME?.length ? PROJECT_NAME : '01175'}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  ) : null}
+                </JPGrid>
+                <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">
                   <AddTask
                     search_string={search_string}
                     onSave={result => {
@@ -105,27 +143,6 @@ export default function TaskTable(props) {
               </JPGrid>
             </CardHeader>
             <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <TextField
-                    type="search"
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    placeholder="Search"
-                    onChange={handleInputChange}
-                    defaultValue={PROJECT_NAME?.length ? PROJECT_NAME : '01175'}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-
               <MuiThemeProvider theme={theme}>
                 <MaterialTable
                   isLoading={isLoading}
@@ -151,6 +168,25 @@ export default function TaskTable(props) {
                               }}
                             >
                               <Edit onClick={() => onClickStory(rowData)} />
+                            </Button>
+                          )
+                        }
+                      : null,
+                    search_string?.length
+                      ? {
+                          field: 'view',
+                          editable: 'never',
+                          title: 'View',
+                          render: rowData => (
+                            <Button
+                              color={'info'}
+                              onClick={() => onClickStoryview(rowData)}
+                              style={{
+                                padding: '8px 4px 6px 8px',
+                                borderRadius: '20px'
+                              }}
+                            >
+                              <Search onClick={() => onClickStoryview(rowData)} />
                             </Button>
                           )
                         }

@@ -25,7 +25,7 @@ export default function OrganizationTable() {
 
   const onClickStory = item => {
     history.push({
-      pathname: `/admin/edit/${item?.ORGANIZATION_ID}`,
+      pathname: `/admin/editOrganization/${item?.ORGANIZATION_ID}`,
       state: { id: item?.ORGANIZATION_ID }
     });
   };
@@ -78,13 +78,41 @@ export default function OrganizationTable() {
           <Card>
             <CardHeader color="primary" icon>
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
-                <JPGrid item xs={6}>
+                <JPGrid item xs={2}>
                   <CardIcon color="primary">
                     <SensorOccupiedIcon />
                   </CardIcon>
-                  <h4 style={{ color: '#000' }}>Organizations</h4>
+                  <h4
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                      fontSize: '28px'
+                    }}
+                  >
+                    Organizations
+                  </h4>
                 </JPGrid>
-                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                <JPGrid item xs={8}>
+                  {' '}
+                  <TextField
+                    type="search"
+                    variant="outlined"
+                    style={{ paddingTop: 4 }}
+                    fullWidth
+                    defaultValue={'TNMOFY'}
+                    placeholder="Search"
+                    onChange={handleInputChange}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                </JPGrid>
+                <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">
                   <AddOrganization
                     onSave={result => {
                       setData(prevState => {
@@ -99,33 +127,15 @@ export default function OrganizationTable() {
               </JPGrid>
             </CardHeader>
             <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <TextField
-                    type="search"
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    defaultValue={'TNMOFY'}
-                    placeholder="Search"
-                    onChange={handleInputChange}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-
               <MuiThemeProvider theme={theme}>
                 <MaterialTable
                   isLoading={isLoading}
                   columns={[
                     { title: 'Organization Name', field: 'ORGANIZATION_NAME' },
                     { title: 'Type', field: 'SERVICE' },
+                    { title: 'DMIS', field: 'DMIS' },
+                    { title: 'PARENT DMIS', field: 'PARENT_DMIS' },
+
                     { title: 'Location', field: 'contacts' },
                     {
                       field: 'view',

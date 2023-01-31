@@ -26,41 +26,6 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-const Accordion = styled(props => <MuiAccordion disableGutters elevation={0} square {...props} />)(
-  ({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
-    '&:not(:last-child)': {
-      borderBottom: 0
-    },
-    '&:before': {
-      display: 'none'
-    },
-    width: '100%'
-  })
-);
-
-const AccordionSummary = styled(props => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, .05)' : 'rgba(0, 0, 0, .03)',
-  flexDirection: 'row-reverse',
-  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)'
-  },
-  '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1)
-  }
-}));
-
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderTop: '1px solid rgba(0, 0, 0, .125)'
-}));
-
 export default function EditAlLocationRuleSet(props) {
   const { onSave, rowData, disabled } = props;
   const [show, setShow] = React.useState(false);
@@ -172,7 +137,7 @@ export default function EditAlLocationRuleSet(props) {
         >
           <JPGrid minHeight={200}>
             <JPGrid container direction="row" alignItems="center" spacing={1} padding={8}>
-              <JPGrid item xs={12} sm={12}>
+              <JPGrid item xs={12} sm={3}>
                 <TextField
                   variant="outlined"
                   required
@@ -187,7 +152,7 @@ export default function EditAlLocationRuleSet(props) {
                   onChange={e => setData({ ...data, NAME: e.target.value })}
                 />
               </JPGrid>
-              <JPGrid item xs={12} sm={4}>
+              <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -205,7 +170,7 @@ export default function EditAlLocationRuleSet(props) {
                   />
                 </MuiPickersUtilsProvider>
               </JPGrid>
-              <JPGrid item xs={12} sm={4}>
+              <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -223,8 +188,12 @@ export default function EditAlLocationRuleSet(props) {
                   />
                 </MuiPickersUtilsProvider>
               </JPGrid>
-              <JPGrid item xs={12} sm={4}>
+              <JPGrid item xs={12} sm={3}>
                 <Button
+                  style={{
+                    fontFamily: 'Trattatello',
+                    fontWeight: 'bold'
+                  }}
                   color={!disabled ? 'info' : null}
                   disabled={disabled}
                   onClick={() => {
@@ -243,38 +212,34 @@ export default function EditAlLocationRuleSet(props) {
                   Run Engine
                 </Button>
               </JPGrid>
-              <Accordion expanded={true} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                  <Typography>Hours</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  {show ? (
-                    <AlLocationRuleSetWorkSchedule
-                      types={'HOURS'}
-                      RULE_SET_ID={rowData.RULE_SET_ID}
-                      PERSON_ID={rowData.PERSON_ID}
-                      disabled={disabled}
-                      START_DATE={data?.START_DATE}
-                    />
-                  ) : null}
-                </AccordionDetails>
-              </Accordion>
-              <Accordion expanded={true} onChange={handleChange('panel2')}>
-                <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                  <Typography>Allocations</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  {show ? (
-                    <AlLocationRuleSetWorkSchedule
-                      types={'PERCENT'}
-                      RULE_SET_ID={rowData.RULE_SET_ID}
-                      PERSON_ID={rowData.PERSON_ID}
-                      disabled={disabled}
-                      START_DATE={data?.START_DATE}
-                    />
-                  ) : null}
-                </AccordionDetails>
-              </Accordion>
+
+              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+                Hours:
+              </Typography>
+
+              {show ? (
+                <AlLocationRuleSetWorkSchedule
+                  types={'HOURS'}
+                  RULE_SET_ID={rowData.RULE_SET_ID}
+                  PERSON_ID={rowData.PERSON_ID}
+                  disabled={disabled}
+                  START_DATE={data?.START_DATE}
+                />
+              ) : null}
+
+              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+                Allocations:
+              </Typography>
+
+              {show ? (
+                <AlLocationRuleSetWorkSchedule
+                  types={'PERCENT'}
+                  RULE_SET_ID={rowData.RULE_SET_ID}
+                  PERSON_ID={rowData.PERSON_ID}
+                  disabled={disabled}
+                  START_DATE={data?.START_DATE}
+                />
+              ) : null}
             </JPGrid>
           </JPGrid>
         </JPModal>

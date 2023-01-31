@@ -18,6 +18,7 @@ import _ from 'lodash';
 import AddProject from './addProject';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { getProjectListAPI } from './api/project-api';
+import { Search } from '@material-ui/icons';
 
 export default function ProjectTable(props) {
   const { ID, NAME } = props;
@@ -28,6 +29,13 @@ export default function ProjectTable(props) {
   const onClickStory = item => {
     history.push({
       pathname: `/admin/editProject/${item?.PROJECT_ID}`,
+      state: { id: item?.PROJECT_ID }
+    });
+  };
+
+  const onClickStoryview = item => {
+    history.push({
+      pathname: `/admin/viewProject/${item?.PROJECT_ID}`,
       state: { id: item?.PROJECT_ID }
     });
   };
@@ -59,6 +67,7 @@ export default function ProjectTable(props) {
     } else {
       setData([]);
     }
+    setIsLoading(false);
   };
 
   const handleInputChange = ({ target }) => {
@@ -84,13 +93,43 @@ export default function ProjectTable(props) {
           <Card>
             <CardHeader color="primary" icon>
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
-                <JPGrid item xs={6}>
+                <JPGrid item xs={2}>
                   <CardIcon color="primary">
                     <AssignmentIcon />
                   </CardIcon>
-                  <h4 style={{ color: '#000' }}>Projects</h4>
+                  <h4
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                      fontSize: '28px'
+                    }}
+                  >
+                    Projects
+                  </h4>
                 </JPGrid>
-                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                <JPGrid item xs={8}>
+                  {' '}
+                  {!ID?.length ? (
+                    <TextField
+                      type="search"
+                      variant="outlined"
+                      style={{ paddingTop: 4 }}
+                      fullWidth
+                      placeholder="Search"
+                      onChange={handleInputChange}
+                      defaultValue={NAME?.length ? NAME : 'Project - 00499'}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  ) : null}
+                </JPGrid>
+                <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">
                   <AddProject
                     onSave={result => {
                       setData(prevState => {
@@ -105,27 +144,6 @@ export default function ProjectTable(props) {
               </JPGrid>
             </CardHeader>
             <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <TextField
-                    type="search"
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    placeholder="Search"
-                    onChange={handleInputChange}
-                    defaultValue={NAME?.length ? NAME : 'Project - 00499'}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-
               <MuiThemeProvider theme={theme}>
                 <MaterialTable
                   isLoading={isLoading}
@@ -158,6 +176,25 @@ export default function ProjectTable(props) {
                               }}
                             >
                               <Edit onClick={() => onClickStory(rowData)} />
+                            </Button>
+                          )
+                        }
+                      : null,
+                    ID?.length
+                      ? {
+                          field: 'view',
+                          editable: 'never',
+                          title: 'view',
+                          render: rowData => (
+                            <Button
+                              color={'info'}
+                              onClick={() => onClickStoryview(rowData)}
+                              style={{
+                                padding: '8px 4px 6px 8px',
+                                borderRadius: '20px'
+                              }}
+                            >
+                              <Search onClick={() => onClickStoryview(rowData)} />
                             </Button>
                           )
                         }

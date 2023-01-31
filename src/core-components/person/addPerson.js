@@ -281,7 +281,11 @@ export default function AddPerson(props) {
       {customersOptions}
       <JPGrid container direction="row" alignItems="center" justify="flex-end">
         <JPGrid>
-          <Button color={'info'} onClick={() => setShow(true)}>
+          <Button
+            color={'info'}
+            onClick={() => setShow(true)}
+            style={{ fontFamily: 'Trattatello', fontWeight: 'bold' }}
+          >
             Add Person
           </Button>
         </JPGrid>

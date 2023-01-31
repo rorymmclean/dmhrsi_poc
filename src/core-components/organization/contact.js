@@ -143,9 +143,13 @@ export default function Contact() {
       <JPGrid container direction={'row'} justify={'flex-end'}>
         <JPGrid item marginRight={3} marginLeft={3}>
           <Button
+            style={{
+              fontFamily: 'Trattatello',
+              fontWeight: 'bold'
+            }}
             onClick={() => {
               history.push({
-                pathname: `/admin/edit/${location.pathname.split('/')[3]}`
+                pathname: `/admin/editOrganization/${location.pathname.split('/')[3]}`
               });
             }}
             variant={'outlined'}
@@ -175,7 +179,16 @@ export default function Contact() {
               <CardIcon color="primary">
                 <PersonIcon />
               </CardIcon>
-              <h4 style={{ color: '#000' }}>Contact</h4>
+              <h4
+                style={{
+                  color: '#000',
+                  fontFamily: 'Trattatello',
+                  fontWeight: 'bold',
+                  fontSize: '28px'
+                }}
+              >
+                Contact
+              </h4>
             </CardHeader>
             <CardBody>
               <MuiThemeProvider theme={theme}>

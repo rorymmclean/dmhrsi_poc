@@ -133,7 +133,16 @@ export default function EditProject() {
             <CardIcon color="primary">
               <Edit />
             </CardIcon>
-            <h4 style={{ color: '#000' }}>Edit Project</h4>
+            <h4
+              style={{
+                color: '#000',
+                fontFamily: 'Trattatello',
+                fontWeight: 'bold',
+                fontSize: '28px'
+              }}
+            >
+              Edit Project
+            </h4>
           </CardHeader>
           {Object.keys(data).length ? (
             <CardBody>
@@ -207,7 +216,7 @@ export default function EditProject() {
                   </JPGrid>
                 </GridItem>
 
-                <GridItem item xs={12} sm={6} style={{ marginTop: '16px' }}>
+                <GridItem item xs={12} sm={4} style={{ marginTop: '16px' }}>
                   <Autocomplete
                     id="Organization"
                     getOptionLabel={option => option.ORGANIZATION_NAME}
@@ -236,7 +245,7 @@ export default function EditProject() {
                     )}
                   />
                 </GridItem>
-                <GridItem item xs={12} sm={6} style={{ marginTop: '16px' }}>
+                <GridItem item xs={12} sm={4} style={{ marginTop: '16px' }}>
                   <Autocomplete
                     id="Managers"
                     getOptionLabel={option =>
@@ -268,7 +277,7 @@ export default function EditProject() {
                   />
                 </GridItem>
 
-                <GridItem xs={12} sm={6} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
                     required

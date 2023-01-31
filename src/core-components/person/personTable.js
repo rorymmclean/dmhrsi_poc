@@ -78,13 +78,40 @@ export default function PersonTable() {
           <Card>
             <CardHeader color="primary" icon>
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
-                <JPGrid item xs={6}>
+                <JPGrid item xs={2}>
                   <CardIcon color="primary">
                     <PersonIcon />
                   </CardIcon>
-                  <h4 style={{ color: '#000' }}>Persons</h4>
+                  <h4
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                      fontSize: '28px'
+                    }}
+                  >
+                    Persons
+                  </h4>
                 </JPGrid>
-                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
+                <JPGrid item xs={8}>
+                  <TextField
+                    type="search"
+                    variant="outlined"
+                    style={{ paddingTop: 4 }}
+                    fullWidth
+                    placeholder="Search"
+                    onChange={handleInputChange}
+                    defaultValue={'Deedra Courtney Robertson'}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      )
+                    }}
+                  />
+                </JPGrid>
+                <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">
                   <AddPerson
                     onSave={result => {
                       setData(prevState => {
@@ -99,27 +126,6 @@ export default function PersonTable() {
               </JPGrid>
             </CardHeader>
             <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <TextField
-                    type="search"
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    placeholder="Search"
-                    onChange={handleInputChange}
-                    defaultValue={'Deedra Courtney Robertson'}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-
               <MuiThemeProvider theme={theme}>
                 <MaterialTable
                   isLoading={isLoading}

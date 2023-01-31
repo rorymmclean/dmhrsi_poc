@@ -207,7 +207,16 @@ export default function TimeCardTable() {
                   <CardIcon color="primary">
                     <ScheduleIcon />
                   </CardIcon>
-                  <h4 style={{ color: '#000' }}>Timecards</h4>
+                  <h4
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                      fontSize: '28px'
+                    }}
+                  >
+                    Announcements{' '}
+                  </h4>
                 </JPGrid>
                 <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
                   <AddTimeCard
@@ -225,12 +234,43 @@ export default function TimeCardTable() {
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
+                <GridItem xs={12} sm={12} md={12} style={{ fontSize: '24px', margin: '16px 0px' }}>
+                  <span style={{ padding: '4px 8px', background: '#00acc1', color: '#fff' }}>
+                    dismiss
+                  </span>{' '}
+                  those working on Project-245, please notify your timekeeper of any upcoming
+                  vacation time.
+                </GridItem>
+              </GridContainer>
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary" icon>
+              <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
+                <JPGrid item xs={2}>
+                  <CardIcon color="primary">
+                    <ScheduleIcon />
+                  </CardIcon>
+                  <h4
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                      fontSize: '28px'
+                    }}
+                  >
+                    Timecards
+                  </h4>
+                </JPGrid>
+                <JPGrid item xs={8}>
                   <Autocomplete
                     id="Persons"
                     getOptionLabel={option =>
                       `${option.FIRST_NAME} ${option.MIDDLE_NAME} ${option.LAST_NAME}`
                     }
+                    style={{ paddingTop: 8 }}
                     filterOptions={x => x}
                     options={optionsEmployee}
                     autoComplete
@@ -262,10 +302,22 @@ export default function TimeCardTable() {
                       />
                     )}
                   />
-                </GridItem>
-              </GridContainer>
-              {customersOptions}
-            </CardBody>
+                </JPGrid>
+                <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">
+                  <AddTimeCard
+                    onSave={result => {
+                      setState(prevState => {
+                        const data = [...prevState.data];
+                        data.unshift(result);
+
+                        return { ...prevState, data };
+                      });
+                    }}
+                  />
+                </JPGrid>
+              </JPGrid>
+            </CardHeader>
+            <CardBody>{customersOptions}</CardBody>
           </Card>
         </GridItem>
       </GridContainer>

@@ -22,11 +22,13 @@ import EditTask from 'core-components/task/editTask';
 import timeCardTable from 'core-components/timeCardSearch/timeCardTable';
 import ContactPerson from 'core-components/person/contact';
 import AlLocationRuleSetTable from 'core-components/alLocationRuleSet/alLocationRuleSetTable';
+import ViewTask from 'core-components/task/viewTask';
+import ViewProject from 'core-components/project/viewProject';
 
 var dashRoutes = [
   {
     path: '/timeCard',
-    name: 'Timecards',
+    name: 'Home',
     rtlName: '',
     mini: 'S',
     rtlMini: '',
@@ -75,7 +77,7 @@ var dashRoutes = [
     layout: '/admin'
   },
   {
-    path: '/edit',
+    path: '/editOrganization',
     name: 'Edit Organization',
     rtlName: '',
     mini: 'S',
@@ -108,6 +110,18 @@ var dashRoutes = [
     layout: '/admin'
   },
   {
+    path: '/viewProject',
+    name: 'View Project',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: ConfirmationNumber,
+    component: ViewProject,
+    redirect: true,
+    layout: '/admin'
+  },
+
+  {
     path: '/editTask',
     name: 'Edit Task',
     rtlName: '',
@@ -115,6 +129,17 @@ var dashRoutes = [
     rtlMini: '',
     icon: ConfirmationNumber,
     component: EditTask,
+    redirect: true,
+    layout: '/admin'
+  },
+  {
+    path: '/viewTask',
+    name: 'View Task',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: ConfirmationNumber,
+    component: ViewTask,
     redirect: true,
     layout: '/admin'
   },

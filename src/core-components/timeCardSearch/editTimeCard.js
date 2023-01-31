@@ -28,41 +28,6 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-const Accordion = styled(props => <MuiAccordion disableGutters elevation={0} square {...props} />)(
-  ({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
-    '&:not(:last-child)': {
-      borderBottom: 0
-    },
-    '&:before': {
-      display: 'none'
-    },
-    width: '100%'
-  })
-);
-
-const AccordionSummary = styled(props => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, .05)' : 'rgba(0, 0, 0, .03)',
-  flexDirection: 'row-reverse',
-  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)'
-  },
-  '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1)
-  }
-}));
-
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderTop: '1px solid rgba(0, 0, 0, .125)'
-}));
-
 export default function EditTimeCard(props) {
   const { onSave, rowData, disabled } = props;
   const [show, setShow] = React.useState(false);
@@ -175,7 +140,7 @@ export default function EditTimeCard(props) {
         >
           <JPGrid minHeight={200}>
             <JPGrid container direction="row" alignItems="center" spacing={1} padding={8}>
-              <JPGrid item xs={12} sm={6}>
+              <JPGrid item xs={12} sm={3}>
                 <Autocomplete
                   id="Employees"
                   getOptionLabel={option =>
@@ -208,7 +173,7 @@ export default function EditTimeCard(props) {
                 />
               </JPGrid>
 
-              <JPGrid item xs={12} sm={6}>
+              <JPGrid item xs={12} sm={3}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Status</InputLabel>
                   <Select
@@ -225,7 +190,7 @@ export default function EditTimeCard(props) {
                   </Select>
                 </FormControl>
               </JPGrid>
-              <JPGrid item xs={12} sm={6}>
+              <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -244,7 +209,7 @@ export default function EditTimeCard(props) {
                   />
                 </MuiPickersUtilsProvider>
               </JPGrid>
-              <JPGrid item xs={12} sm={6}>
+              <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
@@ -263,38 +228,33 @@ export default function EditTimeCard(props) {
                   />
                 </MuiPickersUtilsProvider>
               </JPGrid>
-              <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                  <Typography>First Week</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  {show ? (
-                    <WorkScheduleTest
-                      TIMECARD_ID={rowData.TIMECARD_ID}
-                      disabled={disabled}
-                      START_DATE={data?.START_DATE}
-                      END_DATE={data?.END_DATE}
-                      week={0}
-                    />
-                  ) : null}
-                </AccordionDetails>
-              </Accordion>
-              <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                  <Typography>Second Week</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  {show ? (
-                    <WorkScheduleTest
-                      TIMECARD_ID={rowData.TIMECARD_ID}
-                      disabled={disabled}
-                      START_DATE={data?.START_DATE}
-                      END_DATE={data?.END_DATE}
-                      week={7}
-                    />
-                  ) : null}
-                </AccordionDetails>
-              </Accordion>
+
+              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+                First Week:
+              </Typography>
+
+              {show ? (
+                <WorkScheduleTest
+                  TIMECARD_ID={rowData.TIMECARD_ID}
+                  disabled={disabled}
+                  START_DATE={data?.START_DATE}
+                  END_DATE={data?.END_DATE}
+                  week={0}
+                />
+              ) : null}
+              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+                Second Week:
+              </Typography>
+
+              {show ? (
+                <WorkScheduleTest
+                  TIMECARD_ID={rowData.TIMECARD_ID}
+                  disabled={disabled}
+                  START_DATE={data?.START_DATE}
+                  END_DATE={data?.END_DATE}
+                  week={7}
+                />
+              ) : null}
             </JPGrid>
           </JPGrid>
         </JPModal>

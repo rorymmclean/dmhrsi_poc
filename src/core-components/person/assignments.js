@@ -28,12 +28,10 @@ export default function Assignments() {
 
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Project', field: 'FIRST_NAME' },
       { title: 'Task', field: 'TASK_NAME' },
       { title: 'Organization', field: 'ORGANIZATION_NAME' },
       { title: 'Start Date ', field: 'START_DATE' },
       { title: 'End Date', field: 'END_DATE' },
-      { title: 'Location', field: 'LOCATION_ID' },
       { title: 'Primary', field: 'PRIMARY_FLAG' }
     ],
     data: []
@@ -82,79 +80,20 @@ export default function Assignments() {
             <CardIcon color="primary">
               <AssignmentIcon />
             </CardIcon>
-            <h4 style={{ color: '#000' }}>Assignment</h4>
+            <h4
+              style={{
+                color: '#000',
+                fontFamily: 'Trattatello',
+                fontWeight: 'bold',
+                fontSize: '28px'
+              }}
+            >
+              Assignments
+            </h4>
           </CardHeader>
           {Object.keys(data).length ? (
             <CardBody>
               <GridContainer>
-                <GridItem item xs={12} sm={1}>
-                  <Typography>Person</Typography>
-                </GridItem>
-
-                <GridItem item xs={12} sm={3}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    style={{ fontSize: '25px' }}
-                    fullWidth
-                    id="FirstName"
-                    disabled
-                    label="First Name"
-                    name="FirstName"
-                    autoComplete="FirstName"
-                    value={data?.FIRST_NAME}
-                  />
-                </GridItem>
-                <GridItem item xs={12} sm={3}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    style={{ fontSize: '25px' }}
-                    fullWidth
-                    disabled
-                    id="MiddleName"
-                    label="Middle Name"
-                    name="MiddleName"
-                    autoComplete="MiddleName"
-                    value={data?.MIDDLE_NAME}
-                  />
-                </GridItem>
-                <GridItem item xs={12} sm={3}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    style={{ fontSize: '25px' }}
-                    fullWidth
-                    disabled
-                    id="LastName"
-                    label="Last Name"
-                    name="LastName"
-                    autoComplete="LastName"
-                    value={data?.LAST_NAME}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={2}>
-                  <JPGrid container direction={'row'} justify={'flex-end'}>
-                    <JPGrid item marginRight={3} marginLeft={3}>
-                      <Button
-                        onClick={() => {
-                          history.push({
-                            pathname: `/admin/editPerson/${location.pathname.split('/')[3]}`
-                          });
-                        }}
-                        variant={'outlined'}
-                      >
-                        Cancel
-                      </Button>
-                    </JPGrid>
-                    <JPGrid item marginRight={3} marginLeft={3}>
-                      <Button onClick={() => {}} variant={'outlined'} color={'info'}>
-                        Save
-                      </Button>
-                    </JPGrid>
-                  </JPGrid>
-                </GridItem>
-
                 <MaterialTable
                   isLoading={isLoading}
                   columns={state.columns}

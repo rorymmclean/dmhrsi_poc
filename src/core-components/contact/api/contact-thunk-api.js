@@ -23,7 +23,10 @@ export const getContactDetailsPrimaryThunk = createAsyncThunk(
     let dataPrimary = [];
 
     for (let index = 0; index < JSON.parse(response.data.body).length; index++) {
-      if (JSON.parse(response.data.body)[index]?.PRIMARY_FLAG == 'Y') {
+      if (
+        JSON.parse(response.data.body)[index]?.PRIMARY_FLAG == 'Y' &&
+        JSON.parse(response.data.body)[index]?.CONTACT_TYPE == 'ADDRESS'
+      ) {
         dataPrimary.push(JSON.parse(response.data.body)[index]);
       }
     }

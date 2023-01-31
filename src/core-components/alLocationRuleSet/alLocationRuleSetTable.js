@@ -178,29 +178,23 @@ export default function AlLocationRuleSetTable() {
           <Card>
             <CardHeader color="primary" icon>
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
-                <JPGrid item xs={6}>
+                <JPGrid item xs={3}>
                   <CardIcon color="primary">
                     <Diversity1Icon />
                   </CardIcon>
-                  <h4 style={{ color: '#000' }}>Allocation Rule Set</h4>
-                </JPGrid>
-                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
-                  <AddAlLocationRuleSet
-                    onSave={result => {
-                      setState(prevState => {
-                        const data = [...prevState.data];
-                        data.unshift(result);
-
-                        return { ...prevState, data };
-                      });
+                  <h4
+                    style={{
+                      color: '#000',
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                      fontSize: '28px'
                     }}
-                  />
+                  >
+                    Allocation Rule Set
+                  </h4>
                 </JPGrid>
-              </JPGrid>
-            </CardHeader>
-            <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
+                <JPGrid item xs={6}>
+                  {' '}
                   <Autocomplete
                     id="Persons"
                     getOptionLabel={option =>
@@ -209,6 +203,7 @@ export default function AlLocationRuleSetTable() {
                     filterOptions={x => x}
                     options={optionsEmployee}
                     autoComplete
+                    style={{ paddingTop: 8 }}
                     includeInputInList
                     filterSelectedOptions
                     value={valueEmployee}
@@ -237,10 +232,22 @@ export default function AlLocationRuleSetTable() {
                       />
                     )}
                   />
-                </GridItem>
-              </GridContainer>
-              {customersOptions}
-            </CardBody>
+                </JPGrid>
+                <JPGrid item xs={3} container alignItems="flex-end" justify="flex-end">
+                  <AddAlLocationRuleSet
+                    onSave={result => {
+                      setState(prevState => {
+                        const data = [...prevState.data];
+                        data.unshift(result);
+
+                        return { ...prevState, data };
+                      });
+                    }}
+                  />
+                </JPGrid>
+              </JPGrid>
+            </CardHeader>
+            <CardBody>{customersOptions}</CardBody>
           </Card>
         </GridItem>
       </GridContainer>

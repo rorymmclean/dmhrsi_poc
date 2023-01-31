@@ -122,7 +122,16 @@ export default function EditTask() {
             <CardIcon color="primary">
               <Edit />
             </CardIcon>
-            <h4 style={{ color: '#000' }}>Edit Task</h4>
+            <h4
+              style={{
+                color: '#000',
+                fontFamily: 'Trattatello',
+                fontWeight: 'bold',
+                fontSize: '28px'
+              }}
+            >
+              Edit Task
+            </h4>
           </CardHeader>
           {Object.keys(data).length ? (
             <CardBody>
@@ -146,6 +155,10 @@ export default function EditTask() {
                   <JPGrid container direction={'row'} justify={'flex-end'}>
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
+                        style={{
+                          fontFamily: 'Trattatello',
+                          fontWeight: 'bold'
+                        }}
                         onClick={() => {
                           history.push({
                             pathname: `/admin/task`
@@ -158,6 +171,10 @@ export default function EditTask() {
                     </JPGrid>
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
+                        style={{
+                          fontFamily: 'Trattatello',
+                          fontWeight: 'bold'
+                        }}
                         onClick={() => {
                           const userObject = {
                             TASK_ID: location.pathname.split('/')[3],
@@ -198,7 +215,7 @@ export default function EditTask() {
                   </JPGrid>
                 </GridItem>
 
-                <GridItem item xs={12} sm={6} style={{ marginTop: '16px' }}>
+                <GridItem item xs={12} sm={4} style={{ marginTop: '16px' }}>
                   <Autocomplete
                     id="Project"
                     getOptionLabel={option => option.PROJECT_NAME}
@@ -228,7 +245,7 @@ export default function EditTask() {
                   />
                 </GridItem>
 
-                <GridItem xs={12} sm={6} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
                     required
@@ -242,7 +259,7 @@ export default function EditTask() {
                     onChange={e => setData({ ...data, SERVICE_TYPE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={6} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
                     required
@@ -256,7 +273,7 @@ export default function EditTask() {
                     onChange={e => setData({ ...data, TASK_NBR: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={6} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
                     style={{ fontSize: '25px' }}
@@ -269,7 +286,7 @@ export default function EditTask() {
                     onChange={e => setData({ ...data, FCC: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={6} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
                     style={{ fontSize: '25px' }}
@@ -282,7 +299,7 @@ export default function EditTask() {
                     onChange={e => setData({ ...data, SUPE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={6} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <Autocomplete
                     id="Laborcosts"
                     getOptionLabel={option => `${option.LABOR_COST_ID}`}

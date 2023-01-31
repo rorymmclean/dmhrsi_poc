@@ -134,6 +134,10 @@ export default function GetContactDetailsPrimary(props) {
               <JPGrid container direction={'row'} justify={'flex-end'}>
                 <JPGrid item marginRight={3} marginLeft={3}>
                   <Button
+                    style={{
+                      fontFamily: 'Trattatello',
+                      fontWeight: 'bold'
+                    }}
                     onClick={() => {
                       history.push({
                         pathname:
@@ -349,18 +353,6 @@ export default function GetContactDetailsPrimary(props) {
             ) : null}
           </GridContainer>
         </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>LCA Codes</Typography>
-        </AccordionSummary>
-        <AccordionDetails></AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Self-Service Preferences</Typography>
-        </AccordionSummary>
-        <AccordionDetails></AccordionDetails>
       </Accordion>
     </GridItem>
   ) : (

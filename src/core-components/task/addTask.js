@@ -264,7 +264,11 @@ export default function AddTask(props) {
       {customersOptions}
       <JPGrid container direction="row" alignItems="center" justify="flex-end">
         <JPGrid>
-          <Button color={'info'} onClick={() => setShow(true)}>
+          <Button
+            color={'info'}
+            onClick={() => setShow(true)}
+            style={{ fontFamily: 'Trattatello', fontWeight: 'bold' }}
+          >
             Add Task
           </Button>
         </JPGrid>

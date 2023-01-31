@@ -75,7 +75,16 @@ export default function EditOrganization() {
             <CardIcon color="primary">
               <Edit />
             </CardIcon>
-            <h4 style={{ color: '#000' }}>Edit Organization</h4>
+            <h4
+              style={{
+                color: '#000',
+                fontFamily: 'Trattatello',
+                fontWeight: 'bold',
+                fontSize: '28px'
+              }}
+            >
+              Edit Organization
+            </h4>
           </CardHeader>
           {Object.keys(data).length ? (
             <CardBody>
@@ -98,6 +107,10 @@ export default function EditOrganization() {
                   <JPGrid container direction={'row'} justify={'flex-end'}>
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
+                        style={{
+                          fontFamily: 'Trattatello',
+                          fontWeight: 'bold'
+                        }}
                         onClick={() => {
                           history.push({
                             pathname: `/admin/organization`
@@ -110,6 +123,10 @@ export default function EditOrganization() {
                     </JPGrid>
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
+                        style={{
+                          fontFamily: 'Trattatello',
+                          fontWeight: 'bold'
+                        }}
                         onClick={() => {
                           ThunkDispatch(editOrganizationThunk(data))
                             .then(result => {
@@ -139,6 +156,71 @@ export default function EditOrganization() {
                     autoComplete="Type"
                     value={data?.SERVICE}
                     onChange={e => setData({ ...data, SERVICE: e.target.value })}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                  <TextField
+                    variant="outlined"
+                    style={{ fontSize: '25px' }}
+                    fullWidth
+                    id="UIC"
+                    label="UIC"
+                    name="UIC"
+                    autoComplete="UIC"
+                    value={data?.UIC}
+                    onChange={e => setData({ ...data, UIC: e.target.value })}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                  <TextField
+                    variant="outlined"
+                    style={{ fontSize: '25px' }}
+                    fullWidth
+                    id="DMIS"
+                    label="DMIS"
+                    name="DMIS"
+                    autoComplete="DMIS"
+                    value={data?.DMIS}
+                    onChange={e => setData({ ...data, DMIS: e.target.value })}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                  <TextField
+                    variant="outlined"
+                    style={{ fontSize: '25px' }}
+                    fullWidth
+                    id="PARENT_DMIS"
+                    label="PARENT DMIS"
+                    name="PARENT_DMIS"
+                    autoComplete="PARENT_DMIS"
+                    value={data?.PARENT_DMIS}
+                    onChange={e => setData({ ...data, PARENT_DMIS: e.target.value })}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                  <TextField
+                    variant="outlined"
+                    style={{ fontSize: '25px' }}
+                    fullWidth
+                    id="FCC"
+                    label="FCC"
+                    name="FCC"
+                    autoComplete="FCC"
+                    value={data?.FCC}
+                    onChange={e => setData({ ...data, FCC: e.target.value })}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={6} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                  <TextField
+                    variant="outlined"
+                    style={{ fontSize: '25px' }}
+                    fullWidth
+                    id="PEC"
+                    label="PEC"
+                    name="PEC"
+                    autoComplete="PEC"
+                    value={data?.PEC}
+                    onChange={e => setData({ ...data, PEC: e.target.value })}
                   />
                 </GridItem>
                 <GetContactDetailsPrimary ENTITITY_TYPE={'ORG'} />

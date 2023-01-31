@@ -17,6 +17,7 @@ import { ThunkDispatch } from 'thunk-dispatch';
 import { Alert, Snackbar } from '@mui/material';
 import GetContactDetailsPrimary from 'core-components/contact/getContactDetailsPrimary';
 import ProjectTable from 'core-components/project/projectTable';
+import Assignments from './assignments';
 
 export default function EditPerson() {
   const history = useHistory();
@@ -71,7 +72,16 @@ export default function EditPerson() {
             <CardIcon color="primary">
               <Edit />
             </CardIcon>
-            <h4 style={{ color: '#000' }}>Edit Person</h4>
+            <h4
+              style={{
+                color: '#000',
+                fontFamily: 'Trattatello',
+                fontWeight: 'bold',
+                fontSize: '28px'
+              }}
+            >
+              Edit Person
+            </h4>
           </CardHeader>
           {Object.keys(data).length ? (
             <CardBody>
@@ -122,6 +132,10 @@ export default function EditPerson() {
                   <JPGrid container direction={'row'} justify={'flex-end'}>
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
+                        style={{
+                          fontFamily: 'Trattatello',
+                          fontWeight: 'bold'
+                        }}
                         onClick={() => {
                           history.push({
                             pathname: `/admin/person`
@@ -134,6 +148,10 @@ export default function EditPerson() {
                     </JPGrid>
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
+                        style={{
+                          fontFamily: 'Trattatello',
+                          fontWeight: 'bold'
+                        }}
                         onClick={() => {
                           ThunkDispatch(editPersonThunk(data))
                             .then(result => {
@@ -151,7 +169,7 @@ export default function EditPerson() {
                   </JPGrid>
                 </GridItem>
 
-                <GridItem xs={12} sm={4} style={{ marginTop: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
                     required
@@ -165,7 +183,7 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, SERVICE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
                     style={{ fontSize: '25px' }}
@@ -178,7 +196,7 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, GRADE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
                     style={{ fontSize: '25px' }}
@@ -191,7 +209,7 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, EDIPN: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
                     style={{ fontSize: '25px' }}
@@ -204,7 +222,7 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, PERSON_TYPE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
                     style={{ fontSize: '25px' }}
@@ -217,27 +235,36 @@ export default function EditPerson() {
                     onChange={e => setData({ ...data, NATIONAL_ID: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
                     style={{ fontSize: '25px' }}
                     fullWidth
                     id="CIVILLIAN_TITLE"
-                    label="Title"
+                    label="Civillian Title"
                     name="CIVILLIAN_TITLE"
                     autoComplete="CIVILLIAN_TITLE"
                     value={data?.CIVILLIAN_TITLE}
                     onChange={e => setData({ ...data, CIVILLIAN_TITLE: e.target.value })}
                   />
                 </GridItem>
-
+                <GridItem item xs={12} sm={4} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                  <TextField
+                    variant="outlined"
+                    style={{ fontSize: '25px' }}
+                    fullWidth
+                    id="PERSONNEL_CAT"
+                    label="Personnel Category"
+                    name="PERSONNEL_CAT"
+                    autoComplete="PERSONNEL_CAT"
+                    value={data?.PERSONNEL_CAT}
+                    onChange={e => setData({ ...data, PERSONNEL_CAT: e.target.value })}
+                  />
+                </GridItem>
                 <GetContactDetailsPrimary ENTITITY_TYPE={'PERSON'} />
 
-                <GridItem xs={12} sm={12} style={{ marginTop: '16px', marginBottom: '16px' }}>
-                  <ProjectTable
-                    ID={location.pathname.split('/')[3]}
-                    NAME={`${data?.FIRST_NAME} ${data?.MIDDLE_NAME} ${data?.LAST_NAME}`}
-                  />
+                <GridItem xs={12} sm={12} style={{ marginTop: '8px', marginBottom: '16px' }}>
+                  <Assignments />
                 </GridItem>
               </GridContainer>
             </CardBody>

@@ -214,6 +214,10 @@ export default function WorkScheduleTest(props) {
           <JPGrid>
             {!disabled ? (
               <Button
+                style={{
+                  fontFamily: 'Trattatello',
+                  fontWeight: 'bold'
+                }}
                 color={!ref.current?.TASK_ID?.length || false ? 'info' : null}
                 disabled={ref.current?.TASK_ID?.length || false}
                 onClick={() =>

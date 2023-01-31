@@ -24,7 +24,6 @@ import JPModalStyle from './jp-modal-style';
 import Button from 'components/CustomButtons/Button';
 import JPGrid from 'components/jp-grid/jp-grid';
 
-
 const useStyles = makeStyles(JPModalStyle);
 
 export function scrollContainerRef(scrollContainer) {
@@ -106,13 +105,18 @@ const JPModal = props => {
             <JPGrid item>
               <JPGrid container alignItems={'center'} height={32}>
                 <JPGrid item marginBottom={5}>
-                  <Typography className={classes.titleColor} type={'h2'} overFlow style={{
-                    fontSize: '24px',
-                    color: 'rgba(70,72,74,0.9)',
-                    fontWeight: 'bold',
-                    letterSpacing: '-0.48px',
-                    fontFamily: 'Mulish'
-                  }}>
+                  <Typography
+                    className={classes.titleColor}
+                    type={'h2'}
+                    overFlow
+                    style={{
+                      fontSize: '24px',
+                      color: 'rgba(70,72,74,0.9)',
+                      fontWeight: 'bold',
+                      letterSpacing: '-0.48px',
+                      fontFamily: 'Trattatello'
+                    }}
+                  >
                     {title || defaultTitle}
                   </Typography>
                 </JPGrid>
@@ -123,7 +127,7 @@ const JPModal = props => {
         </JPGrid>
       </Box>
       <Grid sm={12}>
-        <Divider style={{ border: '1px solid #000', margin: "0 !important", height: 0 }} />
+        <Divider style={{ border: '1px solid #000', margin: '0 !important', height: 0 }} />
       </Grid>
     </DialogTitle>
   );
@@ -186,6 +190,10 @@ const JPModal = props => {
                   isLoading={button.isLoading}
                   type={button.type}
                   form={button.form}
+                  style={{
+                    fontFamily: 'Trattatello',
+                    fontWeight: 'bold'
+                  }}
                 >
                   {button.name}
                 </Button>

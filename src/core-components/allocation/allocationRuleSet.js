@@ -35,7 +35,15 @@ export default function Allocations() {
     <div className="m-sm-30">
       <JPGrid container direction={'row'} justify={'flex-end'}>
         <JPGrid item marginRight={3} marginLeft={3}>
-          <Button variant={'outlined'} color={'info'} onClick={handleSave}>
+          <Button
+            variant={'outlined'}
+            color={'info'}
+            onClick={handleSave}
+            style={{
+              fontFamily: 'Trattatello',
+              fontWeight: 'bold'
+            }}
+          >
             Save
           </Button>
         </JPGrid>
@@ -48,7 +56,16 @@ export default function Allocations() {
               <CardIcon color="primary">
                 <TaskIcon />
               </CardIcon>
-              <h4 style={{ color: '#000' }}>Allocations</h4>
+              <h4
+                style={{
+                  color: '#000',
+                  fontFamily: 'Trattatello',
+                  fontWeight: 'bold',
+                  fontSize: '28px'
+                }}
+              >
+                Allocations
+              </h4>
             </CardHeader>
             <CardBody>
               <Grid container>
