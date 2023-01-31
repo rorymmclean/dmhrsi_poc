@@ -171,11 +171,9 @@ export default function TimeCardTable() {
       fontFamily: 'Trattatello',
       fontWeight: 'bold',
       fontSize: '28px',
-      color: '#000',
-    },
+      color: '#000'
+    }
   });
-
-
 
   const customersOptions = useMemo(
     () => (
@@ -305,18 +303,13 @@ export default function TimeCardTable() {
                     renderInput={params => (
                       <TextField
                         {...params}
+                        InputLabelProps={{
+                          style: { fontFamily: 'Trattatello', ...params.InputLabelProps.style }
+                        }}
                         label="Person Name"
                         fullWidth
                         variant="outlined"
                         required
-                        InputProps={{
-                          style: {  fontFamily: 'Trattatello' }
-                        }}
-                        InputLabelProps={{
-                          style: { fontFamily: 'Trattatello' }
-                        }}
-
-
                       />
                     )}
                   />

@@ -175,7 +175,12 @@ export default function EditTimeCard(props) {
 
               <JPGrid item xs={12} sm={3}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                  <InputLabel
+                    id="demo-simple-select-label"
+                    style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                  >
+                    Status
+                  </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -184,16 +189,31 @@ export default function EditTimeCard(props) {
                     label="Status"
                     onChange={e => setData({ ...data, STATUS: STATUS_NAME[e.target.value] })}
                   >
-                    <MenuItem value={'Open'}>Open</MenuItem>
-                    <MenuItem value={'Approved'}>Approved</MenuItem>
-                    <MenuItem value={'Close'}>Close</MenuItem>
+                    <MenuItem
+                      value={'Open'}
+                      style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                    >
+                      Open
+                    </MenuItem>
+                    <MenuItem
+                      value={'Approved'}
+                      style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                    >
+                      Approved
+                    </MenuItem>
+                    <MenuItem
+                      value={'Close'}
+                      style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                    >
+                      Close
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </JPGrid>
               <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
-                  style={{fontFamily: 'Trattatello',width: '100% !important'}}
+                    style={{ fontFamily: 'Trattatello', width: '100% !important' }}
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
@@ -204,7 +224,6 @@ export default function EditTimeCard(props) {
                     }}
                     value={data?.START_DATE}
                     disabled={disabled}
-                 
                     onChange={e => setData({ ...data, START_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
                   />
@@ -223,14 +242,21 @@ export default function EditTimeCard(props) {
                       const day = moment(date).day();
                       return day !== 5;
                     }}
-                    style={{ width: '100% !important' ,fontFamily: 'Trattatello'}}
+                    style={{ width: '100% !important', fontFamily: 'Trattatello' }}
                     onChange={e => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
                   />
                 </MuiPickersUtilsProvider>
               </JPGrid>
 
-              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+              <Typography
+                style={{
+                  color: '#000',
+                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  fontFamily: 'Trattatello'
+                }}
+              >
                 First Week:
               </Typography>
 
@@ -243,7 +269,14 @@ export default function EditTimeCard(props) {
                   week={0}
                 />
               ) : null}
-              <Typography style={{ color: '#000', fontWeight: 'bold', fontSize: '18px' }}>
+              <Typography
+                style={{
+                  color: '#000',
+                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  fontFamily: 'Trattatello'
+                }}
+              >
                 Second Week:
               </Typography>
 
