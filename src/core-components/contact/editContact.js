@@ -105,7 +105,7 @@ export default function EditContact(props) {
                   <Select style={{ fontFamily: 'Trattatello' }}
                     InputProps={{
                       style: {
-                        color: '#000',
+                        
                         fontFamily: 'Trattatello',
 
                       }
@@ -178,7 +178,7 @@ export default function EditContact(props) {
                       style={{ fontFamily: 'Trattatello' }}
                       InputProps={{
                         style: {
-                          color: '#000',
+                          
                           fontFamily: 'Trattatello',
 
                         }
@@ -188,7 +188,7 @@ export default function EditContact(props) {
                       label="Address 1"
                       InputLabelProps={{
                         style: {
-                          color: '#000',
+                          
                           fontFamily: 'Trattatello',
 
                         }
@@ -233,7 +233,7 @@ export default function EditContact(props) {
                       style={{ fontFamily: 'Trattatello' }}
                       InputProps={{
                         style: {
-                          color: '#000',
+                          
                           fontFamily: 'Trattatello',
 
                         }
@@ -260,7 +260,7 @@ export default function EditContact(props) {
                       style={{ fontFamily: 'Trattatello' }}
                       InputProps={{
                         style: {
-                          color: '#000',
+                          
                           fontFamily: 'Trattatello',
 
                         }
@@ -287,7 +287,7 @@ export default function EditContact(props) {
                       style={{ fontFamily: 'Trattatello' }}
                       InputProps={{
                         style: {
-                          color: '#000',
+                          
                           fontFamily: 'Trattatello',
 
                         }
@@ -314,7 +314,7 @@ export default function EditContact(props) {
                       style={{ fontFamily: 'Trattatello' }}
                       InputProps={{
                         style: {
-                          color: '#000',
+                          
                           fontFamily: 'Trattatello',
 
                         }
@@ -343,7 +343,7 @@ export default function EditContact(props) {
                           style={{ fontFamily: 'Trattatello' }}
                           InputProps={{
                             style: {
-                              color: '#000',
+                              
                               fontFamily: 'Trattatello',
 
                             }

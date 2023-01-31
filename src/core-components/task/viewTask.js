@@ -128,7 +128,7 @@ export default function ViewTask() {
                 color: '#000',
                 fontFamily: 'Trattatello',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               View Task
@@ -141,12 +141,19 @@ export default function ViewTask() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                   InputProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                    style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="TASK_NAME"
                     disabled
                     label="Task Name"
                     name="TASK_NAME"
+                    
                     autoComplete="TASK_NAME"
                     value={data?.TASK_NAME}
                     onChange={e => setData({ ...data, TASK_NAME: e.target.value })}
@@ -173,7 +180,14 @@ export default function ViewTask() {
                   </JPGrid>
                 </GridItem>
                 <GridItem item xs={12} sm={4} style={{ marginTop: '16px' }}>
-                  <Autocomplete
+                  <Autocomplete 
+                     InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                   InputProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                    style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     id="Project"
                     getOptionLabel={option => option.PROJECT_NAME}
                     filterOptions={x => x}
@@ -193,6 +207,13 @@ export default function ViewTask() {
                     }}
                     renderInput={params => (
                       <TextField
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                     InputProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                         {...params}
                         label="Project Name"
                         fullWidth
@@ -205,9 +226,16 @@ export default function ViewTask() {
 
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
+                     InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                   InputProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                    style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                    
                     fullWidth
                     id="SERVICE_TYPE"
                     label="Service"
@@ -220,12 +248,19 @@ export default function ViewTask() {
                 </GridItem>
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
+                     InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                   InputProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                    style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                   
                     fullWidth
                     id="TASK_NBR"
-                    label="tASK #"
+                    label="TASK #"
                     disabled
                     name="TASK_NBR"
                     autoComplete="TASK_NBR"
@@ -236,7 +271,13 @@ export default function ViewTask() {
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                       InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="FCC"
                     disabled
@@ -250,7 +291,13 @@ export default function ViewTask() {
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                       InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="SUPE"
                     label="SUPE"
@@ -263,6 +310,13 @@ export default function ViewTask() {
                 </GridItem>
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <Autocomplete
+                     InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                   InputProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                    style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     id="Laborcosts"
                     getOptionLabel={option => `${option.LABOR_COST_ID}`}
                     filterOptions={x => x}
@@ -284,6 +338,13 @@ export default function ViewTask() {
                     }}
                     renderInput={params => (
                       <TextField
+                      InputLabelProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                     InputProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                         {...params}
                         label="Labor Cost Name"
                         fullWidth

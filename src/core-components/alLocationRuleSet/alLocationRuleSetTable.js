@@ -192,16 +192,19 @@ export default function AlLocationRuleSetTable() {
                   <CardIcon color="primary">
                     <Diversity1Icon />
                   </CardIcon>
-                  <h4
+                  <GridItem xs={12}  sm={12} md={12}>
+                  <Typography 
                     style={{
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '27px'
+                      fontSize: '23px'
                     }}
                   >
                     Allocation Rule Set
-                  </h4>
+
+                  </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={6}>
                   {' '}

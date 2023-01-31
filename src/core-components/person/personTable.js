@@ -92,16 +92,21 @@ export default function PersonTable() {
                   <CardIcon color="primary">
                     <PersonIcon />
                   </CardIcon>
-                  <h4
+                  <GridItem xs={12}  sm={12} md={12}>
+                  <Typography 
                     style={{
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '28px'
+                      fontSize: '23px'
                     }}
                   >
                     Persons
-                  </h4>
+                  </Typography>
+                  </GridItem>
+                  
+
+
                 </JPGrid>
                 <JPGrid item xs={8}>
                   <TextField

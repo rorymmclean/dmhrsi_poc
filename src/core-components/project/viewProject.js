@@ -139,7 +139,7 @@ export default function ViewProject() {
                 color: '#000',
                 fontFamily: 'Trattatello',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               View Project
@@ -150,9 +150,15 @@ export default function ViewProject() {
               <GridContainer xs={12} sm={12} md={12}>
                 <GridItem item xs={12} sm={10}>
                   <TextField
+                   InputLabelProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                 InputProps={{
+                  style: { fontFamily: 'Trattatello' }
+               }}
+                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="PROJECT_NAME"
                     disabled
@@ -167,7 +173,10 @@ export default function ViewProject() {
                 <GridItem xs={12} sm={2}>
                   <JPGrid container direction={'row'} justify={'flex-end'}>
                     <JPGrid item marginRight={3} marginLeft={3}>
-                      <Button
+                      <Button 
+                      style={{fontFamily: 'Trattatello',
+                      fontWeight: 'bold',
+                     }}
                         onClick={() => {
                           history.push({
                             pathname: `/admin/project`
@@ -189,6 +198,7 @@ export default function ViewProject() {
                     options={options}
                     autoComplete
                     disabled
+                    
                     includeInputInList
                     filterSelectedOptions
                     value={value}
@@ -207,6 +217,13 @@ export default function ViewProject() {
                         fullWidth
                         variant="outlined"
                         required
+                        InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                       />
                     )}
                   />
@@ -239,6 +256,13 @@ export default function ViewProject() {
                         fullWidth
                         variant="outlined"
                         required
+                        InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                       />
                     )}
                   />
@@ -248,7 +272,13 @@ export default function ViewProject() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'Trattatello' }
+                   }}
+                   InputProps={{
+                    style: { fontFamily: 'Trattatello' }
+                 }}
+                    style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     disabled
                     id="Service"

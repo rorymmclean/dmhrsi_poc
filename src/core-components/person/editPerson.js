@@ -74,7 +74,7 @@ export default function EditPerson() {
             </CardIcon>
             <h4
               style={{
-                color: '#000',
+                
                 fontFamily: 'Trattatello',
                 fontWeight: 'bold',
                 fontSize: '28px'
@@ -92,7 +92,7 @@ export default function EditPerson() {
                     required
                     style={{ fontSize: '25px',fontFamily: 'Trattatello'}}
                     InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }

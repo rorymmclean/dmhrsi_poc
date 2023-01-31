@@ -86,7 +86,7 @@ export default function Assignments() {
                 color: '#000',
                 fontFamily: 'Trattatello',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               Assignments

@@ -127,7 +127,7 @@ export default function EditTask() {
                 color: '#000',
                 fontFamily: 'Trattatello',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               Edit Task
@@ -140,7 +140,13 @@ export default function EditTask() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                      InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="TASK_NAME"
                     label="Task Name"
@@ -249,7 +255,13 @@ export default function EditTask() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                      InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="SERVICE_TYPE"
                     label="Service"
@@ -263,10 +275,16 @@ export default function EditTask() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
+                      InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="TASK_NBR"
-                    label="tASK #"
+                    label="TASK #"
                     name="TASK_NBR"
                     autoComplete="TASK_NBR"
                     value={data?.TASK_NBR}
@@ -276,7 +294,13 @@ export default function EditTask() {
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                      InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="FCC"
                     label="FCC"
@@ -289,7 +313,13 @@ export default function EditTask() {
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    style={{ fontSize: '25px' }}
+                      InputLabelProps={{
+                          style: { fontFamily: 'Trattatello' }
+                       }}
+                       InputProps={{
+                        style: { fontFamily: 'Trattatello' }
+                     }}
+                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
                     fullWidth
                     id="SUPE"
                     label="SUPE"

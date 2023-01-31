@@ -215,16 +215,18 @@ export default function TimeCardTable() {
                   <CardIcon color="primary">
                     <ScheduleIcon />
                   </CardIcon>
-                  <h4
+                  <GridItem xs={12}  sm={12} md={12}>
+                  <Typography 
                     style={{
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '28px'
+                      fontSize: '23px'
                     }}
                   >
-                    Announcements{' '}
-                  </h4>
+                    Announcements
+                  </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
                   <AddTimeCard
@@ -261,16 +263,18 @@ export default function TimeCardTable() {
                   <CardIcon color="primary">
                     <ScheduleIcon />
                   </CardIcon>
-                  <h4
+                  <GridItem xs={12}  sm={12} md={12}>
+                  <Typography 
                     style={{
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '28px'
+                      fontSize: '23px'
                     }}
                   >
                     Timecards
-                  </h4>
+                  </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
                   <Autocomplete

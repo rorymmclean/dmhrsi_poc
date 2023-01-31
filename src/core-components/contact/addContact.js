@@ -161,7 +161,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                        InputProps={{
-                        style: { color: '#000',
+                        style: { 
                         fontFamily: 'Trattatello',
                         
                         }
@@ -185,7 +185,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                     InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }
@@ -209,7 +209,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                     InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }
@@ -233,7 +233,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
                     InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }
@@ -257,7 +257,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
                     InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }
@@ -281,7 +281,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
                     InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }
@@ -307,7 +307,7 @@ export default function AddContact(props) {
                       <JPGrid item>
                         <TextField
                         InputProps={{
-                          style: { color: '#000',
+                          style: { 
                           fontFamily: 'Trattatello',
                           
                           }
@@ -372,7 +372,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                     InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }
@@ -434,7 +434,7 @@ export default function AddContact(props) {
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
                      InputProps={{
-                      style: { color: '#000',
+                      style: { 
                       fontFamily: 'Trattatello',
                       
                       }

@@ -10,7 +10,7 @@ import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { createMuiTheme, MuiThemeProvider, Paper } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
@@ -105,16 +105,18 @@ export default function TaskTable(props) {
                   <CardIcon color="primary">
                     <TaskIcon />
                   </CardIcon>
-                  <h4
+                  <GridItem xs={12}  sm={12} md={12}>
+                  <Typography 
                     style={{
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '28px'
+                      fontSize: '23px'
                     }}
                   >
                     Tasks
-                  </h4>
+                  </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
                   {' '}

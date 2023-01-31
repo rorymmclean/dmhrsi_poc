@@ -105,16 +105,18 @@ export default function ProjectTable(props) {
                   <CardIcon color="primary">
                     <AssignmentIcon />
                   </CardIcon>
-                  <h4
+                  <GridItem xs={12}  sm={12} md={12}>
+                  <Typography 
                     style={{
                       color: '#000',
                       fontFamily: 'Trattatello',
                       fontWeight: 'bold',
-                      fontSize: '28px'
+                      fontSize: '23px'
                     }}
                   >
                     Projects
-                  </h4>
+                  </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
                   {' '}

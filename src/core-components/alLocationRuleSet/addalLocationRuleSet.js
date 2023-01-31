@@ -137,7 +137,7 @@ export default function AddAlLocationRuleSet(props) {
                       InputLabelProps={{
                         style: { fontFamily: 'Trattatello' }
                      }}
-                      style={{ color: '#000',
+                      style={{ 
                       fontFamily: 'Trattatello' }}
                     />
                   )}
@@ -148,7 +148,7 @@ export default function AddAlLocationRuleSet(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px',color: '#000',
+                  style={{ fontSize: '25px',
                   fontFamily: 'Trattatello' }}
                   fullWidth
                   id="Name"

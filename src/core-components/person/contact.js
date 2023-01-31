@@ -171,7 +171,7 @@ export default function ContactPerson() {
                   color: '#000',
                   fontFamily: 'Trattatello',
                   fontWeight: 'bold',
-                  fontSize: '28px'
+                  fontSize: '23px'
                 }}
               >
                 Contact
