@@ -41,7 +41,7 @@ export default function OrganizationTable() {
     });
 
   useEffect(() => {
-    searchOrganizations('TNMOFY');
+    searchOrganizations('EGBDF');
   }, []);
 
   const searchOrganizations = async value => {
@@ -103,7 +103,7 @@ export default function OrganizationTable() {
                     variant="outlined"
                     style={{ paddingTop: 4 }}
                     fullWidth
-                    defaultValue={'TNMOFY'}
+                    defaultValue={'EGBDF'}
                     placeholder="Search"
                     onChange={handleInputChange}
                     InputProps={{
