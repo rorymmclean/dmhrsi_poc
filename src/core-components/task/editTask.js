@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { CircularProgress, Grid, TextField } from '@material-ui/core';
@@ -12,11 +11,9 @@ import Card from 'components/Card/Card.jsx';
 import CardIcon from 'components/Card/CardIcon.jsx';
 import Button from 'components/CustomButtons/Button';
 import 'date-fns';
-
 import { editTaskThunk, getTaskDetailsThunk } from './api/task-thunk-api';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { Alert, Snackbar } from '@mui/material';
-import { getOrganizationListThunk } from 'core-components/organization/api/organization-thunk-api';
 import Autocomplete from '@mui/material/Autocomplete';
 import { getLaborcostsThunk } from 'core-components/laborcosts/laborcosts-thunk-api';
 import { getProjectListThunk } from 'core-components/project/api/project-thunk-api';
@@ -38,7 +35,7 @@ export default function EditTask() {
         }
       })
       .catch(error => console.error('getTaskDetailsThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   const [value, setValue] = React.useState(null);
@@ -59,7 +56,7 @@ export default function EditTask() {
         }
       })
       .catch(error => console.error('getPersonListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   const searchProjects = value => {
@@ -72,7 +69,7 @@ export default function EditTask() {
         }
       })
       .catch(error => console.error('getProjectListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -125,9 +122,9 @@ export default function EditTask() {
             <h4
               style={{
                 color: '#000',
-                fontFamily: 'Trattatello',
+                fontFamily: 'Papyrus',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               Edit Task
@@ -140,6 +137,7 @@ export default function EditTask() {
                   <TextField
                     variant="outlined"
                     required
+
                     style={{ fontSize: '25px' }}
                     fullWidth
                     id="TASK_NAME"
@@ -156,7 +154,7 @@ export default function EditTask() {
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
                         style={{
-                          fontFamily: 'Trattatello',
+                          fontFamily: 'Papyrus',
                           fontWeight: 'bold'
                         }}
                         onClick={() => {
@@ -172,7 +170,7 @@ export default function EditTask() {
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
                         style={{
-                          fontFamily: 'Trattatello',
+                          fontFamily: 'Papyrus',
                           fontWeight: 'bold'
                         }}
                         onClick={() => {
@@ -191,7 +189,7 @@ export default function EditTask() {
                               setOpen(true);
                             })
                             .catch(error => console.error('editTaskThunk', error))
-                            .finally(() => {});
+                            .finally(() => { });
                         }}
                         variant={'outlined'}
                         disabled={
@@ -202,9 +200,9 @@ export default function EditTask() {
                         }
                         color={
                           !value?.PROJECT_ID?.length ||
-                          !data?.TASK_NAME?.length ||
-                          !data?.SERVICE_TYPE?.length ||
-                          !data?.TASK_NBR?.length
+                            !data?.TASK_NAME?.length ||
+                            !data?.SERVICE_TYPE?.length ||
+                            !data?.TASK_NBR?.length
                             ? null
                             : 'info'
                         }
@@ -249,6 +247,7 @@ export default function EditTask() {
                   <TextField
                     variant="outlined"
                     required
+
                     style={{ fontSize: '25px' }}
                     fullWidth
                     id="SERVICE_TYPE"
@@ -263,10 +262,11 @@ export default function EditTask() {
                   <TextField
                     variant="outlined"
                     required
+
                     style={{ fontSize: '25px' }}
                     fullWidth
                     id="TASK_NBR"
-                    label="tASK #"
+                    label="TASK #"
                     name="TASK_NBR"
                     autoComplete="TASK_NBR"
                     value={data?.TASK_NBR}
@@ -276,6 +276,7 @@ export default function EditTask() {
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
+
                     style={{ fontSize: '25px' }}
                     fullWidth
                     id="FCC"
@@ -289,6 +290,7 @@ export default function EditTask() {
                 <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
+
                     style={{ fontSize: '25px' }}
                     fullWidth
                     id="SUPE"

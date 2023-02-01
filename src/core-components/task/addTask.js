@@ -1,13 +1,11 @@
 import React from 'react';
 import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
-
 import JPGrid from 'components/jp-grid/jp-grid';
 import JPModal from 'components/jp-modal/jp-modal';
 import { useMemo } from 'react';
 import { TextField } from '@material-ui/core';
 import { addTaskThunk } from './api/task-thunk-api';
-
 import Autocomplete from '@mui/material/Autocomplete';
 import { getProjectListThunk } from 'core-components/project/api/project-thunk-api';
 import { getLaborcostsThunk } from 'core-components/laborcosts/laborcosts-thunk-api';
@@ -35,7 +33,7 @@ export default function AddTask(props) {
         }
       })
       .catch(error => console.error('getLaborcostsThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   const searchProjects = value => {
@@ -48,7 +46,7 @@ export default function AddTask(props) {
         }
       })
       .catch(error => console.error('getProjectListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -99,7 +97,7 @@ export default function AddTask(props) {
                     setData({});
                   })
                   .catch(error => console.error('addTaskThunk', error))
-                  .finally(() => {});
+                  .finally(() => { });
               },
               isLoading: false,
               disabled:
@@ -110,10 +108,10 @@ export default function AddTask(props) {
                 !valueLaborcosts?.LABOR_COST_ID?.length,
               color:
                 !(value?.PROJECT_ID?.length || search_string?.length) ||
-                !data?.TASK_NAME?.length ||
-                !data?.SERVICE_TYPE?.length ||
-                !data?.TASK_NBR?.length ||
-                !valueLaborcosts?.LABOR_COST_ID?.length
+                  !data?.TASK_NAME?.length ||
+                  !data?.SERVICE_TYPE?.length ||
+                  !data?.TASK_NBR?.length ||
+                  !valueLaborcosts?.LABOR_COST_ID?.length
                   ? null
                   : 'info'
             }
@@ -125,10 +123,8 @@ export default function AddTask(props) {
                 <TextField
                   variant="outlined"
                   required
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="TASK_NAME"
                   label="Task Name"
@@ -164,10 +160,7 @@ export default function AddTask(props) {
                         fullWidth
                         variant="outlined"
                         required
-                        InputLabelProps={{
-                          style: { fontFamily: 'Trattatello' }
-                       }}
-                        style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                        style={{ fontSize: '25px' }}
                       />
                     )}
                   />
@@ -200,10 +193,8 @@ export default function AddTask(props) {
                       fullWidth
                       variant="outlined"
                       required
-                      InputLabelProps={{
-                        style: { fontFamily: 'Trattatello' }
-                     }}
-                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
+                      style={{ fontSize: '25px' }}
                     />
                   )}
                 />
@@ -213,10 +204,8 @@ export default function AddTask(props) {
                 <TextField
                   variant="outlined"
                   required
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="SERVICE_TYPE"
                   label="Service"
@@ -230,10 +219,8 @@ export default function AddTask(props) {
                 <TextField
                   variant="outlined"
                   required
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="TASK_NBR"
                   label="TASK #"
@@ -246,10 +233,8 @@ export default function AddTask(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="FCC"
                   label="FCC"
@@ -262,10 +247,8 @@ export default function AddTask(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="SUPE"
                   label="SUPE"
@@ -290,7 +273,7 @@ export default function AddTask(props) {
           <Button
             color={'info'}
             onClick={() => setShow(true)}
-            style={{ fontFamily: 'Trattatello', fontWeight: 'bold' }}
+            style={{ fontFamily: 'Papyrus', fontWeight: 'bold' }}
           >
             Add Task
           </Button>

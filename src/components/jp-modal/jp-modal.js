@@ -114,7 +114,7 @@ const JPModal = props => {
                       color: 'rgba(70,72,74,0.9)',
                       fontWeight: 'bold',
                       letterSpacing: '-0.48px',
-                      fontFamily: 'Trattatello'
+                    //  fontFamily: 'Papyrus',
                     }}
                   >
                     {title || defaultTitle}
@@ -191,7 +191,7 @@ const JPModal = props => {
                   type={button.type}
                   form={button.form}
                   style={{
-                    fontFamily: 'Trattatello',
+                    fontFamily: 'Papyrus',
                     fontWeight: 'bold'
                   }}
                 >

@@ -141,10 +141,8 @@ export default function AddTimeCard(props) {
                       fullWidth
                       variant="outlined"
                       required
-                      InputLabelProps={{
-                        style: { fontFamily: 'Trattatello' }
-                      }}
-                      style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+
+                      style={{ fontSize: '25px' }}
                     />
                   )}
                 />
@@ -153,9 +151,9 @@ export default function AddTimeCard(props) {
               <JPGrid item xs={12} sm={12}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label"
-                    style={{ fontFamily: 'Trattatello' }}
+
                   >Status</InputLabel>
-                  <Select    style={{ fontFamily: 'Trattatello' }}
+                  <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
 
@@ -182,10 +180,8 @@ export default function AddTimeCard(props) {
                       const day = moment(date).day();
                       return day !== 1;
                     }}
-                    style={{ width: '100% !important', fontSize: '25px', fontFamily: 'Trattatello' }}
-                    InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
+                    style={{ width: '100% !important', fontSize: '25px' }}
+
                     onChange={e => setData({ ...data, START_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
                   />
@@ -202,10 +198,8 @@ export default function AddTimeCard(props) {
                       const day = moment(date).day();
                       return day !== 5;
                     }}
-                    style={{ width: '100% !important', fontSize: '25px', fontFamily: 'Trattatello' }}
-                    InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
+                    style={{ width: '100% !important', fontSize: '25px' }}
+
                     value={data?.END_DATE}
                     onChange={e => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
@@ -227,7 +221,7 @@ export default function AddTimeCard(props) {
           <Button
             color={'info'}
             onClick={() => setShow(true)}
-            style={{ fontFamily: 'Trattatello', fontWeight: 'bold' }}
+            style={{ fontFamily: 'Papyrus', fontWeight: 'bold' }}
           >
             Add Timecard
           </Button>

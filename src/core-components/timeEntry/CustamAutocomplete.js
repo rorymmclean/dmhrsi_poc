@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
@@ -24,7 +24,7 @@ export default function CustamAutocomplete(props) {
           }
         })
         .catch(error => console.error('getTaskListThunkOne', error))
-        .finally(() => {});
+        .finally(() => { });
   };
   React.useEffect(() => {
     setValueTaskOne(task);
@@ -52,9 +52,9 @@ export default function CustamAutocomplete(props) {
       };
 
       ThunkDispatch(editTimeEntryTaskThunk(userObject))
-        .then(result => {})
+        .then(result => { })
         .catch(error => console.error('editTimeEntryTaskThunk', error))
-        .finally(() => {});
+        .finally(() => { });
     }
     if (RULE_ID && RULE_ID[0]) {
       const userObject = {
@@ -63,9 +63,9 @@ export default function CustamAutocomplete(props) {
       };
 
       ThunkDispatch(editTaskThunk(userObject))
-        .then(result => {})
+        .then(result => { })
         .catch(error => console.error('editTaskThunk', error))
-        .finally(() => {});
+        .finally(() => { });
     }
   };
 

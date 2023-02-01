@@ -84,14 +84,7 @@ export default function ProjectTable(props) {
       }
     }
   };
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: 'Trattatello',
-      fontWeight: 'bold',
-      fontSize: '28px',
-      color: '#000',
-    },
-  });
+  const theme = createMuiTheme({ style });
 
 
   return (
@@ -105,16 +98,18 @@ export default function ProjectTable(props) {
                   <CardIcon color="primary">
                     <AssignmentIcon />
                   </CardIcon>
-                  <h4
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Trattatello',
-                      fontWeight: 'bold',
-                      fontSize: '28px'
-                    }}
-                  >
-                    Projects
-                  </h4>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Typography
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Papyrus',
+                        fontWeight: 'bold',
+                        fontSize: '23px'
+                      }}
+                    >
+                      Projects
+                    </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
                   {' '}
@@ -128,9 +123,9 @@ export default function ProjectTable(props) {
                       onChange={handleInputChange}
                       defaultValue={NAME?.length ? NAME : 'Project - 00499'}
                       InputProps={{
-                        style: { fontFamily: 'Trattatello'},
+
                         startAdornment: (
-                          
+
                           <InputAdornment position="start">
                             <SearchIcon />
                           </InputAdornment>
@@ -173,41 +168,41 @@ export default function ProjectTable(props) {
 
                     !ID?.length
                       ? {
-                          field: 'view',
-                          editable: 'never',
-                          title: 'Edit',
-                          render: rowData => (
-                            <Button
-                              color={'info'}
-                              onClick={() => onClickStory(rowData)}
-                              style={{
-                                padding: '8px 4px 6px 8px',
-                                borderRadius: '20px'
-                              }}
-                            >
-                              <Edit onClick={() => onClickStory(rowData)} />
-                            </Button>
-                          )
-                        }
+                        field: 'view',
+                        editable: 'never',
+                        title: 'Edit',
+                        render: rowData => (
+                          <Button
+                            color={'info'}
+                            onClick={() => onClickStory(rowData)}
+                            style={{
+                              padding: '8px 4px 6px 8px',
+                              borderRadius: '20px'
+                            }}
+                          >
+                            <Edit onClick={() => onClickStory(rowData)} />
+                          </Button>
+                        )
+                      }
                       : null,
                     ID?.length
                       ? {
-                          field: 'view',
-                          editable: 'never',
-                          title: 'view',
-                          render: rowData => (
-                            <Button
-                              color={'info'}
-                              onClick={() => onClickStoryview(rowData)}
-                              style={{
-                                padding: '8px 4px 6px 8px',
-                                borderRadius: '20px'
-                              }}
-                            >
-                              <Search onClick={() => onClickStoryview(rowData)} />
-                            </Button>
-                          )
-                        }
+                        field: 'view',
+                        editable: 'never',
+                        title: 'view',
+                        render: rowData => (
+                          <Button
+                            color={'info'}
+                            onClick={() => onClickStoryview(rowData)}
+                            style={{
+                              padding: '8px 4px 6px 8px',
+                              borderRadius: '20px'
+                            }}
+                          >
+                            <Search onClick={() => onClickStoryview(rowData)} />
+                          </Button>
+                        )
+                      }
                       : null
                   ].filter(item => item)}
                   components={{

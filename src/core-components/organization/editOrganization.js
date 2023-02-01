@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { CircularProgress, Grid, TextField } from '@material-ui/core';
@@ -37,7 +36,7 @@ export default function EditOrganization() {
         }
       })
       .catch(error => console.error('getOrganizationDetailsThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   return (
@@ -66,7 +65,7 @@ export default function EditOrganization() {
           variant="filled"
           sx={{ width: '100%' }}
         >
-          Organization Update is Successful!
+          Organization Update Is Successful!
         </Alert>
       </Snackbar>
       <GridItem xs={12} sm={12} md={12}>
@@ -78,7 +77,7 @@ export default function EditOrganization() {
             <h4
               style={{
                 color: '#000',
-                fontFamily: 'Trattatello',
+                fontFamily: 'Papyrus',
                 fontWeight: 'bold',
                 fontSize: '28px'
               }}
@@ -93,10 +92,8 @@ export default function EditOrganization() {
                   <TextField
                     variant="outlined"
                     required
-                   InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
-                    style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+
+                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="Name"
                     label="Organization Name"
@@ -111,7 +108,7 @@ export default function EditOrganization() {
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
                         style={{
-                          fontFamily: 'Trattatello',
+                          fontFamily: 'Papyrus',
                           fontWeight: 'bold'
                         }}
                         onClick={() => {
@@ -127,7 +124,7 @@ export default function EditOrganization() {
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
                         style={{
-                          fontFamily: 'Trattatello',
+                          fontFamily: 'Papyrus',
                           fontWeight: 'bold'
                         }}
                         onClick={() => {
@@ -136,7 +133,7 @@ export default function EditOrganization() {
                               setOpen(true);
                             })
                             .catch(error => console.error('editOrganizationThunk', error))
-                            .finally(() => {});
+                            .finally(() => { });
                         }}
                         variant={'outlined'}
                         color={'info'}
@@ -147,30 +144,24 @@ export default function EditOrganization() {
                   </JPGrid>
                 </GridItem>
 
-                <GridItem xs={12} sm={3} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
                     required
-                   InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
-                    style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+                    style={{ fontSize: '25px' }}
                     fullWidth
-                    id="Type"
-                    label="Type"
-                    name="Type"
-                    autoComplete="Type"
+                    id="Service"
+                    label="Service"
+                    name="Service"
+                    autoComplete="Service"
                     value={data?.SERVICE}
                     onChange={e => setData({ ...data, SERVICE: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={3} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
-                    style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="UIC"
                     label="UIC"
@@ -180,13 +171,10 @@ export default function EditOrganization() {
                     onChange={e => setData({ ...data, UIC: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={3} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
-                    style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="DMIS"
                     label="DMIS"
@@ -196,29 +184,23 @@ export default function EditOrganization() {
                     onChange={e => setData({ ...data, DMIS: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={3} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
-                    style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="PARENT_DMIS"
-                    label="PARENT DMIS"
+                    label="UIC"
                     name="PARENT_DMIS"
                     autoComplete="PARENT_DMIS"
                     value={data?.PARENT_DMIS}
                     onChange={e => setData({ ...data, PARENT_DMIS: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={3} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
-                    style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="FCC"
                     label="FCC"
@@ -228,13 +210,10 @@ export default function EditOrganization() {
                     onChange={e => setData({ ...data, FCC: e.target.value })}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={3} style={{ marginTop: '16px', marginBottom: '16px' }}>
+                <GridItem xs={12} sm={4} style={{ marginTop: '16px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                   InputLabelProps={{
-                      style: { fontFamily: 'Trattatello' }
-                    }}
-                    style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
+                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="PEC"
                     label="PEC"
