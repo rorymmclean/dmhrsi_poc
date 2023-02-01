@@ -75,7 +75,9 @@ export default function TimeCardTable() {
       {
         title: 'Hours',
         field: 'HOURS',
-        customSort: (a, b) => a.HOURS?.localeCompare(b.HOURS),
+        customSort: (a, b) => {
+          return a?.HOURS - b?.HOURS;
+        },
         render: rowData => <Typography type={'h3'}>{`${rowData?.HOURS || 0} Hrs `}</Typography>
       },
       {
