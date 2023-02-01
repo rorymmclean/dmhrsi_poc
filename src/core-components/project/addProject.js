@@ -6,7 +6,6 @@ import JPModal from 'components/jp-modal/jp-modal';
 import { useMemo } from 'react';
 import { TextField } from '@material-ui/core';
 import { addProjectThunk } from './api/project-thunk-api';
-
 import Autocomplete from '@mui/material/Autocomplete';
 import { getOrganizationListThunk } from 'core-components/organization/api/organization-thunk-api';
 import { getPersonListThunk } from 'core-components/person/api/person-thunk-api';
@@ -34,7 +33,7 @@ export default function AddProject(props) {
         }
       })
       .catch(error => console.error('getPersonListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -59,7 +58,7 @@ export default function AddProject(props) {
         }
       })
       .catch(error => console.error('getOrganizationListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -78,7 +77,7 @@ export default function AddProject(props) {
     () => (
       <>
         <JPModal
-        
+
           defaultTitle="Project"
           title={`Add Project`}
           onClose={_ => {
@@ -108,7 +107,7 @@ export default function AddProject(props) {
                     setData({});
                   })
                   .catch(error => console.error('addProjectThunk', error))
-                  .finally(() => {});
+                  .finally(() => { });
               },
               isLoading: false,
               disabled:
@@ -118,9 +117,9 @@ export default function AddProject(props) {
                 !valueManager.PERSON_ID?.length,
               color:
                 !value?.ORGANIZATION_ID?.length ||
-                !data?.PROJECT_NBR?.length ||
-                !data?.PROJECT_NAME?.length ||
-                !valueManager.PERSON_ID?.length
+                  !data?.PROJECT_NBR?.length ||
+                  !data?.PROJECT_NAME?.length ||
+                  !valueManager.PERSON_ID?.length
                   ? null
                   : 'info'
             }
@@ -153,10 +152,7 @@ export default function AddProject(props) {
                       fullWidth
                       variant="outlined"
                       required
-                      InputLabelProps={{
-                        style: { fontFamily: 'Trattatello' }
-                     }}
-                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
                     />
                   )}
                 />
@@ -188,10 +184,7 @@ export default function AddProject(props) {
                       fullWidth
                       variant="outlined"
                       required
-                      InputLabelProps={{
-                        style: { fontFamily: 'Trattatello' }
-                     }}
-                      style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+
                     />
                   )}
                 />
@@ -201,10 +194,7 @@ export default function AddProject(props) {
                 <TextField
                   variant="outlined"
                   required
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="ProjectName"
                   label="Project Name"
@@ -218,10 +208,7 @@ export default function AddProject(props) {
                 <TextField
                   variant="outlined"
                   required
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="PROJECT_NBR"
                   label="Service"
@@ -246,7 +233,7 @@ export default function AddProject(props) {
           <Button
             color={'info'}
             onClick={() => setShow(true)}
-            style={{ fontFamily: 'Trattatello', fontWeight: 'bold' }}
+            style={{ fontFamily: 'Papyrus', fontWeight: 'bold' }}
           >
             Add Project
           </Button>

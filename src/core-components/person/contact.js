@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { Paper, Typography } from '@material-ui/core';
@@ -131,7 +130,7 @@ export default function ContactPerson() {
         <JPGrid item marginRight={3} marginLeft={3}>
           <Button
             style={{
-              fontFamily: 'Trattatello',
+              fontFamily: 'Papyrus',
               fontWeight: 'bold'
             }}
             onClick={() => {
@@ -169,16 +168,16 @@ export default function ContactPerson() {
               <h4
                 style={{
                   color: '#000',
-                  fontFamily: 'Trattatello',
+                  fontFamily: 'Papyrus',
                   fontWeight: 'bold',
-                  fontSize: '28px'
+                  fontSize: '23px'
                 }}
               >
                 Contact
               </h4>
             </CardHeader>
             <CardBody>
-              <MaterialTable  style={{fontFamily: 'Trattatello'}}
+              <MaterialTable
                 isLoading={isLoading}
                 columns={state.columns}
                 components={{

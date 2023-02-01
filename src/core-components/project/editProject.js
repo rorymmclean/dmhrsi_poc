@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { CircularProgress, Grid, TextField } from '@material-ui/core';
@@ -45,7 +44,7 @@ export default function EditProject() {
         }
       })
       .catch(error => console.error('getPersonListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -70,7 +69,7 @@ export default function EditProject() {
         }
       })
       .catch(error => console.error('getOrganizationListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -95,7 +94,7 @@ export default function EditProject() {
         }
       })
       .catch(error => console.error('getProjectDetailsThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   return (
@@ -136,9 +135,9 @@ export default function EditProject() {
             <h4
               style={{
                 color: '#000',
-                fontFamily: 'Trattatello',
+                fontFamily: 'Papyrus',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               Edit Project
@@ -192,7 +191,7 @@ export default function EditProject() {
                               setOpen(true);
                             })
                             .catch(error => console.error('editProjectThunk', error))
-                            .finally(() => {});
+                            .finally(() => { });
                         }}
                         disabled={
                           !value?.ORGANIZATION_ID?.length ||
@@ -202,9 +201,9 @@ export default function EditProject() {
                         }
                         color={
                           !value?.ORGANIZATION_ID?.length ||
-                          !data?.PROJECT_NBR?.length ||
-                          !data?.PROJECT_NAME?.length ||
-                          !(valueManager?.PERSON_ID?.length || data?.MANAGER_ID?.length)
+                            !data?.PROJECT_NBR?.length ||
+                            !data?.PROJECT_NAME?.length ||
+                            !(valueManager?.PERSON_ID?.length || data?.MANAGER_ID?.length)
                             ? null
                             : 'info'
                         }

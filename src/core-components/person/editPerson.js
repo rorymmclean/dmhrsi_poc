@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { CircularProgress, Grid, TextField } from '@material-ui/core';
@@ -16,7 +15,6 @@ import { editPersonThunk, getPersonDetailsThunk } from './api/person-thunk-api';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { Alert, Snackbar } from '@mui/material';
 import GetContactDetailsPrimary from 'core-components/contact/getContactDetailsPrimary';
-import ProjectTable from 'core-components/project/projectTable';
 import Assignments from './assignments';
 
 export default function EditPerson() {
@@ -74,8 +72,7 @@ export default function EditPerson() {
             </CardIcon>
             <h4
               style={{
-                color: '#000',
-                fontFamily: 'Trattatello',
+                fontFamily: 'Papyrus',
                 fontWeight: 'bold',
                 fontSize: '28px'
               }}
@@ -90,13 +87,7 @@ export default function EditPerson() {
                   <TextField
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px',fontFamily: 'Trattatello'}}
-                    InputProps={{
-                      style: { color: '#000',
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
+                    style={{ fontSize: '25px'}}
                     fullWidth
                     id="FirstName"
                     label="First Name"
@@ -110,13 +101,7 @@ export default function EditPerson() {
                   <TextField
                     variant="outlined"
                     required
-                    InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
-                    style={{fontFamily: 'Trattatello'}}                    fullWidth
+                    fullWidth
                     id="MiddleName"
                     label="Middle Name"
                     name="MiddleName"
@@ -129,13 +114,6 @@ export default function EditPerson() {
                   <TextField
                     variant="outlined"
                     required
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="LastName"
                     label="Last Name"
@@ -150,7 +128,7 @@ export default function EditPerson() {
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
                         style={{
-                          fontFamily: 'Trattatello',
+                          fontFamily: 'Papyrus',
                           fontWeight: 'bold'
                         }}
                         onClick={() => {
@@ -166,7 +144,7 @@ export default function EditPerson() {
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
                         style={{
-                          fontFamily: 'Trattatello',
+                          fontFamily: 'Papyrus',
                           fontWeight: 'bold'
                         }}
                         onClick={() => {
@@ -190,13 +168,6 @@ export default function EditPerson() {
                   <TextField
                     variant="outlined"
                     required
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="Service"
                     label="Service"
@@ -209,13 +180,6 @@ export default function EditPerson() {
                 <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="Grade"
                     label="Grade"
@@ -228,13 +192,6 @@ export default function EditPerson() {
                 <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="EDIPN"
                     label="EDIPN"
@@ -247,13 +204,6 @@ export default function EditPerson() {
                 <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="PersonType"
                     label="Person Type"
@@ -266,13 +216,6 @@ export default function EditPerson() {
                 <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="NationalId"
                     label="National ID"
@@ -285,13 +228,6 @@ export default function EditPerson() {
                 <GridItem xs={12} sm={3} style={{ marginTop: '8px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="CIVILLIAN_TITLE"
                     label="Civillian Title"
@@ -304,13 +240,6 @@ export default function EditPerson() {
                 <GridItem item xs={12} sm={3} style={{ marginTop: '8px', marginBottom: '16px' }}>
                   <TextField
                     variant="outlined"
-                    InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
-                      style={{fontFamily: 'Trattatello'}}
                     fullWidth
                     id="PERSONNEL_CAT"
                     label="Personnel Category"

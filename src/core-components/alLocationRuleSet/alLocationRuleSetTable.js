@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import MaterialTable from 'material-table';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { getArsetListThunk } from './api/AlLocationRuleSet-thunk-api';
@@ -28,16 +28,26 @@ export default function AlLocationRuleSetTable() {
       {
         title: 'Date',
         field: 'FIRST_NAME',
+        customSort: (a, b) => {
+          if (a.START_DATE === '' || a.START_DATE === null || a.START_DATE === undefined) return 1;
+          if (b.START_DATE === '' || b.START_DATE === null || b.START_DATE === undefined) return -1;
+
+          return new Date(a.START_DATE).getTime() < new Date(b.START_DATE).getTime() ? -1 : 1;
+        },
         render: rowData => (
           <Typography type={'h3'}>{`${rowData?.START_DATE} - ${rowData?.END_DATE}`}</Typography>
         )
       },
       {
+        customSort: (a, b) => a.NAME?.localeCompare(b.NAME),
+
         title: 'Name',
         field: 'NAME',
         render: rowData => <Typography type={'h3'}>{`${rowData?.NAME}`}</Typography>
       },
       {
+        customSort: (a, b) => a.FULLNAME?.localeCompare(b.FULLNAME),
+
         title: 'Person Name',
         field: 'FULLNAME',
         render: rowData => <Typography type={'h3'}>{`${rowData?.FULLNAME}`}</Typography>
@@ -141,17 +151,7 @@ export default function AlLocationRuleSetTable() {
       }
     }
   };
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: 'Trattatello',
-      fontWeight: 'bold',
-      fontSize: '28px',
-      color: '#000',
-    },
-  });
-
-
-
+  const theme = createMuiTheme({ style });
 
   const customersOptions = useMemo(
     () => (
@@ -192,16 +192,18 @@ export default function AlLocationRuleSetTable() {
                   <CardIcon color="primary">
                     <Diversity1Icon />
                   </CardIcon>
-                  <h4
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Trattatello',
-                      fontWeight: 'bold',
-                      fontSize: '27px'
-                    }}
-                  >
-                    Allocation Rule Set
-                  </h4>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Typography
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Papyrus',
+                        fontWeight: 'bold',
+                        fontSize: '22px'
+                      }}
+                    >
+                      Allocation Rule Set
+                    </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={6}>
                   {' '}
@@ -239,11 +241,6 @@ export default function AlLocationRuleSetTable() {
                         fullWidth
                         variant="outlined"
                         required
-                        InputLabelProps={{
-                          style: { fontFamily: 'Trattatello' }
-                       }}
-                        style={{ color: '#000',
-                        fontFamily: 'Trattatello' }}
                       />
                     )}
                   />

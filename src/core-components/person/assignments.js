@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-
-import { useHistory, useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { CircularProgress, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { CircularProgress, Grid, Paper} from '@material-ui/core';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import CardHeader from 'components/Card/CardHeader';
@@ -10,22 +9,16 @@ import CardBody from 'components/Card/CardBody';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Card from 'components/Card/Card.jsx';
 import CardIcon from 'components/Card/CardIcon.jsx';
-import Button from 'components/CustomButtons/Button';
 import 'date-fns';
-
 import MaterialTable from 'material-table';
 import { getPersonDetailsThunk } from './api/person-thunk-api';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { getAssignmentDetailsThunk } from 'core-components/assignment/api/assignment-thunk-api';
 
 export default function Assignments() {
-  const history = useHistory();
   const location = useLocation();
-
   const [isLoading, setIsLoading] = React.useState(true);
-
   const [data, setData] = React.useState({});
-
   const [state, setState] = React.useState({
     columns: [
       { title: 'Task', field: 'TASK_NAME' },
@@ -44,7 +37,7 @@ export default function Assignments() {
         }
       })
       .catch(error => console.error('getPersonDetailsThunk', error))
-      .finally(() => {});
+      .finally(() => { });
 
     ThunkDispatch(getAssignmentDetailsThunk({ search_string: location.pathname.split('/')[3] }))
       .then(result => {
@@ -72,7 +65,7 @@ export default function Assignments() {
         id: data.id
       };
     });
-    
+
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -84,9 +77,9 @@ export default function Assignments() {
             <h4
               style={{
                 color: '#000',
-                fontFamily: 'Trattatello',
+                fontFamily: 'Papyrus',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               Assignments
@@ -95,7 +88,7 @@ export default function Assignments() {
           {Object.keys(data).length ? (
             <CardBody>
               <GridContainer>
-                <MaterialTable style={{fontFamily: 'Trattatello'}}
+                <MaterialTable
                   isLoading={isLoading}
                   columns={state.columns}
                   components={{

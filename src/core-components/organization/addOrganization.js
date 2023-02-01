@@ -1,8 +1,6 @@
 import React from 'react';
 import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
-
-import { useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import JPModal from 'components/jp-modal/jp-modal';
 import { useMemo } from 'react';
@@ -50,7 +48,7 @@ export default function AddOrganization(props) {
                     setData({});
                   })
                   .catch(error => console.error('addOrganizationThunk', error))
-                  .finally(() => {});
+                  .finally(() => { });
               },
               isLoading: false,
               disabled: !data?.SERVICE?.length || !data?.ORGANIZATION_NAME?.length,
@@ -64,10 +62,7 @@ export default function AddOrganization(props) {
                 <TextField
                   variant="outlined"
                   required
-                   InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="Name"
                   label="Organization Name"
@@ -81,10 +76,7 @@ export default function AddOrganization(props) {
                 <TextField
                   variant="outlined"
                   required
-                   InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="Type"
                   label="Type"
@@ -97,10 +89,7 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                   InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="UIC"
                   label="UIC"
@@ -113,10 +102,7 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                   InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="DMIS"
                   label="DMIS"
@@ -129,13 +115,10 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                   InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="PARENT_DMIS"
-                  label="PARENT DMIS"
+                  label="UIC"
                   name="PARENT_DMIS"
                   autoComplete="PARENT_DMIS"
                   value={data?.PARENT_DMIS}
@@ -145,10 +128,7 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                   InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="FCC"
                   label="FCC"
@@ -161,10 +141,7 @@ export default function AddOrganization(props) {
               <JPGrid item xs={12} sm={12}>
                 <TextField
                   variant="outlined"
-                   InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-                  style={{ fontSize: '25px',  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="PEC"
                   label="PEC"
@@ -189,7 +166,7 @@ export default function AddOrganization(props) {
           <Button
             color={'info'}
             onClick={() => setShow(true)}
-            style={{ fontFamily: 'Trattatello', fontWeight: 'bold' }}
+            style={{ fontFamily: 'Papyrus', fontWeight: 'bold' }}
           >
             Add Organization
           </Button>

@@ -69,17 +69,7 @@ export default function PersonTable() {
       }
     }
   };
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: 'Trattatello',
-      fontWeight: 'bold',
-      fontSize: '28px',
-      color: '#000',
-    },
-  });
-
-
-
+  const theme = createMuiTheme({ style });
 
   return (
     <div className="m-sm-30">
@@ -92,16 +82,18 @@ export default function PersonTable() {
                   <CardIcon color="primary">
                     <PersonIcon />
                   </CardIcon>
-                  <h4
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Trattatello',
-                      fontWeight: 'bold',
-                      fontSize: '28px'
-                    }}
-                  >
-                    Persons
-                  </h4>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Typography
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Papyrus',
+                        fontWeight: 'bold',
+                        fontSize: '23px'
+                      }}
+                    >
+                      Persons
+                    </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
                   <TextField
@@ -113,7 +105,6 @@ export default function PersonTable() {
                     onChange={handleInputChange}
                     defaultValue={'Deedra Courtney Robertson'}
                     InputProps={{
-                      style: {  fontFamily: 'Trattatello' },
                       startAdornment: (
                         <InputAdornment position="start">
                           <SearchIcon />
@@ -147,13 +138,56 @@ export default function PersonTable() {
                       render: rowData => (
                         <Typography
                           type={'h3'}
-                        >{`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} ${rowData.LAST_NAME}`}</Typography>
+                        >{`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} 
+                        
+                        ${rowData.LAST_NAME}`}
+                        </Typography>
+                      )
+                    },
+                    {
+                      title: ' Edipn',
+                      field: 'EDIPN',
+                      render: rowData => (
+                        <Typography
+                          type={'h3'}
+                        >{`${rowData.EDIPN}`}
+                        </Typography>
+                      )
+                    },
+                    {
+                      title: ' Person Type',
+                      field: 'PERSON_TYPE,',
+                      render: rowData => (
+                        <Typography
+                          type={'h3'}
+                        >{`${rowData.PERSON_TYPE}`}
+                        </Typography>
+                      )
+                    },
+
+                    {
+                      title: ' Personnel Cat',
+                      field: 'PERSONNEL_CAT',
+                      render: rowData => (
+                        <Typography
+                          type={'h3'}
+                        >{`${rowData.PERSONNEL_CAT}`}
+                        </Typography>
+                      )
+                    },
+                    {
+                      title: ' Civillian Title',
+                      field: 'CIVILLIAN_TITLE',
+                      render: rowData => (
+                        <Typography
+                          type={'h3'}
+                        >{`${rowData.CIVILLIAN_TITLE}`}
+                        </Typography>
                       )
                     },
                     { title: 'Type', field: 'SERVICE' },
                     { title: 'Rank', field: 'GRADE' },
 
-                    { title: 'Location', field: 'LOCATION' },
                     {
                       field: 'view',
                       editable: 'never',

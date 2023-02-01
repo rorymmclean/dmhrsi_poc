@@ -87,9 +87,9 @@ export default function AlLocationRuleSetWorkSchedule(props) {
     }
     if (ttimeEntryList[index]?.task?.TASK_ID || ref.current?.TASK_ID || types == 'HOURS')
       ThunkDispatch(addRuleSetThunk(userObject))
-        .then(result => {})
+        .then(result => { })
         .catch(error => console.error('addRuleSetThunk', error))
-        .finally(() => {});
+        .finally(() => { });
   };
 
   const editInput = (val, value) => {
@@ -112,9 +112,9 @@ export default function AlLocationRuleSetWorkSchedule(props) {
     }
 
     ThunkDispatch(editRuleSetThunk(userObject))
-      .then(result => {})
+      .then(result => { })
       .catch(error => console.error('editRuleSetThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
 
   return !isLoading ? (
@@ -128,21 +128,21 @@ export default function AlLocationRuleSetWorkSchedule(props) {
       {types != 'HOURS' ? (
         <>
           <JPGrid item xs={12} sm={2} marginRight={'6.2px'} marginBottom={'6.2px'}>
-            <Typography style={{ textAlign: 'center' }}>Task</Typography>
+            <Typography style={{ textAlign: 'center', fontFamily: 'Papyrus', fontWeight: 'bold', marginTop: '3vh' }}>Task</Typography>
           </JPGrid>
 
           <JPGrid item xs={12} sm={1} minWidth={140} marginRight={'6.2px'} marginBottom={'6.2px'}>
-            <Typography style={{ textAlign: 'center' }}>Type</Typography>
+            <Typography style={{ textAlign: 'center', fontFamily: 'Papyrus', fontWeight: 'bold', marginTop: '3vh' }}>Type</Typography>
           </JPGrid>
         </>
       ) : (
         <JPGrid item xs={12} sm={3} marginRight={'6.2px'} marginBottom={'6.2px'}>
-          <Typography style={{ textAlign: 'center' }}></Typography>
+          <Typography style={{ textAlign: 'center', fontFamily: 'Papyrus', fontWeight: 'bold', marginTop: '3vh' }}></Typography>
         </JPGrid>
       )}
       {daysHeader.map((day, index) => (
         <JPGrid item xs={12} sm={1} key={index} marginLeft={'6.2px'} marginBottom={'6.2px'}>
-          <Typography style={{ textAlign: 'center' }}>{day}</Typography>
+          <Typography style={{ textAlign: 'center', fontFamily: 'Papyrus', marginTop: '3vh' }}>{day}</Typography>
         </JPGrid>
       ))}
       {!isLoading ? (
@@ -162,7 +162,15 @@ export default function AlLocationRuleSetWorkSchedule(props) {
                 ) : (
                   <JPGrid item xs={12} sm={3} marginRight={'6.2px'} marginBottom={'6.2px'}>
                     {' '}
-                    <Typography style={{ textAlign: 'center' }}>Work Schedule:</Typography>
+                    <Typography style={{
+                      textAlign: 'center',
+                      color: '#000',
+                      fontFamily: 'Papyrus',
+                      fontWeight: 'bold',
+                      fontSize: '18px',
+                      marginTop: '1vh'
+
+                    }}>Work Schedule:</Typography>
                   </JPGrid>
                 )
               ) : null}
@@ -172,6 +180,7 @@ export default function AlLocationRuleSetWorkSchedule(props) {
 
                 return (
                   <JPGrid
+
                     item
                     xs={12}
                     sm={1}
@@ -182,14 +191,18 @@ export default function AlLocationRuleSetWorkSchedule(props) {
                     {Object.keys(ccc).length ? (
                       <TextField
                         variant="outlined"
-                        style={{ fontSize: '25px' }}
+                        style={{ fontSize: '25px', }}
                         fullWidth
                         defaultValue={ccc?.UNITS}
                         InputProps={{
                           endAdornment: (
-                            <InputAdornment position="end">
+                            <InputAdornment position="end" style={{
+                              fontSize: '14px',
+                              fontWeight: 'bold',
+
+                            }}>
                               {' '}
-                              {types != 'HOURS' ? '%' : null}
+                              {types !== 'HOURS' ? '%' : null}
                             </InputAdornment>
                           )
                         }}
@@ -204,9 +217,13 @@ export default function AlLocationRuleSetWorkSchedule(props) {
                         disabled={disabled}
                         InputProps={{
                           endAdornment: (
-                            <InputAdornment position="end">
+                            <InputAdornment position="end" style={{
+                              fontSize: '14px',
+                              fontWeight: 'bold',
+
+                            }}>
                               {' '}
-                              {types != 'HOURS' ? '%' : null}
+                              {types !== 'HOURS' ? '%' : null}
                             </InputAdornment>
                           )
                         }}
@@ -240,7 +257,7 @@ export default function AlLocationRuleSetWorkSchedule(props) {
             {!disabled ? (
               <Button
                 style={{
-                  fontFamily: 'Trattatello',
+                  fontFamily: 'Papyrus',
                   fontWeight: 'bold'
                 }}
                 color={!ref.current?.TASK_ID?.length || false ? 'info' : null}

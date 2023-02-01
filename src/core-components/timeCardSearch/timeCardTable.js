@@ -6,6 +6,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Card from 'components/Card/Card';
 import CardIcon from 'components/Card/CardIcon';
+import CampaignIcon from '@mui/icons-material/Campaign';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
@@ -28,6 +29,12 @@ export default function TimeCardTable() {
     columns: [
       {
         title: 'Date',
+        customSort: (a, b) => {
+          if (a.START_DATE === '' || a.START_DATE === null || a.START_DATE === undefined) return 1;
+          if (b.START_DATE === '' || b.START_DATE === null || b.START_DATE === undefined) return -1;
+
+          return new Date(a.START_DATE).getTime() < new Date(b.START_DATE).getTime() ? -1 : 1;
+        },
         field: 'FIRST_NAME',
         render: rowData => (
           <Typography type={'h3'}>{`${rowData?.START_DATE} - ${rowData?.END_DATE}`}</Typography>
@@ -45,6 +52,8 @@ export default function TimeCardTable() {
       {
         title: 'Status',
         field: 'FIRST_NAME',
+        customSort: (a, b) => a.STATUS?.localeCompare(b.STATUS),
+
         render: rowData => {
           let s = '';
           let color = '';
@@ -66,6 +75,7 @@ export default function TimeCardTable() {
       {
         title: 'Hours',
         field: 'HOURS',
+        customSort: (a, b) => a.HOURS?.localeCompare(b.HOURS),
         render: rowData => <Typography type={'h3'}>{`${rowData?.HOURS || 0} Hrs `}</Typography>
       },
       {
@@ -166,14 +176,7 @@ export default function TimeCardTable() {
       }
     }
   };
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: 'Trattatello',
-      fontWeight: 'bold',
-      fontSize: '28px',
-      color: '#000'
-    }
-  });
+  const theme = createMuiTheme({ style });
 
   const customersOptions = useMemo(
     () => (
@@ -212,42 +215,33 @@ export default function TimeCardTable() {
             <CardHeader color="primary" icon>
               <JPGrid container direction="row" alignItems="flex-end" justify="space-between">
                 <JPGrid item xs={6}>
-                  <CardIcon color="primary">
+                  <CampaignIcon color="primary">
                     <ScheduleIcon />
-                  </CardIcon>
-                  <h4
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Trattatello',
-                      fontWeight: 'bold',
-                      fontSize: '28px'
-                    }}
-                  >
-                    Announcements{' '}
-                  </h4>
+                  </CampaignIcon>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Typography
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Papyrus',
+                        fontWeight: 'bold',
+                        fontSize: '23px'
+                      }}
+                    >
+                      Announcements
+                    </Typography>
+                  </GridItem>
                 </JPGrid>
-                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end">
-                  <AddTimeCard
-                    onSave={result => {
-                      setState(prevState => {
-                        const data = [...prevState.data];
-                        data.unshift(result);
-
-                        return { ...prevState, data };
-                      });
-                    }}
-                  />
-                </JPGrid>
+                <JPGrid item xs={6} container alignItems="flex-end" justify="flex-end"></JPGrid>
               </JPGrid>
             </CardHeader>
             <CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={12} style={{ fontSize: '24px', margin: '16px 0px' }}>
+                <GridItem xs={12} sm={12} md={12} style={{ fontSize: '20px', margin: '16px 0px' }}>
                   <span style={{ padding: '4px 8px', background: '#00acc1', color: '#fff' }}>
-                    dismiss
+                    Dismiss
                   </span>{' '}
-                  those working on Project-245, please notify your timekeeper of any upcoming
-                  vacation time.
+                  “For those working on Project-245, please notify your timekeeper of any upcoming
+                  vacation time.”
                 </GridItem>
               </GridContainer>
             </CardBody>
@@ -261,16 +255,18 @@ export default function TimeCardTable() {
                   <CardIcon color="primary">
                     <ScheduleIcon />
                   </CardIcon>
-                  <h4
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Trattatello',
-                      fontWeight: 'bold',
-                      fontSize: '28px'
-                    }}
-                  >
-                    Timecards
-                  </h4>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Typography
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Papyrus',
+                        fontWeight: 'bold',
+                        fontSize: '23px'
+                      }}
+                    >
+                      Timecards
+                    </Typography>
+                  </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
                   <Autocomplete
@@ -304,7 +300,7 @@ export default function TimeCardTable() {
                       <TextField
                         {...params}
                         InputLabelProps={{
-                          style: { fontFamily: 'Trattatello', ...params.InputLabelProps.style }
+                          style: { ...params.InputLabelProps.style }
                         }}
                         label="Person Name"
                         fullWidth

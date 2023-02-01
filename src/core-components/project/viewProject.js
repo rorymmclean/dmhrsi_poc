@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { CircularProgress, Grid, TextField } from '@material-ui/core';
@@ -7,12 +6,11 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
-import Edit from '@material-ui/icons/Edit';
 import Card from 'components/Card/Card.jsx';
 import CardIcon from 'components/Card/CardIcon.jsx';
 import Button from 'components/CustomButtons/Button';
 import 'date-fns';
-import { editProjectThunk, getProjectDetailsThunk } from './api/project-thunk-api';
+import { getProjectDetailsThunk } from './api/project-thunk-api';
 import { ThunkDispatch } from 'thunk-dispatch';
 import { Alert, Snackbar } from '@mui/material';
 import { getOrganizationListThunk } from 'core-components/organization/api/organization-thunk-api';
@@ -46,7 +44,7 @@ export default function ViewProject() {
         }
       })
       .catch(error => console.error('getPersonListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -71,7 +69,7 @@ export default function ViewProject() {
         }
       })
       .catch(error => console.error('getOrganizationListThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -96,7 +94,7 @@ export default function ViewProject() {
         }
       })
       .catch(error => console.error('getProjectDetailsThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   return (
@@ -137,9 +135,9 @@ export default function ViewProject() {
             <h4
               style={{
                 color: '#000',
-                fontFamily: 'Trattatello',
+                fontFamily: 'Papyrus',
                 fontWeight: 'bold',
-                fontSize: '28px'
+                fontSize: '23px'
               }}
             >
               View Project
@@ -150,9 +148,9 @@ export default function ViewProject() {
               <GridContainer xs={12} sm={12} md={12}>
                 <GridItem item xs={12} sm={10}>
                   <TextField
+                    style={{ fontSize: '25px' }}
                     variant="outlined"
                     required
-                    style={{ fontSize: '25px' }}
                     fullWidth
                     id="PROJECT_NAME"
                     disabled
@@ -168,6 +166,10 @@ export default function ViewProject() {
                   <JPGrid container direction={'row'} justify={'flex-end'}>
                     <JPGrid item marginRight={3} marginLeft={3}>
                       <Button
+                        style={{
+                          fontFamily: 'Papyrus',
+                          fontWeight: 'bold',
+                        }}
                         onClick={() => {
                           history.push({
                             pathname: `/admin/project`
@@ -189,6 +191,7 @@ export default function ViewProject() {
                     options={options}
                     autoComplete
                     disabled
+
                     includeInputInList
                     filterSelectedOptions
                     value={value}
@@ -207,6 +210,8 @@ export default function ViewProject() {
                         fullWidth
                         variant="outlined"
                         required
+
+                        style={{ fontSize: '25px' }}
                       />
                     )}
                   />
@@ -239,6 +244,8 @@ export default function ViewProject() {
                         fullWidth
                         variant="outlined"
                         required
+
+                        style={{ fontSize: '25px' }}
                       />
                     )}
                   />
