@@ -88,7 +88,8 @@ export default function OrganizationTable() {
                         color: '#000',
                         fontFamily: 'Papyrus',
                         fontWeight: 'bold',
-                        fontSize: '23px'
+                        fontSize: '23px',
+                        whitespace: 'nowrap'
                       }}
                     >
                       Organizations

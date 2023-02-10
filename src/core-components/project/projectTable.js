@@ -5,7 +5,7 @@ import Edit from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-import Card from 'components/Card/Card';
+import Card from 'components/Card/Card'; 
 import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
@@ -19,13 +19,16 @@ import AddProject from './addProject';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { getProjectListAPI } from './api/project-api';
 import { Search } from '@material-ui/icons';
+import JPModal from 'components/jp-modal/jp-modal';
+import EditProjectOrg from 'core-components/project/editProjectOrg';
 
 export default function ProjectTable(props) {
-  const { ID, NAME } = props;
+  const { ID, NAME,MODE} = props;
 
-  const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [show, setShow] = React.useState(false);
+  const [id, setID] = React.useState('');
+  const history = useHistory();
   const onClickStory = item => {
     history.push({
       pathname: `/admin/editProject/${item?.PROJECT_ID}`,
@@ -54,7 +57,7 @@ export default function ProjectTable(props) {
   useEffect(() => {
     if (ID?.length) searchProjects(ID);
     else {
-      searchProjects('Project - 00499');
+      searchProjects('Project - 0049');
     }
   }, [ID]);
 
@@ -85,7 +88,6 @@ export default function ProjectTable(props) {
     }
   };
   const theme = createMuiTheme({ style });
-
 
   return (
     <div className="m-sm-30">
@@ -121,11 +123,9 @@ export default function ProjectTable(props) {
                       fullWidth
                       placeholder="Search"
                       onChange={handleInputChange}
-                      defaultValue={NAME?.length ? NAME : 'Project - 00499'}
+                      defaultValue={NAME?.length ? NAME : 'Project - 0049'}
                       InputProps={{
-
                         startAdornment: (
-
                           <InputAdornment position="start">
                             <SearchIcon />
                           </InputAdornment>
@@ -168,41 +168,44 @@ export default function ProjectTable(props) {
 
                     !ID?.length
                       ? {
-                        field: 'view',
-                        editable: 'never',
-                        title: 'Edit',
-                        render: rowData => (
-                          <Button
-                            color={'info'}
-                            onClick={() => onClickStory(rowData)}
-                            style={{
-                              padding: '8px 4px 6px 8px',
-                              borderRadius: '20px'
-                            }}
-                          >
-                            <Edit onClick={() => onClickStory(rowData)} />
-                          </Button>
-                        )
-                      }
+                          field: 'view',
+                          editable: 'never',
+                          title: 'Edit',
+                          render: rowData => (
+                            <Button
+                              color={'info'}
+                              onClick={() => {
+                                setID(rowData?.PROJECT_ID);
+                                MODE === "Model" ? setShow(true) : onClickStory(rowData);
+                              }}
+                              style={{
+                                padding: '8px 4px 6px 8px',
+                                borderRadius: '20px'
+                              }}
+                            >
+                              <Edit />
+                            </Button>
+                          )
+                        }
                       : null,
                     ID?.length
                       ? {
-                        field: 'view',
-                        editable: 'never',
-                        title: 'view',
-                        render: rowData => (
-                          <Button
-                            color={'info'}
-                            onClick={() => onClickStoryview(rowData)}
-                            style={{
-                              padding: '8px 4px 6px 8px',
-                              borderRadius: '20px'
-                            }}
-                          >
-                            <Search onClick={() => onClickStoryview(rowData)} />
-                          </Button>
-                        )
-                      }
+                          field: 'view',
+                          editable: 'never',
+                          title: 'view',
+                          render: rowData => (
+                            <Button
+                              color={'info'}
+                              onClick={() => onClickStoryview(rowData)}
+                              style={{
+                                padding: '8px 4px 6px 8px',
+                                borderRadius: '20px'
+                              }}
+                            >
+                              <Search onClick={() => onClickStoryview(rowData)} />
+                            </Button>
+                          )
+                        }
                       : null
                   ].filter(item => item)}
                   components={{
@@ -225,7 +228,18 @@ export default function ProjectTable(props) {
             </CardBody>
           </Card>
         </GridItem>
+        <JPModal
+          onClose={_ => {
+            setShow(false);
+          }}
+          closeButton={true}
+          fullWidth
+          maxWidth="lg"
+          open={show}
+        >
+          <EditProjectOrg projectId={id} />
+        </JPModal>
       </GridContainer>
-    </div>
+    </div> 
   );
 }

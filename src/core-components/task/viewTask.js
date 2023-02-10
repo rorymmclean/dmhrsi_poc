@@ -18,10 +18,9 @@ import { getLaborcostsThunk } from 'core-components/laborcosts/laborcosts-thunk-
 import { getProjectListThunk } from 'core-components/project/api/project-thunk-api';
 import { Search } from '@material-ui/icons';
 
-export default function ViewTask() {
+export default function ViewTask(props) {
   const history = useHistory();
   const location = useLocation();
-
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({});
 

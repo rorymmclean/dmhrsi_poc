@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { CircularProgress, Grid, TextField } from '@material-ui/core';
+import { CircularProgress, Grid, TextField, Typography } from '@material-ui/core';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import CardHeader from 'components/Card/CardHeader';
@@ -16,13 +16,118 @@ import { editOrganizationThunk, getOrganizationDetailsThunk } from './api/organi
 import { Alert, Snackbar } from '@mui/material';
 import GetContactDetailsPrimary from 'core-components/contact/getContactDetailsPrimary';
 import ProjectTable from 'core-components/project/projectTable';
+import { Tabs, Tab } from '@material-ui/core';
+import PersonTable from 'core-components/person/personTable';
+import defaultImage from "assets/img/under.jpeg";
+import { makeStyles } from '@material-ui/core/styles';
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
 
 export default function EditOrganization() {
   const history = useHistory();
   const location = useLocation();
-
   const [data, setData] = React.useState({});
   const [open, setOpen] = React.useState(false);
+
+
+  const useStyles = makeStyles({
+    root: {
+      '& .MuiTabs-indicator': {
+        backgroundColor: 'blue',
+      },
+    },
+  });
+  const classes = useStyles();
+
+
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+
+  function TabPanel(props) {
+
+    const { children, value, index, ...other } = props;
+
+    return (
+      <GridItem xs={12} sm={12}
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <GridItem xs={12} sm={12} style={{ marginTop: '16px', marginBottom: '16px' }}>
+
+            {index === 1 ? (
+              <>
+                <PersonTable
+                  ID={location.pathname.split('/')[0]}
+                  NAME={data?.ORGANIZATION_NAME}
+                  MODE={"Model"}
+                />
+              </>
+            ) : index === 2 ? (
+              <>
+       
+
+
+              <Stack sx={{ width: '100%', color: 'grey.500',position: 'center', bottom: 10 }} >
+
+<LinearProgress color="secondary" />
+<LinearProgress color="success" />
+<LinearProgress color="inherit" />
+
+<LinearProgress color="secondary" />
+<LinearProgress color="success" />
+<LinearProgress color="inherit" />
+<Typography style={{fontFamily:'Papyrus',fontWeight:'bold',fontSize:'30px',textAlign:'center',color:'black'}}>Under Construction...</Typography>
+<LinearProgress color="secondary" />
+<LinearProgress color="success" />
+<LinearProgress color="inherit" />
+<LinearProgress color="secondary" />
+<LinearProgress color="success" />
+<LinearProgress color="inherit" />
+
+
+
+
+</Stack>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  
+                  
+                  <img src={defaultImage} width={'55%'} />
+                  
+                </div>
+              </>
+
+            ) : (
+              <ProjectTable
+                ID={location.pathname.split('/')[0]}
+                NAME={data?.ORGANIZATION_NAME}
+                MODE={"Model"}
+              />
+            )
+
+            }
+          </GridItem>
+        )}
+
+      </GridItem>
+    );
+  }
+
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+      className: 'PrivateTabIndicator-color'
+    };
+  }
+
 
   useEffect(() => {
     ThunkDispatch(getOrganizationDetailsThunk({ id: location.pathname.split('/')[3] }))
@@ -224,12 +329,32 @@ export default function EditOrganization() {
                   />
                 </GridItem>
                 <GetContactDetailsPrimary ENTITITY_TYPE={'ORG'} />
-                <GridItem xs={12} sm={12} style={{ marginTop: '16px', marginBottom: '16px' }}>
-                  <ProjectTable
-                    ID={location.pathname.split('/')[3]}
-                    NAME={data?.ORGANIZATION_NAME}
-                  />
+
+                <GridItem xs={12} sm={12}  >
+                  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
+                    classes={{ root: classes.root }}
+
+                    style={{ width: '100%', paddingTop: '1vh', border: '0.5px solid #cfcccc', borderRadius: '5px', backgroundColor: '#f0f0f0' }}
+                    textColor="primary"
+                    centered
+                  >
+                    <Tab label="Manage &nbsp; Projects" style={{ fontFamily: 'Papyrus', fontWeight: 'bold', fontSize: '17px', color: 'black', marginRight: '25px' }} {...a11yProps(0)} />
+                    <Tab label="Manage &nbsp; People" style={{ fontFamily: 'Papyrus', fontWeight: 'bold', fontSize: '17px', color: 'black', marginRight: '25px' }}  {...a11yProps(1)} />
+                    <Tab label="Manage &nbsp; LCA " style={{ fontFamily: 'Papyrus', fontWeight: 'bold', fontSize: '17px', color: 'black', marginRight: '25px' }} {...a11yProps(2)} />
+
+                  </Tabs>
+                  <TabPanel value={value} index={0} >
+                    Projects content
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    Task content
+                  </TabPanel>
+                  <TabPanel value={value} index={2}>
+                    Persons content
+                  </TabPanel>
+
                 </GridItem>
+
               </GridContainer>
             </CardBody>
           ) : (

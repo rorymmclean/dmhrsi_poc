@@ -17,12 +17,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import _ from 'lodash';
 import AddTask from './addTask';
 import { Search } from '@material-ui/icons';
-
 import TaskIcon from '@material-ui/icons/AssignmentLate';
 import { getTaskListAPI } from './api/task-api';
-export default function TaskTable(props) {
-  const { search_string, PROJECT_NAME } = props;
 
+export default function TaskTable(props) {
+  const { search_string, TASK_NAME } = props;
+  const { ID, NAME } = props;
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -42,11 +42,11 @@ export default function TaskTable(props) {
   const [data, setData] = React.useState([]);
 
   useEffect(() => {
-    if (search_string?.length) searchTasks(search_string);
+    if (ID?.length) searchTasks(ID);
     else {
       searchTasks('01175');
     }
-  }, [search_string]);
+  }, [ID]);
 
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
@@ -66,6 +66,7 @@ export default function TaskTable(props) {
     } else {
       setData([]);
     }
+    setIsLoading(false);
   };
 
   const handleInputChange = ({ target }) => {
@@ -109,8 +110,8 @@ export default function TaskTable(props) {
                   </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
-                  {' '}
-                  {!search_string?.length ? (
+                {' '}
+                  {!ID?.length ? (
                     <TextField
                       type="search"
                       variant="outlined"
@@ -118,7 +119,7 @@ export default function TaskTable(props) {
                       fullWidth
                       placeholder="Search"
                       onChange={handleInputChange}
-                      defaultValue={PROJECT_NAME?.length ? PROJECT_NAME : '01175'}
+                      defaultValue={NAME?.length ? NAME : '01175'}
                       InputProps={{
 
                         startAdornment: (
@@ -156,7 +157,9 @@ export default function TaskTable(props) {
                     { title: 'FCC', field: 'FCC' },
                     { title: 'SUPE', field: 'SUPE' },
                     { title: 'Labor Cost', field: 'LABOR_COST_ID' },
-                    !search_string?.length
+                  
+                    
+                    !ID?.length
                       ? {
                         field: 'view',
                         editable: 'never',
@@ -175,7 +178,7 @@ export default function TaskTable(props) {
                         )
                       }
                       : null,
-                    search_string?.length
+                      ID?.length
                       ? {
                         field: 'view',
                         editable: 'never',

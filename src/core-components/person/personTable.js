@@ -18,14 +18,27 @@ import _ from 'lodash';
 import AddPerson from './addPerson';
 import PersonIcon from '@mui/icons-material/Person';
 import { getPersonListAPI } from './api/person-api';
+import EditPerson from './editPerson';
+import EditPersonOrg from './editPersonOrg'; 
+import JPModal from 'components/jp-modal/jp-modal';
 
-export default function PersonTable() {
+export default function PersonTable(props) {
+  const { ID, NAME,MODE} = props;
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
+  const [show, setShow] = React.useState(false);
+  const [id, setID] = React.useState('');
+  
 
   const onClickStory = item => {
     history.push({
       pathname: `/admin/editPerson/${item?.PERSON_ID}`,
+      state: { id: item?.PERSON_ID }
+    });
+  };
+  const onClickStoryview = item => {
+    history.push({
+      pathname: `/admin/viewPerson/${item?.PERSON_ID}`,
       state: { id: item?.PERSON_ID }
     });
   };
@@ -34,15 +47,20 @@ export default function PersonTable() {
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
       return {
-        ...data,
+        ...data, 
         name: data.name,
         id: data.id
       };
     });
 
+
+    
   useEffect(() => {
-    searchPersons('Deedra Courtney Robertson');
-  }, []);
+    if (ID?.length) searchPersons(ID);
+    else {
+      searchPersons('Deedra Courtney Robertson');
+    }
+  }, [ID]);
 
   const searchPersons = async value => {
     const response = await getPersonListAPI({ search_string: value });
@@ -53,6 +71,7 @@ export default function PersonTable() {
     } else {
       setData([]);
     }
+    setIsLoading(false);
   };
 
   const handleInputChange = ({ target }) => {
@@ -96,6 +115,8 @@ export default function PersonTable() {
                   </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
+                {' '}
+                  {!ID?.length ? (
                   <TextField
                     type="search"
                     variant="outlined"
@@ -103,7 +124,7 @@ export default function PersonTable() {
                     fullWidth
                     placeholder="Search"
                     onChange={handleInputChange}
-                    defaultValue={'Deedra Courtney Robertson'}
+                    defaultValue={NAME?.length ? NAME : 'Deedra Courtney Robertson'}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -112,6 +133,7 @@ export default function PersonTable() {
                       )
                     }}
                   />
+                     ) : null}
                 </JPGrid>
                 <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">
                   <AddPerson
@@ -138,9 +160,7 @@ export default function PersonTable() {
                       render: rowData => (
                         <Typography
                           type={'h3'}
-                        >{`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} 
-                        
-                        ${rowData.LAST_NAME}`}
+                        >{`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} ${rowData.LAST_NAME}`}
                         </Typography>
                       )
                     },
@@ -188,24 +208,64 @@ export default function PersonTable() {
                     { title: 'Type', field: 'SERVICE' },
                     { title: 'Rank', field: 'GRADE' },
 
-                    {
-                      field: 'view',
-                      editable: 'never',
-                      title: 'Edit',
-                      render: rowData => (
-                        <Button
-                          color={'info'}
-                          onClick={() => onClickStory(rowData)}
-                          style={{
-                            padding: '8px 4px 6px 8px',
-                            borderRadius: '20px'
-                          }}
-                        >
-                          <Edit onClick={() => onClickStory(rowData)} />
-                        </Button>
-                      )
-                    }
-                  ]}
+
+
+                    
+                    !ID?.length
+                      ? {
+                        field: 'view',
+                        editable: 'never',
+                        title: 'Edit',
+                        render: rowData => (
+                          <Button
+                            color={'info'}
+                            onClick={() => {
+                              setID(rowData?.PERSON_ID);
+                              MODE === "Model" ? setShow(true) : onClickStory(rowData);
+                            }}
+                            style={{
+                              padding: '8px 4px 6px 8px',
+                              borderRadius: '20px'
+                            }}
+                          >
+                            <Edit  />
+                          </Button>
+                        )
+                      }
+                      : null,
+                    ID?.length
+                      ? {
+                        field: 'view',
+                        editable: 'never',
+                        title: 'view',
+                        render: rowData => (
+                          <Button
+                            color={'info'}
+                            onClick={() => onClickStoryview(rowData)}
+                            style={{
+                              padding: '8px 4px 6px 8px',
+                              borderRadius: '20px'
+                            }}
+                          >
+                            <Search onClick={() => onClickStoryview(rowData)} />
+                          </Button>
+                        )
+                      }
+                      : null
+
+
+
+
+
+
+
+                    
+
+
+
+
+                    
+                  ].filter(item => item)}
                   components={{
                     Container: props => (
                       <JPGrid container>
@@ -226,6 +286,17 @@ export default function PersonTable() {
             </CardBody>
           </Card>
         </GridItem>
+        <JPModal
+          onClose={_ => {
+            setShow(false);
+          }}
+          closeButton={true}
+          fullWidth
+          maxWidth="lg"
+          open={show}
+        >
+          <EditPersonOrg personId={id} />
+        </JPModal>
       </GridContainer>
     </div>
   );
