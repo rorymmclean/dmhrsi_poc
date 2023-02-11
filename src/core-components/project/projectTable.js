@@ -176,7 +176,7 @@ export default function ProjectTable(props) {
                               color={'info'}
                               onClick={() => {
                                 setID(rowData?.PROJECT_ID);
-                                MODE === "Model" ? setShow(true) : onClickStory(rowData);
+                                MODE === 'Model' ? setShow(true) : onClickStory(rowData);
                               }}
                               style={{
                                 padding: '8px 4px 6px 8px',

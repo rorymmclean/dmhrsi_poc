@@ -96,10 +96,9 @@ export default function OrganizationTable() {
                     </Typography>
                   </GridItem>
                 </JPGrid>
-                <JPGrid item xs={6}  >
+                <JPGrid item xs={6}>
                   {' '}
                   <TextField
-
                     type="search"
                     variant="outlined"
                     style={{ paddingTop: 4 }}
