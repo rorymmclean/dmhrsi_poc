@@ -5,7 +5,7 @@ import Edit from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-import Card from 'components/Card/Card'; 
+import Card from 'components/Card/Card';
 import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
@@ -23,7 +23,7 @@ import JPModal from 'components/jp-modal/jp-modal';
 import EditProjectOrg from 'core-components/project/editProjectOrg';
 
 export default function ProjectTable(props) {
-  const { ID, NAME,MODE} = props;
+  const { ID, NAME, MODE } = props;
 
   const [isLoading, setIsLoading] = useState(true);
   const [show, setShow] = React.useState(false);
@@ -176,7 +176,7 @@ export default function ProjectTable(props) {
                               color={'info'}
                               onClick={() => {
                                 setID(rowData?.PROJECT_ID);
-                                MODE === "Model" ? setShow(true) : onClickStory(rowData);
+                                MODE === 'Model' ? setShow(true) : onClickStory(rowData);
                               }}
                               style={{
                                 padding: '8px 4px 6px 8px',
@@ -240,6 +240,6 @@ export default function ProjectTable(props) {
           <EditProjectOrg projectId={id} />
         </JPModal>
       </GridContainer>
-    </div> 
+    </div>
   );
 }

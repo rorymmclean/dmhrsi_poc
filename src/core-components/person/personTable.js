@@ -19,16 +19,15 @@ import AddPerson from './addPerson';
 import PersonIcon from '@mui/icons-material/Person';
 import { getPersonListAPI } from './api/person-api';
 import EditPerson from './editPerson';
-import EditPersonOrg from './editPersonOrg'; 
+import EditPersonOrg from './editPersonOrg';
 import JPModal from 'components/jp-modal/jp-modal';
 
 export default function PersonTable(props) {
-  const { ID, NAME,MODE} = props;
+  const { ID, NAME, MODE } = props;
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const [show, setShow] = React.useState(false);
   const [id, setID] = React.useState('');
-  
 
   const onClickStory = item => {
     history.push({
@@ -47,14 +46,12 @@ export default function PersonTable(props) {
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
       return {
-        ...data, 
+        ...data,
         name: data.name,
         id: data.id
       };
     });
 
-
-    
   useEffect(() => {
     if (ID?.length) searchPersons(ID);
     else {
@@ -115,25 +112,25 @@ export default function PersonTable(props) {
                   </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
-                {' '}
+                  {' '}
                   {!ID?.length ? (
-                  <TextField
-                    type="search"
-                    variant="outlined"
-                    style={{ paddingTop: 4 }}
-                    fullWidth
-                    placeholder="Search"
-                    onChange={handleInputChange}
-                    defaultValue={NAME?.length ? NAME : 'Deedra Courtney Robertson'}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                     ) : null}
+                    <TextField
+                      type="search"
+                      variant="outlined"
+                      style={{ paddingTop: 4 }}
+                      fullWidth
+                      placeholder="Search"
+                      onChange={handleInputChange}
+                      defaultValue={NAME?.length ? NAME : 'Deedra Courtney Robertson'}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  ) : null}
                 </JPGrid>
                 <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">
                   <AddPerson
@@ -158,30 +155,21 @@ export default function PersonTable(props) {
                       title: 'Person Name',
                       field: 'FIRST_NAME',
                       render: rowData => (
-                        <Typography
-                          type={'h3'}
-                        >{`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} ${rowData.LAST_NAME}`}
+                        <Typography type={'h3'}>
+                          {`${rowData.FIRST_NAME} ${rowData.MIDDLE_NAME} ${rowData.LAST_NAME}`}
                         </Typography>
                       )
                     },
                     {
                       title: ' Edipn',
                       field: 'EDIPN',
-                      render: rowData => (
-                        <Typography
-                          type={'h3'}
-                        >{`${rowData.EDIPN}`}
-                        </Typography>
-                      )
+                      render: rowData => <Typography type={'h3'}>{`${rowData.EDIPN}`}</Typography>
                     },
                     {
                       title: ' Person Type',
                       field: 'PERSON_TYPE,',
                       render: rowData => (
-                        <Typography
-                          type={'h3'}
-                        >{`${rowData.PERSON_TYPE}`}
-                        </Typography>
+                        <Typography type={'h3'}>{`${rowData.PERSON_TYPE}`}</Typography>
                       )
                     },
 
@@ -189,82 +177,60 @@ export default function PersonTable(props) {
                       title: ' Personnel Cat',
                       field: 'PERSONNEL_CAT',
                       render: rowData => (
-                        <Typography
-                          type={'h3'}
-                        >{`${rowData.PERSONNEL_CAT}`}
-                        </Typography>
+                        <Typography type={'h3'}>{`${rowData.PERSONNEL_CAT}`}</Typography>
                       )
                     },
                     {
                       title: ' Civillian Title',
                       field: 'CIVILLIAN_TITLE',
                       render: rowData => (
-                        <Typography
-                          type={'h3'}
-                        >{`${rowData.CIVILLIAN_TITLE}`}
-                        </Typography>
+                        <Typography type={'h3'}>{`${rowData.CIVILLIAN_TITLE}`}</Typography>
                       )
                     },
                     { title: 'Type', field: 'SERVICE' },
                     { title: 'Rank', field: 'GRADE' },
 
-
-
-                    
                     !ID?.length
                       ? {
-                        field: 'view',
-                        editable: 'never',
-                        title: 'Edit',
-                        render: rowData => (
-                          <Button
-                            color={'info'}
-                            onClick={() => {
-                              setID(rowData?.PERSON_ID);
-                              MODE === "Model" ? setShow(true) : onClickStory(rowData);
-                            }}
-                            style={{
-                              padding: '8px 4px 6px 8px',
-                              borderRadius: '20px'
-                            }}
-                          >
-                            <Edit  />
-                          </Button>
-                        )
-                      }
+                          field: 'view',
+                          editable: 'never',
+                          title: 'Edit',
+                          render: rowData => (
+                            <Button
+                              color={'info'}
+                              onClick={() => {
+                                setID(rowData?.PERSON_ID);
+                                MODE === 'Model' ? setShow(true) : onClickStory(rowData);
+                              }}
+                              style={{
+                                padding: '8px 4px 6px 8px',
+                                borderRadius: '20px'
+                              }}
+                            >
+                              <Edit />
+                            </Button>
+                          )
+                        }
                       : null,
                     ID?.length
                       ? {
-                        field: 'view',
-                        editable: 'never',
-                        title: 'view',
-                        render: rowData => (
-                          <Button
-                            color={'info'}
-                            onClick={() => onClickStoryview(rowData)}
-                            style={{
-                              padding: '8px 4px 6px 8px',
-                              borderRadius: '20px'
-                            }}
-                          >
-                            <Search onClick={() => onClickStoryview(rowData)} />
-                          </Button>
-                        )
-                      }
+                          field: 'view',
+                          editable: 'never',
+                          title: 'view',
+                          render: rowData => (
+                            <Button
+                              color={'info'}
+                              onClick={() => onClickStoryview(rowData)}
+                              style={{
+                                padding: '8px 4px 6px 8px',
+                                borderRadius: '20px'
+                              }}
+                            >
+                              <Search onClick={() => onClickStoryview(rowData)} />
+                            </Button>
+                          )
+                        }
                       : null
-
-
-
-
-
-
-
-                    
-
-
-
-
-                    
                   ].filter(item => item)}
                   components={{
                     Container: props => (
