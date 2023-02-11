@@ -37,6 +37,16 @@ var dashRoutes = [
     layout: '/admin'
   },
   {
+    path: '/allocation',
+    name: 'Allocation',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: Diversity1Icon,
+    component: AlLocationRuleSetTable,
+    layout: '/admin'
+  },
+  {
     path: '/organization',
     name: 'Organizations',
     rtlName: '',
@@ -188,16 +198,6 @@ var dashRoutes = [
     icon: ConfirmationNumber,
     component: Assignments,
     redirect: true,
-    layout: '/admin'
-  },
-  {
-    path: '/allocation',
-    name: 'Allocation',
-    rtlName: '',
-    mini: 'S',
-    rtlMini: '',
-    icon: Diversity1Icon,
-    component: AlLocationRuleSetTable,
     layout: '/admin'
   },
   {
