@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { CircularProgress, Grid, TextField, Typography } from '@material-ui/core';
 import { ThunkDispatch } from 'thunk-dispatch';
@@ -104,9 +104,9 @@ export default function WorkScheduleTest(props) {
     };
     if (ttimeEntryList[index]?.task?.TASK_ID || ref.current?.TASK_ID)
       ThunkDispatch(addTimeEntryThunk(userObject))
-        .then(result => {})
+        .then(result => { })
         .catch(error => console.error('addTimeEntryThunk', error))
-        .finally(() => {});
+        .finally(() => { });
   };
 
   const editInput = (val, value) => {
@@ -119,9 +119,9 @@ export default function WorkScheduleTest(props) {
     };
 
     ThunkDispatch(editTimeEntryThunk(userObject))
-      .then(result => {})
+      .then(result => { })
       .catch(error => console.error('editTimeEntryThunk', error))
-      .finally(() => {});
+      .finally(() => { });
   };
 
   return (
@@ -132,17 +132,17 @@ export default function WorkScheduleTest(props) {
       alignItems={'flex-start'}
       justify={'flex-start'}
     >
-      <JPGrid item xs={12} sm={2} marginRight={'6.2px'} marginBottom={'6.2px'}>
-        <Typography style={{ textAlign: 'center' }}>Task</Typography>
+      <JPGrid item xs={12} sm={2} marginRight={'6.2px'} marginBottom={'6.2px'} >
+        <Typography style={{ textAlign: 'center',fontFamily:'Papyrus',paddingTop:'2vh' ,fontWeight:'bold'}}>Task</Typography>
       </JPGrid>
 
       <JPGrid item xs={12} sm={1} minWidth={140} marginRight={'6.2px'} marginBottom={'6.2px'}>
-        <Typography style={{ textAlign: 'center' }}>Type</Typography>
+        <Typography style={{ textAlign: 'center',fontFamily:'Papyrus' ,paddingTop:'2vh',fontWeight:'bold'}}>Type</Typography>
       </JPGrid>
 
       {daysHeader.map((day, index) => (
         <JPGrid item xs={12} sm={1} key={index} marginLeft={'6.2px'} marginBottom={'6.2px'}>
-          <Typography style={{ textAlign: 'center' }}>{day}</Typography>
+          <Typography style={{ textAlign: 'center' ,fontFamily:'Papyrus',paddingTop:'2vh',fontWeight:'bold'}}>{day}</Typography>
         </JPGrid>
       ))}
       {!isLoading ? (
@@ -215,7 +215,7 @@ export default function WorkScheduleTest(props) {
             {!disabled ? (
               <Button
                 style={{
-                  fontFamily: 'Trattatello',
+                  fontFamily: 'Papyrus',
                   fontWeight: 'bold'
                 }}
                 color={!ref.current?.TASK_ID?.length || false ? 'info' : null}

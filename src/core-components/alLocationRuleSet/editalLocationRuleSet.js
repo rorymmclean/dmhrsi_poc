@@ -19,11 +19,6 @@ import Edit from '@material-ui/icons/Edit';
 import { Search } from '@material-ui/icons';
 import { Alert, Snackbar } from '@mui/material';
 import AlLocationRuleSetWorkSchedule from './alLocationRuleSetWorkSchedule';
-import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 export default function EditAlLocationRuleSet(props) {
@@ -46,7 +41,7 @@ export default function EditAlLocationRuleSet(props) {
           }
         })
         .catch(error => console.error('getRuleDetailsThunk', error))
-        .finally(() => {});
+        .finally(() => { });
   }, [rowData.RULE_SET_ID, show]);
 
   const searchEmployees = value => {
@@ -60,7 +55,7 @@ export default function EditAlLocationRuleSet(props) {
           }
         })
         .catch(error => console.error('getPersonListThunk', error))
-        .finally(() => {});
+        .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -97,59 +92,48 @@ export default function EditAlLocationRuleSet(props) {
             disabled
               ? []
               : [
-                  {
-                    name: 'Save',
-                    onClick: _ => {
-                      const userObject = {
-                        RULE_SET_ID: rowData.RULE_SET_ID,
-                        START_DATE: data?.START_DATE,
-                        END_DATE: data?.END_DATE,
-                        NAME: data?.NAME,
-                        PERSON_ID: valueEmployee?.PERSON_ID || data.PERSON_ID
-                      };
-                      ThunkDispatch(editAlLocationRuleSetThunk({ ...userObject }))
-                        .then(result => {
-                          onSave({ ...rowData, ...userObject });
+                {
+                  name: 'Save',
+                  onClick: _ => {
+                    const userObject = {
+                      RULE_SET_ID: rowData.RULE_SET_ID,
+                      START_DATE: data?.START_DATE,
+                      END_DATE: data?.END_DATE,
+                      NAME: data?.NAME,
+                      PERSON_ID: valueEmployee?.PERSON_ID || data.PERSON_ID
+                    };
+                    ThunkDispatch(editAlLocationRuleSetThunk({ ...userObject }))
+                      .then(result => {
+                        onSave({ ...rowData, ...userObject });
 
-                          setOpen(true);
-                          setShow(false);
-                          setData({});
-                        })
-                        .catch(error => console.error('editAlLocationRuleSetThunk', error))
-                        .finally(() => {});
-                    },
-                    isLoading: false,
-                    disabled:
-                      !data?.START_DATE?.length ||
-                      !data?.END_DATE?.length ||
-                      !(valueEmployee?.PERSON_ID?.length || data.PERSON_ID) ||
-                      !data?.NAME?.length,
-                    color:
-                      !data?.START_DATE?.length ||
+                        setOpen(true);
+                        setShow(false);
+                        setData({});
+                      })
+                      .catch(error => console.error('editAlLocationRuleSetThunk', error))
+                      .finally(() => { });
+                  },
+                  isLoading: false,
+                  disabled:
+                    !data?.START_DATE?.length ||
+                    !data?.END_DATE?.length ||
+                    !(valueEmployee?.PERSON_ID?.length || data.PERSON_ID) ||
+                    !data?.NAME?.length,
+                  color:
+                    !data?.START_DATE?.length ||
                       !data?.END_DATE?.length ||
                       !(valueEmployee?.PERSON_ID?.length || data.PERSON_ID) ||
                       !data?.NAME?.length
-                        ? null
-                        : 'info'
-                  }
-                ]
+                      ? null
+                      : 'info'
+                }
+              ]
           }
         >
           <JPGrid minHeight={200}>
             <JPGrid container direction="row" alignItems="center" spacing={1} padding={8}>
               <JPGrid item xs={12} sm={3} marginTop="0.8vh">
                 <TextField
-                  InputLabelProps={{
-                    style: {
-                      fontFamily: 'Trattatello'
-                    }
-                  }}
-                  InputProps={{
-                    style: {
-                      fontFamily: 'Trattatello'
-                    }
-                  }}
-                  style={{ fontSize: '25px', fontFamily: 'Trattatello' }}
                   variant="outlined"
                   required
                   fullWidth
@@ -165,15 +149,9 @@ export default function EditAlLocationRuleSet(props) {
               <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
-                    style={{ fontFamily: 'Trattatello' }}
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
-                    InputLabelProps={{
-                      style: {
-                        fontFamily: 'Trattatello'
-                      }
-                    }}
                     format="yyy/MM/dd"
                     shouldDisableDate={date => {
                       const day = moment(date).day();
@@ -189,16 +167,11 @@ export default function EditAlLocationRuleSet(props) {
               <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
-                    style={{ fontFamily: 'Trattatello' }}
                     margin="normal"
                     id="date-picker-dialog"
                     label="End Date"
                     format="yyy/MM/dd"
-                    InputLabelProps={{
-                      style: {
-                        fontFamily: 'Trattatello'
-                      }
-                    }}
+
                     disabled={disabled}
                     value={data?.END_DATE}
                     onChange={e => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD') })}
@@ -213,7 +186,7 @@ export default function EditAlLocationRuleSet(props) {
               <JPGrid item xs={12} sm={3}>
                 <Button
                   style={{
-                    fontFamily: 'Trattatello',
+                    fontFamily: 'Papyrus',
                     fontWeight: 'bold'
                   }}
                   color={!disabled ? 'info' : null}
@@ -228,7 +201,7 @@ export default function EditAlLocationRuleSet(props) {
                         setOpenTT(true);
                       })
                       .catch(error => console.error('allocengineThunk', error))
-                      .finally(() => {});
+                      .finally(() => { });
                   }}
                 >
                   Run Engine
@@ -240,7 +213,8 @@ export default function EditAlLocationRuleSet(props) {
                   color: '#000',
                   fontWeight: 'bold',
                   fontSize: '18px',
-                  fontFamily: 'Trattatello'
+                  fontFamily: 'Papyrus',
+                  marginTop: '3vh'
                 }}
               >
                 Hours:
@@ -261,13 +235,15 @@ export default function EditAlLocationRuleSet(props) {
                   color: '#000',
                   fontWeight: 'bold',
                   fontSize: '18px',
-                  fontFamily: 'Trattatello'
+                  fontFamily: 'Papyrus',
+                  marginTop: '3vh'
                 }}
               >
                 Allocations:
               </Typography>
 
               {show ? (
+
                 <AlLocationRuleSetWorkSchedule
                   types={'PERCENT'}
                   RULE_SET_ID={rowData.RULE_SET_ID}
@@ -337,7 +313,7 @@ export default function EditAlLocationRuleSet(props) {
           variant="filled"
           sx={{ width: '100%' }}
         >
-          rule Update is Successful!
+          Rule Update is Successful!
         </Alert>
       </Snackbar>
       {customersOptions}

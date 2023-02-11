@@ -24,7 +24,7 @@ import ContactPerson from 'core-components/person/contact';
 import AlLocationRuleSetTable from 'core-components/alLocationRuleSet/alLocationRuleSetTable';
 import ViewTask from 'core-components/task/viewTask';
 import ViewProject from 'core-components/project/viewProject';
-
+import ViewPerson from 'core-components/person/viewPerson'
 var dashRoutes = [
   {
     path: '/timeCard',
@@ -90,6 +90,17 @@ var dashRoutes = [
   {
     path: '/editPerson',
     name: 'Edit Person',
+    rtlName: '',
+    mini: 'S',
+    rtlMini: '',
+    icon: ConfirmationNumber,
+    component: EditPerson,
+    redirect: true,
+    layout: '/admin'
+  },
+  {
+    path: '/viewPerson',
+    name: 'View Person',
     rtlName: '',
     mini: 'S',
     rtlMini: '',

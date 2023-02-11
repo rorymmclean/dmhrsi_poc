@@ -41,7 +41,7 @@ export default function OrganizationTable() {
     });
 
   useEffect(() => {
-    searchOrganizations('TNMOFY');
+    searchOrganizations('EGBDF');
   }, []);
 
   const searchOrganizations = async value => {
@@ -69,15 +69,7 @@ export default function OrganizationTable() {
       }
     }
   };
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: 'Trattatello',
-      fontWeight: 'bold',
-      fontSize: '28px',
-      color: '#000',
-    },
-  });
-
+  const theme = createMuiTheme({ style });
 
   return (
     <div className="m-sm-30">
@@ -90,48 +82,39 @@ export default function OrganizationTable() {
                   <CardIcon color="primary">
                     <SensorOccupiedIcon />
                   </CardIcon>
-                  <GridItem xs={12}  sm={12} md={12}>
-                  <Typography 
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Trattatello',
-                      fontWeight: 'bold',
-                      fontSize: '23px'
-                    }}
-                  >
-                    Organizations
-                  </Typography>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Typography
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Papyrus',
+                        fontWeight: 'bold',
+                        fontSize: '23px',
+                        whitespace: 'nowrap'
+                      }}
+                    >
+                      Organizations
+                    </Typography>
                   </GridItem>
                 </JPGrid>
                 <JPGrid item xs={6}  >
                   {' '}
                   <TextField
-              
+
                     type="search"
                     variant="outlined"
                     style={{ paddingTop: 4 }}
                     fullWidth
-                    defaultValue={'TNMOFY'}
+                    defaultValue={'EGBDF'}
                     placeholder="Search"
                     onChange={handleInputChange}
                     InputProps={{
-                      style: {  fontFamily: 'Trattatello' },
+
                       startAdornment: (
-                      <InputAdornment position="start" >
-                      <SearchIcon />
-                      </InputAdornment>
+                        <InputAdornment position="start" >
+                          <SearchIcon />
+                        </InputAdornment>
                       )
-                      }}
-                    
-                    InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                  
-                      }
                     }}
-
-
-
                   />
                 </JPGrid>
                 <JPGrid item xs={2} container alignItems="flex-end" justify="flex-end">

@@ -54,7 +54,7 @@ export default function AddAlLocationRuleSet(props) {
       <>
         <JPModal
           defaultTitle="Allocation Rule Set"
-          title={`Add Allocation Rule Set`}
+          title={<h6 >Add Allocation Rule Set</h6>}
           onClose={_ => {
             setShow(false);
             setData({});
@@ -134,11 +134,6 @@ export default function AddAlLocationRuleSet(props) {
                       fullWidth
                       variant="outlined"
                       required
-                      InputLabelProps={{
-                        style: { fontFamily: 'Trattatello' }
-                     }}
-                      style={{ 
-                      fontFamily: 'Trattatello' }}
                     />
                   )}
                 />{' '}
@@ -148,8 +143,7 @@ export default function AddAlLocationRuleSet(props) {
                 <TextField
                   variant="outlined"
                   required
-                  style={{ fontSize: '25px',
-                  fontFamily: 'Trattatello' }}
+                  style={{ fontSize: '25px' }}
                   fullWidth
                   id="Name"
                   label="Name"
@@ -157,17 +151,13 @@ export default function AddAlLocationRuleSet(props) {
                   autoComplete="Name"
                   value={data?.NAME}
                   onChange={e => setData({ ...data, NAME: e.target.value })}
-                  InputLabelProps={{
-                    style: { fontFamily: 'Trattatello' }
-                 }}
-              
                 />
               </JPGrid>
 
               <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
-                  style={{fontFamily: 'Trattatello'}}
+            
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
@@ -185,7 +175,7 @@ export default function AddAlLocationRuleSet(props) {
               <JPGrid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
-                  style={{fontFamily: 'Trattatello'}}
+                
                     margin="normal"
                     id="date-picker-dialog"
                     label="End Date"
@@ -216,7 +206,7 @@ export default function AddAlLocationRuleSet(props) {
             color={'info'}
             onClick={() => setShow(true)}
             style={{
-              fontFamily: 'Trattatello',
+              fontFamily: 'Papyrus',
               fontWeight: 'bold'
             }}
           >
