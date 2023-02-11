@@ -91,7 +91,7 @@ const container = {
 };
 
 const defaultFont = {
-  fontFamily: 'Trattatello',
+  fontFamily: 'Papyrus',
   fontWeight: '300',
   lineHeight: '1.5em'
 };
@@ -280,7 +280,7 @@ const tooltip = {
     ', 0.2)',
   maxWidth: '200px',
   textAlign: 'center',
-  fontFamily: 'Trattatello',
+  fontFamily: 'Papyrus',
   fontSize: '12px',
   fontStyle: 'normal',
   fontWeight: '400',
@@ -301,7 +301,7 @@ const title = {
   marginTop: '12px',
   marginBottom: '25px',
   minHeight: '32px',
-  fontFamily: 'Trattatello',
+  //fontFamily: 'Papyrus',
   '& small': {
     color: grayColor[1],
     fontSize: '65%',

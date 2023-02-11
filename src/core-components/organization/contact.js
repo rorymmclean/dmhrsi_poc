@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import { createMuiTheme, MuiThemeProvider, Paper, Typography } from '@material-ui/core';
@@ -17,7 +16,6 @@ import MaterialTable from 'material-table';
 import AddContact from '../contact/addContact';
 import EditContact from '../contact/editContact';
 import Button from 'components/CustomButtons/Button';
-
 import { Checkbox } from '@mui/material';
 
 export default function Contact() {
@@ -144,7 +142,7 @@ export default function Contact() {
         <JPGrid item marginRight={3} marginLeft={3}>
           <Button
             style={{
-              fontFamily: 'Trattatello',
+              fontFamily: 'Papyrus',
               fontWeight: 'bold'
             }}
             onClick={() => {
@@ -182,7 +180,7 @@ export default function Contact() {
               <h4
                 style={{
                   color: '#000',
-                  fontFamily: 'Trattatello',
+                  fontFamily: 'Papyrus',
                   fontWeight: 'bold',
                   fontSize: '28px'
                 }}

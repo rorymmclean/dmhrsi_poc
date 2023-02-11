@@ -7,7 +7,7 @@ import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import CardBody from 'components/Card/CardBody';
 import JPGrid from 'components/jp-grid/jp-grid';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Select from '@mui/material/Select';
 import TextField from '@material-ui/core/TextField';
 import _ from 'lodash';
@@ -40,7 +40,7 @@ export default function Allocations() {
             color={'info'}
             onClick={handleSave}
             style={{
-              fontFamily: 'Trattatello',
+              fontFamily: 'Papyrus',
               fontWeight: 'bold'
             }}
           >
@@ -59,7 +59,7 @@ export default function Allocations() {
               <h4
                 style={{
                   color: '#000',
-                  fontFamily: 'Trattatello',
+                  fontFamily: 'Papyrus',
                   fontWeight: 'bold',
                   fontSize: '28px'
                 }}
@@ -85,8 +85,7 @@ export default function Allocations() {
                 </JPGrid>
                 <JPGrid xs={12} sm={4}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                     style={{fontFamily: 'Trattatello'}}
+                    <KeyboardDatePicke
                       margin="normal"
                       id="start-date-picker"
                       label="Start Date"
@@ -106,7 +105,6 @@ export default function Allocations() {
                 <JPGrid xs={12} sm={4}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
-                    style={{fontFamily: 'Trattatello'}}
                       margin="normal"
                       id="end-date-picker"
                       label="End Date"

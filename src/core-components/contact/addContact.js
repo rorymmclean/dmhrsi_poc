@@ -1,7 +1,6 @@
 import React from 'react';
 import { ThunkDispatch } from 'thunk-dispatch';
 import Button from 'components/CustomButtons/Button.jsx';
-
 import { useLocation } from 'react-router-dom';
 import JPGrid from 'components/jp-grid/jp-grid';
 import JPModal from 'components/jp-modal/jp-modal';
@@ -68,7 +67,7 @@ export default function AddContact(props) {
                     setData({});
                   })
                   .catch(error => console.error('addOrganizationThunk', error))
-                  .finally(() => {});
+                  .finally(() => { });
               },
               isLoading: false,
               disabled:
@@ -80,11 +79,11 @@ export default function AddContact(props) {
                 ),
               color:
                 !data?.CONTACT_TYPE?.length ||
-                !(
-                  data?.ADDRESS_TYPE?.length ||
-                  data?.EMAIL_TYPE?.length ||
-                  data?.PHONE_TYPE?.length
-                )
+                  !(
+                    data?.ADDRESS_TYPE?.length ||
+                    data?.EMAIL_TYPE?.length ||
+                    data?.PHONE_TYPE?.length
+                  )
                   ? null
                   : 'info'
             }
@@ -94,9 +93,9 @@ export default function AddContact(props) {
             <GridContainer>
               <GridItem xs={12} sm={12} md={12} style={{ marginBottom: '16px' }}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'Trattatello'}}>Contact Type</InputLabel>
-                  <Select  
-                  style={{ fontFamily: 'Trattatello'}}
+                  <InputLabel id="demo-simple-select-label"
+                  >Contact Type</InputLabel>
+                  <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={data.CONTACT_ID}
@@ -121,22 +120,20 @@ export default function AddContact(props) {
                   {' '}
                   <GridItem xs={12} sm={12} md={6}>
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'Trattatello'}}>Type</InputLabel>
-                      <Select style={{ fontFamily: 'Trattatello'}}
+                      <InputLabel id="demo-simple-select-label"
+                      >Service</InputLabel>
+                      <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={data.ADDRESS_TYPE}
                         label="Type"
-                        InputLabelProps={{
-                          style: { 
-                          fontFamily: 'Trattatello',
-                          
-                          }
-                        }}
+
                         onChange={e => setData({ ...data, ADDRESS_TYPE: TYPE[e.target.value] })}
                       >
-                        <MenuItem value={1} style={{ fontFamily: 'Trattatello'}}>Work</MenuItem>
-                        <MenuItem value={2} style={{ fontFamily: 'Trattatello'}}>Home</MenuItem>
+                        <MenuItem value={1}
+                        >Work</MenuItem>
+                        <MenuItem value={2}
+                        >Home</MenuItem>
                       </Select>
                     </FormControl>
                   </GridItem>
@@ -146,7 +143,7 @@ export default function AddContact(props) {
                         <FormGroup>
                           <FormControlLabel
                             control={
-                              <Checkbox style={{ fontFamily: 'Trattatello'}}
+                              <Checkbox
                                 defaultChecked
                                 checked={data?.PRIMARY_FLAG}
                                 onChange={e => setData({ ...data, PRIMARY_FLAG: e.target.checked })}
@@ -160,19 +157,8 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
-                       InputProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }} InputLabelProps={{
-                        style: { 
-                        fontFamily: 'Trattatello',
-                        
-                        }
-                      }}
                       variant="outlined"
-                      style={{ fontSize: '25px' ,fontFamily: 'Trattatello'}}
+                      style={{ fontSize: '25px' }}
                       fullWidth
                       id="ADDRESS_1"
                       label="Address 1"
@@ -184,17 +170,6 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
-                    InputProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }} InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
                       variant="outlined"
                       style={{ fontSize: '25px' }}
                       fullWidth
@@ -208,17 +183,6 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
-                    InputProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }} InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
                       variant="outlined"
                       style={{ fontSize: '25px' }}
                       fullWidth
@@ -232,17 +196,6 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
-                    InputProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }} InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
                       variant="outlined"
                       style={{ fontSize: '25px' }}
                       fullWidth
@@ -256,17 +209,6 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
-                    InputProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }} InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
                       variant="outlined"
                       style={{ fontSize: '25px' }}
                       fullWidth
@@ -280,17 +222,6 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={3} style={{ marginTop: '16px' }}>
                     <TextField
-                    InputProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }} InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
                       variant="outlined"
                       style={{ fontSize: '25px' }}
                       fullWidth
@@ -306,17 +237,6 @@ export default function AddContact(props) {
                     <JPGrid container direction={'row'} justify={'flex-end'}>
                       <JPGrid item>
                         <TextField
-                        InputProps={{
-                          style: { 
-                          fontFamily: 'Trattatello',
-                          
-                          }
-                        }} InputLabelProps={{
-                          style: { 
-                          fontFamily: 'Trattatello',
-                          
-                          }
-                        }}
                           variant="outlined"
                           style={{ fontSize: '25px' }}
                           fullWidth
@@ -337,7 +257,8 @@ export default function AddContact(props) {
                   {' '}
                   <GridItem xs={12} sm={12} md={6}>
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'Trattatello'}}>Type</InputLabel>
+                      <InputLabel id="demo-simple-select-label"
+                      >Type</InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -345,8 +266,10 @@ export default function AddContact(props) {
                         label="Type"
                         onChange={e => setData({ ...data, EMAIL_TYPE: TYPE[e.target.value] })}
                       >
-                        <MenuItem value={1} style={{ fontFamily: 'Trattatello'}}>Work</MenuItem>
-                        <MenuItem value={2} style={{ fontFamily: 'Trattatello'}}>Home</MenuItem>
+                        <MenuItem value={1}
+                        >Work</MenuItem>
+                        <MenuItem value={2}
+                        >Home</MenuItem>
                       </Select>
                     </FormControl>
                   </GridItem>
@@ -363,7 +286,7 @@ export default function AddContact(props) {
                               />
                             }
                             label="Primary"
-                          
+
                           />
                         </FormGroup>
                       </JPGrid>
@@ -371,17 +294,7 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
-                    InputProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }} InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
+
                       variant="outlined"
                       style={{ fontSize: '25px' }}
                       fullWidth
@@ -400,16 +313,16 @@ export default function AddContact(props) {
                   {' '}
                   <GridItem xs={12} sm={12} md={6}>
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label" style={{fontFamily: 'Trattatello'}}>Type</InputLabel>
-                      <Select  style={{fontFamily: 'Trattatello'}}
+                      <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                      <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={data.PHONE_TYPE}
                         label="Type"
                         onChange={e => setData({ ...data, PHONE_TYPE: TYPE[e.target.value] })}
                       >
-                        <MenuItem value={1} style={{fontFamily: 'Trattatello'}}>Work</MenuItem>
-                        <MenuItem value={2} style={{fontFamily: 'Trattatello'}}>Home</MenuItem>
+                        <MenuItem value={1} >Work</MenuItem>
+                        <MenuItem value={2} >Home</MenuItem>
                       </Select>
                     </FormControl>
                   </GridItem>
@@ -419,7 +332,7 @@ export default function AddContact(props) {
                         <FormGroup>
                           <FormControlLabel
                             control={
-                              <Checkbox  style={{fontFamily: 'Trattatello'}}
+                              <Checkbox
                                 defaultChecked
                                 checked={data?.PRIMARY_FLAG}
                                 onChange={e => setData({ ...data, PRIMARY_FLAG: e.target.checked })}
@@ -433,17 +346,6 @@ export default function AddContact(props) {
                   </GridItem>
                   <GridItem xs={12} sm={12} style={{ marginTop: '16px' }}>
                     <TextField
-                     InputProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }} InputLabelProps={{
-                      style: { 
-                      fontFamily: 'Trattatello',
-                      
-                      }
-                    }}
                       variant="outlined"
                       style={{ fontSize: '25px' }}
                       fullWidth
@@ -473,7 +375,7 @@ export default function AddContact(props) {
             color={'info'}
             onClick={() => setShow(true)}
             style={{
-              fontFamily: 'Trattatello',
+              fontFamily: 'Papyrus',
               fontWeight: 'bold'
             }}
           >

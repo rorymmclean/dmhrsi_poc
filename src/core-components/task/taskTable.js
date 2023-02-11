@@ -17,12 +17,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import _ from 'lodash';
 import AddTask from './addTask';
 import { Search } from '@material-ui/icons';
-
 import TaskIcon from '@material-ui/icons/AssignmentLate';
 import { getTaskListAPI } from './api/task-api';
-export default function TaskTable(props) {
-  const { search_string, PROJECT_NAME } = props;
 
+export default function TaskTable(props) {
+  const { search_string, TASK_NAME } = props;
+  const { ID, NAME } = props;
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -42,11 +42,11 @@ export default function TaskTable(props) {
   const [data, setData] = React.useState([]);
 
   useEffect(() => {
-    if (search_string?.length) searchTasks(search_string);
+    if (ID?.length) searchTasks(ID);
     else {
       searchTasks('01175');
     }
-  }, [search_string]);
+  }, [ID]);
 
   const renderList = (tableDataArr = []) =>
     tableDataArr.map(data => {
@@ -66,6 +66,7 @@ export default function TaskTable(props) {
     } else {
       setData([]);
     }
+    setIsLoading(false);
   };
 
   const handleInputChange = ({ target }) => {
@@ -82,17 +83,7 @@ export default function TaskTable(props) {
       }
     }
   };
-  const theme = createMuiTheme({
-    typography: {
-      fontFamily: 'Trattatello',
-      fontWeight: 'bold',
-      fontSize: '28px',
-      color: '#000',
-    },
-  });
-
-
-
+  const theme = createMuiTheme({ style });
 
   return (
     <div className="m-sm-30">
@@ -105,22 +96,22 @@ export default function TaskTable(props) {
                   <CardIcon color="primary">
                     <TaskIcon />
                   </CardIcon>
-                  <GridItem xs={12}  sm={12} md={12}>
-                  <Typography 
-                    style={{
-                      color: '#000',
-                      fontFamily: 'Trattatello',
-                      fontWeight: 'bold',
-                      fontSize: '23px'
-                    }}
-                  >
-                    Tasks
-                  </Typography>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Typography
+                      style={{
+                        color: '#000',
+                        fontFamily: 'Papyrus',
+                        fontWeight: 'bold',
+                        fontSize: '23px'
+                      }}
+                    >
+                      Tasks
+                    </Typography>
                   </GridItem>
                 </JPGrid>
                 <JPGrid item xs={8}>
-                  {' '}
-                  {!search_string?.length ? (
+                {' '}
+                  {!ID?.length ? (
                     <TextField
                       type="search"
                       variant="outlined"
@@ -128,9 +119,9 @@ export default function TaskTable(props) {
                       fullWidth
                       placeholder="Search"
                       onChange={handleInputChange}
-                      defaultValue={PROJECT_NAME?.length ? PROJECT_NAME : '01175'}
+                      defaultValue={NAME?.length ? NAME : '01175'}
                       InputProps={{
-                        style: { fontFamily: 'Trattatello' },
+
                         startAdornment: (
                           <InputAdornment position="start">
                             <SearchIcon />
@@ -166,43 +157,45 @@ export default function TaskTable(props) {
                     { title: 'FCC', field: 'FCC' },
                     { title: 'SUPE', field: 'SUPE' },
                     { title: 'Labor Cost', field: 'LABOR_COST_ID' },
-                    !search_string?.length
+                  
+                    
+                    !ID?.length
                       ? {
-                          field: 'view',
-                          editable: 'never',
-                          title: 'Edit',
-                          render: rowData => (
-                            <Button
-                              color={'info'}
-                              onClick={() => onClickStory(rowData)}
-                              style={{
-                                padding: '8px 4px 6px 8px',
-                                borderRadius: '20px'
-                              }}
-                            >
-                              <Edit onClick={() => onClickStory(rowData)} />
-                            </Button>
-                          )
-                        }
+                        field: 'view',
+                        editable: 'never',
+                        title: 'Edit',
+                        render: rowData => (
+                          <Button
+                            color={'info'}
+                            onClick={() => onClickStory(rowData)}
+                            style={{
+                              padding: '8px 4px 6px 8px',
+                              borderRadius: '20px'
+                            }}
+                          >
+                            <Edit onClick={() => onClickStory(rowData)} />
+                          </Button>
+                        )
+                      }
                       : null,
-                    search_string?.length
+                      ID?.length
                       ? {
-                          field: 'view',
-                          editable: 'never',
-                          title: 'View',
-                          render: rowData => (
-                            <Button
-                              color={'info'}
-                              onClick={() => onClickStoryview(rowData)}
-                              style={{
-                                padding: '8px 4px 6px 8px',
-                                borderRadius: '20px'
-                              }}
-                            >
-                              <Search onClick={() => onClickStoryview(rowData)} />
-                            </Button>
-                          )
-                        }
+                        field: 'view',
+                        editable: 'never',
+                        title: 'View',
+                        render: rowData => (
+                          <Button
+                            color={'info'}
+                            onClick={() => onClickStoryview(rowData)}
+                            style={{
+                              padding: '8px 4px 6px 8px',
+                              borderRadius: '20px'
+                            }}
+                          >
+                            <Search onClick={() => onClickStoryview(rowData)} />
+                          </Button>
+                        )
+                      }
                       : null
                   ].filter(item => item)}
                   components={{

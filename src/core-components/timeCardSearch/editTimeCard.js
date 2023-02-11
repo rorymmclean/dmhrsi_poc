@@ -20,12 +20,6 @@ import Edit from '@material-ui/icons/Edit';
 import WorkScheduleTest from 'core-components/timeEntry/workScheduleTest';
 import { Search } from '@material-ui/icons';
 import { Alert, Snackbar } from '@mui/material';
-
-import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';
-import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 export default function EditTimeCard(props) {
@@ -49,7 +43,7 @@ export default function EditTimeCard(props) {
           }
         })
         .catch(error => console.error('getTimeCardDetailsThunk', error))
-        .finally(() => {});
+        .finally(() => { });
   }, [rowData.TIMECARD_ID, show]);
 
   const searchEmployees = value => {
@@ -63,7 +57,7 @@ export default function EditTimeCard(props) {
           }
         })
         .catch(error => console.error('getPersonListThunk', error))
-        .finally(() => {});
+        .finally(() => { });
   };
   React.useEffect(() => {
     let active = true;
@@ -100,45 +94,45 @@ export default function EditTimeCard(props) {
             disabled
               ? []
               : [
-                  {
-                    name: 'Save',
-                    onClick: _ => {
-                      const userObject = {
-                        TIMECARD_ID: rowData.TIMECARD_ID,
-                        START_DATE: data?.START_DATE,
-                        END_DATE: data?.END_DATE,
-                        STATUS: data?.STATUS,
-                        PERSON_ID: valueEmployee?.PERSON_ID || data.PERSON_ID
-                      };
-                      ThunkDispatch(editTimeCardThunk({ ...userObject }))
-                        .then(result => {
-                          onSave({ ...rowData, ...userObject });
+                {
+                  name: 'Save',
+                  onClick: _ => {
+                    const userObject = {
+                      TIMECARD_ID: rowData.TIMECARD_ID,
+                      START_DATE: data?.START_DATE,
+                      END_DATE: data?.END_DATE,
+                      STATUS: data?.STATUS,
+                      PERSON_ID: valueEmployee?.PERSON_ID || data.PERSON_ID
+                    };
+                    ThunkDispatch(editTimeCardThunk({ ...userObject }))
+                      .then(result => {
+                        onSave({ ...rowData, ...userObject });
 
-                          setOpen(true);
-                          setShow(false);
-                          setData({});
-                        })
-                        .catch(error => console.error('ddTimeCardThunk', error))
-                        .finally(() => {});
-                    },
-                    isLoading: false,
-                    disabled:
-                      !data?.START_DATE?.length ||
-                      !data?.END_DATE?.length ||
-                      !(valueEmployee?.PERSON_ID?.length || data.PERSON_ID) ||
-                      !data?.STATUS?.length,
-                    color:
-                      !data?.START_DATE?.length ||
+                        setOpen(true);
+                        setShow(false);
+                        setData({});
+                      })
+                      .catch(error => console.error('ddTimeCardThunk', error))
+                      .finally(() => { });
+                  },
+                  isLoading: false,
+                  disabled:
+                    !data?.START_DATE?.length ||
+                    !data?.END_DATE?.length ||
+                    !(valueEmployee?.PERSON_ID?.length || data.PERSON_ID) ||
+                    !data?.STATUS?.length,
+                  color:
+                    !data?.START_DATE?.length ||
                       !data?.END_DATE?.length ||
                       !(valueEmployee?.PERSON_ID?.length || data.PERSON_ID) ||
                       !data?.STATUS?.length
-                        ? null
-                        : 'info'
-                  }
-                ]
+                      ? null
+                      : 'info'
+                }
+              ]
           }
         >
-          <JPGrid minHeight={200}>
+          <JPGrid minHeight={500}>
             <JPGrid container direction="row" alignItems="center" spacing={1} padding={8}>
               <JPGrid item xs={12} sm={3}>
                 <Autocomplete
@@ -177,7 +171,7 @@ export default function EditTimeCard(props) {
                 <FormControl fullWidth>
                   <InputLabel
                     id="demo-simple-select-label"
-                    style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                    style={{ width: '100% !important' }}
                   >
                     Status
                   </InputLabel>
@@ -191,19 +185,19 @@ export default function EditTimeCard(props) {
                   >
                     <MenuItem
                       value={'Open'}
-                      style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                      style={{ width: '100% !important' }}
                     >
                       Open
                     </MenuItem>
                     <MenuItem
                       value={'Approved'}
-                      style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                      style={{ width: '100% !important' }}
                     >
                       Approved
                     </MenuItem>
                     <MenuItem
                       value={'Close'}
-                      style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                      style={{ width: '100% !important' }}
                     >
                       Close
                     </MenuItem>
@@ -213,7 +207,7 @@ export default function EditTimeCard(props) {
               <JPGrid item xs={12} sm={3}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
-                    style={{ fontFamily: 'Trattatello', width: '100% !important' }}
+                    style={{ width: '100% !important' }}
                     margin="normal"
                     id="date-picker-dialog"
                     label="Start Date"
@@ -242,7 +236,7 @@ export default function EditTimeCard(props) {
                       const day = moment(date).day();
                       return day !== 5;
                     }}
-                    style={{ width: '100% !important', fontFamily: 'Trattatello' }}
+                    style={{ width: '100% !important', }}
                     onChange={e => setData({ ...data, END_DATE: moment(e).format('YYYY/MM/DD') })}
                     inputVariant="outlined"
                   />
@@ -253,8 +247,9 @@ export default function EditTimeCard(props) {
                 style={{
                   color: '#000',
                   fontWeight: 'bold',
-                  fontSize: '18px',
-                  fontFamily: 'Trattatello'
+                  fontSize: '20px',
+                  fontFamily: 'Papyrus',
+                  paddingTop:'2vh'
                 }}
               >
                 First Week:
@@ -273,8 +268,9 @@ export default function EditTimeCard(props) {
                 style={{
                   color: '#000',
                   fontWeight: 'bold',
-                  fontSize: '18px',
-                  fontFamily: 'Trattatello'
+                  fontSize: '20px',
+                  fontFamily: 'Papyrus',
+                  paddingTop:'4vh'
                 }}
               >
                 Second Week:
