@@ -207,7 +207,6 @@ export default function EditAlLocationRuleSet(props) {
                   Run Engine
                 </Button>
               </JPGrid>
-
               <Typography
                 style={{
                   color: '#000',
@@ -220,15 +219,27 @@ export default function EditAlLocationRuleSet(props) {
                 Hours:
               </Typography>
 
-              {show ? (
+              {rowData.PERSONNEL_CAT === 'Non-DoD Civilian' ? (
+                <div style={{paddingTop:'2vh',width: '100%'}}>
+                <Alert
+               
+                severity="info"
+                variant="filled"
+                sx={{ width: '50%',backgroundColor:'#00acc1',borderRadius:'30px',fontFamily: 'Papyrus',fontSize:'17px',fontWeight:'bold' }}
+              >
+              “&nbsp;&nbsp; Hours will be provided by Payroll interface.&nbsp;&nbsp;”
+              </Alert>
+              </div>
+                
+              ) : (
                 <AlLocationRuleSetWorkSchedule
                   types={'HOURS'}
                   RULE_SET_ID={rowData.RULE_SET_ID}
                   PERSON_ID={rowData.PERSON_ID}
-                  disabled={disabled}
                   START_DATE={data?.START_DATE}
                 />
-              ) : null}
+              )}
+
 
               <Typography
                 style={{
